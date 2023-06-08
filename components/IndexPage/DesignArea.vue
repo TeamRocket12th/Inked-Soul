@@ -2,7 +2,12 @@
   <div class="">
     <h2 class="text-center">認領圖</h2>
     <div v-if="productData" class="grid grid-cols-4">
-      <NuxtLink v-for="item in productData" :key="item.id" class="self-stretch" :to="`/Design/${item.id}`">
+      <NuxtLink
+        v-for="item in productData"
+        :key="item.id"
+        class="self-stretch"
+        :to="`/Design/${item.id}`"
+      >
         <GlobalDesignCard :title="item.title" :category="item.category" :image="item.image" />
       </NuxtLink>
     </div>
