@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="flex justify-between items-center p-4">
+    <nav class="flex items-center justify-between p-4">
       <div class="logo">
         <NuxtLink to="/" class="text-4xl">Inked Soul</NuxtLink>
       </div>
@@ -20,7 +20,7 @@
     <div class="">
       <slot></slot>
     </div>
-    <footer class="flex justify-between items-center p-4">
+    <footer class="flex items-center justify-between p-4">
       <div class="logo">
         <NuxtLink to="/" class="text-4xl">Inked Soul</NuxtLink>
       </div>
