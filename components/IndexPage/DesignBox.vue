@@ -9,7 +9,7 @@
 const productData = ref([])
 const getProducts = async () => {
   const { data: productsRes } = await useFetch('https://fakestoreapi.com/products')
-  for(i=0;i<8;i++){
+  for (i = 0; i < 8; i++) {
     productData.value.push(productsRes.value[i])
   }
 }
