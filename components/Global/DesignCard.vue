@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="boreder-black h-full rounded border-2">
     <img :src="props.image" alt="" class="h-[200px]" />
     <span>{{ props.category }}</span>
     <span>{{ props.title }}</span>
