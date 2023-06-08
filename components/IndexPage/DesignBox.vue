@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="gird gird-cols-4">
     <GlobalDesignCard
       v-for="item in productData"
       :key="item.id"

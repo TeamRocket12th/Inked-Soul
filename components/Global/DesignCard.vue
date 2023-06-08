@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="props.image" alt="" />
+    <img :src="props.image" alt="" class="h-auto" />
     <span>{{ props.category }}</span>
     <span>{{ props.title }}</span>
   </div>
