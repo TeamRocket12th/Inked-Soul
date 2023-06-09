@@ -1,8 +1,15 @@
 <template>
   <div>
-    <IndexPageBannerArea></IndexPageBannerArea>
-    <IndexPageIntroItem class="container mx-auto"></IndexPageIntroItem>
-    <IndexPageDesignArea class="container mx-auto"></IndexPageDesignArea>
-    <IndexPageArtistArea class="container mx-auto"></IndexPageArtistArea>
+    <BannerItem />
+    <IntroItem />
+    <ArtistArea />
+    <DesignArea />
   </div>
 </template>
+
+<script setup>
+import BannerItem from '~/components/home/BannerItem.vue'
+import IntroItem from '~/components/home/IntroItem.vue'
+import ArtistArea from '~/container/home/ArtistArea.vue'
+import DesignArea from '~/container/home/DesignArea.vue'
+</script>

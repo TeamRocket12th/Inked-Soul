@@ -1,9 +1,14 @@
 <template>
   <div>
-    <GlobalNavbarItem></GlobalNavbarItem>
+    <NavbarItem></NavbarItem>
     <div class="">
       <slot></slot>
     </div>
-    <GlobalFooterItem></GlobalFooterItem>
+    <FooterItem></FooterItem>
   </div>
 </template>
+
+<!-- <script setup>
+import NavbarItem from '~/components/global/NavbarItem.vue'
+import FooterItem from '~/components/global/FooterItem.vue'
+</script> -->

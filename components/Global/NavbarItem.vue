@@ -5,15 +5,17 @@
     </h1>
     <ul class="flex gap-4">
       <li>
-        <NuxtLink to="/Design">認領圖</NuxtLink>
+        <NuxtLink to="/designs">認領圖</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/Artists">刺青師</NuxtLink>
+        <NuxtLink to="/artists">刺青師</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/Tips">知識點</NuxtLink>
+        <NuxtLink to="/tips">知識點</NuxtLink>
       </li>
-      <li></li>
+      <li>
+        <NuxtLink to="/login"> <Icon name="mdi:account" /></NuxtLink>
+      </li>
     </ul>
   </nav>
 </template>

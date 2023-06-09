@@ -6,9 +6,9 @@
         v-for="item in productData"
         :key="item.id"
         class="self-stretch"
-        :to="`/Design/${item.id}`"
+        :to="`/designs/${item.id}`"
       >
-        <GlobalDesignCard :title="item.title" :category="item.category" :image="item.image" />
+        <DesignCard :title="item.title" :category="item.category" :image="item.image" />
       </NuxtLink>
     </div>
   </div>
