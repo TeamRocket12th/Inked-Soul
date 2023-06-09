@@ -1,8 +1,8 @@
 <template>
   <div>
     <IndexPageBannerArea></IndexPageBannerArea>
-    <IndexPageIntroItem class="container"></IndexPageIntroItem>
-    <IndexPageDesignArea class="container"></IndexPageDesignArea>
-    <IndexPageArtistArea class="container"></IndexPageArtistArea>
+    <IndexPageIntroItem class="container mx-auto"></IndexPageIntroItem>
+    <IndexPageDesignArea class="container mx-auto"></IndexPageDesignArea>
+    <IndexPageArtistArea class="container mx-auto"></IndexPageArtistArea>
   </div>
 </template>

@@ -16,8 +16,8 @@
 <script setup>
 const productData = ref([])
 
-const { data } = await useFetch('/api/getAllDesign')
+const { data: productsRes } = await useFetch('https://fakestoreapi.com/products')
 for (let i = 0; i < 8; i++) {
-  productData.value.push(data.value[i])
+  productData.value.push(productsRes.value[i])
 }
 </script>
