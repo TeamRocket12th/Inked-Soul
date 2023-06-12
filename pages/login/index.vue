@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto w-[30%] text-center">
     <Identity>
-      <template #LoginTitle>
+      <template #title>
         <h2>登入帳戶</h2>
       </template>
     </Identity>
