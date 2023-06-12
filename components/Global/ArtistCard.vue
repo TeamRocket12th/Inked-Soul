@@ -1,8 +1,10 @@
 <template>
   <div class="boreder-black rounded border-2">
     <img :src="`${props.image}`" alt="" />
-    <span>{{ props.name.first }}</span>
-    <span>{{ props.name.last }}</span>
+    <p>{{ props.nickname }}</p>
+    <p>{{ props.studioname }}</p>
+    <p>{{ props.category }}</p>
+    <button @click="follow" class="p-2 rounded bg-slate-200">追蹤</button>
   </div>
 </template>
 
@@ -12,8 +14,16 @@ const props = defineProps({
     type: String,
     required: true
   },
-  name: {
-    type: Object,
+  nickname: {
+    type: String,
+    required: true
+  },
+  studioname: {
+    type: String,
+    required: true
+  },
+  category: {
+    type: Array,
     required: true
   }
 })

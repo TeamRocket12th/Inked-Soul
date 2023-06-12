@@ -1,25 +1,20 @@
 <template>
-  <div class="container">
-    <h2 class="text-center">刺青師</h2>
-    <div v-if="data" class="grid grid-cols-3">
-      <NuxtLink v-for="item in artistsData" :key="item.id" :to="`/artists/${item.id}`">
+  <div>
+    <div class="grid grid-cols-3">
+      <NuxtLink v-for="item in allArtists" :key="item.id" :to="`/artists/${item.id}`">
         <ArtistCard
           :image="item.photo"
           :nickname="item.nickname"
           :studioname="item.studioName"
           :category="item.style"
         ></ArtistCard>
-        <!--  -->
       </NuxtLink>
     </div>
   </div>
 </template>
-
 <script setup>
-const artistsData = ref([])
+// import ArtistCard from '~/components/global/ArtistCard.vue'
+const allArtists = ref([])
 const { data } = await useFetch('/api/getArtists/getAllArtists')
-
-for (let i = 0; i < 6; i++) {
-  artistsData.value.push(data.value.data[i])
-}
+allArtists.value = data.value.data
 </script>
