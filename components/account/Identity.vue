@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot name="LoginTitle"></slot>
+    <slot name="title"></slot>
     <div class="flex flex-row justify-between">
       <label for="client">
         <input type="radio" name="client" v-model="identity" value="client" />
@@ -14,6 +14,10 @@
   </div>
 </template>
 <script setup>
-const identity = ref()
+import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
+
+const store = useAccountStore()
+const { identity } = storeToRefs(store)
 </script>
 <style scoped></style>
