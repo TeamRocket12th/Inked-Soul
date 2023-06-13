@@ -14,7 +14,7 @@
         <NuxtLink to="/tips">知識點</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/login"> <Icon name="mdi:account" /></NuxtLink>
+        <NuxtLink to="/account/login"> <Icon name="mdi:account" /></NuxtLink>
       </li>
     </ul>
   </nav>

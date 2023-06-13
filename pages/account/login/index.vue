@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-import Identity from '/components/account/Identity.vue'
-import LoginItem from '/components/account/LoginItem.vue'
+import Identity from '~/components/account/Identity.vue'
+import LoginItem from '~/components/account/LoginItem.vue'
 </script>
 <style scoped></style>

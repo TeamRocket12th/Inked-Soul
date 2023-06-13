@@ -20,23 +20,13 @@
   </VForm>
   <button type="button" @click="submit">登入</button>
   <div class="flex flex-row justify-center">
-    <NuxtLink>忘記密碼</NuxtLink>｜
-    <NuxtLink to="signup">註冊</NuxtLink>
+    <NuxtLink to="/account/forgotpassword">忘記密碼</NuxtLink>｜
+    <NuxtLink to="/account/signup">註冊</NuxtLink>
   </div>
 </template>
 <script setup>
-import { configure } from 'vee-validate'
-import { localize, setLocale } from '@vee-validate/i18n'
-import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
-
-configure({
-  generateMessage: localize({ zh_TW: zhTW })
-  // validateOnInput: true // 輸入文字時，就立即進行驗證
-})
-
-setLocale('zh_TW')
 
 const store = useAccountStore()
 const { email, password } = storeToRefs(store)
