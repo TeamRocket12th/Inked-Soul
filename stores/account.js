@@ -9,5 +9,21 @@ export const useAccountStore = defineStore('account', () => {
     // console.log('Email changed:', email.value)
     // console.log('Password changed:', password.value)
   }
-  return { identity, email, password, confirmPassword, submit }
+
+  const resetPasswordSendEmail = () => {
+    // 發送信件
+  }
+
+  const resetPassword = () => {
+    // 傳送新密碼
+  }
+  return {
+    identity,
+    email,
+    password,
+    confirmPassword,
+    submit,
+    resetPasswordSendEmail,
+    resetPassword
+  }
 })
