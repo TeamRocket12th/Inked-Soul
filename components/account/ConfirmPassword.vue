@@ -10,7 +10,7 @@
     />
     <VErrorMessage name="確認密碼" class="whitespace-nowrap" />
   </label>
-  <button type="button">註冊</button>
+  <button type="button" @click="signupSubmit">註冊</button>
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'
@@ -18,5 +18,6 @@ import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
 const { confirmPassword } = storeToRefs(store)
+const { signupSubmit } = store
 </script>
 <style scoped></style>
