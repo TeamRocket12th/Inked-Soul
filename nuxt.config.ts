@@ -6,5 +6,8 @@ export default defineNuxtConfig({
   },
   pinia: {
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]
+  },
+  nitro: {
+    plugins: ['~/server/db/index.js']
   }
 })

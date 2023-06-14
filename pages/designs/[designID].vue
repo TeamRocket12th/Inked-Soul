@@ -2,7 +2,7 @@
   <div class="">
     <p>單一認領圖頁</p>
     <p>
-      {{ $route.params.id }}
+      認領圖ID：{{ $route.params.designID }}
     </p>
   </div>
 </template>

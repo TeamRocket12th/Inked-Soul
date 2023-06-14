@@ -1,6 +1,12 @@
 <template>
   <div class="">
     <h2 class="text-center">認領圖</h2>
+    <div class="grid grid-cols-4">
+      <div class="h-[100px] bg-slate-100"></div>
+      <div class="h-[100px] bg-slate-100"></div>
+      <div class="h-[100px] bg-slate-100"></div>
+      <div class="h-[100px] bg-slate-100"></div>
+    </div>
     <div v-if="productData" class="grid grid-cols-4">
       <NuxtLink
         v-for="item in productData"
@@ -8,7 +14,12 @@
         class="self-stretch"
         :to="`/designs/${item.id}`"
       >
-        <DesignCard :title="item.title" :category="item.category" :image="item.image" />
+        <DesignCard
+          :id="item.id"
+          :category="item.category"
+          :image="item.image"
+          :design-name="item.designName"
+        />
       </NuxtLink>
     </div>
   </div>
@@ -16,8 +27,8 @@
 <script setup>
 const productData = ref([])
 
-const { data: productsRes } = await useFetch('https://fakestoreapi.com/products')
+const { data } = await useFetch('/api/getDesign/getAllDesign')
 for (let i = 0; i < 8; i++) {
-  productData.value.push(productsRes.value[i])
+  productData.value.push(data.value.design[i])
 }
 </script>
