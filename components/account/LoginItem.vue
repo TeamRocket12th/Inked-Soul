@@ -18,7 +18,7 @@
     </label>
     <slot name="confirm-passward"></slot>
   </VForm>
-  <button type="button" @click="submit">登入</button>
+  <button type="button" @click="loginSubmit">登入</button>
   <div class="flex flex-row justify-center">
     <NuxtLink to="/account/forgotpassword">忘記密碼</NuxtLink>｜
     <NuxtLink to="/account/signup">註冊</NuxtLink>
@@ -30,6 +30,6 @@ import { storeToRefs } from 'pinia'
 
 const store = useAccountStore()
 const { email, password } = storeToRefs(store)
-const { submit } = store
+const { loginSubmit } = store
 </script>
 <style></style>

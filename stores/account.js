@@ -4,10 +4,26 @@ export const useAccountStore = defineStore('account', () => {
   const password = ref()
   const confirmPassword = ref()
 
-  const submit = () => {
-    // console.log('Identity changed:', identity.value)
-    // console.log('Email changed:', email.value)
-    // console.log('Password changed:', password.value)
+  const loginSubmit = () => {
+    const { data, error } = useFetch(`http://localhost:3001/login/${identity.value}`, {
+      method: 'POST',
+      body: {
+        email: email.value,
+        password: password.value
+      }
+    })
+    // console.log('data', data.value, 'error', error.value)
+  }
+
+  const signupSubmit = () => {
+    const { data, error } = useFetch(`http://localhost:3001/signup/${identity.value}`, {
+      method: 'POST',
+      body: {
+        email: email.value,
+        password: password.value
+      }
+    })
+    // console.log('data', data.value, 'error', error.value)
   }
 
   const resetPasswordSendEmail = () => {
@@ -22,7 +38,8 @@ export const useAccountStore = defineStore('account', () => {
     email,
     password,
     confirmPassword,
-    submit,
+    loginSubmit,
+    signupSubmit,
     resetPasswordSendEmail,
     resetPassword
   }
