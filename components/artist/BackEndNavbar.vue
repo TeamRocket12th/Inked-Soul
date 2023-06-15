@@ -4,6 +4,7 @@
       <li
         v-for="(item, key) in menu"
         :key="key"
+        @click="handleTab(item.title)"
         class="flex flex-row items-center gap-3 border-b py-[18.5px] pl-8 last:border-0"
       >
         <Icon :name="item.icon" class="h-[25px] w-[25px]" />
@@ -15,6 +16,15 @@
   </div>
 </template>
 <script setup>
+import { useArtistNavbarStore } from '~/stores/artistNavbar'
+import { storeToRefs } from 'pinia'
+
+const store = useArtistNavbarStore()
+const { currentTab } = storeToRefs(store)
+const handleTab = (tab) => {
+  currentTab.value = tab
+}
+
 const menu = [
   {
     icon: 'ic:outline-account-circle',
@@ -45,9 +55,5 @@ const menu = [
     title: '獲得評價'
   }
 ]
-
-// const toggleComponent = ()=>{
-
-// }
 </script>
 <style scoped></style>
