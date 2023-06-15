@@ -1,42 +1,37 @@
 <template>
   <div class="rounded border p-[20px]">
     <ul class="flex flex-col">
-      <li
+      <NuxtLink
         v-for="(item, key) in menu"
+        :to="`/account/artist/${item.link || 'editinfo'}`"
         :key="key"
-        @click="handleTab(item.title)"
-        class="flex flex-row items-center gap-3 border-b py-[18.5px] pl-8 last:border-0"
+        :class="{ 'bg-gray-100': isActive(item.link) }"
+        class="flex flex-row items-center gap-3 rounded border-b py-[18.5px] pl-8 last:border-0"
       >
         <Icon :name="item.icon" class="h-[25px] w-[25px]" />
         <p>
           {{ item.title }}
         </p>
-      </li>
+      </NuxtLink>
     </ul>
   </div>
 </template>
 <script setup>
-import { useArtistNavbarStore } from '~/stores/artistNavbar'
-import { storeToRefs } from 'pinia'
-
-const store = useArtistNavbarStore()
-const { currentTab } = storeToRefs(store)
-const handleTab = (tab) => {
-  currentTab.value = tab
-}
-
 const menu = [
   {
     icon: 'ic:outline-account-circle',
-    title: '編輯個人資料'
+    title: '編輯個人資料',
+    link: 'editinfo'
   },
   {
     icon: 'ic:outline-how-to-reg',
-    title: '會員資格'
+    title: '會員資格',
+    link: 'membership'
   },
   {
     icon: 'ic:outline-collections-bookmark',
-    title: '認領圖'
+    title: '認領圖',
+    link: 'productlist'
   },
   {
     icon: 'ic:baseline-wallpaper',
@@ -55,5 +50,12 @@ const menu = [
     title: '獲得評價'
   }
 ]
+
+const route = useRoute()
+
+const isActive = (link) => {
+  const currentPath = route.path
+  return currentPath.includes(link)
+}
 </script>
 <style scoped></style>

@@ -2,7 +2,9 @@
   <div class="flex flex-col items-center gap-10 rounded border px-[104] py-10">
     <div class="avatar flex flex-col items-center">
       <div class="w-20">
-        <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        <img
+          src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZG9nfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60"
+        />
       </div>
       <h2>dog</h2>
     </div>
