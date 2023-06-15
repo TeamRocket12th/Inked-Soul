@@ -6,7 +6,7 @@
         as="textarea"
         name="個人簡介"
         rules="max:30"
-        placeholder="填寫寧您的個人簡介"
+        placeholder="填寫您的個人簡介"
         class="textarea-bordered textarea min-h-[72px]"
       />
       <VErrorMessage name="個人簡介" class="whitespace-nowrap" />

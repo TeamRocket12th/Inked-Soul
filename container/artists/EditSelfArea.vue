@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2">
+  <div class="grid grid-cols-2" style="gap: 36px">
     <div>
       <UpdatePersonalInfo />
       <UpdatePersonalBrief />
