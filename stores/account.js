@@ -3,23 +3,28 @@ export const useAccountStore = defineStore('account', () => {
   const email = ref()
   const password = ref()
   const confirmPassword = ref()
-  const submit = async () => {
-    // 登入
-    const userData={
-      user:{
-        email:email.value,
-        passwd:password.value
+  
+  const loginSubmit = () => {
+    const { data, error } = useFetch(`http://localhost:3001/login/${identity.value}`, {
+      method: 'POST',
+      body: {
+        email: email.value,
+        password: password.value
       }
-    }
-
-    const{data,error}=await useFetch('http://localhost:5005/login/normal',{
-      method: 'post',
-      body:userData
     })
-
     if(data.value.status===200){
       await navigateTo('/')
     }
+  }
+
+  const signupSubmit = () => {
+    const { data, error } = useFetch(`http://localhost:3001/signup/${identity.value}`, {
+      method: 'POST',
+      body: {
+        email: email.value,
+        password: password.value
+      }
+    })
   }
 
   const resetPasswordSendEmail = () => {
@@ -34,7 +39,8 @@ export const useAccountStore = defineStore('account', () => {
     email,
     password,
     confirmPassword,
-    submit,
+    loginSubmit,
+    signupSubmit,
     resetPasswordSendEmail,
     resetPassword
   }
