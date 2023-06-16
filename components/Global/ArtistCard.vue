@@ -4,7 +4,7 @@
     <p>{{ props.nickname }}</p>
     <p>{{ props.studioname }}</p>
     <p>{{ props.category }}</p>
-    <button @click="follow" class="p-2 rounded bg-slate-200">追蹤</button>
+    <button class="rounded bg-slate-200 p-2" @click="follow">追蹤</button>
   </div>
 </template>
 
