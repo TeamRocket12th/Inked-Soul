@@ -9,6 +9,10 @@
 const url = ref()
 const handleOnPreview = (event) => {
   const file = event.target.files[0]
+  if (file.size > 1024 * 1024 * 4) {
+    // 檔案不能大於 4 MB
+    return
+  }
 
   // 兩種轉換格式 (待確認哪個可以)
   // 1)
