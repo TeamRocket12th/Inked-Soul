@@ -5,7 +5,7 @@
   </NuxtLayout>
 </template>
 <script setup>
-import BackEndHeadImg from '~/components/artist/BackEndHeadImg.vue'
-import BackEndNavbar from '~/components/artist/BackEndNavbar.vue'
+import BackEndHeadImg from '~/components/user/BackEndHeadImg.vue'
+import BackEndNavbar from '~/components/user/BackEndNavbar.vue'
 </script>
 <style scoped></style>
