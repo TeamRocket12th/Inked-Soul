@@ -3,7 +3,7 @@
     <div class="flex flex-col">
       <span>公休日</span>
       <div class="dropdown-end dropdown">
-        <label tabindex="0" class="btn mb-1 w-full">
+        <label tabindex="0" class="btn my-1 mb-1 h-auto w-full py-2">
           <span v-for="(day, key) in ArtistCloseDay" :key="key"> {{ day.week }} </span>
         </label>
         <ul
@@ -60,7 +60,7 @@
     <div class="flex flex-col">
       <span>可供預約時段</span>
       <div class="dropdown-hover dropdown">
-        <label tabindex="0" class="btn mb-1 w-full">
+        <label tabindex="0" class="btn my-1 h-auto w-full py-2">
           <span v-for="(part, key) in ArtistAvailableTimeFrame" :key="key">
             {{ part }}
           </span>

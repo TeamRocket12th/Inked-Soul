@@ -1,6 +1,8 @@
 <template>
   <label>
-    <span>個人風格（選擇最多二個關鍵字來描述你的刺青風格）</span>
+    <span>
+      <slot> 個人風格（選擇最多二個關鍵字來描述你的刺青風格） </slot>
+    </span>
     <ul class="flex flex-wrap gap-2">
       <li v-for="(style, key) in styles" :key="key">
         <button
@@ -8,7 +10,7 @@
           ref="styleBtn"
           type="button"
           :class="{ 'bg-gray-200': personalStyle.includes(style) }"
-          class="whitespace-nowrap rounded-lg border p-1"
+          class="whitespace-nowrap rounded-lg border px-3 py-[6px]"
         >
           {{ style }}
         </button>
@@ -17,6 +19,12 @@
   </label>
 </template>
 <script setup>
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import { storeToRefs } from 'pinia'
+
+const store = useUploadTattooStore()
+const { uploadTattoo } = storeToRefs(store)
+
 const styles = [
   'Black and Grey 黑灰派',
   'Watercolor 水彩風',
@@ -32,8 +40,6 @@ const styles = [
   'Traditional Japanese 日式傳統',
   '其他'
 ]
-
-// 要傳給 API 的值（需要轉換格式）
 const personalStyle = ref([])
 
 const styleToggle = (addStyle) => {
@@ -45,6 +51,8 @@ const styleToggle = (addStyle) => {
   } else if (personalStyle.value.length === 2) {
     personalStyle.value.splice(0, 1, addStyle)
   }
+
+  uploadTattoo.value.tattoo_style = personalStyle.value
 }
 </script>
 <style scoped></style>

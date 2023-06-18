@@ -3,16 +3,16 @@ export const useAccountStore = defineStore('account', () => {
   const email = ref()
   const password = ref()
   const confirmPassword = ref()
-  
-  const loginSubmit = () => {
-    const { data, error } = useFetch(`http://localhost:3001/login/${identity.value}`, {
+
+  const loginSubmit = async () => {
+    const { data, error } = await useFetch(`http://localhost:3001/login/${identity.value}`, {
       method: 'POST',
       body: {
         email: email.value,
         password: password.value
       }
     })
-    if(data.value.status===200){
+    if (data.value.status === 200) {
       navigateTo('/')
     }
   }
