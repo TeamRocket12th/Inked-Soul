@@ -13,7 +13,7 @@ export const useAccountStore = defineStore('account', () => {
       }
     })
     if(data.value.status===200){
-      await navigateTo('/')
+      navigateTo('/')
     }
   }
 

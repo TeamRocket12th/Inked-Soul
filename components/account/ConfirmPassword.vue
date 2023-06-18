@@ -2,11 +2,11 @@
   <label class="flex flex-col items-start">
     <span>確認密碼</span>
     <VField
+      v-model="confirmPassword"
       name="確認密碼"
       type="password"
       rules="required|min:8|confirmed:@password"
       class="w-full border"
-      v-model="confirmPassword"
     />
     <VErrorMessage name="確認密碼" class="whitespace-nowrap" />
   </label>

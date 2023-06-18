@@ -37,5 +37,4 @@ const route = useRoute()
 const id = route.params.designID
 const { data } = await useFetch(`/api/getDesign/${id}`)
 const designData = data.value.data
-
 </script>

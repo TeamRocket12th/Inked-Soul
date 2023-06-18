@@ -3,11 +3,11 @@
     <slot name="title"></slot>
     <div class="flex flex-row justify-between">
       <label for="client">
-        <input type="radio" name="client" v-model="identity" value="client" />
+        <input v-model="identity" type="radio" name="client" value="client" />
         <span>一般身份</span>
       </label>
       <label for="artist">
-        <input type="radio" name="artist" v-model="identity" value="artist" />
+        <input v-model="identity" type="radio" name="artist" value="artist" />
         <span>刺青師身份</span>
       </label>
     </div>
