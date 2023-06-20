@@ -9,4 +9,7 @@
   .formInput {
     @apply w-full rounded-lg border px-[14px] py-[12px];
   }
+  .accountInput {
+    @apply w-full border-b p-4;
+  }
 }
