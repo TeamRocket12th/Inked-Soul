@@ -2,7 +2,7 @@
   <div class="container">
     <div class="grid grid-cols-3">
       <div class="col-span-2">
-        <OrderData/>
+        <OrderData />
         <PaymentData :deposit="designData.deposit" :final-payment="designData.finalPayment" />
         <!-- 確認按鈕 -->
         <PayBtn :deposit="designData.deposit" />
@@ -36,9 +36,9 @@ const id = route.params.designID
 const { data } = await useFetch(`/api/getDesign/${id}`)
 const designData = data.value.data
 const date = ref(new Date())
-const store=useOrderStore()
-const { designData:orderData } = storeToRefs(store)
-orderData.value.ID=id
-orderData.value.name=designData.designName
-orderData.value.deposit=designData.deposit
+const store = useOrderStore()
+const { designData: orderData } = storeToRefs(store)
+orderData.value.ID = id
+orderData.value.name = designData.designName
+orderData.value.deposit = designData.deposit
 </script>

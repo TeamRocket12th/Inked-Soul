@@ -64,6 +64,7 @@ export const useAccountStore = defineStore('account', () => {
 
   return {
     identity,
+    cookie,
     email,
     password,
     confirmPassword,
