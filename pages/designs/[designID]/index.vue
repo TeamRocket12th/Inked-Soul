@@ -35,7 +35,7 @@ import DesignIntro from '~/components/design/DesignIntro.vue'
 
 const route = useRoute()
 const id = route.params.designID
-const { data } = await useFetch(`/api/getDesign/${id}`)
-const designData = data.value.data
-
+// const { data } = await useFetch(`/api/getDesign/${id}`)
+const { data } = await useFetch(`http://localhost:5005/design/${id}`)
+const designData = data.value
 </script>

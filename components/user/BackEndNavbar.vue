@@ -3,7 +3,7 @@
     <ul class="flex flex-col">
       <NuxtLink
         v-for="(item, key) in menu"
-        :to="`/account/user/${item.link || 'editinfo'}`"
+        :to="`/account/normal/${item.link || 'editinfo'}`"
         :key="key"
         :class="{ 'bg-gray-100': isActive(item.link) }"
         class="flex flex-row items-center gap-3 rounded border-b py-[18.5px] pl-8 last:border-0"
