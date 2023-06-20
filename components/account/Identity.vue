@@ -1,15 +1,23 @@
 <template>
-  <div>
+  <div class="flex flex-col gap-[60px]">
     <slot name="title"></slot>
-    <div class="flex flex-row justify-between">
-      <label for="client">
-        <input v-model="identity" type="radio" name="client" value="client" />
-        <span>一般身份</span>
-      </label>
-      <label for="artist">
-        <input v-model="identity" type="radio" name="artist" value="artist" />
-        <span>刺青師身份</span>
-      </label>
+    <div class="grid grid-cols-2">
+      <button
+        type="button"
+        :class="{ 'border-black': identity === 'normal' }"
+        class="border-b-2 px-[25px] py-[3px] duration-200"
+        @click="isActive('normal')"
+      >
+        一般身份
+      </button>
+      <button
+        type="button"
+        :class="{ 'border-black': identity === 'artist' }"
+        class="border-b-2 px-[25px] py-[3px] duration-200"
+        @click="isActive('artist')"
+      >
+        刺青師
+      </button>
     </div>
   </div>
 </template>
@@ -19,5 +27,10 @@ import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
 const { identity } = storeToRefs(store)
+
+const isActive = (btn) => {
+  identity.value = btn
+  return identity.value === btn
+}
 </script>
 <style scoped></style>

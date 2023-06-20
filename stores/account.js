@@ -1,7 +1,7 @@
 export const useAccountStore = defineStore('account', () => {
-  const identity = ref('client')
-  const email = ref('benson@gmail.com')
-  const password = ref('A1234567')
+  const identity = ref('normal')
+  const email = ref('nancy@gmail.com')
+  const password = ref('1234567890')
   const confirmPassword = ref()
 
   const cookie = useCookie('token')
@@ -19,7 +19,7 @@ export const useAccountStore = defineStore('account', () => {
       cookie.value = {
         token: '1234'
       }
-      router.replace('/account/user/editinfo') // 登入成功跳轉到首頁
+      router.replace(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
       // console.log('token', data.value)
       // console.log('cookie', cookie.value.token)
     } else if (error.value) {
