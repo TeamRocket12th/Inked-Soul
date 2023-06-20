@@ -1,15 +1,18 @@
 <template>
-  <div class="mx-auto w-[30%] text-center">
+  <NuxtLayout name="account">
     <Identity>
       <template #title>
-        <h2>登入帳戶</h2>
+        <h2>登入</h2>
       </template>
     </Identity>
     <LoginItem />
-  </div>
+  </NuxtLayout>
 </template>
 <script setup>
 import Identity from '~/components/account/Identity.vue'
 import LoginItem from '~/components/account/LoginItem.vue'
+definePageMeta({
+  layout: false
+})
 </script>
 <style scoped></style>
