@@ -1,6 +1,6 @@
 <template>
-  <VForm class="flex flex-col gap-10">
-    <label class="flex flex-col items-start gap-2">
+  <VForm v-slot="{ errors, meta }" class="flex flex-col gap-10">
+    <label class="relative flex flex-col items-start gap-2">
       <span>電子信箱</span>
       <VField
         name="電子信箱"
@@ -8,10 +8,16 @@
         class="accountInput"
         v-model="email"
         placeholder="Email"
+        :class="{ 'border-[#DC3545]': errors.電子信箱 }"
       />
-      <VErrorMessage name="電子信箱" class="whitespace-nowrap" />
+      <Icon
+        name="ic:baseline-error-outline"
+        class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+        v-if="errors.電子信箱"
+      />
+      <VErrorMessage name="電子信箱" class="whitespace-nowrap border-[#DC3545]" />
     </label>
-    <label class="flex flex-col items-start gap-2">
+    <label class="relative flex flex-col items-start gap-2">
       <span>密碼</span>
       <VField
         name="密碼"
@@ -20,6 +26,12 @@
         class="accountInput"
         v-model="password"
         placeholder="Password"
+        :class="{ 'border-[#DC3545]': errors.密碼 }"
+      />
+      <Icon
+        name="ic:baseline-error-outline"
+        class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+        v-if="errors.密碼"
       />
       <VErrorMessage name="密碼" class="whitespace-nowrap" />
     </label>

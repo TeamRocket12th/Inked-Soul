@@ -7,9 +7,9 @@
 
 @layer components {
   .formInput {
-    @apply w-full rounded-lg border px-[14px] py-[12px];
+    @apply w-full rounded-lg border px-[14px] py-[12px] outline-none;
   }
   .accountInput {
-    @apply w-full border-b p-4;
+    @apply w-full border-b p-4  outline-none;
   }
 }
