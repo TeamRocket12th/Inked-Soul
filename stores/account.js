@@ -3,6 +3,8 @@ export const useAccountStore = defineStore('account', () => {
   const email = ref('nancy@gmail.com')
   const password = ref('1234567890')
   const confirmPassword = ref()
+  const tel=ref()
+  const name=ref()
 
   const cookie = useCookie('token')
   const router = useRouter()
@@ -37,6 +39,18 @@ export const useAccountStore = defineStore('account', () => {
       }
     })
   }
+  const editInfo=()=>{
+    // 修改個人資料
+    const {data,error}=useFetch('http://localhost:5005/user',{
+      method:'PUT',
+      body:{
+        name:name.value,
+        tel:tel.value,
+        email:email.value
+      }
+    })
+    console.log(data)
+  }
 
   const resetPasswordSendEmail = () => {
     // 發送信件
@@ -67,9 +81,12 @@ export const useAccountStore = defineStore('account', () => {
     cookie,
     email,
     password,
+    tel,
+    name,
     confirmPassword,
     loginSubmit,
     signupSubmit,
+    editInfo,
     resetPasswordSendEmail,
     resetPassword,
     checkAuth

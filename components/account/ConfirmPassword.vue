@@ -7,7 +7,6 @@
       type="password"
       rules="required|min:8|confirmed:@password"
       class="accountInput"
-      v-model="confirmPassword"
     />
     <VErrorMessage name="確認密碼" class="whitespace-nowrap" />
   </label>
