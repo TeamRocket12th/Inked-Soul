@@ -42,8 +42,8 @@
 
     <!-- 訂單列表 -->
     <div>
-      <div class="overflow-x-auto">
-        <table class="table">
+      <div class="overflow-scroll">
+        <table class="table whitespace-nowrap">
           <thead>
             <tr>
               <th>認領圖</th>
@@ -58,8 +58,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, key) in productData" :key="key" class="h-[100px] whitespace-nowrap">
-              <td class="p-0"><img :src="item.img_url" alt="" class="w-full" /></td>
+            <tr v-for="(item, key) in productData" :key="key" class="h-[100px]">
+              <td><img :src="item.img_url" alt="" class="w-full" /></td>
               <td>{{ item.tattoo_name }}</td>
               <td>{{ item.tattoo_size.height }}cm x {{ item.tattoo_size.width }}cm</td>
               <td>{{ item.hour }}hr</td>
