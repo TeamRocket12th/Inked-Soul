@@ -6,8 +6,8 @@
       </template>
     </Identity>
     <LoginItem>
-      <template #confirm-passward>
-        <ConfirmPassword />
+      <template #confirm-passward="error">
+        <ConfirmPassword :errors="error.message" />
       </template>
     </LoginItem>
   </NuxtLayout>
