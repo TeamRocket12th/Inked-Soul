@@ -5,7 +5,7 @@
       v-model="confirmPassword"
       name="確認密碼"
       type="password"
-      rules="required|min:8|confirmed:@password"
+      rules="required|min:8|confirmed:@密碼"
       class="accountInput"
     />
     <VErrorMessage name="確認密碼" class="whitespace-nowrap" />
