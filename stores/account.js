@@ -30,7 +30,7 @@ export const useAccountStore = defineStore('account', () => {
   }
 
   const signupSubmit = async () => {
-    const { data, error } = await useFetch('http://localhost:5005/signup', {
+    const { data, error } = await useFetch(`http://localhost:5005/signup/${identity.value}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: {
