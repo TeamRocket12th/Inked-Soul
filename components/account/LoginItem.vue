@@ -55,8 +55,8 @@
   </div>
 </template>
 <script setup>
-import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
 
 const route = useRoute()
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>刺青師ID：{{route.params.artistID}}</p>
+    <p>刺青師ID：{{ route.params.artistID }}</p>
     <div class="container grid grid-cols-3">
       <IntroArea :artist-data="data.data.artistData" />
       <div class="col-span-2">

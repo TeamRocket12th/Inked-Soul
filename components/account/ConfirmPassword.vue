@@ -2,11 +2,11 @@
   <label class="relative flex flex-col items-start gap-1">
     <span class="mb-1">確認密碼</span>
     <VField
+      v-model="confirmPassword"
       name="確認密碼"
       type="password"
       rules="required|min:8|confirmed:@密碼"
       class="accountInput"
-      v-model="confirmPassword"
       :class="{ 'border-[#DC3545]': errors.確認密碼 }"
     />
     <Icon

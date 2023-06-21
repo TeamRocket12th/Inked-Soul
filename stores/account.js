@@ -3,7 +3,8 @@ export const useAccountStore = defineStore('account', () => {
   const email = ref('nancy@gmail.com')
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
-
+  const tel = ref()
+  const name = ref()
   const cookie = useCookie('token')
   const router = useRouter()
 
@@ -15,7 +16,6 @@ export const useAccountStore = defineStore('account', () => {
         Password: password.value
       }
     })
-
     if (data.value) {
       cookie.value = {
         token: '1234'
@@ -31,8 +31,8 @@ export const useAccountStore = defineStore('account', () => {
 
   const signupSubmit = async () => {
     const { data, error } = await useFetch(`http://localhost:5005/signup/${identity.value}`, {
-      headers: { 'Content-type': 'application/json' },
       method: 'POST',
+      headers: { 'Content-type': 'application/json' },
       body: {
         Email: email.value,
         Password: password.value,
@@ -48,6 +48,18 @@ export const useAccountStore = defineStore('account', () => {
     } else if (error.value) {
       console.log(error.value)
     }
+  }
+  const editInfo = async () => {
+    // 修改個人資料
+    const { data, error } = await useFetch('http://localhost:5005/user', {
+      method: 'PUT',
+      body: {
+        name: name.value,
+        tel: tel.value,
+        email: email.value
+      }
+    })
+    // console.log(data)
   }
 
   const resetPasswordSendEmail = () => {
@@ -76,11 +88,15 @@ export const useAccountStore = defineStore('account', () => {
 
   return {
     identity,
+    cookie,
     email,
     password,
+    tel,
+    name,
     confirmPassword,
     loginSubmit,
     signupSubmit,
+    editInfo,
     resetPasswordSendEmail,
     resetPassword,
     checkAuth
