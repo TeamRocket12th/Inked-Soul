@@ -3,14 +3,14 @@ export const useAccountStore = defineStore('account', () => {
   const email = ref('nancy@gmail.com')
   const password = ref('1234567890')
   const confirmPassword = ref()
-  const tel=ref()
-  const name=ref()
+  const tel = ref()
+  const name = ref()
 
   const cookie = useCookie('token')
   const router = useRouter()
 
   const loginSubmit = async () => {
-    const { data, error } = useFetch(`http://localhost:5005/login/${identity.value}`, {
+    const { data, error } = await useFetch(`http://localhost:5005/login/${identity.value}`, {
       method: 'POST',
       body: {
         email: email.value,
@@ -30,23 +30,24 @@ export const useAccountStore = defineStore('account', () => {
     }
   }
 
-  const signupSubmit = () => {
-    const { data, error } = useFetch(`http://localhost:5005/signup/${identity.value}`, {
+  const signupSubmit = async () => {
+    const { data, error } = await useFetch(`http://localhost:5005/signup`, {
       method: 'POST',
       body: {
+        identity: identity.value,
         email: email.value,
         password: password.value
       }
     })
   }
-  const editInfo=()=>{
+  const editInfo = async () => {
     // 修改個人資料
-    const {data,error}=useFetch('http://localhost:5005/user',{
-      method:'PUT',
-      body:{
-        name:name.value,
-        tel:tel.value,
-        email:email.value
+    const { data, error } = await useFetch('http://localhost:5005/user', {
+      method: 'PUT',
+      body: {
+        name: name.value,
+        tel: tel.value,
+        email: email.value
       }
     })
     console.log(data)
