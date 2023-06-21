@@ -12,15 +12,15 @@ export const useAccountStore = defineStore('account', () => {
     const { data, error } = await useFetch(`http://localhost:5005/login/${identity.value}`, {
       method: 'POST',
       body: {
-        email: email.value,
-        password: password.value
+        Email: email.value,
+        Password: password.value
       }
     })
     if (data.value) {
       cookie.value = {
         token: '1234'
       }
-      router.replace(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
+      router.push(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
       // console.log('token', data.value)
       // console.log('cookie', cookie.value.token)
     } else if (error.value) {
@@ -30,19 +30,19 @@ export const useAccountStore = defineStore('account', () => {
   }
 
   const signupSubmit = async () => {
-    const { data, error } = await useFetch('http://localhost:5005/signup', {
+    const { data, error } = await useFetch(`http://localhost:5005/signup/${identity.value}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: {
-        identity: identity.value,
-        email: email.value,
-        password: password.value
+        Email: email.value,
+        Password: password.value,
+        ConfirmPassword: confirmPassword.value
       }
     })
 
     if (data.value) {
       const res = data.value
-      if (res.status === 200) {
+      if (res.Status === 200) {
         router.push('/account/login')
       }
     } else if (error.value) {
@@ -81,7 +81,7 @@ export const useAccountStore = defineStore('account', () => {
       // console.log('checkAuth-succ', data.value)
     } else if (error.value) {
       cookie.value = null
-      router.replace('/account/login')
+      router.push('/account/login')
       // console.log('checkAuth-error', error.value)
     }
   }
