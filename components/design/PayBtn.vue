@@ -14,8 +14,8 @@
   </div>
 </template>
 <script setup>
-import { useOrderStore } from '~/stores/order'
 import { storeToRefs } from 'pinia'
+import { useOrderStore } from '~/stores/order'
 const route = useRoute()
 const designID = route.params.designID
 const store = useOrderStore()

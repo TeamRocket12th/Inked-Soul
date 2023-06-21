@@ -2,7 +2,7 @@
   <div class="border-[1px] border-black p-5">
     <slot name="image"></slot>
     <!-- 預約資訊 -->
-    <div class="mb-16" v-if="props">
+    <div v-if="props" class="mb-16">
       <div class="mb-4 border-b-[1px] border-black pb-5">
         <p class="text-bold">預約資訊</p>
       </div>
@@ -25,7 +25,7 @@
           <p>{{ props.designData.artistData.location }}</p>
         </div>
         <div class="flex">
-          <Icon name="ic:round-access-time" size="24" />          
+          <Icon name="ic:round-access-time" size="24" />
           <p>{{ props.designData.artistData.businessHours }}</p>
         </div>
       </div>
@@ -48,7 +48,6 @@ const props = defineProps({
   designData: {
     type: Object,
     required: true
-  },
-
+  }
 })
 </script>
