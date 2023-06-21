@@ -1,6 +1,6 @@
 export const useOrderStore = defineStore('order', () => {
   const id = ref()
-  let orderID = ref()
+  const orderID = ref()
   const designData = ref({
     ID: 0,
     name: '',
@@ -14,7 +14,6 @@ export const useOrderStore = defineStore('order', () => {
     time: ''
   })
 
-
   const postOrder = async () => {
     // 送出訂單
     const orderData = {
@@ -25,7 +24,7 @@ export const useOrderStore = defineStore('order', () => {
       method: 'post',
       body: orderData
     })
-    orderID.value=data.value.orderID
+    orderID.value = data.value.orderID
     if (data.value.status === 200) {
       await navigateTo(`/designs/${designData.value.ID}/complete`)
     }
