@@ -1,7 +1,7 @@
 <template>
-  <VForm v-slot="{ errors, meta }" class="flex flex-col gap-10">
-    <label class="relative flex flex-col items-start gap-2">
-      <span>電子信箱</span>
+  <VForm v-slot="{ errors, meta }" class="flex flex-col gap-[26px]">
+    <label class="relative flex flex-col items-start gap-1">
+      <span class="mb-1">電子信箱</span>
       <VField
         name="電子信箱"
         rules="required|email"
@@ -15,10 +15,12 @@
         class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
         v-if="errors.電子信箱"
       />
-      <VErrorMessage name="電子信箱" class="whitespace-nowrap border-[#DC3545]" />
+      <div class="h-[14px]">
+        <VErrorMessage name="電子信箱" class="whitespace-nowrap text-[#DC3545]" />
+      </div>
     </label>
-    <label class="relative flex flex-col items-start gap-2">
-      <span>密碼</span>
+    <label class="relative flex flex-col items-start gap-1">
+      <span class="mb-1">密碼</span>
       <VField
         name="密碼"
         type="password"
@@ -33,9 +35,11 @@
         class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
         v-if="errors.密碼"
       />
-      <VErrorMessage name="密碼" class="whitespace-nowrap" />
+      <div class="h-[14px]">
+        <VErrorMessage name="密碼" class="whitespace-nowrap text-[#DC3545]" />
+      </div>
     </label>
-    <slot name="confirm-passward"></slot>
+    <slot name="confirm-passward" :message="errors"></slot>
   </VForm>
   <button
     type="button"
