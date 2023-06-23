@@ -1,23 +1,40 @@
 export const useUploadTattooStore = defineStore('UploadTattoo', () => {
-  const uploadTattoo = ref({
-    img_url: '',
-    tatoo_name: '',
-    recommend_position: [],
-    tattoo_size: {
-      height: '',
-      width: ''
+  const uploadTattooData = ref({
+    Image: '',
+    Name: '',
+    BodyPart: [],
+    Size: {
+      Height: '',
+      Width: ''
     },
-    design_idea: '',
-    hour: '',
-    payment: {
-      deposit: '',
-      balance: '',
-      total: ''
+    Idea: '',
+    Hour: '',
+    Payment: {
+      Deposit: '',
+      Balance: '',
+      Total: ''
     },
-    tattoo_style: [],
-    tattoo_element: []
+    Style: [],
+    Element: []
   })
 
+  const uploadTattoo = async () => {
+    const artistID = '123'
+    const { data, error } = await useFetch(`http://localhost:5005/artist/design/${artistID}`, {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: uploadTattooData.value // 待確認
+    })
+    if (data.value) {
+      const res = data.value
+      if (res.Status === 200) {
+        console.log(res.Data)
+      }
+    } else if (error.value) {
+      console.log(error.value)
+    }
+  }
+
   // POST API
-  return { uploadTattoo }
+  return { uploadTattooData, uploadTattoo }
 })

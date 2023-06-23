@@ -17,10 +17,14 @@ export const useAccountStore = defineStore('account', () => {
       }
     })
     if (data.value) {
-      cookie.value = {
-        token: '1234'
+      const res = data.value
+      if (res.Status === 200) {
+        cookie.value = {
+          token: res.Token,
+          data: res.Data
+        }
+        router.push(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
       }
-      router.push(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
       // console.log('token', data.value)
       // console.log('cookie', cookie.value.token)
     } else if (error.value) {

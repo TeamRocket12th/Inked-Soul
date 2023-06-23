@@ -17,6 +17,12 @@
   </label>
 </template>
 <script setup>
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import { storeToRefs } from 'pinia'
+
+const store = useUploadTattooStore()
+const { uploadTattooData } = storeToRefs(store)
+
 const elements = [
   '動物',
   '植物',
@@ -44,6 +50,7 @@ const styleToggle = (addStyle) => {
   } else if (tattooElement.value.length === 2) {
     tattooElement.value.splice(0, 1, addStyle)
   }
+  uploadTattooData.value.Element = tattooElement.value
 }
 </script>
 <style scoped></style>

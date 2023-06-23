@@ -23,7 +23,7 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
 
 const store = useUploadTattooStore()
-const { uploadTattoo } = storeToRefs(store)
+const { uploadTattooData } = storeToRefs(store)
 
 const styles = [
   'Black and Grey 黑灰派',
@@ -52,7 +52,7 @@ const styleToggle = (addStyle) => {
     personalStyle.value.splice(0, 1, addStyle)
   }
 
-  uploadTattoo.value.tattoo_style = personalStyle.value
+  uploadTattooData.value.Style = personalStyle.value
 }
 </script>
 <style scoped></style>
