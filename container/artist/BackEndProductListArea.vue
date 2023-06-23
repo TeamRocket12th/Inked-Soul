@@ -28,7 +28,6 @@
         </label>
       </div>
 
-      <!-- ! 元件包元件（待修改） -->
       <button class="btn" onclick="upload_product.showModal()">上架認領圖</button>
       <dialog id="upload_product" class="modal">
         <form method="dialog" class="modal-box">
@@ -44,7 +43,7 @@
     <div>
       <div class="overflow-scroll">
         <table class="table whitespace-nowrap">
-          <thead>
+          <thead class="mb-1 border-b">
             <tr>
               <th>認領圖</th>
               <th>名稱</th>
@@ -58,14 +57,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, key) in productData" :key="key" class="h-[100px]">
+            <tr v-for="(item, key) in productData" :key="key" class="h-[100px] py-1">
               <td><img :src="item.img_url" alt="" class="w-full" /></td>
-              <td>{{ item.tattoo_name }}</td>
-              <td>{{ item.tattoo_size.height }}cm x {{ item.tattoo_size.width }}cm</td>
-              <td>{{ item.hour }}hr</td>
-              <td>$ {{ item.payment.deposit }}</td>
-              <td>$ {{ item.payment.total }}</td>
-              <td>{{ item.salesStatus }}</td>
+              <td class="px-12">{{ item.tattoo_name }}</td>
+              <td class="px-12">
+                {{ item.tattoo_size.height }}cm x {{ item.tattoo_size.width }}cm
+              </td>
+              <td class="px-12">{{ item.hour }}hr</td>
+              <td class="px-12">$ {{ item.payment.deposit }}</td>
+              <td class="px-12">$ {{ item.payment.total }}</td>
+              <td class="px-12">{{ item.salesStatus }}</td>
               <td class="text-center"><input type="checkbox" /></td>
               <td class="cursor-pointer text-center">
                 <Icon name="ic:baseline-more-vert" />

@@ -1,10 +1,12 @@
 <template>
-  <div class="boreder-black rounded border-2">
+  <div class="relative overflow-hidden rounded-lg bg-gray-300">
     <img :src="`${props.image}`" alt="" />
-    <p>{{ props.nickname }}</p>
-    <p>{{ props.studioname }}</p>
-    <p>{{ props.category }}</p>
-    <button class="rounded bg-slate-200 p-2" @click="follow">追蹤</button>
+    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 text-white">
+      <p>{{ props.nickname }}</p>
+    </div>
+    <!-- <p>{{ props.studioname }}</p> -->
+    <!-- <p>{{ props.category }}</p> -->
+    <!-- <button class="rounded bg-slate-200 p-2" @click="follow">追蹤</button> -->
   </div>
 </template>
 

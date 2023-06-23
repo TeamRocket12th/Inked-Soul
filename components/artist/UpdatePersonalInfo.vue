@@ -16,7 +16,7 @@
       </label>
       <label class="flex flex-col">
         <span>電子信箱</span>
-        <VField name="電子信箱" class="min-h-12 rounded-lg border" />
+        <VField name="電子信箱" class="min-h-12 rounded-lg border" disabled />
       </label>
       <label class="flex flex-col">
         <span>密碼</span>

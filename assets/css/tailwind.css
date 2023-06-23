@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  /* body {
+    @apply box-border;
+  } */
+  h2 {
+    @apply text-[32px] font-bold;
+  }
 }
 
 @layer components {

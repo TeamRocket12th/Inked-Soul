@@ -3,7 +3,7 @@
     <label class="flex flex-col">
       <span>設計理念（30字內）</span>
       <VField
-        v-model="uploadTattoo.design_idea"
+        v-model="designIdea"
         as="textarea"
         name="設計理念"
         rules="max:30"
@@ -21,6 +21,7 @@
           rules="required"
           class="formInput"
           placeholder="2100元"
+          disabled
         />
         <VErrorMessage name="訂金" class="whitespace-nowrap" />
       </label>
@@ -32,6 +33,7 @@
           rules="required"
           class="formInput"
           placeholder="4900元"
+          disabled
         />
         <VErrorMessage name="尾款" class="whitespace-nowrap" />
       </label>
@@ -59,18 +61,19 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
 
 const store = useUploadTattooStore()
-const { uploadTattoo } = storeToRefs(store)
+const { uploadTattooData } = storeToRefs(store)
 
+const designIdea = uploadTattooData.value.Idea
 const totalPrice = ref(7000)
 const deposit = ref()
 const balance = ref()
 watch(totalPrice, (newTotalPrice) => {
-  deposit.value = newTotalPrice * 0.3
-  balance.value = newTotalPrice - deposit.value
+  deposit.value = Math.floor(newTotalPrice * 0.3)
+  balance.value = Math.floor(newTotalPrice - deposit.value)
 })
 
-uploadTattoo.value.totalPrice = totalPrice.value
-uploadTattoo.value.balance = balance.value
-uploadTattoo.value.deposit = deposit.value
+uploadTattooData.value.Payment.Total = totalPrice.value
+uploadTattooData.value.Payment.Balance = balance.value
+uploadTattooData.value.Payment.Deposit = deposit.value
 </script>
 <style scoped></style>

@@ -25,7 +25,7 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
 
 const store = useUploadTattooStore()
-const { uploadTattoo } = storeToRefs(store)
+const { uploadTattooData } = storeToRefs(store)
 
 const url = ref()
 const handleOnPreview = (event) => {
@@ -35,7 +35,7 @@ const handleOnPreview = (event) => {
   }
   url.value = URL.createObjectURL(event.target.files[0])
   // 待確認
-  uploadTattoo.value.img_url = url.value
+  uploadTattooData.value.Image = url.value
 }
 </script>
 <style scoped></style>
