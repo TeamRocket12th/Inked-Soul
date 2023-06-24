@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table>
+    <table class="w-full">
       <tr>
         <th>認領圖</th>
         <th>名稱</th>
@@ -28,7 +28,7 @@ const { data } = await useFetch('/api/getOrder/getAllOrder')
 console.log('data:', data)
 
 const order = ref([])
-// order.value = data.value.OrderData
+order.value = data.value.OrderData
 order.value = data.value
 console.log('order:', order)
 
