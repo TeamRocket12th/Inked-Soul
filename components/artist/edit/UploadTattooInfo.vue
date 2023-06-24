@@ -4,7 +4,7 @@
     <label class="flex flex-col items-start">
       <span>作品名稱</span>
       <VField
-        v-model="uploadTattoo.tatoo_name"
+        v-model="tattooName"
         name="作品名稱"
         rules="required"
         class="formInput"
@@ -31,9 +31,7 @@
             @click="SelectRecommendPositions(part)"
             class="m-1"
           >
-            <a :class="{ 'bg-gray-100': uploadTattoo.recommend_position.includes(part) }">{{
-              part
-            }}</a>
+            <a :class="{ 'bg-gray-100': selectBodyParts.includes(part) }">{{ part }}</a>
           </li>
         </ul>
       </div>
@@ -41,7 +39,7 @@
     <label class="flex flex-col items-start">
       <span>作品尺寸（cm*cm）</span>
       <VField
-        v-model="uploadTattoo.tattoo_size.height"
+        v-model="tattooSize"
         name="作品尺寸"
         rules="required"
         class="formInput"
@@ -52,7 +50,7 @@
     <label class="flex flex-col items-start">
       <span>預計作業時間（時）</span>
       <VField
-        v-model="uploadTattoo.hour"
+        v-model="hour"
         name="預計作業時間"
         rules="required"
         class="formInput"
@@ -67,7 +65,7 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
 
 const store = useUploadTattooStore()
-const { uploadTattoo } = storeToRefs(store)
+const { uploadTattooData } = storeToRefs(store)
 
 const bodyParts = [
   '全身',
@@ -82,7 +80,14 @@ const bodyParts = [
   '手部',
   '腿部'
 ]
+
+const tattooName = uploadTattooData.value.Name
 const selectBodyParts = ref([bodyParts[0]])
+const tattooSize = ref('')
+// 待整理成 cm * cm
+const tattooSizeHieght = uploadTattooData.value.Size.Height
+const tattooSizeWidth = uploadTattooData.value.Size.Width
+const hour = uploadTattooData.value.Hour
 
 const SelectRecommendPositions = (part) => {
   const index = selectBodyParts.value.indexOf(part)
@@ -94,7 +99,7 @@ const SelectRecommendPositions = (part) => {
     selectBodyParts.value.splice(0, 1, part)
   }
 
-  uploadTattoo.value.recommend_position = selectBodyParts.value
+  uploadTattooData.value.BodyPart = selectBodyParts.value
 }
 </script>
 <style scoped></style>

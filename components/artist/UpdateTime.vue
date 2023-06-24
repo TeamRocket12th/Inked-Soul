@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="flex flex-col">
+  <div class="flex flex-col gap-5">
+    <div class="flex flex-col items-start gap-1">
       <span>公休日</span>
-      <div class="dropdown-end dropdown">
+      <div class="dropdown-end dropdown w-full">
         <label tabindex="0" class="btn my-1 mb-1 h-auto w-full py-2">
           <span v-for="(day, key) in ArtistCloseDay" :key="key"> {{ day.week }} </span>
         </label>
@@ -17,9 +17,9 @@
       </div>
     </div>
     <div class="flex flex-row justify-between gap-2">
-      <div class="flex flex-1 flex-col">
+      <div class="flex flex-1 flex-col items-start gap-1">
         <span>開店時間</span>
-        <div class="dropdown-hover dropdown">
+        <div class="dropdown-hover dropdown w-full">
           <label tabindex="0" class="btn mb-1 w-full">{{ ArtistOpenTime }}</label>
           <ul
             tabindex="0"
@@ -36,9 +36,9 @@
           </ul>
         </div>
       </div>
-      <div class="flex flex-1 flex-col">
+      <div class="flex flex-1 flex-col items-start gap-1">
         <span>閉店時間</span>
-        <div class="dropdown-hover dropdown">
+        <div class="dropdown-hover dropdown w-full">
           <label tabindex="0" class="btn mb-1 w-full">{{ ArtistCloseTime }}</label>
           <ul
             tabindex="0"
@@ -57,9 +57,9 @@
       </div>
     </div>
     <p v-if="AlertSelect">{{ AlertSelect }}</p>
-    <div class="flex flex-col">
+    <div class="flex flex-col items-start gap-1">
       <span>可供預約時段</span>
-      <div class="dropdown-hover dropdown">
+      <div class="dropdown-hover dropdown w-full">
         <label tabindex="0" class="btn my-1 h-auto w-full py-2">
           <span v-for="(part, key) in ArtistAvailableTimeFrame" :key="key">
             {{ part }}

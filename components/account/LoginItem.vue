@@ -24,7 +24,7 @@
       <VField
         name="密碼"
         type="password"
-        rules="required|min:8"
+        :rules="isPassword"
         class="accountInput"
         v-model="password"
         placeholder="Password"
@@ -63,5 +63,7 @@ const route = useRoute()
 const store = useAccountStore()
 const { email, password } = storeToRefs(store)
 const { loginSubmit } = store
+
+const { isPassword } = useValidate()
 </script>
 <style></style>
