@@ -18,8 +18,10 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     Element: []
   })
 
+  const cookie = useCookie('token')
+  const artistID = cookie.value.data.ID // 對應刺青師ID
+
   const uploadTattoo = async () => {
-    const artistID = '123'
     const { data, error } = await useFetch(`http://localhost:5005/artist/design/${artistID}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
@@ -29,12 +31,26 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       const res = data.value
       if (res.Status === 200) {
         console.log(res.Data)
+        getTattooData()
       }
     } else if (error.value) {
       console.log(error.value)
     }
   }
 
+  const getTattooData = async () => {
+    const { data, error } = await useFetch(`http://localhost:5005/artist/design/${artistID}`)
+    if (data) {
+      console.log('res', data.value) // data.value.Data
+      return data.value
+      if (res.Status === 200) {
+        console.log(res.Data)
+      }
+    } else if (error) {
+      console.log(error)
+    }
+  }
+
   // POST API
-  return { uploadTattooData, uploadTattoo }
+  return { uploadTattooData, uploadTattoo, getTattooData }
 })

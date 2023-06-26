@@ -12,5 +12,10 @@ export default defineNuxtConfig({
   nitro: {
     plugins: ['~/server/db/index.js']
   },
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:5005'
+    }
+  },
   plugins: []
 })

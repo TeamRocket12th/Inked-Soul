@@ -1,5 +1,6 @@
 <template>
-  <div class="flex h-[50vh] items-center justify-center bg-slate-400">
-    <h2 class="text-black">靈魂之道 | 譜寫靈魂的篇章</h2>
+  <div class="relative flex h-screen items-center justify-center">
+    <img src="/home-banner.svg" alt="" class="absolute left-0 right-0 top-0 -z-10" />
+    <h2 class="text-white">探索專屬刺青故事</h2>
   </div>
 </template>
