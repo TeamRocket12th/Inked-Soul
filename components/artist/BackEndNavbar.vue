@@ -39,11 +39,13 @@ const menu = [
   },
   {
     icon: 'ic:outline-event-available',
-    title: '預約狀況'
+    title: '預約狀況',
+    link: 'reservation'
   },
   {
     icon: 'ic:round-list-alt',
-    title: '訂單資訊'
+    title: '訂單資訊',
+    link: 'orderinfo'
   },
   {
     icon: 'ic:outline-stars',

@@ -6,15 +6,15 @@
       <div class="grid grid-cols-2 gap-[32px]">
         <!-- first row -->
         <div class="flex flex-row gap-[32px]">
-          <div class="h-[300px] w-[300px] rounded-lg bg-gray-300"></div>
-          <div class="h-[300px] w-[300px] rounded-lg bg-gray-300"></div>
+          <img src="/home-inspire1.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
+          <img src="/home-inspire2.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
         </div>
-        <div class="h-[300px] w-full rounded-lg bg-gray-300"></div>
+        <img src="/home-inspire3.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
         <!-- second row -->
-        <div class="h-[300px] w-full rounded-lg bg-gray-300"></div>
+        <img src="/home-inspire4.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
         <div class="flex flex-row gap-[32px]">
-          <div class="h-[300px] w-[300px] rounded-lg bg-gray-300"></div>
-          <div class="h-[300px] w-[300px] rounded-lg bg-gray-300"></div>
+          <img src="/home-inspire5.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
+          <img src="/home-inspire6.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
             >探索認領圖</NuxtLink
           >
         </div>
-        <div class="h-[416px] w-[416px] rounded-lg bg-gray-300"></div>
+        <img src="/home-inspire7.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
       </div>
       <div class="flex flex-row-reverse gap-[32px]">
         <div class="flex h-[416px] w-[416px] flex-col items-center justify-center gap-10">
@@ -43,7 +43,7 @@
             >探索刺青師</NuxtLink
           >
         </div>
-        <div class="h-[416px] w-[416px] rounded-lg bg-gray-300"></div>
+        <img src="/home-inspire8.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
       </div>
     </div>
   </div>
@@ -51,12 +51,38 @@
   <!-- 最獨特的刺青風格 -->
   <div class="flex flex-col items-center">
     <h2 class="mb-10">最獨特的刺青風格</h2>
-    <div class="grid grid-cols-4">
-      <div v-for="(style, key) in styles" :key="key" class="flex flex-col items-center">
-        <p>
-          {{ style.ch }}
-        </p>
-        <p>{{ style.en }}</p>
+    <div class="grid grid-cols-4 gap-1">
+      <div class="relative flex flex-col items-center">
+        <img src="/home-element1.png" alt="" />
+        <img
+          src="/element-text1.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
+      </div>
+      <div class="relative flex flex-col items-center">
+        <img src="/home-element2.png" alt="" />
+        <img
+          src="/element-text2.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
+      </div>
+      <div class="relative flex flex-col items-center">
+        <img src="/home-element3.png" alt="" />
+        <img
+          src="/element-text3.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
+      </div>
+      <div class="relative flex flex-col items-center">
+        <img src="/home-element4.png" alt="" />
+        <img
+          src="/element-text4.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
       </div>
     </div>
   </div>
@@ -74,39 +100,4 @@
     </div>
   </div> -->
 </template>
-<script setup>
-const styles = [
-  {
-    ch: '老派',
-    en: 'OLD SCHOOL'
-  },
-  {
-    ch: '日式傳統',
-    en: 'Traditional Japanese'
-  },
-  {
-    ch: '點陣',
-    en: 'Dotwork'
-  },
-  {
-    ch: '水彩風',
-    en: 'Watercolor '
-  },
-  {
-    ch: '幾何',
-    en: 'Geometric'
-  },
-  {
-    ch: '寫實主義',
-    en: 'Realism'
-  },
-  {
-    ch: '單針',
-    en: 'Fine Line '
-  },
-  {
-    ch: '黑灰派',
-    en: 'Black and Grey '
-  }
-]
-</script>
+<script setup></script>
