@@ -3,7 +3,12 @@
     <div class="fixed top-0 z-50 w-full">
       <NavbarItem></NavbarItem>
     </div>
-    <div :class="{ 'mt-[160px]': route.path !== '/' }">
+    <div
+      :class="[
+        { 'pt-[160px]': route.path !== '/' },
+        { 'bg-primary': route.path !== '/' && !route.path.includes('account') }
+      ]"
+    >
       <slot></slot>
     </div>
     <FooterItem></FooterItem>
