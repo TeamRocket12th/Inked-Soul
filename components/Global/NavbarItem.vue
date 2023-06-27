@@ -30,7 +30,7 @@
           </label>
           <ul
             tabindex="0"
-            class="dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 text-black shadow"
+            class="dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 border border-[D0D0D0] bg-base-100 p-2 text-black shadow"
           >
             判斷是刺青師 or 一般用戶
             <li><NuxtLink to="/account/artist/editinfo">刺青師後台</NuxtLink></li>
@@ -39,7 +39,7 @@
             <li><a>作品集</a></li>
             <li><NuxtLink to="/account/artist/reservation">預約狀況</NuxtLink></li>
             <li><NuxtLink to="/account/artist/orderinfo">訂單資訊</NuxtLink></li>
-            <li><a>獲得評價</a></li>
+            <li><NuxtLink to="/account/artist/comments">獲得評價</NuxtLink></li>
             <li><NuxtLink to="/account/login" @click="logout">登出</NuxtLink></li>
           </ul>
         </div>
