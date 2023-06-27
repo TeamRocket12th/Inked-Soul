@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   h2 {
-    @apply text-[32px] font-bold;
+    @apply font-serif text-[32px] font-bold;
+  }
+  h4 {
+    @apply text-[20px] font-bold;
   }
 }
 

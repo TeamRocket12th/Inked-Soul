@@ -51,40 +51,72 @@
   <!-- 最獨特的刺青風格 -->
   <div class="flex flex-col items-center">
     <h2 class="mb-10">最獨特的刺青風格</h2>
-    <div class="grid grid-cols-4 gap-1">
-      <div class="relative flex flex-col items-center">
+    <ul class="grid grid-cols-4 gap-1">
+      <li class="relative flex flex-col items-center">
         <img src="/home-element1.png" alt="" />
         <img
           src="/element-text1.svg"
           alt=""
           class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
         />
-      </div>
-      <div class="relative flex flex-col items-center">
+      </li>
+      <li class="relative flex flex-col items-center">
         <img src="/home-element2.png" alt="" />
         <img
           src="/element-text2.svg"
           alt=""
           class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
         />
-      </div>
-      <div class="relative flex flex-col items-center">
+      </li>
+      <li class="relative flex flex-col items-center">
         <img src="/home-element3.png" alt="" />
         <img
           src="/element-text3.svg"
           alt=""
           class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
         />
-      </div>
-      <div class="relative flex flex-col items-center">
+      </li>
+      <li class="relative flex flex-col items-center">
         <img src="/home-element4.png" alt="" />
         <img
           src="/element-text4.svg"
           alt=""
           class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
         />
-      </div>
-    </div>
+      </li>
+      <li class="relative flex flex-col items-center">
+        <img src="/home-element5.png" alt="" />
+        <img
+          src="/element-text5.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
+      </li>
+      <li class="relative flex flex-col items-center">
+        <img src="/home-element6.png" alt="" />
+        <img
+          src="/element-text6.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
+      </li>
+      <li class="relative flex flex-col items-center">
+        <img src="/home-element7.png" alt="" />
+        <img
+          src="/element-text7.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
+      </li>
+      <li class="relative flex flex-col items-center">
+        <img src="/home-element8.png" alt="" />
+        <img
+          src="/element-text8.svg"
+          alt=""
+          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
+        />
+      </li>
+    </ul>
   </div>
 
   <!-- <div class="container mx-auto grid grid-cols-2">

@@ -1,9 +1,9 @@
 <template>
   <div class="relative">
-    <div class="fixed w-full">
+    <div class="fixed top-0 z-50 w-full">
       <NavbarItem></NavbarItem>
     </div>
-    <div>
+    <div :class="{ 'mt-[160px]': route.path !== '/' }">
       <slot></slot>
     </div>
     <FooterItem></FooterItem>
@@ -13,4 +13,5 @@
 <script setup>
 import NavbarItem from '~/components/global/NavbarItem.vue'
 import FooterItem from '~/components/global/FooterItem.vue'
+const route = useRoute()
 </script>

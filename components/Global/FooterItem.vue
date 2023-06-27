@@ -1,30 +1,26 @@
 <template>
-  <footer class="flex items-center justify-between p-4">
-    <div class="logo">
-      <NuxtLink to="/" class="text-4xl">Inked Soul</NuxtLink>
+  <footer class="bg-black px-[60px] text-white">
+    <div class="flex flex-row justify-between py-8">
+      <ul class="flex flex-row items-center gap-4">
+        <li>
+          <NuxtLink to="/designs">認領圖</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/artists">刺青師</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/tips">知識點</NuxtLink>
+        </li>
+      </ul>
+      <Icon name="ic:outline-email" />
     </div>
-    <ul class="flex gap-4">
-      <li>
-        <NuxtLink>認領圖</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink>刺青師</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink>知識點</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink>使用者條款</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink>隱私條款</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink>申訴流程</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink>客服信箱</NuxtLink>
-      </li>
-    </ul>
+    <hr />
+
+    <div class="flex flex-row items-center justify-between py-[60px]">
+      <div class="logo">
+        <NuxtLink to="/" class="text-4xl">Inked Soul</NuxtLink>
+      </div>
+      <NuxtLink>使用者條款</NuxtLink>
+    </div>
   </footer>
 </template>
