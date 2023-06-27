@@ -26,6 +26,11 @@ module.exports = {
     extend: {
       screens: {
         '3xl': '1920px'
+      },
+      colors: {
+        primary: '#F0F0F0',
+        secondary: '#6C6C6C',
+        btn: '#D9D9D9'
       }
     }
   },
