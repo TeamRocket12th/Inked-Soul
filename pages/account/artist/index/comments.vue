@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col">
-    <CommentItem :artistId="id" />
+    <CommentItem :artistId="cookie.data.ID" />
   </div>
 </template>
 <script setup>
 import CommentItem from '~/components/global/CommentItem.vue'
-const route = useRoute()
-const id = route.params.id
+const cookie = useCookie('token')
 </script>
+<style scoped></style>

@@ -49,7 +49,8 @@ const menu = [
   },
   {
     icon: 'ic:outline-stars',
-    title: '獲得評價'
+    title: '獲得評價',
+    link: 'comments'
   }
 ]
 
