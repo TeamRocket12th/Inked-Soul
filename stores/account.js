@@ -16,6 +16,7 @@ export const useAccountStore = defineStore('account', () => {
         Password: password.value
       }
     })
+
     if (data.value) {
       const res = data.value
       if (res.Status === 200) {
