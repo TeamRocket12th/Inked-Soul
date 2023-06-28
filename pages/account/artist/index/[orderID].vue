@@ -2,7 +2,8 @@
   <div>
     <OrderArea>
       <template #orderContext>
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center gap-5">
+          <Icon name="" />
           <p>訂單成立</p>
           <p>請您於三日內確認本筆訂單，若未於三日內回覆，系統將自動取消訂單。</p>
         </div>
@@ -44,9 +45,14 @@ import OrderArea from '~/container/order/OrderArea'
 import OrderBar from '~/components/order/OrderBar'
 
 const route = useRoute()
-// const orderID = route.params.orderID
-// const { data } = await useFetch(`/api/getOrder/${orderID}`)
-// console.log(data)
+const runtimeConfig = useRuntimeConfig()
+const cookie = useCookie('token')
+
+const apiBase = runtimeConfig.public.apiBase
+const orderID = route.params.orderID
+const artistID = cookie.value.data.ID
+
+const { data, error } = await useFetch(`${apiBase}/artist/${artistID}/${orderID}`)
 const order = ref([])
 // order.value = data.value.data
 </script>
