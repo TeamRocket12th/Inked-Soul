@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="mx-[184px] mb-[115px] mt-[85px] grid grid-cols-12 gap-8">
+    <div class="container mb-[115px] mt-[85px] grid grid-cols-12 gap-8">
       <div class="col-span-4 flex flex-col gap-[43px]">
         <slot name="userImg">
           <BackEndHeadImg />
