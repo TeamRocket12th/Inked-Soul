@@ -1,6 +1,6 @@
 <template>
-  <ul v-for="item in commentsData" :key="item.id">
-    <li class="flex flex-row gap-1 border-b p-3">
+  <ul v-for="item in commentsData" :key="item.id" class="rounded-lg">
+    <li class="flex flex-row gap-1 border-b bg-white p-3">
       <img :src="`${item.artistImage}`" alt="" class="h-6 w-6 rounded-full" />
       <div class="flex w-full flex-col gap-3">
         <div class="flex flex-col">
@@ -18,7 +18,7 @@
 
         <p>{{ item.comment }}</p>
         <div class="flex flex-row items-center gap-2 rounded-lg bg-[#F0F0F0]">
-          <img :src="`${item.image}`" alt="" class="h-10 w-10 rounded" />
+          <img :src="`${item.image}`" alt="" class="h-[100px] w-[100px] rounded-lg" />
           <p>{{ item.designName }}</p>
           <p>{{ item.size }}</p>
         </div>
