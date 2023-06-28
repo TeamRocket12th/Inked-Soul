@@ -43,13 +43,13 @@ const route = useRoute()
 console.log(route.params)
 
 const orderID = route.params.orderID
-const { data } = await useFetch(`/api/getOrder/${orderID}`)
+const data = await $fetch(`/api/getOrder/${orderID}`)
 console.log('single order', data)
 // 有真資料後再使用以下
 // const order = ref()
 // order.value = data.value.data
 // console.log('single order reassigned', order)
-const status = data.value.status
+const status = data.status
 console.log('satus', status)
 
 // 訂單狀態
