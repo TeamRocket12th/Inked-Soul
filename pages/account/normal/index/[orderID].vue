@@ -25,12 +25,12 @@
             <th>價格</th>
             <th>訂單狀態</th>
           </tr>
-          <OrderBar :order="order" :status="status" />
+          <OrderBar :order="data" :status="status" />
         </table>
       </template>
     </OrderArea>
     <!-- 評價區 -->
-    <PostComments class="absolute right-0 top-72" v-if="status !== '已評價'" />
+    <PostComments v-if="status !== '已評價'" class="top-76 absolute right-0" />
   </div>
 </template>
 
@@ -45,10 +45,11 @@ console.log(route.params)
 const orderID = route.params.orderID
 const { data } = await useFetch(`/api/getOrder/${orderID}`)
 console.log('single order', data)
-const order = ref()
-order.value = data.value.data
-console.log('single order reassigned', order)
-const status = order.value.status
+// 有真資料後再使用以下
+// const order = ref()
+// order.value = data.value.data
+// console.log('single order reassigned', order)
+const status = data.value.status
 console.log('satus', status)
 
 // 訂單狀態
