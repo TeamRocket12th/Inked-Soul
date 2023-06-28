@@ -1,5 +1,5 @@
 <template>
-  <div class="border-[1px] border-black p-5">
+  <div class="rounded-lg bg-white p-5 shadow">
     <slot name="image"></slot>
     <!-- 預約資訊 -->
     <div v-if="props" class="mb-16">
