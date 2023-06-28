@@ -1,4 +1,4 @@
-export default defineEventHandler(async () => {
+export default defineEventHandler(() => {
   // const data = await $fetch('http://localhost:5005/user/allOrder').catch((error) => error.data)
   const data = [
     {

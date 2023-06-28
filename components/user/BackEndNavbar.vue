@@ -3,8 +3,8 @@
     <ul class="flex flex-col">
       <NuxtLink
         v-for="(item, key) in menu"
-        :to="`/account/normal/${item.link || 'editinfo'}`"
         :key="key"
+        :to="`/account/normal/${item.link}`"
         :class="{ 'bg-gray-100': isActive(item.link) }"
         class="flex flex-row items-center gap-3 rounded border-b py-[18.5px] pl-8 last:border-0"
       >
@@ -21,7 +21,7 @@ const menu = [
   {
     icon: 'ic:outline-account-circle',
     title: '編輯個人資料',
-    link: 'editinfo'
+    link: ''
   },
   {
     icon: 'ic:outline-bookmark-border',

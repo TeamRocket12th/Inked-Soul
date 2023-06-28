@@ -12,7 +12,7 @@
         <th>訂單狀態</th>
       </tr>
       <OrderBar
-        v-for="item in order"
+        v-for="item in data"
         :key="item.id"
         :order="item"
         class="hover:cursor-pointer hover:bg-gray-300"
@@ -24,13 +24,13 @@
 
 <script setup>
 import OrderBar from '~/components/order/OrderBar'
-const { data } = await useFetch('/api/getOrder/getAllOrder')
+const data = await $fetch('/api/getOrder/getAllOrder')
 console.log('data:', data)
-
-const order = ref([])
-order.value = data.value.OrderData
-order.value = data.value
-console.log('order:', order)
+// 有真資料後再使用已下這段
+// const order = ref([])
+// order.value = data.value.OrderData
+// order.value = data.value
+// console.log('order:', order)
 
 const jump = (input) => {
   navigateTo(`/account/normal/${input}`)
