@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto flex w-full flex-col items-center justify-center">
     <!-- 灰色方塊 -->
-    <div class="mb-10 flex w-[500px] flex-col items-center justify-center rounded bg-gray-500">
+    <div class="mb-10 w-[640px] rounded bg-[#666] px-[58px] py-5 text-white">
       <slot name="orderContext"></slot>
     </div>
     <!-- 步驟 -->
