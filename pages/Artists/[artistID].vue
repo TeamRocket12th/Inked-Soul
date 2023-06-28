@@ -2,9 +2,7 @@
   <div>
     <!-- <p>刺青師ID：{{ route.params.artistID }}</p> -->
     <div class="container grid grid-cols-3 gap-8">
-      <div class="h-fit">
-        <IntroArea :artist-data="data.data.artistData" />
-      </div>
+      <IntroArea :artist-data="data.data.artistData" class="h-fit shadow" />
       <div class="col-span-2 flex flex-col gap-10">
         <ul class="flex flex-row items-center">
           <li

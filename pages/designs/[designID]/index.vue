@@ -3,9 +3,12 @@
     <p>單一認領圖頁</p>
     <p>認領圖ID：{{ route.params.designID }}</p>
     <!-- 認領圖資訊 -->
-    <div class="grid grid-cols-3">
-      <DesignImage v-if="designData" :id="id" :design-data="designData" class="col-span-2" />
-      <DesignIntro v-if="designData" :design-data="designData">
+    <div class="grid grid-cols-3 gap-8">
+      <div class="col-span-2 flex flex-col gap-10">
+        <DesignImage v-if="designData" :id="id" :design-data="designData" />
+        <DesignComment />
+      </div>
+      <DesignIntro v-if="designData" :design-data="designData" class="sticky top-[120px] h-fit">
         <template #price>
           <div>
             <p>
@@ -32,6 +35,7 @@
 <script setup>
 import DesignImage from '~/components/design/DesignImage.vue'
 import DesignIntro from '~/components/design/DesignIntro.vue'
+import DesignComment from '~/components/design/DesignComment.vue'
 
 const route = useRoute()
 const id = route.params.designID

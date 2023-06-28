@@ -2,7 +2,7 @@
   <div v-if="props" class="flex flex-col items-center gap-10 rounded-lg bg-white p-5">
     <div class="flex w-full flex-col gap-3">
       <h2>{{ props.artistData.nickname }}</h2>
-      <img :src="props.artistData.photo" class="rounded-lg object-cover" />
+      <img :src="props.artistData.photo" class="rounded-lg object-cover shadow" />
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-row items-center">
           <Icon name="ic:baseline-bookmark" class="h-6 w-6" />
