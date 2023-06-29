@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]
   },
   nitro: {
-    plugins: ['~/server/db/index.js']
+    plugins: []
   },
   runtimeConfig: {
     public: {
