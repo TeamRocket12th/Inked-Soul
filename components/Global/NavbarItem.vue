@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex items-center justify-between px-[60px] py-4 text-black shadow-md duration-200"
+    class="flex min-h-[114px] items-center justify-between px-[60px] py-4 text-secondary shadow-md duration-200 ease-in-out"
     :class="[
       { 'text-white': scrollY < 400 && route.path === '/' },
       { 'bg-[#FFF] text-black': route.path !== '/' },
@@ -23,24 +23,109 @@
       <li>
         <NuxtLink to="/account/login" v-if="!cookie"> <Icon name="mdi:account" /></NuxtLink>
         <div class="dropdown-end dropdown" v-if="cookie">
-          <label tabindex="0" class="btn-ghost btn-circle avatar btn">
-            <div class="w-10 rounded-full">
+          <label tabindex="0" class="avatar cursor-pointer align-middle">
+            <div
+              class="w-10"
+              :class="{
+                'rounded-lg': identity === 'artist',
+                'rounded-full': identity === 'normal'
+              }"
+            >
               <img :src="cookie.data.Photo" />
             </div>
           </label>
           <ul
+            v-if="identity === 'artist'"
             tabindex="0"
-            class="dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 border border-[D0D0D0] bg-base-100 p-2 text-black shadow"
+            class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
-            判斷是刺青師 or 一般用戶
-            <li><NuxtLink to="/account/artist/editinfo">刺青師後台</NuxtLink></li>
-            <li><NuxtLink to="/account/artist/editinfo">個人資料</NuxtLink></li>
-            <li><NuxtLink to="/account/artist/membership">會員資格</NuxtLink></li>
-            <li><a>作品集</a></li>
-            <li><NuxtLink to="/account/artist/reservation">預約狀況</NuxtLink></li>
-            <li><NuxtLink to="/account/artist/orderinfo">訂單資訊</NuxtLink></li>
-            <li><NuxtLink to="/account/artist/comments">獲得評價</NuxtLink></li>
-            <li><NuxtLink to="/account/login" @click="logout">登出</NuxtLink></li>
+            <div class="mb-5 flex flex-row items-center gap-4">
+              <div class="avatar">
+                <div class="h-12 w-12 rounded-lg">
+                  <img :src="photo" alt="" />
+                </div>
+              </div>
+              <div class="flex flex-col items-start">
+                <p class="font-bold">{{ nickName }}</p>
+                <p class="text-base text-secondary">{{ email }}</p>
+              </div>
+            </div>
+            <li>
+              <NuxtLink to="/account/artist/editinfo" class="rounded-none border-b px-8 py-4"
+                >刺青師後台</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/artist/editinfo" class="rounded-none px-8 py-4"
+                >個人資料</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/artist/membership" class="rounded-none px-8 py-4"
+                >會員資格</NuxtLink
+              >
+            </li>
+            <li><NuxtLink class="rounded-none border-b px-8 py-4">作品集</NuxtLink></li>
+            <li>
+              <NuxtLink to="/account/artist/reservation" class="rounded-none px-8 py-4"
+                >預約狀況</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/artist/orderinfo" class="rounded-none px-8 py-4"
+                >訂單資訊</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/artist/comments" class="rounded-none border-b px-8 py-4"
+                >獲得評價</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4"
+                >登出</NuxtLink
+              >
+            </li>
+          </ul>
+          <ul
+            v-if="identity === 'normal'"
+            tabindex="0"
+            class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
+          >
+            <div class="mb-5 flex flex-row items-center gap-4">
+              <div class="avatar">
+                <div class="h-12 w-12 rounded-full">
+                  <img :src="photo" alt="" />
+                </div>
+              </div>
+              <div class="flex flex-col items-start">
+                <p class="font-bold">{{ nickName }}</p>
+                <p class="text-base text-secondary">{{ email }}</p>
+              </div>
+            </div>
+            <li>
+              <NuxtLink to="/artists" class="rounded-none border-b px-8 py-4">加入刺青師</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/account/normal/editinfo" class="rounded-none px-8 py-4"
+                >編輯個人資料</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/normal/orderRecords" class="rounded-none px-8 py-4"
+                >交易紀錄</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/normal/follows" class="rounded-none border-b px-8 py-4"
+                >追蹤刺青師</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4"
+                >登出</NuxtLink
+              >
+            </li>
           </ul>
         </div>
       </li>
@@ -51,6 +136,9 @@
 const cookie = useCookie('token')
 const route = useRoute()
 
+const photo = cookie.value.data.Photo
+const email = cookie.value.data.Email
+const nickName = cookie.value.data.NickName
 const identity = cookie.value.data.Identity
 const scrollY = ref('0')
 
