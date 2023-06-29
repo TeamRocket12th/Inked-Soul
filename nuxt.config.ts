@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt'],
   css: ['~/assets/css/tailwind.css'],
-
   typescript: {
     typeCheck: true
   },
