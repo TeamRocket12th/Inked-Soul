@@ -8,6 +8,23 @@ export const useAccountStore = defineStore('account', () => {
   const cookie = useCookie('token')
   const router = useRouter()
 
+  const editArtistInfoData = ref({
+    realName: '',
+    nickName: '',
+    phone: '',
+    email: '',
+    experience: '',
+    intro: '',
+    selfStyle: [],
+    studioName: '',
+    license: '',
+    address: '',
+    tel: '',
+    closeDay: [],
+    startTime: '',
+    closeTime: ''
+  })
+
   const loginSubmit = async () => {
     const { data, error } = await useFetch(`http://localhost:5005/login/${identity.value}`, {
       method: 'POST',
@@ -67,6 +84,14 @@ export const useAccountStore = defineStore('account', () => {
     // console.log(data)
   }
 
+  const editArtistInfo = async () => {
+    // 修改刺青師個人資料
+    const { data, error } = await useFetch('', {
+      method: 'PUT'
+      // body: editArtistInfoData
+    })
+  }
+
   const resetPasswordSendEmail = () => {
     // 發送信件
   }
@@ -99,6 +124,7 @@ export const useAccountStore = defineStore('account', () => {
     tel,
     name,
     confirmPassword,
+    editArtistInfoData,
     loginSubmit,
     signupSubmit,
     editInfo,

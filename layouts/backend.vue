@@ -1,15 +1,20 @@
 <template>
   <ClientOnly>
-    <div class="container mb-[115px] mt-[85px] grid grid-cols-12 gap-8">
+    <div class="container grid grid-cols-12 gap-8 pb-[115px]">
       <div class="col-span-4 flex flex-col gap-[43px]">
-        <slot name="userImg">
-          <BackEndHeadImg />
-        </slot>
-        <slot name="navbar">
-          <BackEndNavbar />
-        </slot>
+        <div class="rounded bg-white">
+          <slot name="userImg">
+            <BackEndHeadImg />
+          </slot>
+        </div>
+
+        <div class="rounded bg-white">
+          <slot name="navbar">
+            <BackEndNavbar />
+          </slot>
+        </div>
       </div>
-      <div class="col-span-8 rounded border px-10 pb-[112px] pt-[60px]">
+      <div class="col-span-8 rounded bg-white px-10 pb-[36px] pt-[60px]">
         <NuxtPage />
       </div>
     </div>

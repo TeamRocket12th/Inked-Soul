@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center gap-10 rounded border px-[104] py-10">
+  <div class="flex flex-col items-center gap-10 px-[104] py-10">
     <div class="avatar flex flex-col items-center">
       <div class="w-20">
         <img :src="Photo" />
@@ -9,7 +9,7 @@
     <div class="flex flex-row items-center gap-[25px]">
       <button class="btn-outline btn rounded p-[10px]">免費會員</button>
       <div class="flex flex-row items-center">
-        <Icon name="ic:baseline-bookmark-border" />
+        <Icon name="ic:baseline-bookmark-border" class="h-6 w-6" />
         {{ Follower }}
       </div>
     </div>
