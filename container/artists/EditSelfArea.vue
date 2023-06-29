@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="grid grid-cols-2" style="gap: 36px; margin-bottom: 80px">
-      <div>
+    <div class="mb-6 grid grid-cols-2" style="gap: 36px">
+      <div class="flex flex-col gap-5">
         <UpdatePersonalInfo />
         <UpdatePersonalBrief />
         <UpdateStyle />
       </div>
-      <div>
+      <div class="flex flex-col gap-5">
         <UpdateStudioInfo />
         <UpdateTime />
       </div>

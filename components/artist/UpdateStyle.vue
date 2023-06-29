@@ -20,7 +20,11 @@
 </template>
 <script setup>
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
+
+const editStore = useAccountStore()
+const { editArtistInfoData } = storeToRefs(editStore)
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
@@ -53,6 +57,9 @@ const styleToggle = (addStyle) => {
   }
 
   uploadTattooData.value.Style = personalStyle.value
+
+  // 編輯個人風格
+  editArtistInfoData.selfStyle = personalStyle.value
 }
 </script>
 <style scoped></style>

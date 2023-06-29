@@ -21,7 +21,7 @@ const menu = [
   {
     icon: 'ic:outline-account-circle',
     title: '編輯個人資料',
-    link: ''
+    link: 'editinfo'
   },
   {
     icon: 'ic:outline-bookmark-border',
@@ -32,12 +32,12 @@ const menu = [
     icon: 'ic:baseline-monetization-on',
     title: '交易紀錄',
     link: 'orderRecords'
-  },
-  {
-    icon: 'ic:outline-stars',
-    title: '我的評價',
-    link: 'comments'
   }
+  // {
+  //   icon: 'ic:outline-stars',
+  //   title: '我的評價',
+  //   link: 'comments'
+  // }
 ]
 
 const route = useRoute()
