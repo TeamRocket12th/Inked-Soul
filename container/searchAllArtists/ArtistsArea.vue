@@ -13,7 +13,7 @@
   </div>
 </template>
 <script setup>
-import ArtistCard from '~/components/global/ArtistCard.vue'
+// import ArtistCard from '~/components/global/ArtistCard.vue'
 
 const allArtists = ref([])
 const { data } = await useFetch('/api/getArtists/getAllArtists')
