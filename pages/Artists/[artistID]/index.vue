@@ -15,7 +15,7 @@
   </masonry-wall>
 </template>
 <script setup>
-import DesignCard from '~/components/global/DesignCard'
+// import DesignCard from '~/components/global/DesignCard'
 const route = useRoute()
 const id = route.params.id
 const { data } = await useFetch(`/api/getArtists/getDesign/${id}`)
