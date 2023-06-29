@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-// import NavbarItem from '~/components/global/NavbarItem.vue'
-// import FooterItem from '~/components/global/FooterItem.vue'
+import NavbarItem from '~/components/global/NavbarItem.vue'
+import FooterItem from '~/components/global/FooterItem.vue'
 const route = useRoute()
 </script>

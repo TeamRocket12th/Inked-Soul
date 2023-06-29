@@ -32,12 +32,12 @@ const menu = [
     icon: 'ic:baseline-monetization-on',
     title: '交易紀錄',
     link: 'orderRecords'
-  },
-  {
-    icon: 'ic:outline-stars',
-    title: '我的評價',
-    link: 'comments'
   }
+  // {
+  //   icon: 'ic:outline-stars',
+  //   title: '我的評價',
+  //   link: 'comments'
+  // }
 ]
 
 const route = useRoute()

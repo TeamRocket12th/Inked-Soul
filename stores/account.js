@@ -41,7 +41,7 @@ export const useAccountStore = defineStore('account', () => {
           token: res.Token,
           data: res.Data
         }
-        router.push(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
+        router.push(`/account/${identity.value}/`) // 登入成功跳轉到首頁
       }
       // console.log('token', data.value)
       // console.log('cookie', cookie.value.token)
