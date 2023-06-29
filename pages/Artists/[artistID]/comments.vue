@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup>
-import CommentItem from '~/components/global/CommentItem.vue'
+// import CommentItem from '~/components/global/CommentItem.vue'
 const route = useRoute()
 const id = route.params.id
 </script>
