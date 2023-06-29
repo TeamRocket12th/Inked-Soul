@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import ArtistCard from '~/components/global/ArtistCard.vue'
+// import ArtistCard from '~/components/global/ArtistCard.vue'
 const artistsData = ref([])
 const { data } = await useFetch('/api/getArtists/getAllArtists')
 
