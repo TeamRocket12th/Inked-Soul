@@ -21,7 +21,7 @@ const menu = [
   {
     icon: 'ic:outline-account-circle',
     title: '編輯個人資料',
-    link: ''
+    link: 'editinfo'
   },
   {
     icon: 'ic:outline-bookmark-border',
