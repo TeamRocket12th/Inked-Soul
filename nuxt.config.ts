@@ -18,6 +18,6 @@ export default defineNuxtConfig({
   },
   plugins: [],
   imports: {
-    autoImport: false
+    // autoImport: false
   }
 })
