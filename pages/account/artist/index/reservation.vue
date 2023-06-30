@@ -1,5 +1,4 @@
 <template>
-  {{ date }}
   <div class="grid grid-cols-2">
     <VDatePicker v-model="date" />
     <div>

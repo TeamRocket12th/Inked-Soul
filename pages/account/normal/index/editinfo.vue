@@ -18,9 +18,10 @@
               :class="{ 'border-[#DC3545]': errors.名稱 }"
             />
             <Icon
-              name="ic:baseline-error-outline"
-              class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
               v-if="errors.名稱"
+              name="ic:baseline-error-outline"
+              size="26"
+              class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
             />
           </div>
         </div>
@@ -32,16 +33,16 @@
           <div class="relative">
             <VField
               id="phone"
-              :rules="isPhone"
               v-model="tel"
+              :rules="isPhone"
               name="手機"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.手機 }"
             />
             <Icon
+              v-if="errors.手機"
               name="ic:baseline-error-outline"
               class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-              v-if="errors.手機"
             />
           </div>
         </div>
@@ -53,16 +54,16 @@
           <div class="relative">
             <VField
               id="email"
-              rules="email"
               v-model="email"
+              rules="email"
               name="電子信箱"
               class="formInput"
               disabled
             />
             <Icon
+              v-if="errors.電子信箱"
               name="ic:baseline-error-outline"
               class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-              v-if="errors.電子信箱"
             />
           </div>
         </div>
@@ -95,9 +96,9 @@
               disabled
             />
             <Icon
+              v-if="errors.新密碼"
               name="ic:baseline-error-outline"
               class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-              v-if="errors.新密碼"
             />
           </div>
         </div>
@@ -118,9 +119,9 @@
               disabled
             />
             <Icon
+              v-if="errors.密碼"
               name="ic:baseline-error-outline"
               class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-              v-if="errors.密碼"
             />
           </div>
         </div>

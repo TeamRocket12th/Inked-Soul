@@ -3,7 +3,7 @@
     <OrderArea>
       <template #orderContext>
         <div class="flex flex-col items-center gap-5">
-          <Icon name="" />
+          <Icon name="ic:sharp-event-available" size="26" />
           <p>訂單成立</p>
           <p>請您於三日內確認本筆訂單，若未於三日內回覆，系統將自動取消訂單。</p>
         </div>
