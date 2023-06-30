@@ -2,7 +2,7 @@
   <div class="relative">
     <OrderArea class="mb-4">
       <template #orderContext>
-        <Icon :name="`${renderTxt.icon}`" size:32 class="block" />
+        <Icon :name="`${renderTxt.icon}`" size="32" class="block" />
         <p>{{ renderTxt.txt }}</p>
         <p>{{ renderTxt.subTxt }}</p>
       </template>
