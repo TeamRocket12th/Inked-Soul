@@ -1,6 +1,10 @@
 <template>
   <div class="flex flex-col gap-20">
-    <BannerItem />
+    <BannerItem>
+      <template #default>
+        <SearchBar />
+      </template>
+    </BannerItem>
     <IntroItem />
     <ArtistArea />
     <!-- <DesignArea /> -->
@@ -12,6 +16,7 @@
 import BannerItem from '~/components/home/BannerItem.vue'
 import IntroItem from '~/components/home/IntroItem.vue'
 import ArtistArea from '~/container/home/ArtistArea.vue'
+import SearchBar from '~/components/global/SearchBar.vue'
 // import FeatureItem from '~/components/global/FeatureItem.vue'
 // import DesignArea from '~/container/home/DesignArea.vue'
 </script>
