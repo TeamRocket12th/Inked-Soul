@@ -16,5 +16,8 @@ export default defineNuxtConfig({
       apiBase: 'http://localhost:5005'
     }
   },
-  plugins: []
+  plugins: [],
+  imports: {
+    autoImport: false
+  }
 })
