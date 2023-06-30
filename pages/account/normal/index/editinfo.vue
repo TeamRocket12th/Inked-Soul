@@ -104,12 +104,12 @@
         </div>
         <div class="relative flex flex-col gap-2">
           <div class="flex flex-row items-center justify-between">
-            <label for="newPassword" class="cursor-pointer">確認新密碼</label>
+            <label for="confirmPassword" class="cursor-pointer">確認新密碼</label>
             <VErrorMessage name="密碼" class="whitespace-nowrap text-[#DC3545]" />
           </div>
           <div class="relative">
             <VField
-              id="newPassword"
+              id="confirmPassword"
               v-model="confirmPassword"
               rules="confirmed:@新密碼"
               name="密碼"
