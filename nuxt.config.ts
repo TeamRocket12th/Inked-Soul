@@ -19,5 +19,6 @@ export default defineNuxtConfig({
   plugins: [],
   imports: {
     // autoImport: false
-  }
+  },
+  build: { transpile: ['yup', 'lodash', '@vee-validate/rules'] }
 })
