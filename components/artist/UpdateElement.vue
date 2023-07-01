@@ -1,6 +1,6 @@
 <template>
-  <label>
-    <span>元素（最多選擇兩項）</span>
+  <div>
+    <p class="mb-2">元素（最多選擇兩項）</p>
     <ul class="flex flex-wrap gap-2">
       <li v-for="(style, key) in elements" :key="key">
         <button
@@ -14,7 +14,7 @@
         </button>
       </li>
     </ul>
-  </label>
+  </div>
 </template>
 <script setup>
 import { useUploadTattooStore } from '~/stores/uploadTattoo'

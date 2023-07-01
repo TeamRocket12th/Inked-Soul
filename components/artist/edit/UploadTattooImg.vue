@@ -1,6 +1,6 @@
 <template>
   <!-- 上傳刺青圖 -->
-  <label for="file" class="relative rounded-lg border border-black">
+  <label for="file" class="relative overflow-hidden rounded-lg border border-black">
     <div class="flex h-full flex-col items-center justify-center gap-[20px]">
       <Icon name="ic:baseline-add-circle-outline" class="h-[100px] w-[100px]" />
       <p>上傳您的原創認領圖</p>
@@ -9,7 +9,7 @@
     <img
       :src="url"
       alt=""
-      class="absolute top-[50%] h-auto w-full -translate-y-[50%] bg-gray-100"
+      class="absolute top-[50%] max-h-[400px] w-full -translate-y-[50%] bg-gray-100 object-contain"
     />
     <input
       type="file"

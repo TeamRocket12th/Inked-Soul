@@ -1,8 +1,8 @@
 <template>
-  <label>
-    <span>
+  <div>
+    <p class="mb-2">
       <slot> 個人風格（選擇最多二個關鍵字來描述你的刺青風格） </slot>
-    </span>
+    </p>
     <ul class="flex flex-wrap gap-2">
       <li v-for="(style, key) in styles" :key="key">
         <button
@@ -16,7 +16,7 @@
         </button>
       </li>
     </ul>
-  </label>
+  </div>
 </template>
 <script setup>
 import { useUploadTattooStore } from '~/stores/uploadTattoo'

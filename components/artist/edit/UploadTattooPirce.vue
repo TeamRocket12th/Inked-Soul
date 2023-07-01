@@ -1,59 +1,103 @@
 <template>
-  <VForm>
-    <label class="flex flex-col">
-      <span>設計理念（30字內）</span>
-      <VField
-        v-model="designIdea"
-        as="textarea"
-        name="設計理念"
-        rules="max:30"
-        placeholder="填寫您的設計理念"
-        class="textarea-bordered textarea min-h-[72px]"
-      />
-      <VErrorMessage name="設計理念" class="whitespace-nowrap" />
-    </label>
-    <div class="grid grid-cols-3 gap-3">
-      <label class="flex flex-col items-start">
-        <span>訂金（元）</span>
+  <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-row items-center justify-between">
+        <label for="designIdea" class="cursor-pointer">設計理念（30字內）</label>
+        <VErrorMessage name="設計理念" class="whitespace-nowrap text-[#DC3545]" />
+      </div>
+      <div class="relative">
         <VField
-          v-model="deposit"
-          name="訂金"
-          rules="required"
-          class="formInput"
-          placeholder="2100元"
-          disabled
+          id="designIdea"
+          v-model="designIdea"
+          as="textarea"
+          name="設計理念"
+          rules="max:30"
+          placeholder="填寫您的設計理念"
+          class="textarea-bordered textarea min-h-[72px] w-full"
+          :class="{ 'border-[#DC3545]': errors.設計理念 }"
         />
-        <VErrorMessage name="訂金" class="whitespace-nowrap" />
-      </label>
-      <label class="flex flex-col items-start">
-        <span>尾款（元）</span>
-        <VField
-          v-model="balance"
-          name="尾款"
-          rules="required"
-          class="formInput"
-          placeholder="4900元"
-          disabled
+        <Icon
+          name="ic:baseline-error-outline"
+          class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+          v-if="errors.設計理念"
         />
-        <VErrorMessage name="尾款" class="whitespace-nowrap" />
-      </label>
-      <label class="flex flex-col items-start">
-        <span>總金額（元）</span>
-        <VField
-          v-model="totalPrice"
-          name="總金額"
-          rules="required"
-          class="formInput"
-          :placeholder="`${totalPrice} 元`"
-        />
-        <VErrorMessage name="總金額" class="whitespace-nowrap" />
-      </label>
+      </div>
     </div>
-    <p>
-      <Icon
-        name="ic:baseline-error-outline"
-      />本平台僅收<strong>「訂金」</strong>，剩餘尾款請於預約當日與顧客交易。
-    </p>
+    <div class="flex flex-col gap-2">
+      <div class="grid grid-cols-3 gap-3">
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-row items-center justify-between">
+            <label for="deposit" class="cursor-pointer">訂金（元）</label>
+            <VErrorMessage name="訂金" class="whitespace-nowrap text-[#DC3545]" />
+          </div>
+          <div class="relative">
+            <VField
+              id="deposit"
+              v-model="deposit"
+              name="訂金"
+              rules="required"
+              class="formInput"
+              placeholder="2100元"
+              disabled
+            />
+            <Icon
+              name="ic:baseline-error-outline"
+              class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+              v-if="errors.訂金"
+            />
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-row items-center justify-between">
+            <label for="balance" class="cursor-pointer">尾款（元）</label>
+            <VErrorMessage name="尾款" class="whitespace-nowrap text-[#DC3545]" />
+          </div>
+          <div class="relative">
+            <VField
+              id="balance"
+              v-model="balance"
+              name="尾款"
+              rules="required"
+              class="formInput"
+              placeholder="4100元"
+              disabled
+            />
+            <Icon
+              name="ic:baseline-error-outline"
+              class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+              v-if="errors.尾款"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-row items-center justify-between">
+            <label for="totalPrice" class="cursor-pointer">總金額（元） </label>
+            <VErrorMessage name="總金額" class="whitespace-nowrap text-[#DC3545]" />
+          </div>
+          <div class="relative">
+            <VField
+              id="totalPrice"
+              v-model="totalPrice"
+              name="總金額"
+              rules="required"
+              class="formInput"
+              :placeholder="`${totalPrice} 元`"
+              :class="{ 'border-[#DC3545]': errors.總金額 }"
+            />
+            <Icon
+              name="ic:baseline-error-outline"
+              class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+              v-if="errors.總金額"
+            />
+          </div>
+        </div>
+      </div>
+      <p class="flex flex-row items-center gap-2">
+        <Icon name="ic:baseline-error-outline" />
+        <span> 本平台僅收<strong>「訂金」</strong>，剩餘尾款請於預約當日與顧客交易。 </span>
+      </p>
+    </div>
   </VForm>
 </template>
 <script setup>
