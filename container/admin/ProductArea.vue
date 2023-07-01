@@ -155,7 +155,7 @@
   </div>
 </template>
 <script setup>
-import UploadTattooArea from '~/container/artist/UploadTattooArea.vue'
+import UploadTattooArea from '~/container/admin/UploadTattooArea.vue'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 
 const store = useUploadTattooStore()

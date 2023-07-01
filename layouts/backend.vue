@@ -4,13 +4,13 @@
       <div class="col-span-4 flex flex-col gap-[43px]">
         <div class="rounded bg-white">
           <slot name="userImg">
-            <BackEndHeadImg />
+            <Photo />
           </slot>
         </div>
 
         <div class="rounded bg-white">
           <slot name="navbar">
-            <BackEndNavbar />
+            <Navbar />
           </slot>
         </div>
       </div>
@@ -21,7 +21,7 @@
   </ClientOnly>
 </template>
 <script setup>
-import BackEndHeadImg from '~/components/artist/BackEndHeadImg.vue'
-import BackEndNavbar from '~/components/artist/BackEndNavbar.vue'
+import Photo from '~/components/admin/Photo.vue'
+import Navbar from '~/components/admin/Navbar.vue'
 </script>
 <style scoped></style>

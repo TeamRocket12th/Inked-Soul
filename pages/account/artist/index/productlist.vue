@@ -1,7 +1,7 @@
 <template>
-  <BackEndProductListArea />
+  <ProductArea />
 </template>
 <script setup>
-import BackEndProductListArea from '~/container/artist/BackEndProductListArea.vue'
+import ProductArea from '~/container/admin/ProductArea.vue'
 </script>
 <style></style>

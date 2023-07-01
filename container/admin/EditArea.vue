@@ -15,10 +15,10 @@
   </div>
 </template>
 <script setup>
-import UpdatePersonalInfo from '~/components/artist/UpdatePersonalInfo.vue'
-import UpdateStudioInfo from '~/components/artist/UpdateStudioInfo.vue'
-import UpdateTime from '~/components/artist/UpdateTime.vue'
-import UpdatePersonalBrief from '~/components/artist/UpdatePersonalBrief.vue'
-import UpdateStyle from '~/components/artist/UpdateStyle.vue'
+import UpdatePersonalInfo from '~/components/admin/UpdatePersonalInfo.vue'
+import UpdateStudioInfo from '~/components/admin/UpdateStudioInfo.vue'
+import UpdateTime from '~/components/admin/UpdateTime.vue'
+import UpdatePersonalBrief from '~/components/admin/UpdatePersonalBrief.vue'
+import UpdateStyle from '~/components/admin/UpdateStyle.vue'
 </script>
 <style scoped></style>

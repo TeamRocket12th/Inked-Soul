@@ -1,11 +1,11 @@
 <template>
   <NuxtLayout name="backend">
-    <template #userImg> <BackEndHeadImg /> </template>
-    <template #navbar> <BackEndNavbar /> </template>
+    <template #userImg> <Photo /> </template>
+    <template #navbar> <Navbar /> </template>
   </NuxtLayout>
 </template>
 <script setup>
-import BackEndHeadImg from '~/components/artist/BackEndHeadImg.vue'
-import BackEndNavbar from '~/components/artist/BackEndNavbar.vue'
+import Photo from '~/components/admin/Photo.vue'
+import Navbar from '~/components/admin/Navbar.vue'
 </script>
 <style scoped></style>
