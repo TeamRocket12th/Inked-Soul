@@ -16,12 +16,12 @@
   </div>
 </template>
 <script setup>
-import UploadTattooImg from '~/components/artist/edit/UploadTattooImg.vue'
-import UploadTattooInfo from '~/components/artist/edit/UploadTattooInfo.vue'
+import UploadTattooImg from '~/components/admin/UploadTattooImg.vue'
+import UploadTattooInfo from '~/components/admin/UploadTattooInfo.vue'
 
-import UploadTattooPirce from '~/components/artist/edit/UploadTattooPirce.vue'
-import UpdateStyle from '~/components/artist/UpdateStyle.vue'
-import UpdateElement from '~/components/artist/UpdateElement.vue'
+import UploadTattooPirce from '~/components/admin/UploadTattooPirce.vue'
+import UpdateStyle from '~/components/admin/UpdateStyle.vue'
+import UpdateElement from '~/components/admin/UpdateElement.vue'
 
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 

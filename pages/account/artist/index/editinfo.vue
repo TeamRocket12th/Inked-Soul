@@ -1,7 +1,7 @@
 <template>
-  <EditSelfArea />
+  <EditArea />
 </template>
 <script setup>
-import EditSelfArea from '~/container/artists/EditSelfArea.vue'
+import EditArea from '~/container/admin/EditArea.vue'
 </script>
 <style scoped></style>

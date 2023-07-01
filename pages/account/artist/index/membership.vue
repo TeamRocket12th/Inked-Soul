@@ -1,7 +1,7 @@
 <template>
-  <BackEndMemberShip />
+  <Plans />
 </template>
 <script setup>
-import BackEndMemberShip from '~/components/artist/BackEndMemberShip.vue'
+import Plans from '~/components/admin/Plans.vue'
 </script>
 <style scoped></style>
