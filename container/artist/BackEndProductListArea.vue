@@ -39,7 +39,7 @@
 
       <button class="btn" onclick="upload_product.showModal()">上架認領圖</button>
       <dialog id="upload_product" class="modal">
-        <form method="dialog" class="modal-box">
+        <form method="dialog" class="modal-box max-w-none rounded-lg">
           <UploadTattooArea />
         </form>
         <form method="dialog" class="modal-backdrop">

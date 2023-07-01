@@ -1,19 +1,29 @@
 <template>
   <!-- 產品資訊 -->
-  <VForm class="flex flex-col gap-[20px]">
-    <label class="flex flex-col items-start">
-      <span>作品名稱</span>
-      <VField
-        v-model="tattooName"
-        name="作品名稱"
-        rules="required"
-        class="formInput"
-        placeholder="作品名稱"
-      />
-      <VErrorMessage name="作品名稱" class="whitespace-nowrap" />
-    </label>
-
-    <div class="flex flex-col">
+  <VForm v-slot="{ errors, meta }" class="flex flex-col gap-[20px]">
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-row items-center justify-between">
+        <label for="tattooName" class="cursor-pointer">作品名稱 </label>
+        <VErrorMessage name="作品名稱" class="whitespace-nowrap text-[#DC3545]" />
+      </div>
+      <div class="relative">
+        <VField
+          id="tattooName"
+          v-model="tattooName"
+          name="作品名稱"
+          rules="required"
+          class="formInput"
+          placeholder="作品名稱"
+          :class="{ 'border-[#DC3545]': errors.作品名稱 }"
+        />
+        <Icon
+          name="ic:baseline-error-outline"
+          class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+          v-if="errors.作品名稱"
+        />
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
       <span>建議部位（最多選擇兩個部位）</span>
       <div class="dropdown-end dropdown">
         <label tabindex="0" class="btn my-1 mb-1 h-auto w-full py-2">
@@ -36,28 +46,50 @@
         </ul>
       </div>
     </div>
-    <label class="flex flex-col items-start">
-      <span>作品尺寸（cm*cm）</span>
-      <VField
-        v-model="tattooSize"
-        name="作品尺寸"
-        rules="required"
-        class="formInput"
-        placeholder="12cm*12cm"
-      />
-      <VErrorMessage name="作品尺寸" class="whitespace-nowrap" />
-    </label>
-    <label class="flex flex-col items-start">
-      <span>預計作業時間（時）</span>
-      <VField
-        v-model="hour"
-        name="預計作業時間"
-        rules="required"
-        class="formInput"
-        placeholder="4小時"
-      />
-      <VErrorMessage name="預計作業時間" class="whitespace-nowrap" />
-    </label>
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-row items-center justify-between">
+        <label for="studio" class="cursor-pointer">作品尺寸（cm*cm） </label>
+        <VErrorMessage name="店名" class="whitespace-nowrap text-[#DC3545]" />
+        <span class="whitespace-nowrap text-[#DC3545]"> {{ sizeErrorMessage }}</span>
+      </div>
+      <div class="relative">
+        <input
+          id="studio"
+          type="text"
+          placeholder="test"
+          v-model.lazy="tattooSize"
+          class="formInput"
+          :class="{ 'border-[#DC3545]': sizeErrorMessage }"
+        />
+        <Icon
+          name="ic:baseline-error-outline"
+          class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+          v-if="sizeErrorMessage"
+        />
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-row items-center justify-between">
+        <label for="hour" class="cursor-pointer">預計作業時間（時）</label>
+        <VErrorMessage name="預計作業時間" class="whitespace-nowrap text-[#DC3545]" />
+      </div>
+      <div class="relative">
+        <VField
+          id="hour"
+          v-model="hour"
+          name="預計作業時間"
+          rules="required"
+          class="formInput"
+          placeholder="4小時"
+          :class="{ 'border-[#DC3545]': errors.預計作業時間 }"
+        />
+        <Icon
+          name="ic:baseline-error-outline"
+          class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
+          v-if="errors.預計作業時間"
+        />
+      </div>
+    </div>
   </VForm>
 </template>
 <script setup>
@@ -84,9 +116,6 @@ const bodyParts = [
 const tattooName = uploadTattooData.value.Name
 const selectBodyParts = ref([bodyParts[0]])
 const tattooSize = ref('')
-// 待整理成 cm * cm
-const tattooSizeHieght = uploadTattooData.value.Size.Height
-const tattooSizeWidth = uploadTattooData.value.Size.Width
 const hour = uploadTattooData.value.Hour
 
 const SelectRecommendPositions = (part) => {
@@ -101,5 +130,26 @@ const SelectRecommendPositions = (part) => {
 
   uploadTattooData.value.BodyPart = selectBodyParts.value
 }
+
+const sizeErrorMessage = ref('')
+watch(tattooSize, (newValue, oldValue) => {
+  if (/^\d+cm\*\d+cm$/.test(newValue)) {
+    return
+  }
+  if (newValue) {
+    if (/^\d+(\*|\s)\d+$/.test(newValue)) {
+      const parts = newValue.split(/(\*|\s)/)
+      tattooSize.value = `${parts[0]}cm*${parts[2]}cm`
+      sizeErrorMessage.value = ''
+    } else if (/^\d+$/.test(newValue)) {
+      tattooSize.value = `${newValue}cm*${newValue}cm`
+      sizeErrorMessage.value = ''
+    } else {
+      sizeErrorMessage.value = '尺寸格式不正確'
+    }
+  } else {
+    sizeErrorMessage.value = '作品尺寸為必填'
+  }
+})
 </script>
 <style scoped></style>
