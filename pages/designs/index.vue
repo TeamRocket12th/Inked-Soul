@@ -19,7 +19,6 @@
   </div>
 </template>
 <script setup>
-// import DesignCard from '~/components/global/DesignCard'
 const { data } = await useFetch('/api/getDesign/getAllDesign')
 const designData = ref([])
 designData.value = data.value.design
