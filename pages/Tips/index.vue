@@ -4,12 +4,19 @@
     <ul class="grid grid-cols-3 gap-8">
       <li v-for="(item, key) in tipsData" :key="key">
         <NuxtLink :to="`/tips/${item.Id}`">
-          <TipsCard
-            :image="item.Image"
-            :title="item.Title"
-            :date="item.Date"
-            :content="item.Content"
-          />
+          <Suspense>
+            <template #default>
+              <TipsCard
+                :image="item.Image"
+                :title="item.Title"
+                :date="item.Date"
+                :content="item.Content"
+              />
+            </template>
+            <template #fallback>
+              <LoadingCard />
+            </template>
+          </Suspense>
         </NuxtLink>
       </li>
     </ul>
@@ -23,6 +30,5 @@ const apiBase = runtimeConfig.public.apiBase
 
 const tipsData = ref([])
 const { data } = await useFetch(`${apiBase}/tips/all`)
-// console.log(data.value.Data)
 tipsData.value = data.value.Data
 </script>
