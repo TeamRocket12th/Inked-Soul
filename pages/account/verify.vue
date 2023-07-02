@@ -19,7 +19,7 @@
 <script setup>
 import UpdateImg from '~/components/account/UpdateImg.vue'
 import VerifyItem from '~/components/account/VerifyItem.vue'
-import UpdateTime from '~/components/artist/UpdateTime.vue'
+import UpdateTime from '~/components/admin/UpdateTime.vue'
 definePageMeta({
   layout: false
 })
