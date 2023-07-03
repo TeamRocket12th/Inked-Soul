@@ -15,4 +15,5 @@
 import BannerItem from '~/components/home/BannerItem.vue'
 import IntroItem from '~/components/home/IntroItem.vue'
 import ArtistArea from '~/container/home/ArtistArea.vue'
+import FeatureItem from '~/components/home/FeatureItem.vue'
 </script>
