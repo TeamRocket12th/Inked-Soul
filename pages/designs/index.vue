@@ -1,6 +1,7 @@
 <template>
-  <div class="container mx-auto">
-    <p>認領圖首頁</p>
+  <div class="container mx-auto flex flex-col items-center">
+    <SearchBar class="mb-5"></SearchBar>
+    <p class="text-left">認領圖的OO縣市OO風格OO元素，共XX個結果</p>
     <masonry-wall :items="designData" :ssr-columns="3" :column-width="300" :gap="16">
       <template #default="{ item }">
         <div class="rounded-xl">
@@ -9,7 +10,9 @@
               :id="item.id"
               :image="item.image"
               :design-name="item.designName"
-              :category="item.category"
+              :artist-name="item.artistName"
+              :artist-img="item.artistImg"
+              :price="item.price"
             />
           </NuxtLink>
         </div>
