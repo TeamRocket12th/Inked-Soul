@@ -21,7 +21,9 @@
         <NuxtLink to="/tips">知識點</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/account/login" v-if="!cookie"> <Icon name="mdi:account" /></NuxtLink>
+        <NuxtLink to="/account/login" v-if="!cookie">
+          <Icon name="mdi:account" size="24"
+        /></NuxtLink>
         <div class="dropdown-end dropdown" v-if="cookie">
           <label tabindex="0" class="avatar cursor-pointer align-middle">
             <div
@@ -31,7 +33,7 @@
                 'rounded-full': identity === 'normal'
               }"
             >
-              <img :src="cookie.data.Photo" />
+              <img :src="photo" />
             </div>
           </label>
           <ul
@@ -136,10 +138,19 @@
 const cookie = useCookie('token')
 const route = useRoute()
 
-const photo = cookie.value.data.Photo
-const email = cookie.value.data.Email
-const nickName = cookie.value.data.NickName
-const identity = cookie.value.data.Identity
+const photo = computed(() => {
+  return cookie.value ? cookie.value.data.Photo : ''
+})
+const email = computed(() => {
+  return cookie.value ? cookie.value.data.Email : ''
+})
+const nickName = computed(() => {
+  return cookie.value ? cookie.value.data.NickName : ''
+})
+const identity = computed(() => {
+  return cookie.value ? cookie.value.data.Identity : ''
+})
+
 const scrollY = ref('0')
 
 const handleScroll = () => {
@@ -151,5 +162,6 @@ if (process.client) {
 
 const logout = () => {
   cookie.value = undefined || null
+  localStorage.removeItem('token')
 }
 </script>
