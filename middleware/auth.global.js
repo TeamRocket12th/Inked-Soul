@@ -1,6 +1,6 @@
 import { useAccountStore } from '~/stores/account'
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to, _from) => {
   const store = useAccountStore()
   const { checkAuth } = store
 
@@ -12,10 +12,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
     // 📍 持續監聽 token，如果沒有 token 就跳頁
     // setInterval(() => {
-    const auth2 = useCookie('token')
-    if (auth1 !== auth2.value?.token) {
-      router.replace('/account/login')
-    }
+    //   const auth2 = useCookie('token')
+    //   if (auth1 !== auth2.value?.token) {
+    //     router.replace('/account/login')
+    //   }
     // }, 3000)
 
     if (!auth1) {
