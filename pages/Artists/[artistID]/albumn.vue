@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="grid grid-cols-3">
-      <NuxtLink v-for="item in albumnData" :key="item.id" :to="`/albumn/${item.id}`" >
-        <AlbumnCard :image=item.image />
+      <NuxtLink v-for="item in albumnData" :key="item.id" :to="`/albumn/${item.id}`">
+        <AlbumnCard :image="item.image" />
       </NuxtLink>
     </div>
   </div>
