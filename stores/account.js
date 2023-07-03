@@ -43,11 +43,8 @@ export const useAccountStore = defineStore('account', () => {
         }
         router.push(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
       }
-      // console.log('token', data.value)
-      // console.log('cookie', cookie.value.token)
     } else if (error.value) {
       cookie.value = null
-      // console.log('error', error.value)
     }
   }
 
@@ -108,11 +105,11 @@ export const useAccountStore = defineStore('account', () => {
       }
     })
     if (data.value) {
-      // console.log('checkAuth-succ', data.value)
+      console.log('驗證成功')
     } else if (error.value) {
       cookie.value = null
       router.push('/account/login')
-      // console.log('checkAuth-error', error.value)
+      console.log('驗證失敗')
     }
   }
 
