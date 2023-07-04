@@ -12,11 +12,11 @@ export const useValidate = () => {
 
   const isPhone = (value: string): string | true => {
     if (!value) {
-      return '手機號碼為必填'
+      return '電話為必填'
     }
     const regex = /^09\d{10}$/
     if (!regex.test(String(value))) {
-      return '手機號碼格式不正確'
+      return '電話格式不正確'
     }
     return true
   }

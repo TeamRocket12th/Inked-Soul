@@ -1,23 +1,40 @@
 <template>
   <div class="container">
-    <div class="grid grid-cols-3">
+    <Icon
+      name="ic:outline-keyboard-arrow-left"
+      size="48"
+      class="mb-5 cursor-pointer rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
+      @click="toPreviousPage"
+    />
+    <div class="grid grid-cols-3 gap-8">
       <div class="col-span-2">
-        <OrderData />
-        <PaymentData :deposit="designData.deposit" :final-payment="designData.finalPayment" />
-        <!-- 確認按鈕 -->
-        <PayBtn :deposit="designData.deposit" />
-        <p>
-          <Icon name="ic:baseline-warning-amber" size="16" />
-          本平台僅收「訂金」，剩餘尾款請於預約當日與刺青師本人交易。
-        </p>
+        <div class="mb-10 rounded-lg bg-white p-4 shadow">
+          <OrderData :time="artistData" />
+          <PaymentData :deposit="designData.deposit" :final-payment="designData.finalPayment" />
+        </div>
+        <div class="flex flex-col gap-3">
+          <!-- 確認按鈕 -->
+          <PaymentBtn :deposit="designData.deposit" />
+          <p class="flex flex-row items-center gap-2 text-[#6C6C6C]">
+            <Icon name="ic:outline-error-outline" size="24" />
+            <span> 本平台僅收「訂金」，剩餘尾款請於預約當日與刺青師本人交易。 </span>
+          </p>
+        </div>
       </div>
       <!-- 右側訂單內容 -->
       <div>
-        <h2 class="text-2xl">訂單內容</h2>
         <DesignIntro :design-data="designData" :id="id">
           <template #image>
-            <img :src="`${designData.image}`" />
-            <p>{{ designData.designName }}</p>
+            <div>
+              <h4 class="mb-5">訂單內容</h4>
+              <div class="flex flex-col gap-3">
+                <img
+                  :src="`${designData.image}`"
+                  class="overflow-hidden rounded-lg border border-[#D0D0D0] object-contain"
+                />
+                <p>{{ designData.designName }}</p>
+              </div>
+            </div>
           </template>
         </DesignIntro>
       </div>
@@ -28,17 +45,25 @@
 import DesignIntro from '~/components/design/DesignIntro'
 import OrderData from '~/components/design/OrderData'
 import PaymentData from '~/components/design/PaymentData'
-import PayBtn from '~/components/design/PayBtn'
+import PaymentBtn from '~/components/design/PaymentBtn'
 import { useOrderStore } from '~/stores/order'
 import { storeToRefs } from 'pinia'
+
+const router = useRouter()
 const route = useRoute()
+
 const id = route.params.designID
 const { data } = await useFetch(`/api/getDesign/${id}`)
 const designData = data.value.data
-const date = ref(new Date())
+const artistData = data.value.data.artistData
+
 const store = useOrderStore()
 const { designData: orderData } = storeToRefs(store)
 orderData.value.ID = id
 orderData.value.name = designData.designName
 orderData.value.deposit = designData.deposit
+
+const toPreviousPage = () => {
+  router.push(`/designs/${id}`)
+}
 </script>
