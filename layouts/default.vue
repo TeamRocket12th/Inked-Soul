@@ -4,7 +4,7 @@
       <NavbarItem></NavbarItem>
     </div>
     <div
-      class="relative"
+      class="relative pb-20"
       :class="[{ 'pt-[160px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
     >
       <span

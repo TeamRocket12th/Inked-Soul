@@ -11,7 +11,7 @@ export const useOrderStore = defineStore('order', () => {
     tel: '',
     email: '',
     date: '',
-    time: ''
+    time: '預約時段'
   })
 
   const postOrder = async () => {
