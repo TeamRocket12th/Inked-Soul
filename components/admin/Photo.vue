@@ -7,7 +7,7 @@
       <h2>{{ NickName }}</h2>
     </div>
     <div class="flex flex-row items-center gap-[25px]">
-      <button class="btn-outline btn rounded p-[10px]">免費會員</button>
+      <button class="btn-outline btn rounded px-6 py-3">免費會員</button>
       <div class="flex flex-row items-center">
         <Icon name="ic:baseline-bookmark-border" class="h-6 w-6" />
         {{ Follower }}
