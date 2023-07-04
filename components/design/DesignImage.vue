@@ -9,7 +9,7 @@
       <div class="flex w-full flex-col items-start gap-2">
         <div class="flex w-full flex-row items-center justify-between">
           <h4>{{ props.designData.designName }}</h4>
-          <Icon name="ic:outline-share" />
+          <Icon name="ic:outline-share" size="24" />
         </div>
         <p class="text-secondary">{{ props.designData.description }}</p>
       </div>
