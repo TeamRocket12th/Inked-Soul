@@ -19,4 +19,7 @@
   .accountInput {
     @apply w-full border-b p-4  outline-none;
   }
+  .styleBtn {
+    @apply m-2 block inline-block whitespace-nowrap rounded-full border border-black p-2;
+  }
 }
