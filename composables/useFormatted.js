@@ -7,6 +7,7 @@ export const useFormatted = () => {
     const day = String(date.getDate()).padStart(2, '0')
 
     formatDate.value = `${year}-${month}-${day}`
+    return `${year}-${month}-${day}`
   }
 
   return { formatDate, formattedOutput }
@@ -14,6 +15,7 @@ export const useFormatted = () => {
 
 // 使用方法
 // const { formatDate, formattedOutput } = useFormatted()
-// watch(userData.value, () => {
-//   userData.date = formattedOutput(userData.value.date)
+// watch(selectDate, (newValue) => {
+//   userData.value.date = formattedOutput(newValue)
+//   console.log('date', userData.value.date)
 // })

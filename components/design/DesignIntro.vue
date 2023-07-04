@@ -14,7 +14,7 @@
           </div>
           <p>{{ props.designData.artistData.nickname }}</p>
         </div>
-        <p>工作室 | {{ props.designData.artistData.studioName }}</p>
+        <p>工作室&nbsp; | &nbsp;{{ props.designData.artistData.studioName }}</p>
         <div class="flex flex-row items-center gap-2">
           <Icon name="ic:outline-phone" size="24" />
           <p>{{ props.designData.artistData.tel }}</p>
@@ -32,15 +32,15 @@
     <!-- 操作細節 -->
     <div class="flex flex-col gap-3">
       <p class="mb-3 bg-primary px-5 py-3">操作細節</p>
-      <p>作品尺寸 | {{ props.designData.size }}</p>
+      <p>作品尺寸&nbsp; | &nbsp;{{ props.designData.size }}</p>
       <p>
-        建議部位 |
+        建議部位&nbsp; | &nbsp;
         <span v-for="(part, key) in props.designData.bodyPart" :key="key">
           {{ part }}
           <span v-if="key !== props.designData.bodyPart.length - 1"> 、 </span>
         </span>
       </p>
-      <p>預計操作時間 | {{ props.designData.time }}</p>
+      <p>預計操作時間&nbsp; | &nbsp;{{ props.designData.time }}</p>
     </div>
     <!-- 價格與下單 -->
     <slot name="price"></slot>

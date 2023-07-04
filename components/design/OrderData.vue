@@ -71,7 +71,7 @@
           <div>
             <ClientOnly>
               <VDatePicker
-                v-model="userData.date"
+                v-model="selectDate"
                 :min-date="minDate"
                 :disabled-dates="disabledDates"
                 color="gray"
@@ -90,11 +90,35 @@
         </div>
         <div>
           <p class="mb-2">預約時段</p>
-          <select v-model="userData.time" class="formInput">
-            <option>上午（開店時間-12:00）</option>
-            <option>下午（12:00-18:00）</option>
-            <option>晚上（18:00-閉店時間）</option>
-          </select>
+          <div class="dropdown-bottom dropdown-end dropdown w-full">
+            <label tabindex="0" class="btn w-full">{{ userData.time }}</label>
+            <ul
+              tabindex="0"
+              class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
+            >
+              <li>
+                <a
+                  @click="selectTime(0)"
+                  :class="{ 'pointer-events-none line-through': disabledTime.includes('0') }"
+                  >上午（開店時間-12:00）</a
+                >
+              </li>
+              <li>
+                <a
+                  @click="selectTime(1)"
+                  :class="{ 'pointer-events-none line-through': disabledTime.includes('1') }"
+                  >下午（12:00-18:00）</a
+                >
+              </li>
+              <li>
+                <a
+                  @click="selectTime(2)"
+                  :class="{ 'pointer-events-none line-through': disabledTime.includes('2') }"
+                  >晚上（18:00-閉店時間）</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </VForm>
@@ -104,6 +128,9 @@
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 
+const store = useOrderStore()
+const { userData } = storeToRefs(store)
+
 const props = defineProps({
   time: {
     require: true
@@ -112,8 +139,13 @@ const props = defineProps({
 
 const closeDays = props.time.ClosedDays
 const dayOff = props.time.DayOff
-const startTime = props.time.StartTime
-const endTime = props.time.EndTime
+const _startTime = props.time.StartTime
+const _endTime = props.time.EndTime
+
+const date = new Date()
+date.setDate(date.getDate() + 5)
+userData.date = date
+const minDate = date.toISOString().slice(0, 10)
 
 // output: '7,1' -> ['7','1']
 const toArray = (string) => {
@@ -122,13 +154,24 @@ const toArray = (string) => {
   })
 }
 
-const store = useOrderStore()
-const { userData } = storeToRefs(store)
-
-const date = new Date()
-date.setDate(date.getDate() + 5)
-userData.date = date
-const minDate = date.toISOString().slice(0, 10)
+const disabledTime = ref('')
+const selectDate = ref(userData.value.date)
+const selectTime = (time) => {
+  switch (time) {
+    case 0:
+      userData.value.time = '上午（開店時間-12:00）'
+      break
+    case 1:
+      userData.value.time = '下午（12:00-18:00）'
+      break
+    case 2:
+      userData.value.time = '晚上（18:00-閉店時間）'
+      break
+    default:
+      userData.value.time = '預約時段'
+      break
+  }
+}
 
 const disabledDates = ref([
   {
@@ -136,17 +179,38 @@ const disabledDates = ref([
       weekdays: toArray(closeDays) // 📌 放入公休日 1~7
     }
   },
-  '2023-7-20'
+  dayOff
 ])
 
+// Composable
 const { isPhone } = useValidate()
 const { formatDate, formattedOutput } = useFormatted()
 
 onMounted(() => {
-  userData.date = formattedOutput(date)
+  userData.value.date = formattedOutput(date)
+  isBookAvailable()
 })
 
-watch(userData.value, () => {
-  userData.date = formattedOutput(userData.value.date)
+watch(selectDate, (newValue) => {
+  userData.value.date = formattedOutput(newValue)
+  isBookAvailable()
 })
+
+// 已被預約時間
+const booked = [
+  ['2023-07-27', ['0', '1', '2']],
+  ['2023-07-31', ['0', '2']]
+]
+
+const isBookAvailable = () => {
+  booked.map((item) => {
+    if (item[1].length >= 3) {
+      disabledDates.value.push(item[0])
+    } else if (item[0] === formatDate.value) {
+      disabledTime.value = item[1]
+    } else {
+      disabledTime.value = ''
+    }
+  })
+}
 </script>
