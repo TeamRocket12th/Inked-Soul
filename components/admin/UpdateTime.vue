@@ -1,26 +1,49 @@
 <template>
   <div class="flex flex-col gap-5">
-    <div class="flex flex-col items-start gap-1">
-      <span>公休日</span>
-      <div class="dropdown-end dropdown w-full">
-        <label tabindex="0" class="btn my-1 mb-1 h-auto w-full py-2">
-          <span v-for="(day, key) in ArtistCloseDay" :key="key"> {{ day.week }} </span>
-        </label>
-        <ul
-          tabindex="0"
-          class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
-        >
-          <li v-for="(day, key) in weeks" :key="key" @click="SelectCloseDays(day)" class="m-1">
-            <a :class="{ 'bg-gray-100': ArtistCloseDay.includes(day) }">{{ day.week }}</a>
-          </li>
-        </ul>
+    <div class="flex flex-row justify-between gap-2">
+      <div class="flex w-full flex-col items-start gap-1">
+        <span>公休日</span>
+        <div class="dropdown-end dropdown w-full">
+          <label
+            tabindex="0"
+            class="btn-outline btn my-1 mb-1 h-auto w-full border-[#D0D0D0] bg-white py-2"
+          >
+            <span v-for="(day, key) in ArtistCloseDay" :key="key"> {{ day.week }} </span>
+          </label>
+          <ul
+            tabindex="0"
+            class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
+          >
+            <li v-for="(day, key) in weeks" :key="key" @click="SelectCloseDays(day)" class="m-1">
+              <a :class="{ 'bg-gray-100': ArtistCloseDay.includes(day) }">{{ day.week }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="w-full">
+        <p class="mb-2">新增臨時公休日</p>
+        <div>
+          <VDatePicker v-model="selectDayoff" :disabled-dates="disabledDates" color="gray">
+            <template #default="{ togglePopover }">
+              <button
+                class="formInput rounded-md px-3 py-2 text-sm font-semibold text-black"
+                @click="togglePopover"
+              >
+                {{ formatDate }}
+              </button>
+            </template>
+          </VDatePicker>
+        </div>
       </div>
     </div>
+
     <div class="flex flex-row justify-between gap-2">
       <div class="flex flex-1 flex-col items-start gap-1">
         <span>開店時間</span>
         <div class="dropdown-hover dropdown w-full">
-          <label tabindex="0" class="btn mb-1 w-full">{{ ArtistOpenTime }}</label>
+          <label tabindex="0" class="btn-outline btn mb-1 w-full border-[#D0D0D0]">{{
+            ArtistOpenTime
+          }}</label>
           <ul
             tabindex="0"
             class="dropdown-content menu rounded-box z-10 h-[300px] w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -39,7 +62,9 @@
       <div class="flex flex-1 flex-col items-start gap-1">
         <span>閉店時間</span>
         <div class="dropdown-hover dropdown w-full">
-          <label tabindex="0" class="btn mb-1 w-full">{{ ArtistCloseTime }}</label>
+          <label tabindex="0" class="btn-outline btn mb-1 w-full border-[#D0D0D0]">{{
+            ArtistCloseTime
+          }}</label>
           <ul
             tabindex="0"
             class="dropdown-content menu rounded-box z-10 h-[300px] w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -59,26 +84,17 @@
     <p v-if="AlertSelect">{{ AlertSelect }}</p>
     <div class="flex flex-col items-start gap-1">
       <span>可供預約時段</span>
-      <div class="dropdown-hover dropdown w-full">
-        <label tabindex="0" class="btn my-1 h-auto w-full py-2">
-          <span v-for="(part, key) in ArtistAvailableTimeFrame" :key="key">
-            {{ part }}
-          </span>
-        </label>
-        <ul
-          tabindex="0"
-          class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
+      <ul class="flex flex-wrap gap-2">
+        <li
+          v-for="(part, key) in timeFrame"
+          :key="key"
+          @click="SelectTimeFrame(part)"
+          class="rounded-full border px-3 py-1 text-center"
+          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(part) }"
         >
-          <li
-            v-for="(part, key) in timeFrame"
-            :key="key"
-            @click="SelectTimeFrame(part)"
-            class="m-1"
-          >
-            <a :class="{ 'bg-gray-100': ArtistAvailableTimeFrame.includes(part) }">{{ part }}</a>
-          </li>
-        </ul>
-      </div>
+          <a>{{ part }}</a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -120,11 +136,24 @@ const time = [
 ]
 const timeFrame = ['上午（開店時間～12:00）', '下午（12:00~18:00）', '晚上（18:00~閉店時間）']
 
+const { formatDate, formattedOutput } = useFormatted()
+
 // 要傳給 API 的值（需要轉換格式）
 const ArtistCloseDay = ref([weeks[0]])
 const ArtistOpenTime = ref('09:00')
 const ArtistCloseTime = ref('22:00')
 const ArtistAvailableTimeFrame = ref([timeFrame[0]])
+const ArtistDayoff = ref('')
+
+const date = new Date()
+const selectDayoff = ref('')
+
+onMounted(() => {
+  ArtistDayoff.value = formattedOutput(date)
+})
+watch(selectDayoff, (newValue) => {
+  ArtistDayoff.value = formattedOutput(newValue)
+})
 
 const AlertSelect = ref(false)
 
