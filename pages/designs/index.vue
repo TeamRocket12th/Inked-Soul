@@ -1,8 +1,13 @@
 <template>
   <div class="container mx-auto flex flex-col items-center">
     <SearchBar class="mb-5"></SearchBar>
-    <p class="text-left">認領圖的OO縣市OO風格OO元素，共XX個結果</p>
-    <masonry-wall :items="filterData.length===0?designData:filterData" :ssr-columns="3" :column-width="300" :gap="16">
+    <!-- <p class="text-left">認領圖的OO縣市OO風格OO元素，共XX個結果</p> -->
+    <masonry-wall
+      :items="filterData.length === 0 ? designData : filterData"
+      :ssr-columns="3"
+      :column-width="300"
+      :gap="16"
+    >
       <!-- :items="filterData.length===0?designData:filterData" -->
       <template #default="{ item }">
         <div class="rounded-xl">
@@ -29,19 +34,19 @@
 import { useSearchStore } from '~/stores/search'
 import { storeToRefs } from 'pinia'
 const store = useSearchStore()
-const { allData,filterArr } = storeToRefs(store)
-const { filterArr:filterData } = store
+const { allData, filterArr } = storeToRefs(store)
+const { filterArr: filterData } = store
 const { data } = await useFetch('/api/getDesign/getAllDesign')
 const designData = ref([])
 designData.value = data.value.design
 allData.value = designData.value
 
-const defaultRender=()=>{
-  if(filterData.length===0){
-    filterArr.value=designData.value
+const defaultRender = () => {
+  if (filterData.length === 0) {
+    filterArr.value = designData.value
   }
-  console.log('filterData',filterData)
-  console.log('filterArr',filterArr)
+  console.log('filterData', filterData)
+  console.log('filterArr', filterArr)
 }
 
 // 參考用

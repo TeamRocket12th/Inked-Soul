@@ -1,5 +1,5 @@
 export const useAccountStore = defineStore('account', () => {
-  const identity = ref('User')
+  const identity = ref('user')
   const email = ref('nancy@gmail.com')
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
@@ -27,8 +27,10 @@ export const useAccountStore = defineStore('account', () => {
 
   const loginSubmit = async () => {
     const { data, error } = await useFetch(
-      `http://inkedsoul.rocket-coding.com/api/Account/Login${identity.value}`,
+      `http://inkedsoul.rocket-coding.com/api/login${identity.value}`,
       {
+        // http://inkedsoul.rocket-coding.com/api/login${identity.value}
+        // http://localhost:5005/login/${identity.value}
         method: 'POST',
         body: {
           Account: email.value,
@@ -37,7 +39,6 @@ export const useAccountStore = defineStore('account', () => {
         }
       }
     )
-
     if (data.value) {
       const res = data.value
       if (res.Status === 200) {
@@ -46,10 +47,10 @@ export const useAccountStore = defineStore('account', () => {
           data: res.Data
         }
         let newIdentity = ''
-        if (identity.value === 'User') {
+        if (identity.value === 'user') {
           newIdentity = 'normal'
           console.log(newIdentity)
-        } else if (identity.value === 'Artist') {
+        } else if (identity.value === 'artist') {
           newIdentity = 'artist'
           console.log(newIdentity)
         }
@@ -62,7 +63,9 @@ export const useAccountStore = defineStore('account', () => {
 
   const signupSubmit = async () => {
     const { data, error } = await useFetch(
-      `http://inkedsoul.rocket-coding.com/api/Account/SingUp${identity.value}`,
+      `http://inkedsoul.rocket-coding.com/api/signup${identity.value}`,
+      // http://localhost:5005/signup/${identity.value}
+      // http://inkedsoul.rocket-coding.com/api/singup${identity.value}
       {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },

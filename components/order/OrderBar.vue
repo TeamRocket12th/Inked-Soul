@@ -43,6 +43,7 @@ const props = defineProps({
     required: true
   }
 })
+console.log(props.order)
 
 const starAmount = props.order.star
 const starArr = []

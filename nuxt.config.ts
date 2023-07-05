@@ -20,5 +20,12 @@ export default defineNuxtConfig({
   imports: {
     // autoImport: false
   },
-  build: { transpile: ['yup', 'lodash', '@vee-validate/rules'] }
+  build: { transpile: ['yup', 'lodash', '@vee-validate/rules'] },
+  proxy: {
+    // 要捕獲的根路由
+    '/api': {
+      target: 'http://inkedsoul.rocket-coding.com',
+      changeOrigin: true
+    }
+  }
 })
