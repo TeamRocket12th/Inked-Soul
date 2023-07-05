@@ -86,12 +86,12 @@
                   >
                     <li>
                       <a>
-                        <Icon name="ic:baseline-edit" class="h-6 w-6" />
+                        <Icon name="ic:baseline-edit" size="24" />
                       </a>
                     </li>
                     <li>
                       <a>
-                        <Icon name="ic:baseline-delete" class="h-6 w-6" />
+                        <Icon name="ic:baseline-delete" size="24" />
                       </a>
                     </li>
                   </ul>
