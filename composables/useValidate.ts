@@ -14,7 +14,7 @@ export const useValidate = () => {
     if (!value) {
       return '電話為必填'
     }
-    const regex = /^09\d{10}$/
+    const regex = /^09\d{8}$/
     if (!regex.test(String(value))) {
       return '電話格式不正確'
     }

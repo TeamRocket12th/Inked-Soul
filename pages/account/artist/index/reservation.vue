@@ -1,8 +1,13 @@
 <template>
-  <div class="grid grid-cols-2">
-    <VDatePicker v-model="date" />
-    <div>
-      <p class="mb-[33px]">2023年1月15日的預約 (ＡＰＩ資料)</p>
+  <div class="grid grid-cols-2 items-center">
+    <VDatePicker
+      v-model="date"
+      :disabled-dates="disabledDates"
+      title-position="left"
+      color="gray"
+    />
+    <!-- <p class="mb-[33px]">2023年1月15日的預約 (ＡＰＩ資料)</p> -->
+    <div class="overflow-scroll">
       <table class="orderTable">
         <thead>
           <tr>
@@ -14,7 +19,17 @@
         <tbody v-if="isLoading">
           <tr>
             <th>上午</th>
-            <th>{{ dateDetail['上午'].Image }}</th>
+            <th class="flex flex-row items-center justify-center gap-3">
+              <img
+                :src="dateDetail['上午'].Image"
+                alt=""
+                class="h-[100px] w-[100px] rounded-lg border border-[#D0D0D0] bg-white object-contain object-center"
+              />
+              <div class="text-left">
+                <p>墨水中的靈魂</p>
+                <p>12cm*12cm</p>
+              </div>
+            </th>
             <th>{{ dateDetail['上午'].Purchaser }}</th>
           </tr>
           <tr>
@@ -34,6 +49,8 @@
 </template>
 <script setup>
 const date = ref(new Date())
+const selectDate = ref('')
+
 const isLoading = ref('')
 
 const cookie = useCookie('token')
@@ -42,6 +59,14 @@ const runtimeConfig = useRuntimeConfig()
 const apiBase = runtimeConfig.public.apiBase
 
 const dateDetail = ref('')
+
+const disabledDates = ref([
+  {
+    repeat: {
+      weekdays: [1, 2] // 📌 放入公休日 1~7
+    }
+  }
+])
 
 watch(
   date,
@@ -64,11 +89,18 @@ watch(
 }
 .orderTable thead th {
   padding: 20px;
+  white-space: nowrap;
 }
 .orderTable tbody tr {
   height: 106px;
 }
+.orderTable tbody tr th {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 50px;
+  width: max-content;
+}
 .orderTable tbody tr:nth-of-type(odd) {
-  background-color: #d9d9d9;
+  background-color: #f0f0f0;
 }
 </style>
