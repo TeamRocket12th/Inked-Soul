@@ -4,17 +4,17 @@
     <div class="grid grid-cols-2">
       <button
         type="button"
-        :class="{ 'border-black': identity === 'normal' }"
+        :class="{ 'border-black': identity === 'User' }"
         class="border-b-2 px-[25px] py-[3px] duration-200"
-        @click="isActive('normal')"
+        @click="isActive('User')"
       >
         一般身份
       </button>
       <button
         type="button"
-        :class="{ 'border-black': identity === 'artist' }"
+        :class="{ 'border-black': identity === 'Artist' }"
         class="border-b-2 px-[25px] py-[3px] duration-200"
-        @click="isActive('artist')"
+        @click="isActive('Artist')"
       >
         刺青師
       </button>

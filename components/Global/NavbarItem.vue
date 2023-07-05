@@ -29,15 +29,15 @@
             <div
               class="w-10"
               :class="{
-                'rounded-lg': identity === 'artist',
-                'rounded-full': identity === 'normal'
+                'rounded-lg': identity === 'Artist',
+                'rounded-full': identity === 'User'
               }"
             >
               <img :src="photo" />
             </div>
           </label>
           <ul
-            v-if="identity === 'artist'"
+            v-if="identity === 'Artist'"
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
@@ -90,7 +90,7 @@
             </li>
           </ul>
           <ul
-            v-if="identity === 'normal'"
+            v-if="identity === 'User'"
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >

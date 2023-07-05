@@ -1,5 +1,5 @@
 export const useAccountStore = defineStore('account', () => {
-  const identity = ref('normal')
+  const identity = ref('User')
   const email = ref('nancy@gmail.com')
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
@@ -26,13 +26,17 @@ export const useAccountStore = defineStore('account', () => {
   })
 
   const loginSubmit = async () => {
-    const { data, error } = await useFetch(`http://localhost:5005/login/${identity.value}`, {
-      method: 'POST',
-      body: {
-        Email: email.value,
-        Password: password.value
+    const { data, error } = await useFetch(
+      `http://inkedsoul.rocket-coding.com/api/Account/Login${identity.value}`,
+      {
+        method: 'POST',
+        body: {
+          Account: email.value,
+          Password: password.value,
+          Role: identity.value
+        }
       }
-    })
+    )
 
     if (data.value) {
       const res = data.value
@@ -41,7 +45,15 @@ export const useAccountStore = defineStore('account', () => {
           token: res.Token,
           data: res.Data
         }
-        router.push(`/account/${identity.value}/editinfo`) // 登入成功跳轉到首頁
+        let newIdentity = ''
+        if (identity.value === 'User') {
+          newIdentity = 'normal'
+          console.log(newIdentity)
+        } else if (identity.value === 'Artist') {
+          newIdentity = 'artist'
+          console.log(newIdentity)
+        }
+        router.push(`/account/${newIdentity}/editinfo`) // 登入成功跳轉到首頁
       }
     } else if (error.value) {
       cookie.value = null
@@ -49,15 +61,18 @@ export const useAccountStore = defineStore('account', () => {
   }
 
   const signupSubmit = async () => {
-    const { data, error } = await useFetch(`http://localhost:5005/signup/${identity.value}`, {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: {
-        Email: email.value,
-        Password: password.value,
-        ConfirmPassword: confirmPassword.value
+    const { data, error } = await useFetch(
+      `http://inkedsoul.rocket-coding.com/api/Account/SingUp${identity.value}`,
+      {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: {
+          Account: email.value,
+          Password: password.value,
+          Role: identity.value
+        }
       }
-    })
+    )
 
     if (data.value) {
       const res = data.value

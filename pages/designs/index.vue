@@ -1,7 +1,9 @@
 <template>
-  <div class="container mx-auto">
-    <p>認領圖首頁</p>
-    <masonry-wall :items="designData" :ssr-columns="3" :column-width="300" :gap="16">
+  <div class="container mx-auto flex flex-col items-center">
+    <SearchBar class="mb-5"></SearchBar>
+    <p class="text-left">認領圖的OO縣市OO風格OO元素，共XX個結果</p>
+    <masonry-wall :items="filterData.length===0?designData:filterData" :ssr-columns="3" :column-width="300" :gap="16">
+      <!-- :items="filterData.length===0?designData:filterData" -->
       <template #default="{ item }">
         <div class="rounded-xl">
           <NuxtLink :key="item.id" :to="`/designs/${item.id}`">
@@ -9,7 +11,12 @@
               :id="item.id"
               :image="item.image"
               :design-name="item.designName"
-              :category="item.category"
+              :artist-name="item.artistName"
+              :artist-img="item.artistImg"
+              :price="item.price"
+              :city="item.city"
+              :style="item.style"
+              :element="item.element"
             />
           </NuxtLink>
         </div>
@@ -19,9 +26,23 @@
   </div>
 </template>
 <script setup>
+import { useSearchStore } from '~/stores/search'
+import { storeToRefs } from 'pinia'
+const store = useSearchStore()
+const { allData,filterArr } = storeToRefs(store)
+const { filterArr:filterData } = store
 const { data } = await useFetch('/api/getDesign/getAllDesign')
 const designData = ref([])
 designData.value = data.value.design
+allData.value = designData.value
+
+const defaultRender=()=>{
+  if(filterData.length===0){
+    filterArr.value=designData.value
+  }
+  console.log('filterData',filterData)
+  console.log('filterArr',filterArr)
+}
 
 // 參考用
 const limit = ref(20)
@@ -51,5 +72,9 @@ onMounted(() => {
   })
 
   observer.observe(root.value)
+  computed(() => {
+    return filterArr
+  })
+  defaultRender()
 })
 </script>
