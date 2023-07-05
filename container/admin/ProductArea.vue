@@ -38,11 +38,11 @@
       </div>
 
       <button class="btn" onclick="upload_product.showModal()">上架認領圖</button>
-      <dialog id="upload_product" class="modal">
-        <form method="dialog" class="modal-box max-w-none rounded-lg">
+      <dialog id="upload_product" class="modal grid grid-cols-12">
+        <form method="dialog" class="modal-box col-span-8 col-start-3 max-w-none rounded-lg">
           <UploadTattooArea />
         </form>
-        <form method="dialog" class="modal-backdrop">
+        <form method="dialog" class="modal-backdrop col-span-full">
           <button>close</button>
         </form>
       </dialog>

@@ -160,7 +160,7 @@ watch(
   font-size: 16px;
   font-weight: 400;
 }
-.orderTable tbody tr th > div {
+.orderTable tbody tr th:nth-child(2) > div {
   width: max-content;
   margin: 0 100px;
 }
