@@ -10,9 +10,9 @@ module.exports = {
         DEFAULT: '0.75rem',
         sm: '0.75rem',
         lg: '0.75rem',
-        xl: '100px',
-        '2xl': '304px',
-        '3xl': '304px'
+        xl: '50px',
+        '2xl': '100px',
+        '3xl': '300px'
       },
       screens: {
         sm: '640px',
