@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="mb-10 text-base font-bold">工作室資訊</p>
+    <h4 class="mb-10">工作室資訊</h4>
     <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
       <div class="flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">
