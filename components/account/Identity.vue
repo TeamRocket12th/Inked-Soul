@@ -6,7 +6,7 @@
         type="button"
         :class="{ 'border-black': identity === 'User' }"
         class="border-b-2 px-[25px] py-[3px] duration-200"
-        @click="isActive('User')"
+        @click="isActive('user')"
       >
         一般身份
       </button>
@@ -14,7 +14,7 @@
         type="button"
         :class="{ 'border-black': identity === 'Artist' }"
         class="border-b-2 px-[25px] py-[3px] duration-200"
-        @click="isActive('Artist')"
+        @click="isActive('artist')"
       >
         刺青師
       </button>
