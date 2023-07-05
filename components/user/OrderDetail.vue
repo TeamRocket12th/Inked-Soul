@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <table class="border-[1px] border-black w-full">
+    <table class="w-full border-[1px] border-black">
       <tr>
         <th>認領圖</th>
         <th>名稱</th>
@@ -13,15 +13,15 @@
       </tr>
       <tr>
         <td>
-          <img :src="`${orderData.image}`" alt="" class="w-[50px]">
+          <img :src="`${orderData.image}`" alt="" class="w-[50px]" />
         </td>
-        <td>{{orderData.name}}</td>
-        <td>{{orderData.artist}}</td>
-        <td>{{orderData.id}}</td>
-        <td>{{orderData.orderDay}}</td>
-        <td>{{orderData.date}}</td>
-        <td>{{orderData.deposit}}</td>
-        <td>{{orderData.status}}</td>
+        <td>{{ orderData.name }}</td>
+        <td>{{ orderData.artist }}</td>
+        <td>{{ orderData.id }}</td>
+        <td>{{ orderData.orderDay }}</td>
+        <td>{{ orderData.date }}</td>
+        <td>{{ orderData.deposit }}</td>
+        <td>{{ orderData.status }}</td>
       </tr>
     </table>
   </div>
@@ -34,8 +34,8 @@ const props = defineProps({
     default: ''
   }
 })
-console.log('props.orderID',props.orderID)
+console.log('props.orderID', props.orderID)
 const { data } = await useFetch(`/api/getOrder/${props.orderID}`)
 console.log(data)
-const orderData=data.value.data
+const orderData = data.data
 </script>

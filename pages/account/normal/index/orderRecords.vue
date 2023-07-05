@@ -15,6 +15,7 @@
         v-for="item in data"
         :key="item.id"
         :order="item"
+        :status="item.status"
         class="hover:cursor-pointer hover:bg-gray-300"
         @click="jump(item.id)"
       />
