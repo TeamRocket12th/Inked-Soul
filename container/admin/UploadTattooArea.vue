@@ -1,20 +1,22 @@
 <template>
   <div>
     <div class="mb-8 grid grid-cols-3 items-center justify-center">
-      <Icon
-        name="ic:outline-keyboard-arrow-left"
-        size="48"
-        class="cursor-pointer rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-      />
+      <button class="h-12 w-12 cursor-pointer">
+        <Icon
+          name="ic:outline-keyboard-arrow-left"
+          size="48"
+          class="rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
+        />
+      </button>
       <!-- @click="toPreviousPage" -->
       <h4 class="text-center">上架認領圖</h4>
       <div></div>
     </div>
 
     <div class="flex flex-col gap-5">
-      <div class="grid grid-cols-2 gap-[20px]">
+      <div class="grid grid-cols-2 gap-5">
         <UploadTattooImg />
-        <div>
+        <div class="flex flex-col gap-5">
           <UploadTattooInfo />
           <UploadTattooPirce />
         </div>
