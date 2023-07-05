@@ -145,7 +145,11 @@
             </li>
             <li v-for="(element, index) in elements" :key="index">
               <button
-                :class="elementArr.includes(element)?'styleBtn bg-black text-white focus:bg-black':'styleBtn bg-white text-black focus:bg-white'"
+                :class="
+                  elementArr.includes(element)
+                    ? 'styleBtn bg-black text-white focus:bg-black'
+                    : 'styleBtn bg-white text-black focus:bg-white'
+                "
                 @click="elementToggle(element)"
               >
                 {{ element }}
@@ -157,17 +161,19 @@
     </div>
     <button
       type="button"
-      class="btn-neutral btn h-fit h-full rounded-none rounded-r-lg border-0 bg-black p-3 text-base" @click="searchDesign()"
+      class="btn-neutral btn h-fit h-full rounded-none rounded-r-lg border-0 bg-black p-3 text-base"
+      @click="searchDesign()"
     >
       搜尋認領圖
     </button>
   </div>
 </template>
 <script setup>
-import {useSearchStore} from '~/stores/search'
-import {storeToRefs} from 'pinia'
-const store=useSearchStore()
-const {cityChosen,styleChosen,elementChosen}=storeToRefs(store)
+import { useSearchStore } from '~/stores/search'
+import { storeToRefs } from 'pinia'
+const store = useSearchStore()
+const { filterArr } = storeToRefs(store)
+const { allData } = store
 
 const taiwanCities = {
   northern: ['臺北市', '新北市', '基隆市', '桃園市', '新竹市', '新竹縣', '宜蘭縣'],
@@ -208,6 +214,7 @@ const elements = [
 const cityArr = ref([])
 const styleArr = ref([])
 const elementArr = ref([])
+// 選擇城市
 const cityToggle = (input) => {
   const cityIndex = cityArr.value.indexOf(input)
   if (cityIndex === -1) {
@@ -216,7 +223,7 @@ const cityToggle = (input) => {
     cityArr.value.splice(cityIndex, 1)
   }
 }
-
+// 選擇風格
 const styleToggle = (input) => {
   const styleIndex = styleArr.value.indexOf(input)
   if (styleIndex === -1) {
@@ -225,7 +232,7 @@ const styleToggle = (input) => {
     styleArr.value.splice(styleIndex, 1)
   }
 }
-
+// 選擇元素
 const elementToggle = (input) => {
   const elementIndex = elementArr.value.indexOf(input)
   if (elementIndex === -1) {
@@ -234,14 +241,46 @@ const elementToggle = (input) => {
     elementArr.value.splice(elementIndex, 1)
   }
 }
+// 篩選
+const filterFn = () => {
+  if(cityArr.value.length===0 && styleArr.value.length === 0 && elementArr.value.length ===0 ){
+    filterFn.value = allData.value
+  }else{
+    filterArr.value = allData.filter((item) => {
+      const cityIndex = cityArr.value.includes(item.city)
+      const styleIndex0 = styleArr.value.includes(item.style[0])
+      const styleIndex1 = styleArr.value.includes(item.style[1])
+      const elementIndex0 = elementArr.value.includes(item.element[0])
+      const elementIndex1 = elementArr.value.includes(item.element[1])
+      
+      if (
+        cityIndex === true ||
+        styleIndex0 === true ||
+        styleIndex1 === true ||
+        elementIndex0 === true ||
+        elementIndex1 === true
+      ) {
+        return item
+      }
+    })
+  }
+  console.log(cityArr)
+  console.log(styleArr)
+  console.log(elementArr)
 
-const searchDesign = () => {
-  cityChosen.value = cityArr.value
-  styleChosen.value = styleArr.value
-  elementChosen.value = elementArr.value
-  navigateTo('/designs')
+  console.log(filterArr)
 }
-
+// 搜尋
+const route = useRoute()
+const length = route.matched.length
+const searchDesign = () => {
+  if (route.matched[length - 1].path === '/') {
+    navigateTo('/designs')
+    filterFn()
+  } else {
+    filterFn()
+  }
+}
 
 // onMounted(() => {
 //   window.addEventListener('click', clickOutside)

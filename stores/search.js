@@ -1,7 +1,6 @@
-export const useSearchStore=defineStore('search',()=>{
-  const cityChosen=ref([])
-  const styleChosen=ref([])
-  const elementChosen=ref([])
-  
-  return { cityChosen ,styleChosen,elementChosen}
+export const useSearchStore = defineStore('search', () => {
+  const allData = ref([])
+
+  const filterArr = ref([])
+  return { allData, filterArr }
 })
