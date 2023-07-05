@@ -11,13 +11,18 @@
         <UpdateTime />
       </div>
     </div>
-    <button type="button" class="btn w-full">更新個人資料</button>
+    <!-- :disabled="!meta.valid" -->
+    <button type="button" class="btn-neutral btn mb-20 w-full bg-black text-white">
+      更新個人資料
+    </button>
+    <UpdatePassword />
   </div>
 </template>
 <script setup>
 import UpdatePersonalInfo from '~/components/admin/UpdatePersonalInfo.vue'
 import UpdateStudioInfo from '~/components/admin/UpdateStudioInfo.vue'
 import UpdateTime from '~/components/admin/UpdateTime.vue'
+import UpdatePassword from '~/components/admin/UpdatePassword.vue'
 import UpdatePersonalBrief from '~/components/admin/UpdatePersonalBrief.vue'
 import UpdateStyle from '~/components/admin/UpdateStyle.vue'
 </script>

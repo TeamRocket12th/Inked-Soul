@@ -9,8 +9,8 @@
           @click="styleToggle(style)"
           ref="styleBtn"
           type="button"
-          :class="{ 'bg-gray-200': personalStyle.includes(style) }"
-          class="whitespace-nowrap rounded-lg border px-3 py-[6px]"
+          :class="{ 'bg-black text-white': personalStyle.includes(style) }"
+          class="whitespace-nowrap rounded-full border px-3 py-1"
         >
           {{ style }}
         </button>

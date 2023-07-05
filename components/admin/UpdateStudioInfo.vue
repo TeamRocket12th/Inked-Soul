@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="mb-10 text-base font-bold">工作室資訊</p>
+    <h4 class="mb-10">工作室資訊</h4>
     <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
       <div class="flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">
@@ -43,9 +43,16 @@
           />
         </div>
       </div>
+
       <div class="flex flex-col gap-2">
         <label for="address" class="cursor-pointer">地址 </label>
-        <VField id="address" name="地址" class="formInput" v-model="editArtistInfoData.address" />
+        <VField
+          id="address"
+          name="地址"
+          class="formInput"
+          v-model="editArtistInfoData.address"
+          placeholder="鄉鎮市區、里鄰、門牌號碼"
+        />
       </div>
       <div class="flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">

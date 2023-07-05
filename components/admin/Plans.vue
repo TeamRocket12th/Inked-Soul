@@ -1,20 +1,55 @@
 <template>
+  <div class="mx-auto mb-20 flex w-[496px] flex-col rounded-lg border">
+    <div class="flex flex-col items-center gap-4 bg-primary py-5">
+      <button class="btn-outline btn rounded bg-white px-6 py-3">免費會員</button>
+      <p class="text-[#6C6C6C]">無限期</p>
+    </div>
+    <ul class="grid grid-cols-3 gap-[56px] px-[108px] py-10">
+      <li class="flex flex-col items-center gap-2">
+        <div
+          class="flex h-14 w-14 flex-col justify-center rounded-full border-[4px] text-center align-middle"
+        >
+          <span> 5張 </span>
+        </div>
+        <p>認領圖</p>
+      </li>
+      <li class="flex flex-col items-center gap-2">
+        <div
+          class="flex h-14 w-14 flex-col justify-center rounded-full border-[4px] text-center align-middle"
+        >
+          <span> 5張 </span>
+        </div>
+        <p>作品集</p>
+      </li>
+      <li class="flex flex-col items-center gap-2">
+        <div
+          class="flex h-14 w-14 flex-col justify-center rounded-full border-[4px] text-center align-middle"
+        >
+          <span> ∞ </span>
+        </div>
+        <p>會期</p>
+      </li>
+    </ul>
+  </div>
+
   <div>
-    <h3 class="mb-[60px]">升級方案</h3>
+    <h4 class="mb-[26px]">升級方案</h4>
     <div>
       <ul class="grid grid-cols-3 gap-8">
         <li
           v-for="(info, key) in memberShipPlan"
           :key="key"
-          class="flex flex-col items-center gap-10 rounded border px-[44px] py-[28px]"
+          class="flex flex-col items-center gap-10 rounded border py-[28px] hover:bg-primary"
         >
-          <p class="border-b">
-            {{ info.title }}
-          </p>
-          <p>${{ info.pirce }}</p>
-          <button>{{ info.yourPlan ? '目前方案' : '選擇方案' }}</button>
+          <div class="border-b border-black px-6 py-3">
+            <h4>
+              {{ info.title }}
+            </h4>
+          </div>
+          <p class="text-[32px] font-bold leading-9">$ {{ info.pirce }}</p>
+          <button class="btn-neutral btn">{{ info.yourPlan ? '目前方案' : '選擇方案' }}</button>
           <ul>
-            <li v-for="(detail, key) in info.planInfo" :key="key">
+            <li v-for="(detail, key) in info.planInfo" :key="key" class="text-center">
               {{ detail }}
             </li>
           </ul>

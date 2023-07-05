@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="mb-10 text-base font-bold">個人資料</p>
+    <h4 class="mb-10">個人資料</h4>
     <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
       <div class="relative flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">
@@ -76,7 +76,7 @@
             id="email"
             rules="email"
             name="電子信箱"
-            class="formInput"
+            class="formInput text-[#D0D0D0]"
             v-model="email"
             disabled
           />
