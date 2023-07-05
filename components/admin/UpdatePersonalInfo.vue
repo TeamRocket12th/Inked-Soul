@@ -76,7 +76,7 @@
             id="email"
             rules="email"
             name="電子信箱"
-            class="formInput"
+            class="formInput text-[#D0D0D0]"
             v-model="email"
             disabled
           />

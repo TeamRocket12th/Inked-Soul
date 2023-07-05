@@ -14,7 +14,7 @@
           </slot>
         </div>
       </div>
-      <div class="col-span-8 rounded bg-white px-10 pb-[36px] pt-[60px]">
+      <div class="col-span-8 rounded bg-white p-10">
         <NuxtPage />
       </div>
     </div>

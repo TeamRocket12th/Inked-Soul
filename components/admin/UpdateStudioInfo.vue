@@ -43,9 +43,16 @@
           />
         </div>
       </div>
+
       <div class="flex flex-col gap-2">
         <label for="address" class="cursor-pointer">地址 </label>
-        <VField id="address" name="地址" class="formInput" v-model="editArtistInfoData.address" />
+        <VField
+          id="address"
+          name="地址"
+          class="formInput"
+          v-model="editArtistInfoData.address"
+          placeholder="鄉鎮市區、里鄰、門牌號碼"
+        />
       </div>
       <div class="flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">
