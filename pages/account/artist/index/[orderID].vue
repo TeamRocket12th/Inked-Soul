@@ -24,7 +24,7 @@
         <OrderStep :step="orderStatus" />
       </template>
       <template #orderDetail>
-        <OrderBar :order="order.Data" :status="order.Data.Status" />
+        <OrderData :order="order.Data" :status="order.Data.Status" />
       </template>
     </OrderArea>
     <div
@@ -57,7 +57,7 @@
 <script setup>
 import OrderArea from '~/container/order/OrderArea'
 import OrderStep from '~/components/order/OrderStep'
-import OrderBar from '~/components/order/OrderBar'
+import OrderData from '~/components/order/OrderData'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -67,6 +67,7 @@ const cookie = useCookie('token')
 const orderID = route.params.orderID
 const artistID = cookie.value.data.ID
 
+// 透過 API 最後一個
 const orderContext = {
   訂單成立: {
     title: '付款成功！訂單成立',
@@ -81,11 +82,11 @@ const orderContext = {
   獲得評價: {
     title: '您已獲得評價',
     icon: 'ic:sharp-event-available',
-    contnet: ''
+    content: ''
   },
   取消訂單: {
     title: '訂單已取消',
-    icon: 'ic:outline-backspac',
+    icon: 'ic:outline-backspace',
     content: '請重新上架認領圖'
   }
 }
@@ -100,7 +101,7 @@ const { data, error } = await useFetch(`${apiBase}/artist/${artistID}/${orderID}
 
 const order = ref({
   Data: {
-    Id: '',
+    Id: '123eqwda',
     Image: 'https://fakeimg.pl/300/?text=Design',
     Name: 'Tenetur nisi.',
     User: 'Benny.Rippin39',

@@ -37,7 +37,7 @@
       >
         <p>03</p>
       </div>
-      <p class="text-base">獲得評價</p>
+      <p class="whitespace-nowrap text-base">{{ props.step3Title }}</p>
       <p v-if="props.step.Step3.Status" class="font-noto-tc text-sm font-normal">
         {{ props.step.Step3.Date }}
       </p>
@@ -48,6 +48,9 @@
 const props = defineProps({
   step: {
     required: true
+  },
+  step3Title: {
+    default: '獲得評價'
   }
 })
 </script>
