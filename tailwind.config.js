@@ -24,6 +24,12 @@ module.exports = {
       }
     },
     extend: {
+      fontFamily: {
+        'heading-typo': ['Cinzel Decorative', 'sans-serif'],
+        'serif-tc': ['Noto Serif TC', 'sans-serif'],
+        'roboto-nl': ['Roboto', 'sans-serif'],
+        'noto-tc': ['Noto Sans', 'sans-serif']
+      },
       screens: {
         '3xl': '1920px'
       },
