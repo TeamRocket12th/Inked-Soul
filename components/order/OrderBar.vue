@@ -24,9 +24,9 @@
       <!-- 交易日期 -->
       {{ props.order.OrderDay }}
     </td>
-    <td>{{ props.order.Date }} {{ props.order.Time }}</td>
+    <td>{{ props.order.BookingDate }} {{ props.order.TimeFrame }}</td>
     <td>$ {{ props.order.Deposit }}</td>
-    <td>{{ props.order.Status }}</td>
+    <td>{{ props.order.OrderStatus }}</td>
   </tr>
 </template>
 <script setup>
