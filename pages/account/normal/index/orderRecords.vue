@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-auto">
+  <div class="overflow-x-scroll">
     <div>
       <table class="w-full">
         <thead class="h-12 bg-primary">
@@ -17,11 +17,11 @@
         <tbody>
           <OrderBar
             v-for="item in data"
-            :key="item.id"
+            :key="item.Id"
             :order="item"
-            :status="item.status"
+            :status="item.Status"
             class="hover:cursor-pointer hover:bg-gray-300"
-            @click="jump(item.id)"
+            @click="jump(item.Id)"
           />
         </tbody>
       </table>
