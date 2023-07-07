@@ -5,6 +5,13 @@ export const useAccountStore = defineStore('account', () => {
   const confirmPassword = ref('A1234567')
   const tel = ref()
   const name = ref()
+
+  const runtimeConfig = useRuntimeConfig()
+  const APIBASE = runtimeConfig.public.APIBASE
+
+  const authToken = useCookie('token')
+  const authCookie = useCookie('data')
+
   const cookie = useCookie('token')
   const router = useRouter()
 
@@ -26,20 +33,20 @@ export const useAccountStore = defineStore('account', () => {
   })
 
   const loginSubmit = async () => {
-    const { data, error } = await useFetch(
-      `https://inkedsoul.rocket-coding.com/api/login${identity.value}`,
-      {
-        method: 'POST',
-        body: {
-          Account: email.value,
-          Password: password.value,
-          Role: identity.value
-        }
+    const { data, error } = await useFetch(`${APIBASE}/login${identity.value}`, {
+      method: 'POST',
+      body: {
+        Account: email.value,
+        Password: password.value,
+        Role: identity.value
       }
-    )
+    })
     if (data.value) {
       const res = data.value
       if (res.Status === 200) {
+        authToken.value = res.Token
+        authCookie.value = res.Data
+
         cookie.value = {
           token: res.Token,
           data: res.Data
