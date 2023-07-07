@@ -68,22 +68,7 @@ export const useAccountStore = defineStore('account', () => {
       cookie.value = null
     }
   }
-  // 傳送新密碼
-  const resetPassword = async () => {
-    try {
-      const res = await fetch(
-        `${APIBASE}/${identity.value}emailpwd/?email=${email.value}&guid=${guid.value}`,
-        {
-          headers: { 'Content-type': 'application/json' },
-          method: 'POST'
-        }
-      )
-      console.log(res.data)
-    } catch {
-      const error = res.error
-      console.log(error)
-    }
-  }
+
   // 登入
   const loginSubmit = () => {
     // 一般流程登入
@@ -151,6 +136,23 @@ export const useAccountStore = defineStore('account', () => {
         Account: email
       }
     })
+  }
+
+  // 傳送新密碼
+  const resetPassword = async () => {
+    try {
+      const res = await fetch(
+        `${APIBASE}/${identity.value}emailpwd/?email=${email.value}&guid=${guid.value}`,
+        {
+          headers: { 'Content-type': 'application/json' },
+          method: 'POST'
+        }
+      )
+      console.log(res.data)
+    } catch {
+      const error = res.error
+      console.log(error)
+    }
   }
   // 驗證登入身分
   const checkAuth = async () => {
