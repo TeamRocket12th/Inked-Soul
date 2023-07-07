@@ -1,20 +1,18 @@
 export const useAccountStore = defineStore('account', () => {
+  const runtimeConfig = useRuntimeConfig()
+  const APIBASE = runtimeConfig.public.APIBASE
+  const router = useRouter()
+
+  const authToken = useCookie('token')
+  const authCookie = useCookie('data')
+  const cookie = useCookie('token')
+
   const identity = ref('user')
   const email = ref('nancy@gmail.com')
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
   const tel = ref()
   const name = ref()
-
-  const runtimeConfig = useRuntimeConfig()
-  const APIBASE = runtimeConfig.public.APIBASE
-
-  const authToken = useCookie('token')
-  const authCookie = useCookie('data')
-
-  const cookie = useCookie('token')
-  const router = useRouter()
-  const showTxt = ref(false)
 
   const editArtistInfoData = ref({
     realName: '',
@@ -33,8 +31,39 @@ export const useAccountStore = defineStore('account', () => {
     closeTime: ''
   })
 
+  // 少 Phone、 License(isVerified)
+  const artistInfoData = reactive({
+    Id: 0,
+    Account: 'user@example.com',
+    Password: '',
+    Salt: '',
+    Photo: '',
+    Realname: '',
+    Nickname: '',
+    StudioName: '',
+    Tel: '',
+    Role: '',
+    Style: '',
+    StartTime: '',
+    EndTime: '',
+    City: '',
+    Address: '',
+    ClosedDays: '',
+    DayOff: '',
+    Experience: 0,
+    Intro: '123',
+    IsVerified: 0,
+    MemberShip: 0,
+    registration: '',
+    Guid: '',
+    Follower: 0,
+    TimeFrame: 'string',
+    PasswordTime: ''
+  })
+
   const loginSubmit = async () => {
-    const { data, error } = await useFetch(`${APIBASE}/login${identity.value}`, {
+    const { data, error } = await useFetch(`${APIBASE}/api/login${identity.value}`, {
+      headers: { 'Content-type': 'application/json' },
       method: 'POST',
       body: {
         Account: email.value,
@@ -68,18 +97,15 @@ export const useAccountStore = defineStore('account', () => {
   }
 
   const signupSubmit = async () => {
-    const { data, error } = await useFetch(
-      `https://inkedsoul.rocket-coding.com/api/signup${identity.value}`,
-      {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: {
-          Account: email.value,
-          Password: password.value,
-          Role: identity.value
-        }
+    const { data, error } = await useFetch(`${APIBASE}/api/signup${identity.value}`, {
+      headers: { 'Content-type': 'application/json' },
+      method: 'POST',
+      body: {
+        Account: email.value,
+        Password: password.value,
+        Role: identity.value
       }
-    )
+    })
 
     if (data.value) {
       const res = data.value
@@ -103,12 +129,18 @@ export const useAccountStore = defineStore('account', () => {
     // console.log(data)
   }
 
+  // 修改刺青師個人資料
   const editArtistInfo = async () => {
-    // 修改刺青師個人資料
-    const { data, error } = await useFetch('', {
-      method: 'PUT'
-      // body: editArtistInfoData
-    })
+    try {
+      const { data, error } = await useFetch(`${APIBASE}/api/editartistinfo`, {
+        headers: { 'Content-type': 'application/json' },
+        method: 'POST',
+        body: artistInfoData
+      })
+      console.log('edit', data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const resetPasswordSendEmail = async () => {
@@ -151,7 +183,6 @@ export const useAccountStore = defineStore('account', () => {
     name,
     confirmPassword,
     editArtistInfoData,
-    showTxt,
     loginSubmit,
     signupSubmit,
     editInfo,

@@ -88,17 +88,20 @@
         <li
           v-for="(part, key) in timeFrame"
           :key="key"
-          @click="SelectTimeFrame(part)"
+          @click="SelectTimeFrame(part.id)"
           class="rounded-full border px-3 py-1 text-center"
-          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(part) }"
+          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(part.id) }"
         >
-          <a>{{ part }}</a>
+          <a>{{ part.time }}</a>
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
+
 const weeks = [
   { id: 1, week: '星期一' },
   { id: 2, week: '星期二' },
@@ -134,15 +137,21 @@ const time = [
   '23:00',
   '24:00'
 ]
-const timeFrame = ['上午（開店時間～12:00）', '下午（12:00~18:00）', '晚上（18:00~閉店時間）']
+const timeFrame = [
+  { id: 0, time: '上午（開店時間～12:00）' },
+  { id: 1, time: '下午（12:00~18:00' },
+  { id: 2, time: '晚上（18:00~閉店時間）' }
+]
 
+const store = useAccountStore()
+const { artistInfoData } = storeToRefs(store)
 const { formatDate, formattedOutput } = useFormatted()
 
-// 要傳給 API 的值（需要轉換格式）
+// 要get API 的值（需要轉換格式）
 const ArtistCloseDay = ref([weeks[0]])
 const ArtistOpenTime = ref('09:00')
 const ArtistCloseTime = ref('22:00')
-const ArtistAvailableTimeFrame = ref([timeFrame[0]])
+const ArtistAvailableTimeFrame = ref([])
 const ArtistDayoff = ref('')
 
 const date = new Date()
@@ -153,6 +162,7 @@ onMounted(() => {
 })
 watch(selectDayoff, (newValue) => {
   ArtistDayoff.value = formattedOutput(newValue)
+  artistInfoData.DayOff = ArtistDayoff.value
 })
 
 const AlertSelect = ref(false)
@@ -172,6 +182,11 @@ const SelectCloseDays = (day) => {
       ArtistCloseDay.value.splice(index, 1, day)
     }
   }
+
+  artistInfoData.ClosedDays = ArtistCloseDay.value.map((item) => {
+    return item.week
+  })
+  console.log(artistInfoData.ClosedDays)
 }
 const SelectTime = (status, time) => {
   if (status === 'open') {
@@ -185,18 +200,16 @@ const SelectTime = (status, time) => {
   } else {
     AlertSelect.value = false
   }
+
+  artistInfoData.StartTime = ArtistOpenTime.value
+  artistInfoData.EndTime = ArtistCloseTime.value
 }
 
 const SelectTimeFrame = (part) => {
   if (ArtistAvailableTimeFrame.value.includes(part) === false) {
     ArtistAvailableTimeFrame.value.push(part)
     ArtistAvailableTimeFrame.value.sort((a, b) => {
-      const order = {
-        '上午（開店時間～12:00)': 1,
-        '下午（12:00~18:00）': 2,
-        '晚上（18:00~閉店時間）': 3
-      }
-      return order[a] - order[b]
+      return a - b
     })
   } else {
     const index = ArtistAvailableTimeFrame.value.indexOf(part)
@@ -205,6 +218,8 @@ const SelectTimeFrame = (part) => {
       ArtistAvailableTimeFrame.value.splice(index, 1, part)
     }
   }
+
+  artistInfoData.TimeFrame = ArtistAvailableTimeFrame.value
 }
 </script>
 <style></style>
