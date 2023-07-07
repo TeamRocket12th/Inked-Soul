@@ -27,10 +27,8 @@ export const useAccountStore = defineStore('account', () => {
 
   const loginSubmit = async () => {
     const { data, error } = await useFetch(
-      `http://inkedsoul.rocket-coding.com/api/login${identity.value}`,
+      `https://inkedsoul.rocket-coding.com/api/login${identity.value}`,
       {
-        // http://inkedsoul.rocket-coding.com/api/login${identity.value}
-        // http://localhost:5005/login/${identity.value}
         method: 'POST',
         body: {
           Account: email.value,
@@ -63,9 +61,7 @@ export const useAccountStore = defineStore('account', () => {
 
   const signupSubmit = async () => {
     const { data, error } = await useFetch(
-      `http://inkedsoul.rocket-coding.com/api/signup${identity.value}`,
-      // http://localhost:5005/signup/${identity.value}
-      // http://inkedsoul.rocket-coding.com/api/singup${identity.value}
+      `https://inkedsoul.rocket-coding.com/api/signup${identity.value}`,
       {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
