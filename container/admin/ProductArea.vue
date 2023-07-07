@@ -37,7 +37,12 @@
         </label>
       </div>
 
-      <button class="btn" onclick="upload_product.showModal()">上架認領圖</button>
+      <button
+        class="btn-neutral btn rounded-lg bg-black px-6 py-3 text-white"
+        onclick="upload_product.showModal()"
+      >
+        上架認領圖
+      </button>
       <dialog id="upload_product" class="modal grid grid-cols-12">
         <form method="dialog" class="modal-box col-span-8 col-start-3 max-w-none rounded-lg">
           <UploadTattooArea />
@@ -49,12 +54,13 @@
     </div>
 
     <!-- 訂單列表 -->
-    <div>
-      <button @click="getTattooData">btn</button>
-      <div class="overflow-scroll">
-        <table class="whitespace-nowraps table whitespace-nowrap text-center">
-          <thead class="mb-1 border-b">
+    <!-- <button @click="getTattooData">btn</button> -->
+    <div class="overflow-x-scroll rounded-lg">
+      <div>
+        <table class="w-full">
+          <thead class="h-12 bg-primary">
             <tr>
+              <th>置頂</th>
               <th>認領圖</th>
               <th>名稱</th>
               <th>尺寸</th>
@@ -67,30 +73,37 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, key) in filterData" :key="key" class="h-[100px] py-1">
-              <td><img :src="item.Image" alt="" class="w-full" /></td>
-              <td class="px-12">{{ item.Name }}</td>
-              <td class="px-12">{{ item.Size.Height }}cm x {{ item.Size.Width }}cm</td>
-              <td class="px-12">{{ item.Time }}hr</td>
-              <td class="px-12">$ {{ item.Payment.Deposit }}</td>
-              <td class="px-12">$ {{ item.Payment.Total }}</td>
-              <td class="px-12">{{ item.isSoldout }}</td>
+            <tr v-for="(item, key) in filterData" :key="key" class="h-[108px]">
+              <td><input type="checkbox" /></td>
+              <td class="flex h-[108px] items-center justify-center">
+                <img
+                  :src="item.Image"
+                  alt=""
+                  class="h-[100px] w-[100px] rounded-lg border bg-white object-contain object-center"
+                />
+              </td>
+              <td>{{ item.Name }}</td>
+              <td>{{ item.Size.Height }}cm x {{ item.Size.Width }}cm</td>
+              <td>{{ item.Time }}hr</td>
+              <td>$ {{ item.Payment.Deposit }}</td>
+              <td>$ {{ item.Payment.Total }}</td>
+              <td>{{ item.isSoldout }}</td>
               <td class="text-center"><input type="checkbox" /></td>
               <td class="cursor-pointer text-center">
-                <details class="dropdown mb-32">
-                  <summary class="btn">
-                    <Icon name="ic:baseline-more-vert" />
+                <details class="dropdown-right dropdown">
+                  <summary class="btn border-none bg-white">
+                    <Icon name="ic:baseline-more-vert" size="24" />
                   </summary>
                   <ul
-                    class="dropdown-content menu rounded-box z-[1] flex w-52 flex-row gap-5 bg-base-100 p-2 shadow"
+                    class="dropdown-content menu flex w-[180px] flex-row gap-5 rounded-lg bg-base-100 p-5 shadow"
                   >
                     <li>
-                      <a>
+                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
                         <Icon name="ic:baseline-edit" size="24" />
                       </a>
                     </li>
                     <li>
-                      <a>
+                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
                         <Icon name="ic:baseline-delete" size="24" />
                       </a>
                     </li>
@@ -101,56 +114,6 @@
           </tbody>
         </table>
       </div>
-
-      <!-- table 樣式測試 -->
-      <!-- <table class="content-table">
-        <thead>
-          <tr>
-            <th>認領圖</th>
-            <th>名稱</th>
-            <th>尺寸</th>
-            <th>預計時間</th>
-            <th>訂金</th>
-            <th>總金額</th>
-            <th>狀態</th>
-            <th>釘選</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, key) in productData" :key="key">
-            <td><img :src="item.Image" alt="" class="w-full" /></td>
-            <td>{{ item.Name }}</td>
-            <td>{{ item.Size.Height }}cm x {{ item.Size.Width }}cm</td>
-            <td>{{ item.Time }}hr</td>
-            <td>$ {{ item.Payment.Deposit }}</td>
-            <td>$ {{ item.Payment.Total }}</td>
-            <td>{{ item.SaleStatus }}</td>
-            <td class="text-center"><input type="checkbox" /></td>
-            <td class="cursor-pointer text-center">
-              <details class="dropdown mb-32">
-                <summary class="btn">
-                  <Icon name="ic:baseline-more-vert" />
-                </summary>
-                <ul
-                  class="dropdown-content menu rounded-box z-[1] flex w-52 flex-row gap-5 bg-base-100 p-2 shadow"
-                >
-                  <li>
-                    <a>
-                      <Icon name="ic:baseline-edit" class="h-6 w-6" />
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <Icon name="ic:baseline-delete" class="h-6 w-6" />
-                    </a>
-                  </li>
-                </ul>
-              </details>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
   </div>
 </template>
