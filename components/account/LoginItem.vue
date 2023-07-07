@@ -42,14 +42,14 @@
     <slot name="confirm-passward" :message="errors"></slot>
   </VForm>
   <button
-    type="button"
-    @click="loginSubmit"
     v-show="route.path.includes('login')"
+    type="button"
     class="btn-neutral btn bg-black text-white"
+    @click="loginSubmit"
   >
     登入
   </button>
-  <div class="flex flex-row justify-center" v-show="route.path.includes('login')">
+  <div v-show="route.path.includes('login')" class="flex flex-row justify-center">
     <NuxtLink to="/account/forgotpassword">忘記密碼</NuxtLink>｜
     <NuxtLink to="/account/signup">註冊</NuxtLink>
   </div>
@@ -57,9 +57,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
-
 const route = useRoute()
-
 const store = useAccountStore()
 const { email, password } = storeToRefs(store)
 const { loginSubmit } = store
