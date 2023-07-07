@@ -14,15 +14,6 @@ export const useAccountStore = defineStore('account', () => {
   const tel = ref()
   const name = ref()
 
-  const runtimeConfig = useRuntimeConfig()
-  const APIBASE = runtimeConfig.public.APIBASE
-
-  const authToken = useCookie('token')
-  const authCookie = useCookie('data')
-
-  const cookie = useCookie('token')
-  const router = useRouter()
-
   const editArtistInfoData = ref({
     realName: '',
     nickName: '',
