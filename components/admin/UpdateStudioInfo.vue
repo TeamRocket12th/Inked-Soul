@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="mb-10">工作室資訊</h4>
-    <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
+    <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">
           <label for="studio" class="cursor-pointer">店名 </label>
@@ -13,13 +13,13 @@
             :rules="isUnder20"
             name="店名"
             class="formInput"
-            v-model="editArtistInfoData.studioName"
-            :class="{ 'border-[#DC3545]': errors.店名 }"
+            v-model="artistInfoData.StudioName"
+            :class="{ 'border-[#DC3545]': props.errors.店名 }"
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.店名"
+            v-if="props.errors.店名"
           />
         </div>
       </div>
@@ -34,12 +34,12 @@
             name="營業登記號"
             class="formInput"
             v-model="editArtistInfoData.license"
-            :class="{ 'border-[#DC3545]': errors.營業登記號 }"
+            :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.營業登記號"
+            v-if="props.errors.營業登記號"
           />
         </div>
       </div>
@@ -50,7 +50,7 @@
           id="address"
           name="地址"
           class="formInput"
-          v-model="editArtistInfoData.address"
+          v-model="artistInfoData.Address"
           placeholder="鄉鎮市區、里鄰、門牌號碼"
         />
       </div>
@@ -65,18 +65,18 @@
             :rules="isTel"
             name="電話"
             class="formInput"
-            v-model="editArtistInfoData.tel"
+            v-model="artistInfoData.Tel"
             placeholder="00-00000000"
-            :class="{ 'border-[#DC3545]': errors.電話 }"
+            :class="{ 'border-[#DC3545]': props.errors.電話 }"
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.電話"
+            v-if="props.errors.電話"
           />
         </div>
       </div>
-    </VForm>
+    </div>
   </div>
 </template>
 <script setup>
@@ -84,8 +84,14 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { editArtistInfoData } = storeToRefs(store)
+const { editArtistInfoData, artistInfoData, editError } = storeToRefs(store)
 
 const { isTel, isUnder20 } = useValidate()
+
+const props = defineProps({
+  errors: {
+    require: true
+  }
+})
 </script>
 <style scoped></style>

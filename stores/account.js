@@ -34,6 +34,37 @@ export const useAccountStore = defineStore('account', () => {
     startTime: '',
     closeTime: ''
   })
+
+  // 少 Phone、 License(isVerified)
+  const artistInfoData = reactive({
+    Id: 0,
+    Account: 'user@example.com',
+    Password: '',
+    Salt: '',
+    Photo: '',
+    Realname: '',
+    Nickname: '',
+    StudioName: '',
+    Tel: '',
+    Role: '',
+    Style: '',
+    StartTime: '',
+    EndTime: '',
+    City: '',
+    Address: '',
+    ClosedDays: '',
+    DayOff: '',
+    Experience: 0,
+    Intro: '123',
+    IsVerified: 0,
+    MemberShip: 0,
+    registration: '',
+    Guid: '',
+    Follower: 0,
+    TimeFrame: 'string',
+    PasswordTime: ''
+  })
+
   // 一般流程登入
   const loginFn = async () => {
     const { data, error } = await useFetch(`${APIBASE}/login${identity.value}`, {
@@ -84,18 +115,15 @@ export const useAccountStore = defineStore('account', () => {
   }
   // 註冊
   const signupSubmit = async () => {
-    const { data, error } = await useFetch(
-      `https://inkedsoul.rocket-coding.com/api/signup${identity.value}`,
-      {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: {
-          Account: email.value,
-          Password: password.value,
-          Role: identity.value
-        }
+    const { data, error } = await useFetch(`${APIBASE}/api/signup${identity.value}`, {
+      headers: { 'Content-type': 'application/json' },
+      method: 'POST',
+      body: {
+        Account: email.value,
+        Password: password.value,
+        Role: identity.value
       }
-    )
+    })
 
     if (data.value) {
       const res = data.value
@@ -121,10 +149,16 @@ export const useAccountStore = defineStore('account', () => {
 
   // 修改刺青師個人資料
   const editArtistInfo = async () => {
-    const { data, error } = await useFetch('', {
-      method: 'PUT'
-      // body: editArtistInfoData
-    })
+    try {
+      const { data, error } = await useFetch(`${APIBASE}/api/editartistinfo`, {
+        headers: { 'Content-type': 'application/json' },
+        method: 'POST',
+        body: artistInfoData
+      })
+      console.log('edit', data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   // 發送重設密碼信件
@@ -180,8 +214,8 @@ export const useAccountStore = defineStore('account', () => {
     name,
     confirmPassword,
     editArtistInfoData,
-    showTxt,
-    guid,
+    artistInfoData,
+    editArtistInfo,
     loginSubmit,
     signupSubmit,
     editInfo,

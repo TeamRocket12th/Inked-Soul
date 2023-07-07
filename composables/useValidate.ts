@@ -21,24 +21,28 @@ export const useValidate = () => {
     return true
   }
 
-  const isUnder20 = (value: string): string | true => {
+  const isUnder20 = (value: string): string | Boolean => {
     if (value) {
       const characters = value.split('')
       if (characters.length >= 20) {
         return '僅能填寫 20 個字內'
+      } else {
+        return true
       }
     }
-    return true
+    return false
   }
 
-  const isTel = (value: string): string | true => {
+  const isTel = (value: string): string | Boolean => {
     const regex = /^\d{2}-\d{8}$/
     if (value) {
       if (!regex.test(String(value))) {
         return '電話格式不正確'
+      } else {
+        return true
       }
     }
-    return true
+    return false
   }
 
   return { isPassword, isPhone, isUnder20, isTel }
