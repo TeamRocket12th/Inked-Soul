@@ -1,14 +1,31 @@
 <template>
   <div class="container mx-auto flex flex-col items-center">
-    <SearchBar class="mb-5"></SearchBar>
-    <!-- <p class="text-left">認領圖的OO縣市OO風格OO元素，共XX個結果</p> -->
+    <SearchBar class="mb-5">搜尋認領圖</SearchBar>
+    <div class="flex w-full justify-between">
+      <p class="text-left">
+        認領圖的
+        <span v-if="cityArr.length === 0">全部</span>
+        <span v-for="(item, index) in cityArr" :key="index" class="font-bold"
+          >{{ item }}<span>&nbsp;</span></span
+        ><span>&nbsp;</span>縣市
+        <span v-if="styleArr.length === 0">全部</span>
+        <span v-for="(item, index) in styleArr" :key="index" class="font-bold"
+          >{{ item }}<span>&nbsp;</span></span
+        ><span>&nbsp;</span>風格
+        <span v-if="elementArr.length === 0">全部</span>
+        <span v-for="(item, index) in elementArr" :key="index" class="font-bold"
+          >{{ item }}<span>&nbsp;</span></span
+        ><span>&nbsp;</span>元素， 共{{ filterArr.length }}個結果
+      </p>
+      <Icon name="ic:round-sync-alt" class="origin-center rotate-90 bg-white p-1" />
+    </div>
     <masonry-wall
-      :items="filterData.length === 0 ? designData : filterData"
+      v-if="filterArr"
+      :items="filterArr"
       :ssr-columns="3"
       :column-width="300"
       :gap="16"
     >
-      <!-- :items="filterData.length===0?designData:filterData" -->
       <template #default="{ item }">
         <div class="rounded-xl">
           <NuxtLink :key="item.id" :to="`/designs/${item.id}`">
@@ -31,22 +48,19 @@
   </div>
 </template>
 <script setup>
-import { useSearchStore } from '~/stores/search'
 import { storeToRefs } from 'pinia'
+import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
-const { allData, filterArr } = storeToRefs(store)
-const { filterArr: filterData } = store
+const { allData, filterArr, cityArr, styleArr, elementArr } = storeToRefs(store)
 const { data } = await useFetch('/api/getDesign/getAllDesign')
 const designData = ref([])
 designData.value = data.value.design
-allData.value = designData.value
 
 const defaultRender = () => {
-  if (filterData.length === 0) {
-    filterArr.value = designData.value
+  if (filterArr.length === 0) {
+    allData.value = designData.value
+    filterArr.value = allData.value
   }
-  console.log('filterData', filterData)
-  console.log('filterArr', filterArr)
 }
 
 // 參考用
@@ -77,9 +91,7 @@ onMounted(() => {
   })
 
   observer.observe(root.value)
-  computed(() => {
-    return filterArr
-  })
+
   defaultRender()
 })
 </script>

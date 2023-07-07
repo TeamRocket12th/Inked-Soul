@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-20">
     <BannerItem>
       <template #default>
-        <SearchBar />
+        <SearchBar>搜尋認領圖</SearchBar>
       </template>
     </BannerItem>
     <IntroItem />
