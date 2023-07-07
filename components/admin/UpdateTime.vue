@@ -23,7 +23,7 @@
       <div class="w-full">
         <p class="mb-2">新增臨時公休日</p>
         <div>
-          <VDatePicker v-model="selectDayoff" :disabled-dates="disabledDates" color="gray">
+          <VDatePicker v-model="selectDayoff" color="gray">
             <template #default="{ togglePopover }">
               <button
                 class="formInput rounded-md px-3 py-2 text-sm font-semibold text-black"

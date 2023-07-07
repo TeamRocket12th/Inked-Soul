@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="dropdown-bottom dropdown-end dropdown relative">
-      <label tabindex="0" class="btn m-1 bg-black text-white focus:bg-gray-500">評價刺青師</label>
+      <label tabindex="0" class="btn m-1 bg-black text-white focus:bg-gray-500">撰寫評價</label>
       <div
         tabindex="0"
         class="dropdown-content menu rounded-box absolute right-5 top-5 z-[1] w-[40rem] bg-base-100 p-2"

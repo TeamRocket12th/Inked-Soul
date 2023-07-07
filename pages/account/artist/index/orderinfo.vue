@@ -1,9 +1,9 @@
 <template>
   <!-- 訂單列表 -->
-  <div>
-    <div class="overflow-scroll">
-      <table class="whitespace-nowraps table whitespace-nowrap text-center">
-        <thead class="mb-1 border-b">
+  <div class="overflow-x-scroll">
+    <div>
+      <table class="w-full">
+        <thead class="h-12 bg-primary">
           <tr>
             <th>認領圖</th>
             <th>名稱</th>
@@ -16,7 +16,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr
+          <OrderBar
+            v-for="item in data"
+            :key="item.Id"
+            :order="item"
+            :status="item.Status"
+            class="hover:cursor-pointer hover:bg-gray-300"
+            @click="toPage(item.Id)"
+          />
+          <!-- <tr
             v-for="(item, key) in orderData"
             :key="key"
             @click="toPage(item.OrderId)"
@@ -30,26 +38,42 @@
             <td class="px-12">{{ item.Reservation }}</td>
             <td class="px-12">$ {{ item.Payment.Deposit }}</td>
             <td class="px-12">{{ item.OrderStatus }}</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
   </div>
 </template>
 <script setup>
-const orderData = [
+import OrderBar from '~/components/order/OrderBar.vue'
+
+const data = [
   {
+    Id: '123123',
     Image:
       'https://images.unsplash.com/photo-1597852075234-fd721ac361d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHRhdHRvb3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60',
     Name: '墨水中的靈魂',
-    Client: 'cat',
+    User: 'cat',
     OrderId: '12321',
-    PurchesDate: '2023-12-01',
-    Reservation: '2023-12-01上午',
-    Payment: {
-      Deposit: '3000',
-      Total: '7000'
-    },
+    OrderDay: '2023-12-01',
+    BookingDate: '2023-12-01',
+    TimeFrame: '早上',
+    Deposit: '3000',
+    Total: '7000',
+    OrderStatus: '訂單成立' // '訂單成立','完成訂單'
+  },
+  {
+    Id: '123123',
+    Image:
+      'https://images.unsplash.com/photo-1597852075234-fd721ac361d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHRhdHRvb3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60',
+    Name: '墨水中的靈魂',
+    User: 'cat',
+    OrderId: '12321',
+    OrderDay: '2023-12-01',
+    BookingDate: '2023-12-01',
+    TimeFrame: '早上',
+    Deposit: '3000',
+    Total: '7000',
     OrderStatus: '訂單成立' // '訂單成立','完成訂單'
   }
 ]

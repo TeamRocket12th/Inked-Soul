@@ -1,115 +1,115 @@
 <template>
-  <div class="relative">
-    <OrderArea class="mb-4">
+  <NuxtLink to="/account/normal/orderRecords">
+    <Icon
+      name="ic:outline-keyboard-arrow-left"
+      size="48"
+      class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
+    />
+  </NuxtLink>
+
+  <div>
+    <OrderArea>
       <template #orderContext>
-        <Icon :name="`${renderTxt.icon}`" size="32" class="block" />
-        <p>{{ renderTxt.txt }}</p>
-        <p>{{ renderTxt.subTxt }}</p>
+        <Icon :name="orderContext[order.Data.Status].icon" size="40" />
+        <h4>
+          {{ orderContext[order.Data.Status].title }}
+        </h4>
+        <p class="text-base text-secondary">
+          {{ orderContext[order.Data.Status].content }}
+        </p>
       </template>
       <template #steps>
-        <ul class="steps w-[800px]">
-          <li class="step-neutral step">訂單成立</li>
-          <li :class="`${renderTxt.class2}`">{{ renderTxt.step2 }}</li>
-          <li :class="`${renderTxt.class3}`">{{ renderTxt.step3 }}</li>
-        </ul>
+        <OrderStep :step="orderStatus" step3Title="評價刺青師" />
       </template>
       <template #orderDetail>
-        <table class="w-full">
-          <tr>
-            <th>認領圖</th>
-            <th>名稱</th>
-            <th>刺青師</th>
-            <th>訂單編號</th>
-            <th>交易日期</th>
-            <th>預約時間</th>
-            <th>價格</th>
-            <th>訂單狀態</th>
-          </tr>
-          <OrderBar :order="data" :status="status" />
-        </table>
+        <OrderData :order="order.Data" :status="order.Data.Status" role="刺青師" />
       </template>
     </OrderArea>
     <!-- 評價區 -->
-    <PostComments v-if="status !== '已評價'" class="top-76 absolute right-0" />
+    <PostComments v-if="status !== '已評價'" class=" " />
   </div>
 </template>
 
 <script setup>
 import OrderArea from '~/container/order/OrderArea'
-import OrderBar from '~/components/order/OrderBar'
+import OrderData from '~/components/order/OrderData'
+import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
 
 const route = useRoute()
-console.log(route.params)
+const runtimeConfig = useRuntimeConfig()
+const apiBase = runtimeConfig.public.apiBase
 
-const orderID = route.params.orderID
-const data = await $fetch(`/api/getOrder/${orderID}`)
-console.log('single order', data)
+// const data = await $fetch(`/api/getOrder/${orderID}`)
+// console.log('single order', data)
+// const status = data.status
+// console.log('satus', status)
+
 // 有真資料後再使用以下
 // const order = ref()
 // order.value = data.value.data
 // console.log('single order reassigned', order)
-const status = data.status
-console.log('satus', status)
 
-// 訂單狀態
-const renderTxt = ref({
-  txt: '',
-  subTxt: '',
-  icon: '',
-  step2: '',
-  step3: '',
-  class2: '',
-  class3: ''
-})
-const statusRender = (input) => {
-  if (status === '訂單成立') {
-    renderTxt.value.txt = '付款成功！訂單成立'
-    renderTxt.value.subTxt = '等候刺青師三個工作天確認'
-    renderTxt.value.icon = 'ic:sharp-event-available'
-    renderTxt.value.step2 = '完成訂單'
-    renderTxt.value.step3 = '評價刺青師'
-    renderTxt.value.class2 = 'step'
-    renderTxt.value.class3 = 'step'
-  } else if (status === '已確認') {
-    renderTxt.value.txt = '刺青師已確認，完成訂單'
-    renderTxt.value.subTxt = '請於預約時間內前往刺青'
-    renderTxt.value.icon = 'ic:sharp-event-available'
-    renderTxt.value.step2 = '完成訂單'
-    renderTxt.value.step3 = '評價刺青師'
-    renderTxt.value.class2 = 'step-neutral step'
-    renderTxt.value.class3 = 'step'
-  } else if (status === '已評價') {
-    renderTxt.value.txt = '您已評價刺青師'
-    renderTxt.value.subTxt = ''
-    renderTxt.value.icon = 'ic:outline-stars'
-    renderTxt.value.step2 = '完成訂單'
-    renderTxt.value.step3 = '評價刺青師'
-    renderTxt.value.class2 = 'step-neutral step'
-    renderTxt.value.class3 = 'step-neutral step'
-  } else if (status === '已取消') {
-    renderTxt.value.txt = '刺青師已取消此筆訂單'
-    renderTxt.value.subTxt = '等待7~14日退款工作天'
-    renderTxt.value.icon = 'ic:baseline-backspace'
-    renderTxt.value.step2 = '訂單取消'
-    renderTxt.value.step3 = '完成退款'
-    renderTxt.value.class2 = 'step-neutral step'
-    renderTxt.value.class3 = 'step'
-  } else if (status === '已退款') {
-    renderTxt.value.txt = '系統已完成退款'
-    renderTxt.value.subTxt = '本次交易款項已退回您的信用卡帳單'
-    renderTxt.value.icon = 'ic:baseline-credit-card'
-    renderTxt.value.step2 = '訂單取消'
-    renderTxt.value.step3 = '完成退款'
-    renderTxt.value.class2 = 'step-neutral step'
-    renderTxt.value.class3 = 'step-neutral step'
+const cookie = useCookie('token')
+const orderID = route.params.orderID
+const userID = cookie.value.data.ID
+
+const orderContext = {
+  訂單成立: {
+    title: '付款成功！訂單成立',
+    icon: 'ic:sharp-event-available',
+    content: '等候刺青師三個工作日(含)內確認'
+  },
+  完成訂單: {
+    title: '刺青師已確認，完成訂單',
+    icon: 'ic:sharp-event-available',
+    content: '請於預約時間內前往刺青'
+  },
+  評價刺青師: {
+    title: '刺青師已確認，完成訂單',
+    icon: 'ic:sharp-event-available',
+    content: '您已評價刺青師'
+  },
+  取消訂單: {
+    title: '訂單已取消',
+    icon: 'ic:outline-backspace',
+    content: '等待 7-14 日(含)退款工作日'
   }
 }
 
-onMounted(() => {
-  statusRender(status)
-  console.log(renderTxt)
+// const { data } = useFetch(`${apiBase}/user/${orderID}`)
+
+// 📌 ＡＰＩ
+const order = ref({
+  Data: {
+    Id: '123eqwda',
+    Image: 'https://fakeimg.pl/300/?text=Design',
+    Name: 'Tenetur nisi.',
+    User: 'Benny.Rippin39',
+    ArtistImg:
+      'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/842.jpg',
+    OrderDay: '2023-06-20',
+    Date: '2023-06-30',
+    Time: '晚上',
+    Deposit: '2000',
+    Status: '取消訂單'
+  }
+})
+
+// 狀態 ＡＰＩ
+const orderStatus = ref({
+  Step1: {
+    Status: true,
+    Date: '2023-06-20'
+  },
+  Step2: {
+    Status: true,
+    Date: '2023-06-20'
+  },
+  Step3: {
+    Status: false,
+    Date: null
+  }
 })
 </script>
-
-<style lang="scss" scoped></style>
+<style scoped></style>

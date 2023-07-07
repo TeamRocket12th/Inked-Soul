@@ -10,9 +10,9 @@ module.exports = {
         DEFAULT: '0.75rem',
         sm: '0.75rem',
         lg: '0.75rem',
-        xl: '100px',
-        '2xl': '304px',
-        '3xl': '304px'
+        xl: '50px',
+        '2xl': '100px',
+        '3xl': '300px'
       },
       screens: {
         sm: '640px',
@@ -24,6 +24,12 @@ module.exports = {
       }
     },
     extend: {
+      fontFamily: {
+        'heading-typo': ['Cinzel Decorative', 'sans-serif'],
+        'serif-tc': ['Noto Serif TC', 'sans-serif'],
+        'roboto-nl': ['Roboto', 'sans-serif'],
+        'noto-tc': ['Noto Sans', 'sans-serif']
+      },
       screens: {
         '3xl': '1920px'
       },

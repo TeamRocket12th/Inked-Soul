@@ -26,7 +26,7 @@
     <div class="flex flex-col gap-2">
       <span>建議部位（最多選擇兩個部位）</span>
       <div class="dropdown-end dropdown">
-        <label tabindex="0" class="btn my-1 mb-1 h-auto w-full py-2">
+        <label tabindex="0" class="btn-outline btn my-1 mb-1 h-auto w-full border-[#D0D0D0] py-2">
           <span v-for="(part, key) in selectBodyParts" :key="key">
             {{ part }}
           </span>
@@ -56,7 +56,7 @@
         <input
           id="studio"
           type="text"
-          placeholder="test"
+          placeholder="12cm*12cm"
           v-model.lazy="tattooSize"
           class="formInput"
           :class="{ 'border-[#DC3545]': sizeErrorMessage }"
@@ -80,7 +80,7 @@
           name="預計作業時間"
           rules="required"
           class="formInput"
-          placeholder="4小時"
+          placeholder="4"
           :class="{ 'border-[#DC3545]': errors.預計作業時間 }"
         />
         <Icon

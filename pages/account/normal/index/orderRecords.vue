@@ -1,25 +1,31 @@
 <template>
-  <div>
-    <table class="w-full">
-      <tr>
-        <th>認領圖</th>
-        <th>名稱</th>
-        <th>刺青師</th>
-        <th>訂單編號</th>
-        <th>交易日期</th>
-        <th>預約時間</th>
-        <th>價格</th>
-        <th>訂單狀態</th>
-      </tr>
-      <OrderBar
-        v-for="item in data"
-        :key="item.id"
-        :order="item"
-        :status="item.status"
-        class="hover:cursor-pointer hover:bg-gray-300"
-        @click="jump(item.id)"
-      />
-    </table>
+  <div class="overflow-x-scroll">
+    <div>
+      <table class="w-full">
+        <thead class="h-12 bg-primary">
+          <tr>
+            <th>認領圖</th>
+            <th>名稱</th>
+            <th>刺青師</th>
+            <th>訂單編號</th>
+            <th>交易日期</th>
+            <th>預約時段</th>
+            <th>訂金</th>
+            <th>訂單狀態</th>
+          </tr>
+        </thead>
+        <tbody>
+          <OrderBar
+            v-for="item in data"
+            :key="item.Id"
+            :order="item"
+            :status="item.Status"
+            class="hover:cursor-pointer hover:bg-gray-300"
+            @click="jump(item.Id)"
+          />
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 

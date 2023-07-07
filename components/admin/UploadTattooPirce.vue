@@ -37,7 +37,7 @@
               name="訂金"
               rules="required"
               class="formInput"
-              placeholder="2100元"
+              placeholder="2100"
               disabled
             />
             <Icon
@@ -59,7 +59,7 @@
               name="尾款"
               rules="required"
               class="formInput"
-              placeholder="4100元"
+              placeholder="4100"
               disabled
             />
             <Icon
@@ -82,7 +82,7 @@
               name="總金額"
               rules="required"
               class="formInput"
-              :placeholder="`${totalPrice} 元`"
+              :placeholder="`${totalPrice} `"
               :class="{ 'border-[#DC3545]': errors.總金額 }"
             />
             <Icon
@@ -93,9 +93,9 @@
           </div>
         </div>
       </div>
-      <p class="flex flex-row items-center gap-2">
-        <Icon name="ic:baseline-error-outline" />
-        <span> 本平台僅收<strong>「訂金」</strong>，剩餘尾款請於預約當日與顧客交易。 </span>
+      <p class="flex flex-row items-center gap-2 text-secondary">
+        <Icon name="ic:baseline-error-outline" size="24" />
+        <span class="text-base"> 本平台僅收<strong>「三成訂金」</strong></span>
       </p>
     </div>
   </VForm>
