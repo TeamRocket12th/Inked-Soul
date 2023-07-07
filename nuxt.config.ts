@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: 'http://localhost:5005',
-      APIBASE: 'https://inkedsoul.rocket-coding.com/api'
+      APIBASE: 'https://inkedsoul.rocket-coding.com'
     }
   },
   plugins: [],

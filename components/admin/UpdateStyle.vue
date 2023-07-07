@@ -24,7 +24,7 @@ import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
 
 const editStore = useAccountStore()
-const { editArtistInfoData } = storeToRefs(editStore)
+const { artistInfoData } = storeToRefs(editStore)
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
@@ -56,10 +56,11 @@ const styleToggle = (addStyle) => {
     personalStyle.value.splice(0, 1, addStyle)
   }
 
+  // 上傳刺青風格
   uploadTattooData.value.Style = personalStyle.value
 
   // 編輯個人風格
-  editArtistInfoData.selfStyle = personalStyle.value
+  artistInfoData.Style = personalStyle.value
 }
 </script>
 <style scoped></style>

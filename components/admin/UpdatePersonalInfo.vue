@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="mb-10">個人資料</h4>
-    <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
+    <div class="flex flex-col gap-5">
       <div class="relative flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">
           <label for="realName" class="cursor-pointer">真實姓名</label>
@@ -13,13 +13,13 @@
             :rules="isUnder20"
             name="真實姓名"
             class="formInput"
-            v-model="editArtistInfoData.realName"
-            :class="{ 'border-[#DC3545]': errors.真實姓名 }"
+            v-model="artistInfoData.Realname"
+            :class="{ 'border-[#DC3545]': props.errors.真實姓名 }"
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.真實姓名"
+            v-if="props.errors.真實姓名"
           />
         </div>
       </div>
@@ -34,13 +34,13 @@
             :rules="isUnder20"
             name="名稱"
             class="formInput"
-            v-model="editArtistInfoData.nickName"
-            :class="{ 'border-[#DC3545]': errors.名稱 }"
+            v-model="artistInfoData.Nickname"
+            :class="{ 'border-[#DC3545]': props.errors.名稱 }"
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.名稱"
+            v-if="props.errors.名稱"
           />
         </div>
       </div>
@@ -57,12 +57,12 @@
             class="formInput"
             placeholder="0912345678"
             v-model="editArtistInfoData.phone"
-            :class="{ 'border-[#DC3545]': errors.手機 }"
+            :class="{ 'border-[#DC3545]': props.errors.手機 }"
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.手機"
+            v-if="props.errors.手機"
           />
         </div>
       </div>
@@ -77,13 +77,13 @@
             rules="email"
             name="電子信箱"
             class="formInput text-[#D0D0D0]"
-            v-model="email"
+            v-model="artistInfoData.Account"
             disabled
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.電子信箱"
+            v-if="props.errors.電子信箱"
           />
         </div>
       </div>
@@ -99,17 +99,17 @@
             name="資歷"
             class="formInput"
             placeholder="8"
-            v-model="editArtistInfoData.experience"
-            :class="{ 'border-[#DC3545]': errors.資歷 }"
+            v-model="artistInfoData.Experience"
+            :class="{ 'border-[#DC3545]': props.errors.資歷 }"
           />
           <Icon
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.資歷"
+            v-if="props.errors.資歷"
           />
         </div>
       </div>
-    </VForm>
+    </div>
   </div>
 </template>
 <script setup>
@@ -117,8 +117,14 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { email, editArtistInfoData } = storeToRefs(store)
+const { editArtistInfoData, artistInfoData } = storeToRefs(store)
 
 const { isUnder20, isPhone } = useValidate()
+
+const props = defineProps({
+  errors: {
+    require: true
+  }
+})
 </script>
 <style scoped></style>
