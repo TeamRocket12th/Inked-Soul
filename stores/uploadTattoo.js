@@ -24,7 +24,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const uploadTattoo = async () => {
     const { data, error } = await useFetch(`http://localhost:5005/artist/design/${artistID}`, {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      // headers: { 'Content-type': 'application/json' },
       body: uploadTattooData.value // 待確認
     })
     if (data.value) {

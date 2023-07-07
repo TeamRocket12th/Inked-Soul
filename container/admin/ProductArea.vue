@@ -68,18 +68,21 @@
               <th>訂金</th>
               <th>總金額</th>
               <th>狀態</th>
-              <th>釘選</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, key) in filterData" :key="key" class="h-[108px]">
+            <tr
+              v-for="(item, key) in filterData"
+              :key="key"
+              class="h-[108px] border-b border-[#D0D0D0]"
+            >
               <td><input type="checkbox" /></td>
               <td class="flex h-[108px] items-center justify-center">
                 <img
                   :src="item.Image"
                   alt=""
-                  class="h-[100px] w-[100px] rounded-lg border bg-white object-contain object-center"
+                  class="h-[100px] w-[100px] rounded-lg border border-[#D0D0D0] bg-white object-contain object-center"
                 />
               </td>
               <td>{{ item.Name }}</td>
@@ -88,7 +91,6 @@
               <td>$ {{ item.Payment.Deposit }}</td>
               <td>$ {{ item.Payment.Total }}</td>
               <td>{{ item.isSoldout }}</td>
-              <td class="text-center"><input type="checkbox" /></td>
               <td class="cursor-pointer text-center">
                 <details class="dropdown-right dropdown">
                   <summary class="btn border-none bg-white">
