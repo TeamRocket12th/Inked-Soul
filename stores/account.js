@@ -16,6 +16,8 @@ export const useAccountStore = defineStore('account', () => {
   const router = useRouter()
   const showTxt = ref(false)
 
+  const guid = ref('')
+
   const editArtistInfoData = ref({
     realName: '',
     nickName: '',
@@ -32,8 +34,8 @@ export const useAccountStore = defineStore('account', () => {
     startTime: '',
     closeTime: ''
   })
-
-  const loginSubmit = async () => {
+  // 一般流程登入
+  const loginFn = async () => {
     const { data, error } = await useFetch(`${APIBASE}/login${identity.value}`, {
       method: 'POST',
       body: {
@@ -66,7 +68,36 @@ export const useAccountStore = defineStore('account', () => {
       cookie.value = null
     }
   }
-
+  // 傳送新密碼
+  const resetPassword = async () => {
+    try {
+      const res = await fetch(
+        `${APIBASE}/${identity.value}emailpwd/?email=${email.value}&guid=${guid.value}`,
+        {
+          headers: { 'Content-type': 'application/json' },
+          method: 'POST'
+        }
+      )
+      console.log(res.data)
+    } catch {
+      const error = res.error
+      console.log(error)
+    }
+  }
+  // 登入
+  const loginSubmit = () => {
+    // 一般流程登入
+    if (!guid) {
+      loginFn()
+    } else {
+      // 忘記密碼後登入
+      resetPassword()
+      setTimeout(() => {
+        loginFn()
+      }, 1000)
+    }
+  }
+  // 註冊
   const signupSubmit = async () => {
     const { data, error } = await useFetch(
       `https://inkedsoul.rocket-coding.com/api/signup${identity.value}`,
@@ -90,8 +121,8 @@ export const useAccountStore = defineStore('account', () => {
       console.log(error.value)
     }
   }
+  // 修改用戶個人資料
   const editInfo = async () => {
-    // 修改個人資料
     const { data, error } = await useFetch('http://localhost:5005/user', {
       method: 'PUT',
       body: {
@@ -103,29 +134,25 @@ export const useAccountStore = defineStore('account', () => {
     // console.log(data)
   }
 
+  // 修改刺青師個人資料
   const editArtistInfo = async () => {
-    // 修改刺青師個人資料
     const { data, error } = await useFetch('', {
       method: 'PUT'
       // body: editArtistInfoData
     })
   }
 
+  // 發送重設密碼信件
   const resetPasswordSendEmail = async () => {
-    // 發送信件
     showTxt.value = true
-    const { data, error } = await useFetch('https://inkedsoul.rocket-coding.com/api/useremail', {
+    const { data, error } = await useFetch(`${APIBASE}/${identity.value}email`, {
       method: 'POST',
       body: {
         Account: email
       }
     })
   }
-
-  const resetPassword = () => {
-    // 傳送新密碼
-  }
-
+  // 驗證登入身分
   const checkAuth = async () => {
     const { data, error } = await useFetch(`http://localhost:5005/checkauth`, {
       method: 'POST',
@@ -152,6 +179,7 @@ export const useAccountStore = defineStore('account', () => {
     confirmPassword,
     editArtistInfoData,
     showTxt,
+    guid,
     loginSubmit,
     signupSubmit,
     editInfo,
