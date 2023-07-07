@@ -4,7 +4,7 @@
     <div class="grid grid-cols-2">
       <button
         type="button"
-        :class="{ 'border-black': identity === 'User' }"
+        :class="{ 'border-black': identity === 'user' }"
         class="border-b-2 px-[25px] py-[3px] duration-200"
         @click="isActive('user')"
       >
@@ -12,7 +12,7 @@
       </button>
       <button
         type="button"
-        :class="{ 'border-black': identity === 'Artist' }"
+        :class="{ 'border-black': identity === 'artist' }"
         class="border-b-2 px-[25px] py-[3px] duration-200"
         @click="isActive('artist')"
       >
