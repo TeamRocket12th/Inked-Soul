@@ -21,16 +21,16 @@ const guid = ref(route.query.key)
 
 const coverPwd = async () => {
   try {
-    const res = await useFetch(
+    const res = await fetch(
       `https://inkedsoul.rocket-coding.com/api/useremailpwd/?email=${email.value}&guid=${guid.value}`,
       {
+        headers: { 'Content-type': 'application/json' },
         method: 'POST'
       }
     )
-    const data = await res.data.value
-    console.log(data)
+    console.log(res)
   } catch {
-    const error = await res.error.value
+    const error = res.error
     console.log(error)
   }
 }
