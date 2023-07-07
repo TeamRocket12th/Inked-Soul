@@ -1,6 +1,6 @@
 <template>
   <!-- 訂單列表 -->
-  <div class="overflow-x-scroll">
+  <div class="overflow-x-scroll rounded-lg">
     <div>
       <table class="w-full">
         <thead class="h-12 bg-primary">
