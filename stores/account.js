@@ -7,6 +7,7 @@ export const useAccountStore = defineStore('account', () => {
   const name = ref()
   const cookie = useCookie('token')
   const router = useRouter()
+  const showTxt = ref(false)
 
   const editArtistInfoData = ref({
     realName: '',
@@ -103,8 +104,15 @@ export const useAccountStore = defineStore('account', () => {
     })
   }
 
-  const resetPasswordSendEmail = () => {
+  const resetPasswordSendEmail = async () => {
     // 發送信件
+    showTxt.value = true
+    const { data, error } = await useFetch('https://inkedsoul.rocket-coding.com/api/useremail', {
+      method: 'POST',
+      body: {
+        Account: email
+      }
+    })
   }
 
   const resetPassword = () => {
@@ -136,6 +144,7 @@ export const useAccountStore = defineStore('account', () => {
     name,
     confirmPassword,
     editArtistInfoData,
+    showTxt,
     loginSubmit,
     signupSubmit,
     editInfo,
