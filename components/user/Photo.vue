@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup>
-const cookie = useCookie('token')
-const { Photo, NickName } = cookie.value.data
+const authCookie = useCookie('data')
+const { Photo, NickName } = authCookie.value
 </script>
 <style scoped></style>
