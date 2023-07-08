@@ -33,7 +33,7 @@
             id="license"
             name="營業登記號"
             class="formInput"
-            v-model="editArtistInfoData.license"
+            v-model="artistInfoData.Registration"
             :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
           />
           <Icon
@@ -41,6 +41,35 @@
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
             v-if="props.errors.營業登記號"
           />
+        </div>
+      </div>
+
+      <div class="flex flex-1 flex-col items-start gap-1">
+        <span>縣市</span>
+        <div class="dropdown-end dropdown w-full">
+          <label tabindex="0" class="btn-outline btn mb-1 w-full border-[#D0D0D0]">{{
+            studioLoaction
+          }}</label>
+          <ul
+            tabindex="0"
+            class="dropdown-content menu rounded-box z-10 h-[300px] w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
+          >
+            <li
+              v-for="(city, key) in taiwanCities"
+              :key="key"
+              @click="selectCity(city)"
+              class="m-1"
+            >
+              <a
+                :class="{
+                  'bg-gray-100': studioLoaction.includes(city),
+                  'pointer-events-none rounded-none  border-b font-bold hover:bg-white':
+                    errorSelect.includes(city)
+                }"
+                >{{ city }}</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -84,7 +113,7 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { editArtistInfoData, artistInfoData, editError } = storeToRefs(store)
+const { artistInfoData } = storeToRefs(store)
 
 const { isTel, isUnder20 } = useValidate()
 
@@ -93,5 +122,41 @@ const props = defineProps({
     require: true
   }
 })
+
+const taiwanCities = [
+  '北部',
+  '臺北市',
+  '新北市',
+  '基隆市',
+  '桃園市',
+  '新竹市',
+  '新竹縣',
+  '宜蘭縣',
+  '中部',
+  '臺中市',
+  '苗栗縣',
+  '彰化縣',
+  '南投縣',
+  '雲林縣',
+  '南部',
+  '高雄市',
+  '臺南市',
+  '嘉義市',
+  '嘉義縣',
+  '屏東縣',
+  '澎湖縣',
+  '東部',
+  '臺東縣',
+  '花蓮縣'
+]
+const errorSelect = ['地區', '北部', '中部', '南部', '東部']
+
+const studioLoaction = ref('地區')
+const selectCity = (city) => {
+  if (!errorSelect.includes(city)) {
+    studioLoaction.value = city
+    artistInfoData.City = studioLoaction.value
+  }
+}
 </script>
 <style scoped></style>

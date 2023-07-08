@@ -3,13 +3,11 @@
     <VForm v-slot="{ errors, meta }">
       <div class="mb-6 grid grid-cols-2 gap-[36px]">
         <div class="flex flex-col gap-5">
-          <!-- 缺少 Phone -->
           <UpdatePersonalInfo :errors="errors" />
           <UpdatePersonalBrief :errors="errors" />
           <UpdateStyle />
         </div>
         <div class="flex flex-col gap-5">
-          <!-- 缺少 License -->
           <UpdateStudioInfo :errors="errors" />
           <UpdateTime :errors="errors" />
         </div>
