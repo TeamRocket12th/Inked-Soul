@@ -48,8 +48,8 @@
                 </div>
               </div>
               <div class="flex flex-col items-start">
-                <p class="font-bold">{{ NickName }}</p>
-                <p class="text-base text-secondary">{{ email }}</p>
+                <p class="font-bold">{{ Nickname }}</p>
+                <p class="text-base text-secondary">{{ Email }}</p>
               </div>
             </div>
             <li>
@@ -101,8 +101,8 @@
                 </div>
               </div>
               <div class="flex flex-col items-start">
-                <p class="font-bold">{{ nickName }}</p>
-                <p class="text-base text-secondary">{{ email }}</p>
+                <p class="font-bold">{{ Nickname }}</p>
+                <p class="text-base text-secondary">{{ Email }}</p>
               </div>
             </div>
             <li>
@@ -136,20 +136,13 @@
 </template>
 <script setup>
 const route = useRoute()
-const cookie = useCookie('token')
 const authToken = useCookie('token')
 const authCookie = useCookie('data')
 
-const { Role, NickName, MemberShip, Follower } = authCookie.value
+const { Role, Email } = authCookie.value
 
 const Photo = ref(authCookie.value.Photo)
-
-const email = computed(() => {
-  return cookie.value ? cookie.value.data.Email : ''
-})
-const nickName = computed(() => {
-  return cookie.value ? cookie.value.data.NickName : ''
-})
+const Nickname = ref(authCookie.value.Nickname)
 
 const scrollY = ref('0')
 
@@ -163,7 +156,6 @@ if (process.client) {
 const logout = () => {
   authToken.value = undefined || null
   authCookie.value = undefined || null
-  cookie.value = undefined || null
 }
 
 onMounted(() => {
@@ -173,6 +165,11 @@ onMounted(() => {
 
     authCookie.value.Photo = defaultPhoto // 賦值到 cookie
     Photo.value = authCookie.value.Photo // 賦值到 變數
+  }
+  if (!Nickname.value) {
+    const defaultNickname = 'xxx'
+    authCookie.value.Nickname = defaultNickname
+    Nickname.value = authCookie.value.Nickname
   }
 })
 </script>
