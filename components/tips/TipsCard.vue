@@ -13,6 +13,7 @@
 </template>
 <script setup>
 const props = defineProps({
+  time: { default: 0 },
   image: {
     type: String,
     required: true
@@ -30,5 +31,15 @@ const props = defineProps({
     required: true
   }
 })
+
+const promise = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, time)
+  })
+}
+
+await promise(props.time)
 </script>
 <style scoped></style>
