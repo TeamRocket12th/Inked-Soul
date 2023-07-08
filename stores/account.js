@@ -129,6 +129,19 @@ export const useAccountStore = defineStore('account', () => {
     // console.log(data)
   }
 
+  // 取得刺青師個人資料
+  const getArtistInfo = async () => {
+    try {
+      const { data, error } = await useFetch(`${APIBASE}/api/`, {
+        headers: { 'Content-type': 'application/json' },
+        method: 'GET'
+      })
+      console.log('get', data)
+    } catch (error) {
+      console.log('get', error)
+    }
+  }
+
   // 修改刺青師個人資料
   const editArtistInfo = async () => {
     try {
