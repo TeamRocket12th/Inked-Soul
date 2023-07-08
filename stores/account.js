@@ -14,24 +14,7 @@ export const useAccountStore = defineStore('account', () => {
   const tel = ref()
   const name = ref()
 
-  const editArtistInfoData = ref({
-    realName: '',
-    nickName: '',
-    phone: '',
-    email: '',
-    experience: '',
-    intro: '',
-    selfStyle: [],
-    studioName: '',
-    license: '',
-    address: '',
-    tel: '',
-    closeDay: [],
-    startTime: '',
-    closeTime: ''
-  })
-
-  // 少 Phone、 License(isVerified)
+  // 後端少 Phone、 License(isVerified)
   const artistInfoData = reactive({
     Id: 0,
     Account: 'user@example.com',
@@ -41,6 +24,8 @@ export const useAccountStore = defineStore('account', () => {
     Realname: '',
     Nickname: '',
     StudioName: '',
+    Registration: '',
+    Phone: '',
     Tel: '',
     Role: '',
     Style: '',
@@ -195,7 +180,7 @@ export const useAccountStore = defineStore('account', () => {
     tel,
     name,
     confirmPassword,
-    editArtistInfoData,
+    artistInfoData,
     loginSubmit,
     signupSubmit,
     editInfo,
