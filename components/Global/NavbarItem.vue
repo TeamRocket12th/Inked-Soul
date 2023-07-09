@@ -37,7 +37,7 @@
             </div>
           </label>
           <ul
-            v-if="identity === 'Artist'"
+            v-if="identity === 'artist'"
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
@@ -90,7 +90,7 @@
             </li>
           </ul>
           <ul
-            v-if="identity === 'User'"
+            v-if="identity === 'user'"
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
@@ -148,7 +148,7 @@ const nickName = computed(() => {
   return cookie.value ? cookie.value.data.NickName : ''
 })
 const identity = computed(() => {
-  return cookie.value ? cookie.value.data.Identity : ''
+  return cookie.value ? cookie.value.data.Role : ''
 })
 
 const scrollY = ref('0')
