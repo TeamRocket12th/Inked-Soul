@@ -5,10 +5,10 @@ export default defineNuxtRouteMiddleware((to, _from) => {
   const { checkAuth } = store
 
   const router = useRouter()
+
   const authToken = useCookie('token')
   const authCookie = useCookie('data')
-
-  const { Role } = authCookie.value
+  const { Role } = authCookie.value ? authCookie.value : ''
 
   if (to.path.includes('normal' || 'artist')) {
     checkAuth()
@@ -17,10 +17,18 @@ export default defineNuxtRouteMiddleware((to, _from) => {
     }
   }
 
-  if (to.path.includes('normal') && Role !== 'User') {
-    router.replace('/account/login')
+  const isLogin = () => {
+    if (!authToken.value) {
+      return
+    } else {
+      if (to.path.includes('normal') && Role !== 'User') {
+        router.replace('/account/login')
+      }
+      if (to.path.includes('artist') && Role !== 'artist') {
+        router.replace('/account/login')
+      }
+    }
   }
-  if (to.path.includes('artist') && Role !== 'artist') {
-    router.replace('/account/login')
-  }
+
+  isLogin()
 })
