@@ -3,6 +3,7 @@ export const useAccountStore = defineStore('account', () => {
   const email = ref('nancy@gmail.com')
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
+  const guid = ref('')
   const tel = ref()
   const name = ref()
   const cookie = useCookie('token')
@@ -131,6 +132,7 @@ export const useAccountStore = defineStore('account', () => {
     identity,
     cookie,
     email,
+    guid,
     password,
     tel,
     name,
