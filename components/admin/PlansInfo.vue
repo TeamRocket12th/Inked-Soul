@@ -36,24 +36,9 @@
     <h4 class="mb-[26px]">升級方案</h4>
     <div>
       <ul class="grid grid-cols-3 gap-8">
-        <li v-for="(info, key) in memberShipPlan" :key="key">
-          <NuxtLink to="membership/123">
-            <div
-              class="flex flex-col items-center gap-10 rounded border py-[28px] duration-200 hover:bg-primary"
-            >
-              <div class="border-b border-black px-6 py-3">
-                <h4>
-                  {{ info.title }}
-                </h4>
-              </div>
-              <p class="text-[32px] font-bold leading-9">$ {{ info.price }}</p>
-              <button class="btn-neutral btn">{{ info.yourPlan ? '目前方案' : '選擇方案' }}</button>
-              <ul>
-                <li v-for="(detail, key) in info.planInfo" :key="key" class="text-center">
-                  {{ detail }}
-                </li>
-              </ul>
-            </div>
+        <li v-for="(info, key) in planInfo" :key="key">
+          <NuxtLink :to="`membership/${key}`">
+            <PlansCard :info="info" class="hover:bg-primary" />
           </NuxtLink>
         </li>
       </ul>
@@ -61,7 +46,9 @@
   </div>
 </template>
 <script setup>
-const memberShipPlan = [
+import PlansCard from '~/components/admin/PlansCard.vue'
+
+const planInfo = [
   {
     title: '免費方案',
     price: '0',
@@ -75,7 +62,7 @@ const memberShipPlan = [
     planInfo: ['一個月內', '無限上傳認領圖', '無限上傳作品集']
   },
   {
-    title: '免費方案',
+    title: '年費方案',
     price: '5000',
     yourPlan: false,
     planInfo: ['一年內', '無限上傳認領圖', '無限上傳作品集']
