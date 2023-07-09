@@ -59,9 +59,10 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 const route = useRoute()
 const store = useAccountStore()
-const { email, password } = storeToRefs(store)
+const { email, password, guid } = storeToRefs(store)
 const { loginSubmit } = store
 
 const { isPassword } = useValidate()
+guid.value = route.query.key
 </script>
 <style></style>
