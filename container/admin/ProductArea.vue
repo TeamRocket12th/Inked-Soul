@@ -82,7 +82,7 @@
                 <img
                   :src="item.Image"
                   alt=""
-                  class="h-[100px] w-[100px] rounded-lg border border-[#D0D0D0] bg-white object-contain object-center"
+                  class="h-[100px] w-[100px] rounded-lg border border-[#D0D0D0] bg-white object-cover object-center"
                 />
               </td>
               <td>{{ item.Name }}</td>
