@@ -139,10 +139,10 @@ const route = useRoute()
 const authToken = useCookie('token')
 const authCookie = useCookie('data')
 
-const { Role, Email } = authCookie.value
+const { Role, Email } = authCookie.value ? authCookie.value : ''
 
-const Photo = ref(authCookie.value.Photo)
-const Nickname = ref(authCookie.value.Nickname)
+const Photo = ref('')
+const Nickname = ref('')
 
 const scrollY = ref('0')
 
@@ -158,18 +158,28 @@ const logout = () => {
   authCookie.value = undefined || null
 }
 
-onMounted(() => {
-  if (!Photo.value) {
-    const defaultPhoto =
-      'https://images.unsplash.com/photo-1601921004897-b7d582836990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNrZXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
-
-    authCookie.value.Photo = defaultPhoto // 賦值到 cookie
-    Photo.value = authCookie.value.Photo // 賦值到 變數
-  }
-  if (!Nickname.value) {
-    const defaultNickname = 'xxx'
-    authCookie.value.Nickname = defaultNickname
+const isLogin = () => {
+  if (!authToken.value) {
+    return
+  } else {
+    Photo.value = authCookie.value.Photo
     Nickname.value = authCookie.value.Nickname
+    if (!Photo.value) {
+      const defaultPhoto =
+        'https://images.unsplash.com/photo-1601921004897-b7d582836990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNrZXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
+
+      authCookie.value.Photo = defaultPhoto // 賦值到 cookie
+      Photo.value = authCookie.value.Photo // 賦值到 變數
+    }
+    if (!Nickname.value) {
+      const defaultNickname = 'xxx'
+      authCookie.value.Nickname = defaultNickname
+      Nickname.value = authCookie.value.Nickname
+    }
   }
+}
+
+onMounted(() => {
+  isLogin()
 })
 </script>
