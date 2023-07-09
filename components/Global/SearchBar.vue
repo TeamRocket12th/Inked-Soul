@@ -7,7 +7,10 @@
         class="height-auto mb-5 flex h-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-3"
       >
         <Icon name="ic:outline-room" class="h-6 w-6" />
-        <p class="text-[#D0D0D0]">選擇縣市</p>
+        <p v-if="cityArr.length === 0" class="text-[#D0D0D0]">選擇縣市</p>
+        <div v-if="cityArr.length !== 0" class="flex text-black">
+          <p v-for="(item, index) in cityArr" :key="index">{{ item }}<span>&nbsp;</span></p>
+        </div>
       </label>
 
       <ul
@@ -95,7 +98,19 @@
         class="mb-5 flex h-full items-center border border-secondary bg-white p-3"
       >
         <Icon name="ic:outline-tune" class="h-6 w-6" />
-        <p class="text-[#D0D0D0]">風格及元素</p>
+        <p v-if="styleArr.length === 0 && elementArr.length === 0" class="text-[#D0D0D0]">
+          風格及元素
+        </p>
+        <div v-if="styleArr.length !== 0" class="">
+          <span v-for="(item, index) in styleArr" :key="index" class="text-black"
+            >{{ item }}<span>&nbsp;</span></span
+          >
+        </div>
+        <div v-if="elementArr.length !== 0" class="">
+          <span v-for="(item, index) in elementArr" :key="index" class="text-black"
+            >{{ item }}<span>&nbsp;</span></span
+          >
+        </div>
       </label>
       <ul
         tabindex="0"
@@ -164,16 +179,16 @@
       class="btn-neutral btn h-fit h-full rounded-none rounded-r-lg border-0 bg-black p-3 text-base"
       @click="searchDesign()"
     >
-      搜尋認領圖
+      <slot></slot>
     </button>
   </div>
 </template>
 <script setup>
-import { useSearchStore } from '~/stores/search'
 import { storeToRefs } from 'pinia'
+import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
-const { filterArr } = storeToRefs(store)
-const { allData } = store
+const { filterArr, allData, cityArr, styleArr, elementArr } = storeToRefs(store)
+// const { allData } = store
 
 const taiwanCities = {
   northern: ['臺北市', '新北市', '基隆市', '桃園市', '新竹市', '新竹縣', '宜蘭縣'],
@@ -196,7 +211,6 @@ const styles = [
   'Traditional Japanese 日式傳統',
   '其他'
 ]
-
 const elements = [
   '動物',
   '植物',
@@ -211,9 +225,7 @@ const elements = [
   '靈魂',
   '其他'
 ]
-const cityArr = ref([])
-const styleArr = ref([])
-const elementArr = ref([])
+
 // 選擇城市
 const cityToggle = (input) => {
   const cityIndex = cityArr.value.indexOf(input)
@@ -243,32 +255,40 @@ const elementToggle = (input) => {
 }
 // 篩選
 const filterFn = () => {
-  if(cityArr.value.length===0 && styleArr.value.length === 0 && elementArr.value.length ===0 ){
-    filterFn.value = allData.value
-  }else{
-    filterArr.value = allData.filter((item) => {
-      const cityIndex = cityArr.value.includes(item.city)
-      const styleIndex0 = styleArr.value.includes(item.style[0])
-      const styleIndex1 = styleArr.value.includes(item.style[1])
-      const elementIndex0 = elementArr.value.includes(item.element[0])
-      const elementIndex1 = elementArr.value.includes(item.element[1])
-      
-      if (
-        cityIndex === true ||
-        styleIndex0 === true ||
-        styleIndex1 === true ||
-        elementIndex0 === true ||
-        elementIndex1 === true
-      ) {
-        return item
-      }
-    })
-  }
-  console.log(cityArr)
-  console.log(styleArr)
-  console.log(elementArr)
+  // 若沒有做選擇，就預設全部
+  // cityArr.value.length === 0 && styleArr.value.length === 0 && elementArr.value.length === 0
+  // 全部都沒選
+  // 沒有選地區
+  // 沒有選風格
+  // 沒有選元素
+  // 沒有選地區和風格(只有選元素)
+  // 沒有選地區和元素(只有選風格)
+  // 沒有選風格和元素(只有選地區)
+  filterArr.value = allData.value.filter((item) => {
+    // const cityIndex = cityArr.value.includes(item.city)
+    // const styleIndex0 = styleArr.value.length === 0 || styleArr.value.includes(item.style[0])
+    // const styleIndex1 = styleArr.value.length === 0 || styleArr.value.includes(item.style[1])
+    // const elementIndex0 =
+    //   elementArr.value.length === 0 || elementArr.value.includes(item.element[0])
+    // const elementIndex1 =
+    //   elementArr.value.length === 0 || elementArr.value.includes(item.element[1])
+    // if (
+    //   cityIndex === true ||
+    //   styleIndex0 === true ||
+    //   styleIndex1 === true ||
+    //   elementIndex0 === true ||
+    //   elementIndex1 === true
+    // ) {
+    //   return item
+    // }
+    const cityMatched = !cityArr || cityArr.value.includes(item.city) === true
+    const styleMatched01 = !styleArr || styleArr.value.includes(item.style[0]) === true
+    const styleMatched02 = !styleArr || styleArr.value.includes(item.style[1]) === true
+    const elementMatched01 = !elementArr || elementArr.value.includes(item.element[0]) === true
+    const elementMatched02 = !elementArr || elementArr.value.includes(item.element[0]) === true
 
-  console.log(filterArr)
+    return cityMatched && styleMatched01 && styleMatched02 && elementMatched01 && styleMatched02
+  })
 }
 // 搜尋
 const route = useRoute()
@@ -277,8 +297,10 @@ const searchDesign = () => {
   if (route.matched[length - 1].path === '/') {
     navigateTo('/designs')
     filterFn()
+    console.log(filterArr)
   } else {
     filterFn()
+    console.log(filterArr)
   }
 }
 
