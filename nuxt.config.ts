@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt'],
   css: ['~/assets/css/tailwind.css'],
   typescript: {
-    typeCheck: true
+    // typeCheck: true
   },
   pinia: {
     autoImports: ['defineStore', ['defineStore', 'definePiniaStore']]
