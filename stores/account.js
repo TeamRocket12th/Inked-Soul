@@ -1,4 +1,12 @@
 export const useAccountStore = defineStore('account', () => {
+  const runtimeConfig = useRuntimeConfig()
+  const APIBASE = runtimeConfig.public.APIBASE
+  const router = useRouter()
+
+  const authToken = useCookie('token')
+  const authCookie = useCookie('data')
+  const cookie = useCookie('token')
+  const showTxt = ref(false)
   const identity = ref('user')
   const email = ref('nancy@gmail.com')
   const password = ref('A1234567')
@@ -6,36 +14,7 @@ export const useAccountStore = defineStore('account', () => {
   const tel = ref()
   const name = ref()
 
-  const runtimeConfig = useRuntimeConfig()
-  const APIBASE = runtimeConfig.public.APIBASE
-
-  const authToken = useCookie('token')
-  const authCookie = useCookie('data')
-
-  const cookie = useCookie('token')
-  const router = useRouter()
-  const showTxt = ref(false)
-
-  const guid = ref('')
-
-  const editArtistInfoData = ref({
-    realName: '',
-    nickName: '',
-    phone: '',
-    email: '',
-    experience: '',
-    intro: '',
-    selfStyle: [],
-    studioName: '',
-    license: '',
-    address: '',
-    tel: '',
-    closeDay: [],
-    startTime: '',
-    closeTime: ''
-  })
-
-  // 少 Phone、 License(isVerified)
+  // 後端少 Phone、 License(isVerified)
   const artistInfoData = reactive({
     Id: 0,
     Account: 'user@example.com',
@@ -45,6 +24,8 @@ export const useAccountStore = defineStore('account', () => {
     Realname: '',
     Nickname: '',
     StudioName: '',
+    Registration: '',
+    Phone: '',
     Tel: '',
     Role: '',
     Style: '',
@@ -147,6 +128,19 @@ export const useAccountStore = defineStore('account', () => {
     // console.log(data)
   }
 
+  // 取得刺青師個人資料
+  const getArtistInfo = async () => {
+    try {
+      const { data, error } = await useFetch(`${APIBASE}/api/`, {
+        headers: { 'Content-type': 'application/json' },
+        method: 'GET'
+      })
+      console.log('get', data)
+    } catch (error) {
+      console.log('get', error)
+    }
+  }
+
   // 修改刺青師個人資料
   const editArtistInfo = async () => {
     try {
@@ -213,9 +207,10 @@ export const useAccountStore = defineStore('account', () => {
     tel,
     name,
     confirmPassword,
-    editArtistInfoData,
     artistInfoData,
+    showTxt,
     editArtistInfo,
+    getArtistInfo,
     loginSubmit,
     signupSubmit,
     editInfo,

@@ -7,6 +7,7 @@
           <Suspense>
             <template #default>
               <TipsCard
+                :time="1000"
                 :image="item.Image"
                 :title="item.Title"
                 :date="item.Date"
@@ -28,7 +29,8 @@ import TipsCard from '~/components/tips/TipsCard.vue'
 const runtimeConfig = useRuntimeConfig()
 const apiBase = runtimeConfig.public.apiBase
 
-const tipsData = ref([])
+const tipsData = ref(null)
 const { data } = await useFetch(`${apiBase}/tips/all`)
+
 tipsData.value = data.value.Data
 </script>

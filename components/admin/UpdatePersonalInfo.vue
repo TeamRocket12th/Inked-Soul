@@ -56,7 +56,7 @@
             name="手機"
             class="formInput"
             placeholder="0912345678"
-            v-model="editArtistInfoData.phone"
+            v-model="artistInfoData.Phone"
             :class="{ 'border-[#DC3545]': props.errors.手機 }"
           />
           <Icon
@@ -117,7 +117,7 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { editArtistInfoData, artistInfoData } = storeToRefs(store)
+const { artistInfoData } = storeToRefs(store)
 
 const { isUnder20, isPhone } = useValidate()
 

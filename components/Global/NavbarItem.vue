@@ -21,35 +21,35 @@
         <NuxtLink to="/tips">知識點</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/account/login" v-if="!cookie">
+        <NuxtLink to="/account/login" v-if="!authToken">
           <Icon name="mdi:account" size="24"
         /></NuxtLink>
-        <div class="dropdown-end dropdown" v-if="cookie">
+        <div class="dropdown-end dropdown" v-if="authToken">
           <label tabindex="0" class="avatar cursor-pointer align-middle">
             <div
               class="w-10"
               :class="{
-                'rounded-lg': identity === 'Artist',
-                'rounded-full': identity === 'User'
+                'rounded-lg': Role === 'artist',
+                'rounded-full': Role === 'user' || Role === 'User'
               }"
             >
-              <img :src="photo" />
+              <img :src="Photo" />
             </div>
           </label>
           <ul
-            v-if="identity === 'artist'"
+            v-if="Role === 'artist'"
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
             <div class="mb-5 flex flex-row items-center gap-4">
               <div class="avatar">
                 <div class="h-12 w-12 rounded-lg">
-                  <img :src="photo" alt="" />
+                  <img :src="Photo" alt="" />
                 </div>
               </div>
               <div class="flex flex-col items-start">
-                <p class="font-bold">{{ nickName }}</p>
-                <p class="text-base text-secondary">{{ email }}</p>
+                <p class="font-bold">{{ Nickname }}</p>
+                <p class="text-base text-secondary">{{ Email }}</p>
               </div>
             </div>
             <li>
@@ -90,19 +90,19 @@
             </li>
           </ul>
           <ul
-            v-if="identity === 'user'"
+            v-if="Role === 'user' || Role === 'User'"
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
             <div class="mb-5 flex flex-row items-center gap-4">
               <div class="avatar">
                 <div class="h-12 w-12 rounded-full">
-                  <img :src="photo" alt="" />
+                  <img :src="Photo" alt="" />
                 </div>
               </div>
               <div class="flex flex-col items-start">
-                <p class="font-bold">{{ nickName }}</p>
-                <p class="text-base text-secondary">{{ email }}</p>
+                <p class="font-bold">{{ Nickname }}</p>
+                <p class="text-base text-secondary">{{ Email }}</p>
               </div>
             </div>
             <li>
@@ -135,21 +135,14 @@
   </nav>
 </template>
 <script setup>
-const cookie = useCookie('token')
 const route = useRoute()
+const authToken = useCookie('token')
+const authCookie = useCookie('data')
 
-const photo = computed(() => {
-  return cookie.value ? cookie.value.data.Photo : ''
-})
-const email = computed(() => {
-  return cookie.value ? cookie.value.data.Email : ''
-})
-const nickName = computed(() => {
-  return cookie.value ? cookie.value.data.NickName : ''
-})
-const identity = computed(() => {
-  return cookie.value ? cookie.value.data.Role : ''
-})
+const { Role, Email } = authCookie.value
+
+const Photo = ref(authCookie.value.Photo)
+const Nickname = ref(authCookie.value.Nickname)
 
 const scrollY = ref('0')
 
@@ -161,7 +154,22 @@ if (process.client) {
 }
 
 const logout = () => {
-  cookie.value = undefined || null
-  localStorage.removeItem('token')
+  authToken.value = undefined || null
+  authCookie.value = undefined || null
 }
+
+onMounted(() => {
+  if (!Photo.value) {
+    const defaultPhoto =
+      'https://images.unsplash.com/photo-1601921004897-b7d582836990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNrZXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
+
+    authCookie.value.Photo = defaultPhoto // 賦值到 cookie
+    Photo.value = authCookie.value.Photo // 賦值到 變數
+  }
+  if (!Nickname.value) {
+    const defaultNickname = 'xxx'
+    authCookie.value.Nickname = defaultNickname
+    Nickname.value = authCookie.value.Nickname
+  }
+})
 </script>

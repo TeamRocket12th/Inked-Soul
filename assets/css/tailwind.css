@@ -8,10 +8,10 @@
 
 @layer base {
   h2 {
-    @apply font-serif text-[32px] font-bold;
+    @apply font-serif text-[32px] font-bold leading-8;
   }
   h4 {
-    @apply text-[20px] font-bold;
+    @apply text-[20px] font-bold leading-6;
   }
 
   th:first-child {

@@ -4,7 +4,7 @@
       <div class="w-20 overflow-hidden rounded-full">
         <img :src="Photo" />
       </div>
-      <h2>{{ NickName }}</h2>
+      <h2>{{ Nickname }}</h2>
     </div>
     <div class="flex flex-row items-center gap-[25px]">
       <button class="btn-outline btn rounded p-[10px]">免費會員</button>
@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup>
-const cookie = useCookie('token')
-const { Photo, NickName } = cookie.value.data
+const authCookie = useCookie('data')
+const { Photo, Nickname } = authCookie.value
 </script>
 <style scoped></style>
