@@ -80,7 +80,7 @@ const data = [
 
 const router = useRouter()
 const toPage = (orderId) => {
-  router.push(`/account/artist/${orderId}`)
+  router.push(`/account/artist/orderinfo/${orderId}`)
 }
 </script>
 <style scoped></style>

@@ -3,7 +3,7 @@
     <td class="flex h-[108px] items-center justify-center">
       <img
         :src="`${props.order.Image}`"
-        class="h-[100px] w-[100px] rounded-lg border bg-white object-contain object-center"
+        class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
       />
     </td>
     <td>
