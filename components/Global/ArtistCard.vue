@@ -4,7 +4,7 @@
     <div
       class="absolute bottom-0 left-0 right-0 hidden bg-black bg-opacity-50 p-4 text-white duration-300 group-hover:block"
     >
-      <div class="flex flex-col items-start items-center gap-3 hover:flex">
+      <div class="flex flex-col items-center gap-3 hover:flex">
         <p>{{ props.nickname }}</p>
         <span class="rounded-full border px-3 py-1">寫實主義 Realism</span>
       </div>
