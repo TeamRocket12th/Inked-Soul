@@ -122,8 +122,7 @@ export const useAccountStore = defineStore('account', () => {
       method: 'PUT',
       body: {
         name: name.value,
-        tel: tel.value,
-        email: email.value
+        tel: tel.value
       }
     })
     // console.log(data)
