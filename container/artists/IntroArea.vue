@@ -8,7 +8,18 @@
           <Icon name="ic:baseline-bookmark" class="h-6 w-6" />
           {{ props.artistData.Follower }}
         </div>
-        <Icon name="ic:outline-share" class="h-6 w-6" />
+        <div>
+          <div class="dropdown-end dropdown">
+            <label
+              tabindex="0"
+              class="btn-outline btn border-none bg-white hover:bg-white hover:text-black"
+              ><Icon name="ic:outline-share" class="h-6 w-6"
+            /></label>
+            <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100 shadow">
+              <ShareModal />
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -47,6 +58,7 @@
   </div>
 </template>
 <script setup>
+import ShareModal from '~/components/global/ShareModal.vue'
 // import { useChNameStore } from '~/stores/useChNameStore'
 // const chNameStore = useChNameStore()
 const props = defineProps({
