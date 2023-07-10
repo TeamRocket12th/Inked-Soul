@@ -14,6 +14,7 @@ export const useAccountStore = defineStore('account', () => {
   const guid = ref('')
   const tel = ref()
   const name = ref()
+  const Id = ref(0)
 
   const artistInfoData = reactive({
     Id: 0,
@@ -62,10 +63,11 @@ export const useAccountStore = defineStore('account', () => {
     })
     if (data.value) {
       const res = data.value
+      console.log('login res', res)
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
-
+        Id.value = res.Data.Id
         let newIdentity = ''
         if (identity.value === 'user') {
           newIdentity = 'normal'
@@ -114,16 +116,37 @@ export const useAccountStore = defineStore('account', () => {
       console.log(error.value)
     }
   }
+  // 取得一般用戶資料
+  const getUserInfo = async () => {
+    try {
+      const { data } = await useFetch(`${APIBASE}/api/userinfo`, {
+        headers: { 'Content-type': 'application/json' },
+        method: 'GET'
+      })
+      console.log('get', data)
+      // 補上email、tel等變數重新賦值，以便畫面渲染新值
+    } catch (error) {
+      console.log('get', error)
+    }
+  }
+
   // 修改用戶個人資料
+  // 'Content-type': 'application/json',
   const editInfo = async () => {
-    const { data, error } = await useFetch('http://localhost:5005/user', {
-      method: 'PUT',
+    console.log(Id.value)
+    const { data, error } = await useFetch(`${APIBASE}/api/edituserinfo`, {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${cookie.value.token}`
+      },
+      method: 'POST',
       body: {
-        name: name.value,
-        tel: tel.value,
-        email: email.value
+        Id: Id.value,
+        Nickname: name.value,
+        Tel: tel.value
       }
     })
+    // 待補：呼叫getUserInfo()
     // console.log(data)
   }
 
@@ -135,6 +158,7 @@ export const useAccountStore = defineStore('account', () => {
         method: 'GET'
       })
       console.log('get', data)
+      // 補上email、tel等變數重新賦值，以便畫面渲染新值
     } catch (error) {
       console.log('get', error)
     }
@@ -152,6 +176,7 @@ export const useAccountStore = defineStore('account', () => {
         body: artistInfoData
       })
       console.log('edit', data)
+      // 待補呼叫getArtistInfo()
     } catch (error) {
       console.log(error)
     }
@@ -160,7 +185,7 @@ export const useAccountStore = defineStore('account', () => {
   // 發送重設密碼信件
   const resetPasswordSendEmail = async () => {
     showTxt.value = true
-    const { data, error } = await useFetch(`${APIBASE}/${identity.value}email`, {
+    const { data, error } = await useFetch(`${APIBASE}/api/${identity.value}email`, {
       method: 'POST',
       body: {
         Account: email
@@ -172,7 +197,7 @@ export const useAccountStore = defineStore('account', () => {
   const resetPassword = async () => {
     try {
       const res = await fetch(
-        `${APIBASE}/${identity.value}emailpwd/?email=${email.value}&guid=${guid.value}`,
+        `${APIBASE}/api/${identity.value}emailpwd/?email=${email.value}&guid=${guid.value}`,
         {
           headers: { 'Content-type': 'application/json' },
           method: 'POST'
@@ -211,6 +236,7 @@ export const useAccountStore = defineStore('account', () => {
     confirmPassword,
     artistInfoData,
     showTxt,
+    getUserInfo,
     editArtistInfo,
     getArtistInfo,
     loginSubmit,

@@ -57,7 +57,7 @@ const designData = ref([])
 designData.value = data.value.design
 
 const defaultRender = () => {
-  if (filterArr.length === 0) {
+  if (filterArr.value.length === 0) {
     allData.value = designData.value
     filterArr.value = allData.value
   }

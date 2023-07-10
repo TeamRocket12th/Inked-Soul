@@ -53,11 +53,11 @@
           </div>
           <div class="relative">
             <VField
-              id="email"
               v-model="email"
+              id="email"
               rules="email"
               name="電子信箱"
-              class="formInput"
+              class="formInput text-gray-200"
               disabled
             />
             <Icon
@@ -137,8 +137,12 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 const store = useAccountStore()
 const { email, password, confirmPassword, tel, name } = storeToRefs(store)
-const { editInfo } = store
+const { getUserInfo, editInfo } = store
 
 const { isUnder20, isPhone, isPassword } = useValidate()
+// 待補取得用戶資料API
+// onMounted(()=>{
+//   getUserInfo()
+// })
 </script>
 <style scoped></style>
