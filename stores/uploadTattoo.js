@@ -18,8 +18,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     Element: []
   })
 
-  const cookie = useCookie('token')
-  const artistID = cookie.value.data.ID // 對應刺青師ID
+  const authCookie = useCookie('data')
+  const artistID = authCookie.value.Id // 對應刺青師ID
 
   const uploadTattoo = async () => {
     const { data, error } = await useFetch(`http://localhost:5005/artist/design/${artistID}`, {
@@ -43,9 +43,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     if (data) {
       console.log('res', data.value) // data.value.Data
       return data.value
-      if (res.Status === 200) {
-        console.log(res.Data)
-      }
     } else if (error) {
       console.log(error)
     }

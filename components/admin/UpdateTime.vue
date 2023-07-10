@@ -162,7 +162,7 @@ onMounted(() => {
 })
 watch(selectDayoff, (newValue) => {
   ArtistDayoff.value = formattedOutput(newValue)
-  artistInfoData.DayOff = ArtistDayoff.value
+  artistInfoData.value.DayOff = ArtistDayoff.value
 })
 
 const AlertSelect = ref(false)
@@ -183,10 +183,11 @@ const SelectCloseDays = (day) => {
     }
   }
 
-  artistInfoData.ClosedDays = ArtistCloseDay.value.map((item) => {
-    return item.week
-  })
-  console.log(artistInfoData.ClosedDays)
+  artistInfoData.value.ClosedDays = ArtistCloseDay.value
+    .map((item) => {
+      return item.week
+    })
+    .join()
 }
 const SelectTime = (status, time) => {
   if (status === 'open') {
@@ -201,8 +202,8 @@ const SelectTime = (status, time) => {
     AlertSelect.value = false
   }
 
-  artistInfoData.StartTime = ArtistOpenTime.value
-  artistInfoData.EndTime = ArtistCloseTime.value
+  artistInfoData.value.StartTime = ArtistOpenTime.value
+  artistInfoData.value.EndTime = ArtistCloseTime.value
 }
 
 const SelectTimeFrame = (part) => {
@@ -219,7 +220,14 @@ const SelectTimeFrame = (part) => {
     }
   }
 
-  artistInfoData.TimeFrame = ArtistAvailableTimeFrame.value
+  const timeFrameMapping = {
+    0: '時段一',
+    1: '時段二',
+    2: '時段三'
+  }
+  artistInfoData.value.TimeFrame = ArtistAvailableTimeFrame.value
+    .map((item) => timeFrameMapping[item])
+    .join()
 }
 </script>
 <style></style>
