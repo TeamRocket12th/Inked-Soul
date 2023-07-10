@@ -29,7 +29,7 @@
             <div
               class="w-10"
               :class="{
-                'rounded-lg': Role === 'artist',
+                'rounded-lg': Role === 'artist' || Role === 'Artist',
                 'rounded-full': Role === 'user' || Role === 'User'
               }"
             >
@@ -37,7 +37,7 @@
             </div>
           </label>
           <ul
-            v-if="Role === 'artist'"
+            v-if="Role === 'artist' || Role === 'Artist'"
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
@@ -163,15 +163,18 @@ const isLogin = () => {
     return
   } else {
     Photo.value = authCookie.value.Photo
+    // ? undefined : authCookie.value.Photo
     Nickname.value = authCookie.value.Nickname
-    if (!Photo.value) {
+    // ? authCookie.value.Nickname : undefined
+    if (Photo.value === 'null') {
+      console.log('in')
       const defaultPhoto =
         'https://images.unsplash.com/photo-1601921004897-b7d582836990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNrZXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
 
       authCookie.value.Photo = defaultPhoto // 賦值到 cookie
       Photo.value = authCookie.value.Photo // 賦值到 變數
     }
-    if (!Nickname.value) {
+    if (Nickname.value === 'null') {
       const defaultNickname = 'xxx'
       authCookie.value.Nickname = defaultNickname
       Nickname.value = authCookie.value.Nickname

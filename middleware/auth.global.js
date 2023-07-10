@@ -13,6 +13,7 @@ export default defineNuxtRouteMiddleware((to, _from) => {
   if (to.path.includes('normal' || 'artist')) {
     checkAuth()
     if (!authToken.value?.token) {
+      console.log('沒有 token 的問題')
       router.replace('/account/login')
     }
   }
@@ -21,10 +22,10 @@ export default defineNuxtRouteMiddleware((to, _from) => {
     if (!authToken.value) {
       return
     } else {
-      if (to.path.includes('normal') && Role !== 'User') {
+      if (to.path.includes('/account/normal') && Role !== 'User') {
         router.replace('/account/login')
       }
-      if (to.path.includes('artist') && Role !== 'artist') {
+      if (to.path.includes('/account/artist') && Role !== 'Artist') {
         router.replace('/account/login')
       }
     }

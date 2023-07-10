@@ -57,10 +57,10 @@ const styleToggle = (addStyle) => {
   }
 
   // 上傳刺青風格
-  uploadTattooData.value.Style = personalStyle.value
+  uploadTattooData.value.Style = personalStyle.value.join()
 
   // 編輯個人風格
-  artistInfoData.Style = personalStyle.value
+  artistInfoData.value.Style = personalStyle.value.join()
 }
 </script>
 <style scoped></style>
