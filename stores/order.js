@@ -1,4 +1,5 @@
 export const useOrderStore = defineStore('order', () => {
+  const router = useRouter()
   const id = ref()
   const orderID = ref()
   const designData = ref({
@@ -26,7 +27,7 @@ export const useOrderStore = defineStore('order', () => {
     })
     orderID.value = data.value.orderID
     if (data.value.status === 200) {
-      await navigateTo(`/designs/${designData.value.ID}/complete`)
+      await router.push(`/designs/${designData.value.ID}/complete`)
     }
   }
 

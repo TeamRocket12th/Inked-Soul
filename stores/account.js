@@ -159,7 +159,7 @@ export const useAccountStore = defineStore('account', () => {
   // 發送重設密碼信件
   const resetPasswordSendEmail = async () => {
     showTxt.value = true
-    const { data, error } = await useFetch(`${APIBASE}/${identity.value}email`, {
+    const { data, error } = await useFetch(`${APIBASE}/api/${identity.value}email`, {
       method: 'POST',
       body: {
         Account: email
@@ -171,7 +171,7 @@ export const useAccountStore = defineStore('account', () => {
   const resetPassword = async () => {
     try {
       const res = await fetch(
-        `${APIBASE}/${identity.value}emailpwd/?email=${email.value}&guid=${guid.value}`,
+        `${APIBASE}/api/${identity.value}emailpwd/?email=${email.value}&guid=${guid.value}`,
         {
           headers: { 'Content-type': 'application/json' },
           method: 'POST'

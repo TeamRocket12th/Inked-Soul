@@ -21,9 +21,9 @@
 <script setup>
 import OrderArea from '~/container/order/OrderArea'
 import OrderDetail from '~/components/user/OrderDetail'
+import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
-import { useAccountStore } from '~/stores/account'
 
 const store = useOrderStore()
-const { orderID } = store
+const { orderID } = storeToRefs(store)
 </script>
