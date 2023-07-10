@@ -49,7 +49,7 @@ export const useAccountStore = defineStore('account', () => {
 
   // 一般流程登入
   const loginFn = async () => {
-    const { data, error } = await useFetch(`${APIBASE}/login${identity.value}`, {
+    const { data, error } = await useFetch(`${APIBASE}/api/login${identity.value}`, {
       method: 'POST',
       body: {
         Account: email.value,
@@ -85,7 +85,7 @@ export const useAccountStore = defineStore('account', () => {
   // 登入
   const loginSubmit = () => {
     // 一般流程登入
-    if (!guid) {
+    if (!guid.value) {
       loginFn()
     } else {
       // 忘記密碼後登入
