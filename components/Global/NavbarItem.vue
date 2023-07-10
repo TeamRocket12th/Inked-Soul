@@ -163,10 +163,10 @@ const isLogin = () => {
     return
   } else {
     Photo.value = authCookie.value.Photo
-    // ? undefined : authCookie.value.Photo
     Nickname.value = authCookie.value.Nickname
-    // ? authCookie.value.Nickname : undefined
-    if (Photo.value === 'null') {
+
+    // 因為 API 回傳 null 有兩個type string|object
+    if (Photo.value === 'null' || !Photo.value) {
       console.log('in')
       const defaultPhoto =
         'https://images.unsplash.com/photo-1601921004897-b7d582836990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNrZXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
@@ -174,7 +174,7 @@ const isLogin = () => {
       authCookie.value.Photo = defaultPhoto // 賦值到 cookie
       Photo.value = authCookie.value.Photo // 賦值到 變數
     }
-    if (Nickname.value === 'null') {
+    if (Nickname.value === 'null' || !Nickname.value) {
       const defaultNickname = 'xxx'
       authCookie.value.Nickname = defaultNickname
       Nickname.value = authCookie.value.Nickname
