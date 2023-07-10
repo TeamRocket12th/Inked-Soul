@@ -155,7 +155,7 @@ const studioLoaction = ref('地區')
 const selectCity = (city) => {
   if (!errorSelect.includes(city)) {
     studioLoaction.value = city
-    artistInfoData.City = studioLoaction.value
+    artistInfoData.value.City = studioLoaction.value
   }
 }
 </script>

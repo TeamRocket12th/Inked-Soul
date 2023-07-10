@@ -15,10 +15,9 @@ export const useAccountStore = defineStore('account', () => {
   const tel = ref()
   const name = ref()
 
-  // 後端少 Phone、 License(isVerified)
   const artistInfoData = reactive({
     Id: 0,
-    Account: 'user@example.com',
+    Account: 'example@gamil.com',
     Password: '',
     Salt: '',
     Photo: '',
@@ -37,15 +36,19 @@ export const useAccountStore = defineStore('account', () => {
     ClosedDays: '',
     DayOff: '',
     Experience: 0,
-    Intro: '123',
+    Intro: '',
     IsVerified: 0,
     MemberShip: 0,
-    registration: '',
     Guid: '',
     Follower: 0,
-    TimeFrame: 'string',
+    TimeFrame: '',
     PasswordTime: ''
   })
+
+  if (authToken.value) {
+    artistInfoData.Nickname = authCookie.value.Nickname || ''
+    artistInfoData.Account = authCookie.value.Email
+  }
 
   // 一般流程登入
   const loginFn = async () => {
@@ -63,29 +66,24 @@ export const useAccountStore = defineStore('account', () => {
         authToken.value = res.Token
         authCookie.value = res.Data
 
-        cookie.value = {
-          token: res.Token,
-          data: res.Data
-        }
         let newIdentity = ''
         if (identity.value === 'user') {
           newIdentity = 'normal'
-          console.log(newIdentity)
         } else if (identity.value === 'artist') {
           newIdentity = 'artist'
-          console.log(newIdentity)
         }
         router.push(`/account/${newIdentity}/editinfo`) // 登入成功跳轉到首頁
       }
     } else if (error.value) {
-      cookie.value = null
+      console.log(error.value)
+      authToken.value = null
     }
   }
 
   // 登入
   const loginSubmit = () => {
     // 一般流程登入
-    if (!guid) {
+    if (!guid.value) {
       loginFn()
     } else {
       // 忘記密碼後登入
@@ -146,7 +144,10 @@ export const useAccountStore = defineStore('account', () => {
   const editArtistInfo = async () => {
     try {
       const { data, error } = await useFetch(`${APIBASE}/api/editartistinfo`, {
-        headers: { 'Content-type': 'application/json' },
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        },
         method: 'POST',
         body: artistInfoData
       })
@@ -188,13 +189,13 @@ export const useAccountStore = defineStore('account', () => {
     const { data, error } = await useFetch(`http://localhost:5005/checkauth`, {
       method: 'POST',
       body: {
-        token: cookie.value?.token
+        token: authToken.value
       }
     })
     if (data.value) {
       console.log('驗證成功')
     } else if (error.value) {
-      cookie.value = null
+      authToken.value = null
       router.push('/account/login')
       console.log('驗證失敗')
     }
@@ -202,7 +203,6 @@ export const useAccountStore = defineStore('account', () => {
 
   return {
     identity,
-    cookie,
     email,
     guid,
     password,
