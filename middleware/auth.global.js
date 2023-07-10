@@ -12,7 +12,7 @@ export default defineNuxtRouteMiddleware((to, _from) => {
 
   if (to.path.includes('normal' || 'artist')) {
     checkAuth()
-    if (!authToken.value?.token) {
+    if (!authToken.value) {
       console.log('沒有 token 的問題')
       router.replace('/account/login')
     }

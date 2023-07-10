@@ -8,7 +8,11 @@
             tabindex="0"
             class="btn-outline btn my-1 mb-1 h-auto w-full border-[#D0D0D0] bg-white py-2"
           >
-            <span v-for="(day, key) in ArtistCloseDay" :key="key"> {{ day.week }} </span>
+            <span>
+              <!-- v-for="(day, key) in ArtistCloseDay" :key="key" -->
+              {{ artistInfoData.ClosedDays }}
+              <!-- {{ day.week }} -->
+            </span>
           </label>
           <ul
             tabindex="0"
@@ -225,6 +229,7 @@ const SelectTimeFrame = (part) => {
     1: '時段二',
     2: '時段三'
   }
+
   artistInfoData.value.TimeFrame = ArtistAvailableTimeFrame.value
     .map((item) => timeFrameMapping[item])
     .join()
