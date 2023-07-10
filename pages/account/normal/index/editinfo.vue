@@ -52,7 +52,14 @@
             <VErrorMessage name="電子信箱" class="whitespace-nowrap text-[#DC3545]" />
           </div>
           <div class="relative">
-            <VField id="email" rules="email" name="電子信箱" class="formInput" disabled />
+            <VField
+              v-model="email"
+              id="email"
+              rules="email"
+              name="電子信箱"
+              class="formInput text-gray-200"
+              disabled
+            />
             <Icon
               v-if="errors.電子信箱"
               name="ic:baseline-error-outline"
@@ -129,9 +136,13 @@
 import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 const store = useAccountStore()
-const { password, confirmPassword, tel, name } = storeToRefs(store)
-const { editInfo } = store
+const { email, password, confirmPassword, tel, name } = storeToRefs(store)
+const { getUserInfo, editInfo } = store
 
 const { isUnder20, isPhone, isPassword } = useValidate()
+// 待補取得用戶資料API
+// onMounted(()=>{
+//   getUserInfo()
+// })
 </script>
 <style scoped></style>

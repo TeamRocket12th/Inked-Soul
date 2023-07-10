@@ -59,6 +59,7 @@ export const useAccountStore = defineStore('account', () => {
     })
     if (data.value) {
       const res = data.value
+      console.log('login res', res)
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
@@ -67,15 +68,17 @@ export const useAccountStore = defineStore('account', () => {
           token: res.Token,
           data: res.Data
         }
+        console.log(cookie)
         let newIdentity = ''
         if (identity.value === 'user') {
           newIdentity = 'normal'
-          console.log(newIdentity)
+          console.log('newIdentity', newIdentity)
         } else if (identity.value === 'artist') {
           newIdentity = 'artist'
           console.log(newIdentity)
         }
         router.push(`/account/${newIdentity}/editinfo`) // 登入成功跳轉到首頁
+        console.log('router pushed')
       }
     } else if (error.value) {
       cookie.value = null
@@ -116,15 +119,37 @@ export const useAccountStore = defineStore('account', () => {
       console.log(error.value)
     }
   }
+  // 取得一般用戶資料
+  const getUserInfo = async () => {
+    try {
+      const { data } = await useFetch(`${APIBASE}/api/userinfo`, {
+        headers: { 'Content-type': 'application/json' },
+        method: 'GET'
+      })
+      console.log('get', data)
+      // 補上email、tel等變數重新賦值，以便畫面渲染新值
+    } catch (error) {
+      console.log('get', error)
+    }
+  }
+
   // 修改用戶個人資料
+  // 'Content-type': 'application/json',
   const editInfo = async () => {
-    const { data, error } = await useFetch('http://localhost:5005/user', {
-      method: 'PUT',
+    console.log(cookie.value.token)
+    console.log(authToken.value)
+    const { data, error } = await useFetch(`${APIBASE}/api/edituserinfo`, {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${cookie.value.token}`
+      },
+      method: 'POST',
       body: {
         name: name.value,
         tel: tel.value
       }
     })
+    // 待補：呼叫getUserInfo()
     // console.log(data)
   }
 
@@ -136,6 +161,7 @@ export const useAccountStore = defineStore('account', () => {
         method: 'GET'
       })
       console.log('get', data)
+      // 補上email、tel等變數重新賦值，以便畫面渲染新值
     } catch (error) {
       console.log('get', error)
     }
@@ -150,6 +176,7 @@ export const useAccountStore = defineStore('account', () => {
         body: artistInfoData
       })
       console.log('edit', data)
+      // 待補呼叫getArtistInfo()
     } catch (error) {
       console.log(error)
     }
@@ -210,6 +237,7 @@ export const useAccountStore = defineStore('account', () => {
     confirmPassword,
     artistInfoData,
     showTxt,
+    getUserInfo,
     editArtistInfo,
     getArtistInfo,
     loginSubmit,
