@@ -2,7 +2,8 @@
   <ul class="flex flex-col gap-3 rounded-lg p-5 shadow">
     <li class="min-w-[140px]">
       <a
-        href="https://twitter.com/intent/tweet?text=Awesome%20Blog!&url="
+        :href="`https://twitter.com/intent/tweet?text=Awesome%20Blog!&url=${shareLink}`"
+        target="_blank"
         class="group flex cursor-pointer flex-row items-center gap-[10px] p-3 duration-300 hover:bg-black"
       >
         <svg
@@ -24,6 +25,7 @@
     <li>
       <a
         :href="`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`"
+        target="_blank"
         class="group flex cursor-pointer flex-row items-center gap-[10px] p-3 duration-300 hover:bg-black hover:text-white"
       >
         <svg
@@ -52,6 +54,7 @@
     <li>
       <a
         :href="`https://twitter.com/intent/tweet?text=Awesome%20Blog!&url=${shareLink}`"
+        target="_blank"
         class="group flex cursor-pointer flex-row items-center gap-[10px] p-3 duration-300 hover:bg-black hover:text-white"
       >
         <svg
@@ -72,19 +75,14 @@
     </li>
   </ul>
 
-  <!-- <div>
-          <div class="dropdown-end dropdown">
-            <label
-              tabindex="0"
-              class="btn-outline btn border-none bg-white hover:bg-white hover:text-black"
-              ><Icon name="ic:outline-share" class="h-6 w-6"
-            /></label>
-            <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100 shadow">
-              <ShareModal />
-            </ul>
-          </div>
-        </div>
-      </div> -->
+  <!-- <div class="dropdown-end dropdown">
+    <label tabindex="0" class="btn-outline btn border-none bg-white hover:bg-white hover:text-black"
+      ><Icon name="ic:outline-share" size="24"
+    /></label>
+    <ul tabindex="0" class="dropdown-content z-[1] w-52 rounded-lg bg-base-100">
+      <ShareModal />
+    </ul>
+  </div> -->
 </template>
 <script setup>
 const shareLink = ref('')

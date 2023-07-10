@@ -13,7 +13,7 @@
             <label
               tabindex="0"
               class="btn-outline btn border-none bg-white hover:bg-white hover:text-black"
-              ><Icon name="ic:outline-share" class="h-6 w-6"
+              ><Icon name="ic:outline-share" size="24"
             /></label>
             <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
               <ShareModal />
@@ -58,7 +58,6 @@
   </div>
 </template>
 <script setup>
-import ShareModal from '~/components/global/ShareModal.vue'
 // import { useChNameStore } from '~/stores/useChNameStore'
 // const chNameStore = useChNameStore()
 const props = defineProps({
