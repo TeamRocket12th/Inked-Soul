@@ -14,6 +14,7 @@ export const useAccountStore = defineStore('account', () => {
   const guid = ref('')
   const tel = ref()
   const name = ref()
+  const Id = ref(0)
 
   const artistInfoData = reactive({
     Id: 0,
@@ -66,7 +67,7 @@ export const useAccountStore = defineStore('account', () => {
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
-
+        Id.value = res.Data.Id
         let newIdentity = ''
         if (identity.value === 'user') {
           newIdentity = 'normal'
@@ -74,7 +75,6 @@ export const useAccountStore = defineStore('account', () => {
           newIdentity = 'artist'
         }
         router.push(`/account/${newIdentity}/editinfo`) // 登入成功跳轉到首頁
-        console.log('router pushed')
       }
     } else if (error.value) {
       console.log(error.value)
@@ -133,8 +133,7 @@ export const useAccountStore = defineStore('account', () => {
   // 修改用戶個人資料
   // 'Content-type': 'application/json',
   const editInfo = async () => {
-    console.log(cookie.value.token)
-    console.log(authToken.value)
+    console.log(Id.value)
     const { data, error } = await useFetch(`${APIBASE}/api/edituserinfo`, {
       headers: {
         'Content-type': 'application/json',
@@ -142,8 +141,9 @@ export const useAccountStore = defineStore('account', () => {
       },
       method: 'POST',
       body: {
-        name: name.value,
-        tel: tel.value
+        Id: Id.value,
+        Nickname: name.value,
+        Tel: tel.value
       }
     })
     // 待補：呼叫getUserInfo()
