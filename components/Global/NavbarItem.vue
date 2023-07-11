@@ -143,14 +143,14 @@ const authToken = useCookie('token')
 const authCookie = useCookie('data')
 
 const store = useAccountStore()
-const { userInfoData } = storeToRefs(store)
+const { userInfoData, artistInfoData } = storeToRefs(store)
 
 const { Role, Email } = authCookie.value ? authCookie.value : ''
 
 const Photo = ref('')
 // const Nickname = ref('')
 const Nickname = computed(() => {
-  return userInfoData.value.Nickname
+  return userInfoData.value.Nickname || artistInfoData.value.Nickname
 })
 
 const scrollY = ref('0')
