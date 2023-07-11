@@ -3,5 +3,12 @@
 </template>
 <script setup>
 import EditArea from '~/container/admin/EditArea.vue'
+import { useAccountStore } from '~/stores/account'
+
+const store = useAccountStore()
+const { getArtistInfo } = store
+onMounted(() => {
+  getArtistInfo()
+})
 </script>
 <style scoped></style>
