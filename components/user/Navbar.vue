@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded border p-[20px]">
+  <div class="rounded p-[20px]">
     <ul class="flex flex-col">
       <NuxtLink
         v-for="(item, key) in menu"

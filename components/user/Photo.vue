@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center gap-10 rounded border px-[104] py-10">
+  <div class="flex flex-col items-center gap-10 rounded px-[104] py-10">
     <div class="avatar flex flex-col items-center">
       <div class="w-20 overflow-hidden rounded-full">
         <img :src="Photo" />
