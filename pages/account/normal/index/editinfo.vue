@@ -16,6 +16,7 @@
               :rules="isUnder20"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.名稱 }"
+              :placeholder="userInfoData.Nickname"
             />
             <Icon
               v-if="errors.名稱"
@@ -38,6 +39,7 @@
               name="手機"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.手機 }"
+              :placeholder="userInfoData.Tel"
             />
             <Icon
               v-if="errors.手機"
@@ -138,7 +140,7 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { email, password, confirmPassword, tel, name } = storeToRefs(store)
+const { email, password, confirmPassword, tel, name, userInfoData } = storeToRefs(store)
 const { getUserInfo, editInfo } = store
 
 const { isUnder20, isPhone, isPassword } = useValidate()
