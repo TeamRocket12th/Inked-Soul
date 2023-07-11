@@ -17,18 +17,18 @@ export const useAccountStore = defineStore('account', () => {
   const Id = ref(0)
 
   const artistInfoData = reactive({
-    Id: 0,
-    Account: 'example@gamil.com',
+    Id: authToken.value ? authCookie.value.Id : '',
+    Account: authToken.value ? authCookie.value.Email : '',
     Password: '',
     Salt: '',
-    Photo: '',
+    Photo: authToken.value ? authCookie.value.Photo : '',
     Realname: '',
-    Nickname: '',
+    Nickname: authToken.value ? authCookie.value.Nickname : '',
     StudioName: '',
     Registration: '',
     Phone: '',
     Tel: '',
-    Role: '',
+    Role: authToken.value ? authCookie.value.Role : '',
     Style: '',
     StartTime: '',
     EndTime: '',
@@ -39,17 +39,18 @@ export const useAccountStore = defineStore('account', () => {
     Experience: 0,
     Intro: '',
     IsVerified: 0,
-    MemberShip: 0,
+    MemberShip: authToken.value ? authCookie.value.MemberShip : 0,
+    Style: '',
     Guid: '',
     Follower: 0,
     TimeFrame: '',
     PasswordTime: ''
   })
 
-  if (authToken.value) {
-    artistInfoData.Nickname = authCookie.value.Nickname || ''
-    artistInfoData.Account = authCookie.value.Email
-  }
+  // if (authToken.value) {
+  //   artistInfoData.Nickname = authCookie.value.Nickname || ''
+  //   artistInfoData.Account = authCookie.value.Email
+  // }
 
   // 一般流程登入
   const loginFn = async () => {
@@ -131,7 +132,6 @@ export const useAccountStore = defineStore('account', () => {
   }
 
   // 修改用戶個人資料
-  // 'Content-type': 'application/json',
   const editInfo = async () => {
     console.log(Id.value)
     const { data, error } = await useFetch(`${APIBASE}/api/edituserinfo`, {
@@ -153,12 +153,15 @@ export const useAccountStore = defineStore('account', () => {
   // 取得刺青師個人資料
   const getArtistInfo = async () => {
     try {
-      const { data, error } = await useFetch(`${APIBASE}/api/`, {
-        headers: { 'Content-type': 'application/json' },
+      const { data, error } = await useFetch(`${APIBASE}/api/artistinfo`, {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        },
         method: 'GET'
       })
       console.log('get', data)
-      // 補上email、tel等變數重新賦值，以便畫面渲染新值
+      // 補上artistInfoData重新賦值，以便畫面渲染新值
     } catch (error) {
       console.log('get', error)
     }
@@ -166,6 +169,7 @@ export const useAccountStore = defineStore('account', () => {
 
   // 修改刺青師個人資料
   const editArtistInfo = async () => {
+    console.log(authCookie)
     try {
       const { data, error } = await useFetch(`${APIBASE}/api/editartistinfo`, {
         headers: {
