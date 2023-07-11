@@ -39,7 +39,7 @@ import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
 const store = useAccountStore()
-const { authCookie } = storeToRefs()
+const { authCookie } = storeToRefs(store)
 const route = useRoute(store)
 const runtimeConfig = useRuntimeConfig()
 const apiBase = runtimeConfig.public.apiBase

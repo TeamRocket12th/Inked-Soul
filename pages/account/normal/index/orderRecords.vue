@@ -30,8 +30,14 @@
 </template>
 
 <script setup>
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { getAllOrder } = store
 import OrderBar from '~/components/order/OrderBar'
+
+// 資料庫建置完成後改用store.js的getAllOrder
 const data = await $fetch('/api/getOrder/getAllOrder')
+
 console.log('data:', data)
 // 有真資料後再使用已下這段
 // const order = ref([])
@@ -42,4 +48,8 @@ console.log('data:', data)
 const jump = (input) => {
   navigateTo(`/account/normal/${input}`)
 }
+
+// onMounted(()=>{
+//   getAllOrder()
+// })
 </script>
