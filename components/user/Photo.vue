@@ -12,7 +12,20 @@
   </div>
 </template>
 <script setup>
+import { useAccountStore } from '~/stores/account'
+import { storeToRefs } from 'pinia'
+
+const store = useAccountStore()
+const { userInfoData } = storeToRefs(store)
+
+// const Photo = computed(() => {
+//   return userInfoData.value.Photo
+// })
+const Nickname = computed(() => {
+  return userInfoData.value.Nickname
+})
+
 const authCookie = useCookie('data')
-const { Photo, Nickname } = authCookie.value
+const { Photo } = authCookie.value
 </script>
 <style scoped></style>

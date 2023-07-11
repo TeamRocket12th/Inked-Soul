@@ -8,18 +8,18 @@ export const useAccountStore = defineStore('account', () => {
 
   const showTxt = ref(false)
   const identity = ref('user')
-  const email = ref('')
-  // authCookie.value.Email
+  const email = ref('benson@gmail.com')
+
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
   const guid = ref('')
 
-  const tel = ref()
   const name = ref()
+  const tel = ref()
   const Id = ref(0)
 
   const userInfoData = reactive({
-    Id: '',
+    Id: Id.value,
     Nickname: '',
     Tel: ''
   })
@@ -130,8 +130,12 @@ export const useAccountStore = defineStore('account', () => {
         headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
         method: 'GET'
       })
-      name.value = data.value.Data.Nickname
-      tel.value = data.value.Data.Tel
+      // 接收輸入
+      // name.value = data.value.Data.Nickname
+      // tel.value = data.value.Data.Tel
+
+      userInfoData.Nickname = data.value.Data.Nickname
+      userInfoData.Tel = data.value.Data.Tel
 
       authCookie.value.Nickname = data.value.Data.Nickname
     } catch (error) {

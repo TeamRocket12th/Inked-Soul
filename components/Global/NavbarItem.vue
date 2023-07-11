@@ -135,14 +135,23 @@
   </nav>
 </template>
 <script setup>
+import { useAccountStore } from '~/stores/account'
+import { storeToRefs } from 'pinia'
+
 const route = useRoute()
 const authToken = useCookie('token')
 const authCookie = useCookie('data')
 
+const store = useAccountStore()
+const { userInfoData } = storeToRefs(store)
+
 const { Role, Email } = authCookie.value ? authCookie.value : ''
 
 const Photo = ref('')
-const Nickname = ref('')
+// const Nickname = ref('')
+const Nickname = computed(() => {
+  return userInfoData.value.Nickname
+})
 
 const scrollY = ref('0')
 
@@ -164,10 +173,10 @@ const isLogin = () => {
   } else {
     Photo.value = authCookie.value.Photo
     Nickname.value = authCookie.value.Nickname
+    console.log('nickname', Nickname.value)
 
     // 因為 API 回傳 null 有兩個type string|object
     if (Photo.value === 'null' || !Photo.value) {
-      console.log('in')
       const defaultPhoto =
         'https://images.unsplash.com/photo-1601921004897-b7d582836990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNrZXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
 
@@ -175,6 +184,7 @@ const isLogin = () => {
       Photo.value = authCookie.value.Photo // 賦值到 變數
     }
     if (Nickname.value === 'null' || !Nickname.value) {
+      console.log('nickname error', Nickname.value)
       const defaultNickname = 'xxx'
       authCookie.value.Nickname = defaultNickname
       Nickname.value = authCookie.value.Nickname
