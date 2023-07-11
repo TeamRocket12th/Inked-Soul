@@ -45,8 +45,10 @@ const handleOnPreview = (event) => {
     return
   }
   url.value = URL.createObjectURL(event.target.files[0])
-  uploadTattooData.value.Image = url.value
-  console.log(authToken.value.token)
+  uploadTattooData.value.Image = event.target.files[0]
+  console.log(event.target.files)
+  console.log(uploadTattooData.value.Image)
+  console.log(authToken.value)
 }
 
 const selectImage = () => {

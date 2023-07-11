@@ -113,10 +113,12 @@ const bodyParts = [
   '腿部'
 ]
 
-const tattooName = uploadTattooData.value.Name
+const tattooName = ref()
 const selectBodyParts = ref([bodyParts[0]])
 const tattooSize = ref('')
-const hour = uploadTattooData.value.Hour
+const hour = ref()
+uploadTattooData.value.Hour = hour
+uploadTattooData.value.Name = tattooName
 
 const SelectRecommendPositions = (part) => {
   const index = selectBodyParts.value.indexOf(part)
@@ -127,8 +129,8 @@ const SelectRecommendPositions = (part) => {
   } else if (selectBodyParts.value.length === 2) {
     selectBodyParts.value.splice(0, 1, part)
   }
-
-  uploadTattooData.value.BodyPart = selectBodyParts.value
+  const bodypartStr = selectBodyParts.value.join(',')
+  uploadTattooData.value.BodyPart = bodypartStr
 }
 
 const sizeErrorMessage = ref('')
