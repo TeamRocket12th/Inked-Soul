@@ -6,7 +6,7 @@
       >
       <div
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute right-0 top-5 z-[1] w-[38rem] bg-base-100 p-2"
+        class="dropdown-content menu rounded-box absolute !-right-10 top-5 z-[1] w-[38rem] bg-base-100 p-2"
       >
         <!-- 星星 -->
         <div class="flex">
@@ -30,9 +30,9 @@
             ></textarea>
           </label>
         </div>
-        <div class="relative w-full">
+        <div class="">
           <div class="row-reverse comment-btn absolute right-0">
-            <button class="btn bg-black text-white" @click="postComments">送出評論</button>
+            <button class="btn bg-black text-white" @click="postComments">評價</button>
             <p><Icon name="ic:baseline-warning-amber" />評論送出後將無法修改</p>
           </div>
         </div>
