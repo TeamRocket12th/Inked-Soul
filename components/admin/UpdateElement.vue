@@ -50,7 +50,8 @@ const styleToggle = (addStyle) => {
   } else if (tattooElement.value.length === 2) {
     tattooElement.value.splice(0, 1, addStyle)
   }
-  uploadTattooData.value.Element = tattooElement.value
+  const elementStr = tattooElement.value.join()
+  uploadTattooData.value.Element = elementStr
 }
 </script>
 <style scoped></style>
