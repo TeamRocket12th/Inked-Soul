@@ -26,7 +26,8 @@
         </template>
       </OrderArea>
       <!-- 評價區 -->
-      <PostComments v-if="status !== '已評價'" class="absolute right-12 top-0" />
+      <!-- 出現時機視訂單狀態而定 -->
+      <PostComments v-if="orderStatus.Step2.Status === true" class="absolute right-12 top-0" />
     </div>
   </div>
 </template>
