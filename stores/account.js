@@ -17,8 +17,8 @@ export const useAccountStore = defineStore('account', () => {
   const name = ref()
   const tel = ref()
   const Id = ref(0)
-  const photo = ref()
 
+  const photo = ref('')
   const userInfoData = reactive({
     Id: Id.value,
     Nickname: '',
@@ -76,6 +76,7 @@ export const useAccountStore = defineStore('account', () => {
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
+        console.log('login', authCookie.value.Photo)
         Id.value = res.Data.Id
         let newIdentity = ''
         if (identity.value === 'user') {
@@ -104,6 +105,7 @@ export const useAccountStore = defineStore('account', () => {
       }, 1000)
     }
   }
+
   // 註冊
   const signupSubmit = async () => {
     const { data, error } = await useFetch(`${APIBASE}/api/signup${identity.value}`, {
@@ -138,11 +140,10 @@ export const useAccountStore = defineStore('account', () => {
 
       userInfoData.Nickname = data.value.Data.Nickname
       userInfoData.Tel = data.value.Data.Tel
-
       photo.value = data.value.Data.Photo
-      // console.log(data.value.Data.Photo)
 
       authCookie.value.Nickname = data.value.Data.Nickname
+      authCookie.value.Photo = data.value.Data.Photo
     } catch (error) {
       console.log('get', error)
     }
@@ -241,7 +242,7 @@ export const useAccountStore = defineStore('account', () => {
       }
     })
     if (data.value) {
-      console.log('驗證成功')
+      // console.log('驗證成功')
     } else if (error.value) {
       authToken.value = null
       router.push('/account/login')
@@ -249,15 +250,43 @@ export const useAccountStore = defineStore('account', () => {
     }
   }
 
+  const handleDefaultInfo = () => {
+    if (authToken.value) {
+      if (
+        authCookie.value.Photo === '' ||
+        authCookie.value.Photo === 'null' ||
+        !authCookie.value.Photo
+      ) {
+        const defaultPhoto =
+          'https://images.unsplash.com/photo-1601921004897-b7d582836990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNrZXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'
+
+        photo.value = defaultPhoto
+        authCookie.value.Photo = defaultPhoto
+      }
+      if (
+        (authCookie.value.Nickname === '' || authCookie.value.Nickname) === 'null' ||
+        !authCookie.value.Nickname
+      ) {
+        const defaultNickname = 'xxx'
+
+        userInfoData.Nickname = defaultNickname
+        artistInfoData.Nickname = defaultNickname
+        authCookie.value.Nickname = defaultNickname
+      }
+    } else {
+      return
+    }
+  }
+
   return {
     identity,
-    photo,
     email,
     guid,
     password,
     tel,
     name,
     confirmPassword,
+    photo,
     userInfoData,
     artistInfoData,
     showTxt,
@@ -269,6 +298,7 @@ export const useAccountStore = defineStore('account', () => {
     editInfo,
     resetPasswordSendEmail,
     resetPassword,
-    checkAuth
+    checkAuth,
+    handleDefaultInfo
   }
 })
