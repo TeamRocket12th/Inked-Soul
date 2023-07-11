@@ -21,10 +21,10 @@ export default defineNuxtRouteMiddleware((to, _from) => {
     if (!authToken.value) {
       return
     } else {
-      if (to.path.includes('/account/normal') && Role !== 'user') {
+      if (to.path.includes('/account/normal') && Role.toLowerCase() !== 'user') {
         router.replace('/account/login')
       }
-      if (to.path.includes('/account/artist') && Role !== 'artist') {
+      if (to.path.includes('/account/artist') && Role.toLowerCase() !== 'artist') {
         router.replace('/account/login')
       }
     }

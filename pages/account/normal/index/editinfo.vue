@@ -67,14 +67,15 @@
             />
           </div>
         </div>
+        <button
+          type="button"
+          class="btn w-full bg-black text-white hover:text-black"
+          :disabled="!meta.valid"
+          @click="editInfo"
+        >
+          更新個人資料
+        </button>
       </VForm>
-      <button
-        type="button"
-        class="btn w-full bg-black text-white hover:text-black"
-        @click="editInfo"
-      >
-        更新個人資料
-      </button>
     </div>
     <div class="w-full">
       <p class="mb-5 text-base font-bold">更改密碼</p>
@@ -135,14 +136,15 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
+
 const store = useAccountStore()
 const { email, password, confirmPassword, tel, name } = storeToRefs(store)
 const { getUserInfo, editInfo } = store
 
 const { isUnder20, isPhone, isPassword } = useValidate()
-// 待補取得用戶資料API
-// onMounted(()=>{
-//   getUserInfo()
-// })
+
+onMounted(async () => {
+  await getUserInfo()
+})
 </script>
 <style scoped></style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center gap-10 rounded border px-[104] py-10">
+  <div class="flex flex-col items-center gap-10 rounded px-[104] py-10">
     <div class="avatar flex flex-col items-center">
       <div class="w-20 overflow-hidden rounded-full">
         <img :src="Photo" />
@@ -12,7 +12,20 @@
   </div>
 </template>
 <script setup>
+import { useAccountStore } from '~/stores/account'
+import { storeToRefs } from 'pinia'
+
+const store = useAccountStore()
+const { userInfoData } = storeToRefs(store)
+
+// const Photo = computed(() => {
+//   return userInfoData.value.Photo
+// })
+const Nickname = computed(() => {
+  return userInfoData.value.Nickname
+})
+
 const authCookie = useCookie('data')
-const { Photo, Nickname } = authCookie.value
+const { Photo } = authCookie.value
 </script>
 <style scoped></style>

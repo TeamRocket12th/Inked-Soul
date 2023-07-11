@@ -5,17 +5,24 @@ export const useAccountStore = defineStore('account', () => {
 
   const authToken = useCookie('token')
   const authCookie = useCookie('data')
-  const cookie = useCookie('token')
+
   const showTxt = ref(false)
   const identity = ref('user')
-  const email = ref('nancy@gmail.com')
+  const email = ref('benson@gmail.com')
+
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
   const guid = ref('')
-  const tel = ref()
+
   const name = ref()
+  const tel = ref()
   const Id = ref(0)
 
+  const userInfoData = reactive({
+    Id: Id.value,
+    Nickname: '',
+    Tel: ''
+  })
   const artistInfoData = reactive({
     Id: authToken.value ? authCookie.value.Id : '',
     Account: authToken.value ? authCookie.value.Email : '',
@@ -121,11 +128,17 @@ export const useAccountStore = defineStore('account', () => {
   const getUserInfo = async () => {
     try {
       const { data } = await useFetch(`${APIBASE}/api/userinfo`, {
-        headers: { 'Content-type': 'application/json' },
+        headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
         method: 'GET'
       })
-      console.log('get', data)
-      // 補上email、tel等變數重新賦值，以便畫面渲染新值
+      // 接收輸入
+      // name.value = data.value.Data.Nickname
+      // tel.value = data.value.Data.Tel
+
+      userInfoData.Nickname = data.value.Data.Nickname
+      userInfoData.Tel = data.value.Data.Tel
+
+      authCookie.value.Nickname = data.value.Data.Nickname
     } catch (error) {
       console.log('get', error)
     }
@@ -133,21 +146,23 @@ export const useAccountStore = defineStore('account', () => {
 
   // 修改用戶個人資料
   const editInfo = async () => {
-    console.log(Id.value)
-    const { data, error } = await useFetch(`${APIBASE}/api/edituserinfo`, {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${cookie.value.token}`
-      },
-      method: 'POST',
-      body: {
-        Id: Id.value,
-        Nickname: name.value,
-        Tel: tel.value
-      }
-    })
-    // 待補：呼叫getUserInfo()
-    // console.log(data)
+    userInfoData.Id = Id.value
+    userInfoData.Nickname = name.value
+    userInfoData.Tel = tel.value
+
+    try {
+      const { data, error } = await useFetch(`${APIBASE}/api/edituserinfo`, {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        },
+        method: 'POST',
+        body: userInfoData
+      })
+      getUserInfo()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   // 取得刺青師個人資料
@@ -161,7 +176,7 @@ export const useAccountStore = defineStore('account', () => {
         method: 'GET'
       })
       console.log('get', data)
-      // 補上artistInfoData重新賦值，以便畫面渲染新值
+      // 補上email、tel等變數重新賦值，以便畫面渲染新值
     } catch (error) {
       console.log('get', error)
     }
@@ -238,6 +253,7 @@ export const useAccountStore = defineStore('account', () => {
     tel,
     name,
     confirmPassword,
+    userInfoData,
     artistInfoData,
     showTxt,
     getUserInfo,
