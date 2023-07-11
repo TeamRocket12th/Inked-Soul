@@ -153,8 +153,8 @@ const { formatDate, formattedOutput } = useFormatted()
 
 // 要get API 的值（需要轉換格式）
 const ArtistCloseDay = ref([weeks[0]])
-const ArtistOpenTime = ref('09:00')
-const ArtistCloseTime = ref('22:00')
+const ArtistOpenTime = ref('請選擇')
+const ArtistCloseTime = ref('請選擇')
 const ArtistAvailableTimeFrame = ref([])
 const ArtistDayoff = ref('')
 

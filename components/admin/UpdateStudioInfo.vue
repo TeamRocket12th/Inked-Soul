@@ -10,16 +10,16 @@
         <div class="relative">
           <VField
             id="studio"
+            v-model="artistInfoData.StudioName"
             :rules="isUnder20"
             name="店名"
             class="formInput"
-            v-model="artistInfoData.StudioName"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
           />
           <Icon
+            v-if="props.errors.店名"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.店名"
           />
         </div>
       </div>
@@ -31,15 +31,15 @@
         <div class="relative">
           <VField
             id="license"
+            v-model="artistInfoData.Registration"
             name="營業登記號"
             class="formInput"
-            v-model="artistInfoData.Registration"
             :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
           />
           <Icon
+            v-if="props.errors.營業登記號"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.營業登記號"
           />
         </div>
       </div>
@@ -57,8 +57,8 @@
             <li
               v-for="(city, key) in taiwanCities"
               :key="key"
-              @click="selectCity(city)"
               class="m-1"
+              @click="selectCity(city)"
             >
               <a
                 :class="{
@@ -77,9 +77,9 @@
         <label for="address" class="cursor-pointer">地址 </label>
         <VField
           id="address"
+          v-model="artistInfoData.Address"
           name="地址"
           class="formInput"
-          v-model="artistInfoData.Address"
           placeholder="鄉鎮市區、里鄰、門牌號碼"
         />
       </div>
@@ -91,17 +91,17 @@
         <div class="relative">
           <VField
             id="tel"
+            v-model="artistInfoData.Tel"
             :rules="isTel"
             name="電話"
             class="formInput"
-            v-model="artistInfoData.Tel"
             placeholder="00-00000000"
             :class="{ 'border-[#DC3545]': props.errors.電話 }"
           />
           <Icon
+            v-if="props.errors.電話"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.電話"
           />
         </div>
       </div>
