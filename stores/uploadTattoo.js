@@ -18,23 +18,28 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     Element: []
   })
 
+  const runtimeConfig = useRuntimeConfig()
+  const APIBASE = runtimeConfig.public.APIBASE
+
+  const authToken = useCookie('token')
   const authCookie = useCookie('data')
   const artistID = authCookie.value.Id // 對應刺青師ID
 
   const uploadTattoo = async () => {
-    const { data, error } = await useFetch(`http://localhost:5005/artist/design/${artistID}`, {
-      method: 'POST',
-      // headers: { 'Content-type': 'application/json' },
-      body: uploadTattooData.value // 待確認
-    })
-    if (data.value) {
-      const res = data.value
-      if (res.Status === 200) {
-        console.log(res.Data)
-        getTattooData()
+    try {
+      const { data, error } = await useFetch(`${APIBASE}/api/uploadimage`, {
+        method: 'POST',
+        headers: { Authorization: authToken },
+        body: uploadTattooData.value // 待確認
+      })
+
+      if (error.value) {
+        console.log('err', error.value)
+      } else {
+        console.log('data', data.value)
       }
-    } else if (error.value) {
-      console.log(error.value)
+    } catch (error) {
+      console.log(error)
     }
   }
 

@@ -17,6 +17,7 @@ export const useAccountStore = defineStore('account', () => {
   const name = ref()
   const tel = ref()
   const Id = ref(0)
+  const photo = ref()
 
   const userInfoData = reactive({
     Id: Id.value,
@@ -138,6 +139,9 @@ export const useAccountStore = defineStore('account', () => {
       userInfoData.Nickname = data.value.Data.Nickname
       userInfoData.Tel = data.value.Data.Tel
 
+      photo.value = data.value.Data.Photo
+      // console.log(data.value.Data.Photo)
+
       authCookie.value.Nickname = data.value.Data.Nickname
     } catch (error) {
       console.log('get', error)
@@ -247,6 +251,7 @@ export const useAccountStore = defineStore('account', () => {
 
   return {
     identity,
+    photo,
     email,
     guid,
     password,
