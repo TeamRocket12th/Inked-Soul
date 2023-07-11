@@ -58,6 +58,21 @@ export const useOrderStore = defineStore('order', () => {
       console.log('取得訂單資料失敗', error)
     }
   }
+  // 取得訂單狀態
+  const getStatus = async () => {
+    try {
+      const { status } = useFetch(`${APIBASE}/api/`, {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        }
+      })
+      console.log('成功取得訂單狀態', status)
+    } catch (error) {
+      console.log('取得訂單狀態失敗', error)
+    }
+  }
+  // 取得全部訂單
   const getAllOrder = async () => {
     try {
       const { data } = useFetch(`${APIBASE}/api/`, {
@@ -78,6 +93,7 @@ export const useOrderStore = defineStore('order', () => {
     userData,
     postOrder,
     getOrder,
+    getStatus,
     getAllOrder
   }
 })

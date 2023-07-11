@@ -11,7 +11,7 @@
       <slot name="orderDetail"></slot>
     </div>
     <!-- 步驟 -->
-    <div class="mb-20">
+    <div class="">
       <slot name="steps"></slot>
     </div>
   </div>

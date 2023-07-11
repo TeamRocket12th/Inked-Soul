@@ -7,7 +7,7 @@
         class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
       />
     </NuxtLink>
-    <div>
+    <div class="relative">
       <OrderArea>
         <template #orderContext>
           <Icon :name="orderContext[order.Data.Status].icon" size="40" />
@@ -26,7 +26,7 @@
         </template>
       </OrderArea>
       <!-- 評價區 -->
-      <PostComments v-if="status !== '已評價'" class=" " />
+      <PostComments v-if="status !== '已評價'" class="absolute right-12 top-0" />
     </div>
   </div>
 </template>

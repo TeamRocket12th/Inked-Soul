@@ -1,11 +1,14 @@
 <template>
-  <div class="">
-    <div class="dropdown-bottom dropdown-end dropdown relative">
-      <label tabindex="0" class="btn m-1 bg-black text-white focus:bg-gray-500">撰寫評價</label>
+  <div class="relative h-[10vh] w-full">
+    <div class="dropdown-bottom dropdown-end dropdown absolute right-0">
+      <label tabindex="0" class="btn m-1 bg-black px-4 py-0 text-white focus:bg-gray-500"
+        >撰寫評價</label
+      >
       <div
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute right-5 top-5 z-[1] w-[40rem] bg-base-100 p-2"
+        class="dropdown-content menu rounded-box absolute right-0 top-5 z-[1] w-[38rem] bg-base-100 p-2"
       >
+        <!-- 星星 -->
         <div class="flex">
           <p>星級評價</p>
           <div class="rating">
@@ -16,13 +19,14 @@
             <input type="radio" name="rating-9" class="mask mask-star" @change="updateRating(5)" />
           </div>
         </div>
-        <div class="flex">
-          <label>
-            <p>撰寫評語<br />(20字內)</p>
+        <!-- 文字輸入框 -->
+        <div>
+          <label class="flex justify-between">
+            <p>撰寫評語</p>
             <textarea
               v-model="txt"
-              class="textarea-bordered textarea w-[20rem]"
-              maxlength="20"
+              class="textarea-bordered textarea w-full"
+              maxlength="30"
             ></textarea>
           </label>
         </div>
