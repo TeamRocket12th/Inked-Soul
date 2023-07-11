@@ -32,5 +32,10 @@ import UpdateTime from '~/components/admin/UpdateTime.vue'
 import UpdatePassword from '~/components/admin/UpdatePassword.vue'
 import UpdatePersonalBrief from '~/components/admin/UpdatePersonalBrief.vue'
 import UpdateStyle from '~/components/admin/UpdateStyle.vue'
+
+import { useAccountStore } from '~/stores/account'
+
+const store = useAccountStore()
+const { editArtistInfo } = store
 </script>
 <style scoped></style>

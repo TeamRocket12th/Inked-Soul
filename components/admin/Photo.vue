@@ -1,22 +1,103 @@
 <template>
-  <div class="flex flex-col items-center gap-10 px-[104] py-10">
+  <div class="flex flex-col items-center gap-10 rounded px-[104] py-10">
     <div class="avatar flex flex-col items-center gap-2">
-      <div class="w-20 rounded-lg">
-        <img :src="Photo" />
+      <div class="group relative w-20 rounded-lg">
+        <label for="photo" class="cursor-pointer">
+          <img v-if="!previewUrl" :src="Photo" alt="" class="bg-white object-cover object-center" />
+          <img
+            v-if="previewUrl"
+            :src="previewUrl"
+            alt=""
+            class="bg-white object-cover object-center"
+          />
+        </label>
+        <div
+          class="group-hover:uploadPhoto bottom-0 left-0 right-0 top-0 h-full w-full group-hover:absolute"
+        >
+          <div class="h-full w-full">
+            <label for="photo" class="flex h-full w-full items-center justify-center">
+              <Icon name="ic:outline-photo-camera" size="20" class="text-white" />
+            </label>
+            <input
+              type="file"
+              accept=".jpg, .png, .svg "
+              @change="handleOnPreview"
+              class="hidden"
+              id="photo"
+            />
+          </div>
+        </div>
       </div>
-      <h2>{{ Nickname }}</h2>
-    </div>
-    <div class="flex flex-row items-center gap-[25px]">
-      <button class="btn-outline btn rounded px-6 py-3">免費會員</button>
-      <div class="flex flex-row items-center">
-        <Icon name="ic:baseline-bookmark-border" class="h-6 w-6" />
-        {{ Follower }}
-      </div>
+      <h2>{{ nickname }}</h2>
+
+      <button
+        v-show="previewUrl"
+        @click="postImg"
+        class="m-2 flex items-center gap-2 rounded-lg border border-black px-3 py-1"
+      >
+        <Icon name="ic:baseline-upgrade" size="24" />
+        <p>上傳認領圖</p>
+      </button>
     </div>
   </div>
 </template>
 <script setup>
+import { useAccountStore } from '~/stores/account'
+import { storeToRefs } from 'pinia'
+
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+
+const authToken = useCookie('token')
 const authCookie = useCookie('data')
-const { Photo, Nickname, MemberShip, Follower } = authCookie.value
+const { MemberShip, Follower } = authCookie.value
+
+const store = useAccountStore()
+const { artistInfoData, photo } = storeToRefs(store)
+const { getArtistInfo, handleDefaultInfo } = store
+
+const nickname = computed(() => {
+  return artistInfoData.value.Nickname || authCookie.value.Nickname || 'xxx'
+})
+const Photo = computed(() => {
+  return photo.value
+})
+
+const previewUrl = ref()
+const userImage = ref()
+
+const handleOnPreview = (event) => {
+  const file = event.target.files[0]
+  if (file.size > 1024 * 1024 * 4) {
+    return
+  }
+  previewUrl.value = URL.createObjectURL(event.target.files[0])
+  userImage.value = event.target.files[0]
+}
+
+const postImg = async () => {
+  const formData = new FormData()
+  formData.append('file', userImage.value)
+  try {
+    const { data, error } = useFetch(`${APIBASE}/api/uploadartistprofile`, {
+      headers: {
+        Authorization: `Bearer ${authToken.value}`
+      },
+      method: 'POST',
+      body: formData
+    })
+    console.log('postImg', data.value)
+    if (data.value.Message) {
+      await getArtistInfo()
+    }
+    previewUrl.value = false
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+onMounted(() => {
+  handleDefaultInfo()
+})
 </script>
 <style scoped></style>

@@ -161,7 +161,12 @@ const Photo = computed(() => {
   return photo.value
 })
 const Nickname = computed(() => {
-  return userInfoData.value.Nickname || artistInfoData.value.Nickname || 'xxx'
+  return (
+    userInfoData.value.Nickname ||
+    artistInfoData.value.Nickname ||
+    authCookie.value.Nickname ||
+    'xxx'
+  )
 })
 
 const logout = () => {
