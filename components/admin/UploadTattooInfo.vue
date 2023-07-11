@@ -142,6 +142,7 @@ watch(tattooSize, (newValue, oldValue) => {
     if (/^\d+(\*|\s)\d+$/.test(newValue)) {
       const parts = newValue.split(/(\*|\s)/)
       tattooSize.value = `${parts[0]}cm*${parts[2]}cm`
+      uploadTattooData.value.Size = tattooSize.value
       sizeErrorMessage.value = ''
     } else if (/^\d+$/.test(newValue)) {
       tattooSize.value = `${newValue}cm*${newValue}cm`

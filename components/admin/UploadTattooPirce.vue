@@ -107,17 +107,21 @@ import { storeToRefs } from 'pinia'
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
 
-const designIdea = uploadTattooData.value.Idea
+const designIdea = ref()
 const totalPrice = ref(7000)
 const deposit = ref()
+// Math.floor(totalPrice.value * 0.3)
 const balance = ref()
+// Math.floor(totalPrice.value - deposit.value)
 watch(totalPrice, (newTotalPrice) => {
   deposit.value = Math.floor(newTotalPrice * 0.3)
   balance.value = Math.floor(newTotalPrice - deposit.value)
 })
 
-uploadTattooData.value.Payment.Total = totalPrice.value
-uploadTattooData.value.Payment.Balance = balance.value
-uploadTattooData.value.Payment.Deposit = deposit.value
+// uploadTattooData.value.Payment.Total = totalPrice.value
+// uploadTattooData.value.Payment.Balance = balance.value
+// uploadTattooData.value.Payment.Deposit = deposit.value
+// uploadTattooData.value.Idea = designIdea.value
+// uploadTattooData.value.Payment = deposit.value
 </script>
 <style scoped></style>

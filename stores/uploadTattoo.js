@@ -2,20 +2,13 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const uploadTattooData = ref({
     Image: '',
     Name: '',
-    BodyPart: [],
-    Size: {
-      Height: '',
-      Width: ''
-    },
+    BodyPart: '',
+    Size: '',
     Idea: '',
     Hour: '',
-    Payment: {
-      Deposit: '',
-      Balance: '',
-      Total: ''
-    },
-    Style: [],
-    Element: []
+    Payment: '',
+    Style: '',
+    Element: ''
   })
 
   const runtimeConfig = useRuntimeConfig()
