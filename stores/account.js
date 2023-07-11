@@ -199,7 +199,7 @@ export const useAccountStore = defineStore('account', () => {
         body: artistInfoData
       })
       console.log('edit', data)
-      // 待補呼叫getArtistInfo()
+      getArtistInfo()
     } catch (error) {
       console.log(error)
     }
