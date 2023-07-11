@@ -31,6 +31,9 @@ export const useOrderStore = defineStore('order', () => {
     }
   }
 
+  // 取得訂單資料
+  const getOrder = async () => {}
+
   return {
     id,
     orderID,

@@ -1,42 +1,46 @@
 <template>
-  <NuxtLink to="/account/normal/orderRecords">
-    <Icon
-      name="ic:outline-keyboard-arrow-left"
-      size="48"
-      class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-    />
-  </NuxtLink>
-
   <div>
-    <OrderArea>
-      <template #orderContext>
-        <Icon :name="orderContext[order.Data.Status].icon" size="40" />
-        <h4>
-          {{ orderContext[order.Data.Status].title }}
-        </h4>
-        <p class="text-base text-secondary">
-          {{ orderContext[order.Data.Status].content }}
-        </p>
-      </template>
-      <template #steps>
-        <OrderStep :step="orderStatus" step3Title="評價刺青師" />
-      </template>
-      <template #orderDetail>
-        <OrderData :order="order.Data" :status="order.Data.Status" role="刺青師" />
-      </template>
-    </OrderArea>
-    <!-- 評價區 -->
-    <PostComments v-if="status !== '已評價'" class=" " />
+    <NuxtLink to="/account/normal/orderRecords">
+      <Icon
+        name="ic:outline-keyboard-arrow-left"
+        size="48"
+        class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
+      />
+    </NuxtLink>
+    <div>
+      <OrderArea>
+        <template #orderContext>
+          <Icon :name="orderContext[order.Data.Status].icon" size="40" />
+          <h4>
+            {{ orderContext[order.Data.Status].title }}
+          </h4>
+          <p class="text-base text-secondary">
+            {{ orderContext[order.Data.Status].content }}
+          </p>
+        </template>
+        <template #steps>
+          <OrderStep :step="orderStatus" step3Title="評價刺青師" />
+        </template>
+        <template #orderDetail>
+          <OrderData :order="order.Data" :status="order.Data.Status" role="刺青師" />
+        </template>
+      </OrderArea>
+      <!-- 評價區 -->
+      <PostComments v-if="status !== '已評價'" class=" " />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
 import OrderArea from '~/container/order/OrderArea'
 import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
-
-const route = useRoute()
+const store = useAccountStore()
+const { authCookie } = storeToRefs()
+const route = useRoute(store)
 const runtimeConfig = useRuntimeConfig()
 const apiBase = runtimeConfig.public.apiBase
 
@@ -50,9 +54,11 @@ const apiBase = runtimeConfig.public.apiBase
 // order.value = data.value.data
 // console.log('single order reassigned', order)
 
-const cookie = useCookie('token')
-const orderID = route.params.orderID
-const userID = cookie.value.data.ID
+// const cookie = useCookie('token')
+// const orderID = route.params.orderID
+// const userID = authCookie.value.data.Id
+console.log('authCookie', authCookie)
+console.log('route', route)
 
 const orderContext = {
   訂單成立: {
