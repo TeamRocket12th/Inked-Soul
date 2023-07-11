@@ -17,6 +17,7 @@ export const useAccountStore = defineStore('account', () => {
   const name = ref()
   const tel = ref()
   const Id = ref(0)
+  const photo = ref()
 
   const userInfoData = reactive({
     Id: Id.value,
@@ -24,18 +25,18 @@ export const useAccountStore = defineStore('account', () => {
     Tel: ''
   })
   const artistInfoData = reactive({
-    Id: authToken.value ? authCookie.value.Id : '',
-    Account: authToken.value ? authCookie.value.Email : '',
+    Id: '',
+    Account: '',
     Password: '',
     Salt: '',
-    Photo: authToken.value ? authCookie.value.Photo : '',
+    Photo: '',
     Realname: '',
-    Nickname: authToken.value ? authCookie.value.Nickname : '',
+    Nickname: '',
     StudioName: '',
     Registration: '',
     Phone: '',
     Tel: '',
-    Role: authToken.value ? authCookie.value.Role : '',
+    Role: '',
     Style: '',
     StartTime: '',
     EndTime: '',
@@ -46,7 +47,7 @@ export const useAccountStore = defineStore('account', () => {
     Experience: 0,
     Intro: '',
     IsVerified: 0,
-    MemberShip: authToken.value ? authCookie.value.MemberShip : 0,
+    MemberShip: 0,
     Style: '',
     Guid: '',
     Follower: 0,
@@ -138,6 +139,9 @@ export const useAccountStore = defineStore('account', () => {
       userInfoData.Nickname = data.value.Data.Nickname
       userInfoData.Tel = data.value.Data.Tel
 
+      photo.value = data.value.Data.Photo
+      // console.log(data.value.Data.Photo)
+
       authCookie.value.Nickname = data.value.Data.Nickname
     } catch (error) {
       console.log('get', error)
@@ -176,7 +180,7 @@ export const useAccountStore = defineStore('account', () => {
         method: 'GET'
       })
       console.log('get', data)
-      // 補上email、tel等變數重新賦值，以便畫面渲染新值
+      // 補上artistInfoData重新賦值，以便畫面渲染新值
     } catch (error) {
       console.log('get', error)
     }
@@ -247,6 +251,7 @@ export const useAccountStore = defineStore('account', () => {
 
   return {
     identity,
+    photo,
     email,
     guid,
     password,

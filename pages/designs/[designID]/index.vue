@@ -1,7 +1,17 @@
 <template>
   <div class="container">
-    <p>單一認領圖頁</p>
-    <p>認領圖ID：{{ route.params.designID }}</p>
+    <!-- 麵包屑 -->
+    <div class="breadcrumbs text-sm">
+      <ul>
+        <li><NuxtLink to="/">首頁</NuxtLink></li>
+        <li>
+          <NuxtLink :to="`/artists/${artistID}`">{{ artistName }}</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink :to="`/designs/${designID}`" class="underline">{{ designName }}</NuxtLink>
+        </li>
+      </ul>
+    </div>
     <!-- 認領圖資訊 -->
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-2 flex flex-col gap-10">
@@ -43,4 +53,9 @@ const id = route.params.designID
 const { data } = await useFetch(`/api/getDesign/${id}`)
 // const { data } = await useFetch(`http://localhost:5005/design/${id}`)
 const designData = data.value.data
+console.log(data.value.data.designName)
+const artistName = data.value.data.artistData.nickname
+const artistID = data.value.data.artistData.id
+const designName = data.value.data.designName
+const designID = data.value.data.designID
 </script>
