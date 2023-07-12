@@ -10,7 +10,7 @@
         <div class="relative">
           <VField
             id="realName"
-            v-model="userData.name"
+            v-model="inputPaymentInfo.Realname"
             name="真實姓名"
             rules="required"
             class="formInput"
@@ -31,7 +31,7 @@
         <div class="relative">
           <VField
             id="phone"
-            v-model="userData.tel"
+            v-model="inputPaymentInfo.Phone"
             name="聯絡電話"
             :rules="isPhone"
             class="formInput"
@@ -51,7 +51,7 @@
         </div>
         <div class="relative">
           <VField
-            v-model="userData.email"
+            v-model="inputPaymentInfo.Email"
             name="電子信箱"
             rules="required|email"
             class="formInput"
@@ -91,7 +91,7 @@
         <div>
           <p class="mb-2">預約時段</p>
           <div class="dropdown-bottom dropdown-end dropdown w-full">
-            <label tabindex="0" class="btn w-full">{{ userData.time }}</label>
+            <label tabindex="0" class="btn w-full">{{ inputPaymentInfo.time }}</label>
             <ul
               tabindex="0"
               class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -122,20 +122,80 @@
         </div>
       </div>
     </VForm>
+    <!-- ❌ -->
+    <div>
+      <p>artistInfo</p>
+      {{ artistInfo }}
+    </div>
+    <div>
+      <p>input</p>
+      {{ inputPaymentInfo }}
+    </div>
+    <div>
+      <p>payment</p>
+      {{ paymentInfo }}
+    </div>
+    <button @click="postOrder">test</button>
   </div>
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+const authToken = useCookie('token')
+///
 const store = useOrderStore()
-const { userData } = storeToRefs(store)
+const { paymentInfo } = storeToRefs(store)
+////
+
+const inputPaymentInfo = reactive({
+  Realname: '',
+  Phone: '',
+  Email: '',
+  BookedDate: '',
+  BookedTimeFrame: '',
+  ImagesId: '',
+  PayWay: ''
+})
 
 const props = defineProps({
   time: {
-    require: true
+    required: true
+  },
+  artistId: {
+    required: true
   }
 })
+
+// 取得刺青師可預約時間
+const { data: artistInfo, error } = useFetch(`${APIBASE}/api/artistbooking`, {
+  headers: { 'Content-type': 'application/json' },
+  method: 'POST',
+  body: props.artistId
+})
+
+// 發送用戶下單資料
+const postOrder = async () => {
+  Object.assign(paymentInfo.value, inputPaymentInfo)
+  if (!authToken) {
+    return
+  } else {
+    const {
+      data: orderResponse,
+      error: userError,
+      pending
+    } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
+      headers: { 'Content-type': 'application/json', Authorization: `Bearer ` },
+      method: 'POST',
+      body: paymentInfo.value
+    })
+    if (!orderResponse.value.Status) {
+      console.log(orderResponse.value.Message)
+    }
+  }
+}
 
 const closeDays = props.time.ClosedDays
 const dayOff = props.time.DayOff
@@ -144,7 +204,7 @@ const _endTime = props.time.EndTime
 
 const date = new Date()
 date.setDate(date.getDate() + 5)
-userData.date = date
+inputPaymentInfo.BookedDate = date
 const minDate = date.toISOString().slice(0, 10)
 
 // output: '7,1' -> ['7','1']
@@ -155,20 +215,20 @@ const toArray = (string) => {
 }
 
 const disabledTime = ref('')
-const selectDate = ref(userData.value.date)
+const selectDate = ref(inputPaymentInfo.BookedDate)
 const selectTime = (time) => {
   switch (time) {
     case 0:
-      userData.value.time = '上午（開店時間-12:00）'
+      inputPaymentInfo.BookedTimeFrame = '上午（開店時間-12:00）'
       break
     case 1:
-      userData.value.time = '下午（12:00-18:00）'
+      inputPaymentInfo.BookedTimeFrame = '下午（12:00-18:00）'
       break
     case 2:
-      userData.value.time = '晚上（18:00-閉店時間）'
+      inputPaymentInfo.BookedTimeFrame = '晚上（18:00-閉店時間）'
       break
     default:
-      userData.value.time = '預約時段'
+      inputPaymentInfo.BookedTimeFrame = '預約時段'
       break
   }
 }
@@ -187,12 +247,12 @@ const { isPhone } = useValidate()
 const { formatDate, formattedOutput } = useFormatted()
 
 onMounted(() => {
-  userData.value.date = formattedOutput(date)
+  inputPaymentInfo.BookedDate = formattedOutput(date)
   isBookAvailable()
 })
 
 watch(selectDate, (newValue) => {
-  userData.value.date = formattedOutput(newValue)
+  inputPaymentInfo.BookedDate = formattedOutput(newValue)
   isBookAvailable()
 })
 

@@ -11,38 +11,48 @@ export const useOrderStore = defineStore('order', () => {
     name: '',
     deposit: 0
   })
-  const userData = ref({
-    name: '',
-    tel: '',
-    email: '',
-    date: '',
-    time: '預約時段'
-  })
 
-  const postOrder = async () => {
-    // 送出訂單
-    const orderData = {
-      designData: designData.value,
-      userData: userData.value
-    }
-    try {
-      const { data } = await useFetch('http://localhost:5005/order', {
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
-        },
-        method: 'post',
-        body: orderData
-      })
-      orderID.value = data.value.orderID
-      if (data.value.status === 200) {
-        console.log('送出訂單成功', data)
-        await router.push(`/designs/${designData.value.ID}/complete`)
-      }
-    } catch (error) {
-      console.log('送出訂單失敗', error)
-    }
-  }
+  const paymentInfo = reactive({
+    Realname: '',
+    Phone: '',
+    Email: '',
+    BookedDate: '',
+    BookedTimeFrame: '',
+    ImagesId: '',
+    PayWay: ''
+  })
+  // const userData = ref({
+  //   name: '',
+  //   tel: '',
+  //   email: '',
+  //   date: '',
+  //   time: '預約時段'
+  // })
+
+  // const postOrder = async () => {
+  //   // 送出訂單
+  //   const orderData = {
+  //     designData: designData.value,
+  //     userData: userData.value
+  //   }
+  //   try {
+  //     const { data } = await useFetch('http://localhost:5005/order', {
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //         Authorization: `Bearer ${authToken.value}`
+  //       },
+  //       method: 'post',
+  //       body: orderData
+  //     })
+  //     orderID.value = data.value.orderID
+  //     if (data.value.status === 200) {
+  //       console.log('送出訂單成功', data)
+  //       await router.push(`/designs/${designData.value.ID}/complete`)
+  //     }
+  //   } catch (error) {
+  //     console.log('送出訂單失敗', error)
+  //   }
+  // }
 
   // 取得訂單資料
   const getOrder = async () => {
@@ -90,8 +100,9 @@ export const useOrderStore = defineStore('order', () => {
     id,
     orderID,
     designData,
-    userData,
-    postOrder,
+    // userData,s
+    paymentInfo,
+    // postOrder,
     getOrder,
     getStatus,
     getAllOrder
