@@ -16,24 +16,20 @@
       class="absolute top-[50%] h-full w-full -translate-y-[50%] bg-black object-contain"
     />
     <input
+      id="file"
       type="file"
       accept=".jpg, .png, .svg "
-      id="file"
       class="hidden"
       @change.stop="handleOnPreview"
     />
   </label>
 </template>
 <script setup>
-import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
-const runtimeConfig = useRuntimeConfig()
-const apiBase = runtimeConfig.public.apiBase
-
-const authToken = useCookie('token')
 
 const isFileSizeAlert = ref(false)
 
