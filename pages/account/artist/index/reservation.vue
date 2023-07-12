@@ -107,18 +107,19 @@
   </div>
 </template>
 <script setup>
+const authToken = useCookie('token')
+const authCookie = useCookie('data')
+
+const artistID = authCookie.value.Id // 對應刺青師ID
+const runtimeConfig = useRuntimeConfig()
+const apiBase = runtimeConfig.public.apiBase
+
 const { formattedOutput } = useFormatted()
 
 const date = ref(new Date())
 const selectDate = ref('')
 
 const isLoading = ref('')
-
-const cookie = useCookie('token')
-const artistID = cookie.value.data.ID // 對應刺青師ID
-const runtimeConfig = useRuntimeConfig()
-const apiBase = runtimeConfig.public.apiBase
-
 const dateDetail = ref('')
 
 const disabledDates = ref([
