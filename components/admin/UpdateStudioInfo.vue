@@ -11,10 +11,10 @@
           <VField
             id="studio"
             v-model="artistInfoData.StudioName"
-            :rules="isUnder20"
             name="店名"
             class="formInput"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
+            disabled
           />
           <Icon
             v-if="props.errors.店名"
