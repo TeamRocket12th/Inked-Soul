@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn-neutral btn w-full text-white" onclick="my_modal_3.showModal()">
+    <button class="btn-neutral btn w-full bg-black text-white" onclick="my_modal_3.showModal()">
       確認付款
     </button>
     <dialog id="my_modal_3" class="modal">
@@ -21,7 +21,9 @@
             提醒您，請再次確認完整訂單。 <br />
             訂單成立後，平台將會協助把訂金撥款給賣家。
           </p>
-          <button class="btn-neutral btn px-5 text-white" @click="postOrder">確認付款</button>
+          <button class="btn-neutral btn bg-black px-5 text-white" @click="postOrder">
+            確認付款
+          </button>
         </div>
       </form>
     </dialog>
