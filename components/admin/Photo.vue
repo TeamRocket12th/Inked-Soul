@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center gap-10 px-[104] py-10">
-    <div class="avatar flex flex-col items-center">
+    <div class="avatar flex flex-col items-center gap-2">
       <div class="w-20 rounded-lg">
         <img :src="Photo" />
       </div>

@@ -35,4 +35,8 @@
   .styleBtn {
     @apply m-2 block inline-block whitespace-nowrap rounded-full border border-black p-2;
   }
+  .uploadPhoto {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
+    /* lightgray 0px -5.437px / 100% 149.982% no-repeat; */
+  }
 }
