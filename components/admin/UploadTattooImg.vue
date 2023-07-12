@@ -13,7 +13,8 @@
     <img
       :src="url"
       alt=""
-      class="absolute top-[50%] h-full w-full -translate-y-[50%] bg-black object-contain"
+      class="absolute top-[50%] h-full w-full -translate-y-[50%] object-contain"
+      :class="url ? 'bg-black' : ''"
     />
     <input
       id="file"
