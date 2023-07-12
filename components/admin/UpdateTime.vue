@@ -10,7 +10,7 @@
           >
             <span>
               <!-- v-for="(day, key) in ArtistCloseDay" :key="key" -->
-              {{ inputArtistInfoData.ClosedDays }}
+              {{ inputArtistInfoData.ClosedDays || artistInfoData.ClosedDays }}
               <!-- {{ day.week }} -->
             </span>
           </label>
@@ -95,13 +95,13 @@
       <span>可供預約時段</span>
       <ul class="flex flex-wrap gap-2">
         <li
-          v-for="(part, key) in timeFrame"
+          v-for="(time, key) in timeFrame"
           :key="key"
-          @click="SelectTimeFrame(part.id)"
+          @click="SelectTimeFrame(time)"
           class="rounded-full border px-3 py-1 text-center"
-          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(part.id) }"
+          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(time) }"
         >
-          <a>{{ part.time }}</a>
+          <a>{{ time }}</a>
         </li>
       </ul>
     </div>
@@ -146,25 +146,20 @@ const time = [
   '23:00',
   '24:00'
 ]
-const timeFrame = [
-  { id: 0, time: '上午（開店時間～12:00）' },
-  { id: 1, time: '下午（12:00~18:00' },
-  { id: 2, time: '晚上（18:00~閉店時間）' }
-]
+const timeFrame = ['上午（開店時間～12:00）', '下午（12:00~18:00)', '晚上（18:00~閉店時間）']
 
 const store = useAccountStore()
 const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
 const { formatDate, formattedOutput } = useFormatted()
 
 // 要get API 的值（需要轉換格式）
-const ArtistCloseDay = ref([weeks[0]])
-const ArtistOpenTime = ref('請選擇')
-const ArtistCloseTime = ref('請選擇')
+const ArtistCloseDay = ref([])
+const ArtistOpenTime = ref(
+  artistInfoData.value.StartTime ? artistInfoData.value.StartTime : '請選擇'
+)
+const ArtistCloseTime = ref(artistInfoData.value.EndTime ? artistInfoData.value.EndTime : '請選擇')
 const ArtistAvailableTimeFrame = ref(artistInfoData.value.TimeFrame || [])
 const ArtistDayoff = ref('')
-
-console.log('a', artistInfoData.value.TimeFrame)
-console.log(ArtistAvailableTimeFrame.value)
 
 const date = new Date()
 const selectDayoff = ref('')
@@ -230,9 +225,6 @@ const SelectTime = (status, time) => {
 const SelectTimeFrame = (part) => {
   if (ArtistAvailableTimeFrame.value.includes(part) === false) {
     ArtistAvailableTimeFrame.value.push(part)
-    ArtistAvailableTimeFrame.value.sort((a, b) => {
-      return a - b
-    })
   } else {
     const index = ArtistAvailableTimeFrame.value.indexOf(part)
     ArtistAvailableTimeFrame.value.splice(index, 1)

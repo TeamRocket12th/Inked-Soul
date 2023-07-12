@@ -175,11 +175,11 @@ const taiwanCities = [
 ]
 const errorSelect = ['地區', '北部', '中部', '南部', '東部']
 
-const studioLoaction = ref('地區')
+const studioLoaction = ref(artistInfoData.value.City ? artistInfoData.value.City : '地區')
 const selectCity = (city) => {
   if (!errorSelect.includes(city)) {
     studioLoaction.value = city
-    artistInfoData.value.City = studioLoaction.value
+    inputArtistInfoData.value.City = studioLoaction.value
   }
 }
 </script>
