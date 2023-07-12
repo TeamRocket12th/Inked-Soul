@@ -84,7 +84,9 @@ const postImg = async () => {
       method: 'POST',
       body: formData
     })
-    await getUserInfo()
+    if (data.value.Message) {
+      await getUserInfo()
+    }
     previewUrl.value = false
   } catch (error) {
     console.log(error)

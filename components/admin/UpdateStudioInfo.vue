@@ -11,10 +11,22 @@
           <VField
             id="studio"
             v-model="artistInfoData.StudioName"
+            :rules="isUnder20"
             name="店名"
-            class="formInput"
+            class="formInput text-[#D0D0D0]"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
             disabled
+          />
+          <!-- 正確的，因為篩選功能所以不能被改 -->
+          <VField
+            v-if="!artistInfoData.StudioName"
+            id="studio"
+            v-model="inputArtistInfoData.StudioName"
+            :rules="isUnder20"
+            name="店名"
+            class="formInput text-[#D0D0D0]"
+            :class="{ 'border-[#DC3545]': props.errors.店名 }"
+            :placeholder="artistInfoData.StudioName"
           />
           <Icon
             v-if="props.errors.店名"
@@ -31,10 +43,22 @@
         <div class="relative">
           <VField
             id="license"
-            v-model="artistInfoData.Registration"
+            v-model="artistInfoData.License"
+            name="營業登記號"
+            class="formInput text-[#D0D0D0]"
+            :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
+            :placeholder="artistInfoData.License"
+            disabled
+          />
+          <!-- 正確的，因為篩選功能所以不能被改 -->
+          <VField
+            v-if="!artistInfoData.License"
+            id="license"
+            v-model="inputArtistInfoData.License"
             name="營業登記號"
             class="formInput"
             :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
+            :placeholder="artistInfoData.License"
           />
           <Icon
             v-if="props.errors.營業登記號"
@@ -77,10 +101,10 @@
         <label for="address" class="cursor-pointer">地址 </label>
         <VField
           id="address"
-          v-model="artistInfoData.Address"
+          v-model="inputArtistInfoData.Address"
           name="地址"
           class="formInput"
-          placeholder="鄉鎮市區、里鄰、門牌號碼"
+          :placeholder="artistInfoData.Address || '鄉鎮市區、里鄰、門牌號碼'"
         />
       </div>
       <div class="flex flex-col gap-2">
@@ -91,12 +115,12 @@
         <div class="relative">
           <VField
             id="tel"
-            v-model="artistInfoData.Tel"
+            v-model="inputArtistInfoData.Tel"
             :rules="isTel"
             name="電話"
             class="formInput"
-            placeholder="00-00000000"
             :class="{ 'border-[#DC3545]': props.errors.電話 }"
+            :placeholder="artistInfoData.Tel || '00 - 00000000'"
           />
           <Icon
             v-if="props.errors.電話"
@@ -113,7 +137,7 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { artistInfoData } = storeToRefs(store)
+const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
 
 const { isTel, isUnder20 } = useValidate()
 
@@ -151,11 +175,11 @@ const taiwanCities = [
 ]
 const errorSelect = ['地區', '北部', '中部', '南部', '東部']
 
-const studioLoaction = ref('地區')
+const studioLoaction = ref(artistInfoData.value.City ? artistInfoData.value.City : '地區')
 const selectCity = (city) => {
   if (!errorSelect.includes(city)) {
     studioLoaction.value = city
-    artistInfoData.value.City = studioLoaction.value
+    inputArtistInfoData.value.City = studioLoaction.value
   }
 }
 </script>

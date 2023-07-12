@@ -13,8 +13,9 @@
             :rules="isUnder20"
             name="真實姓名"
             class="formInput"
-            v-model="artistInfoData.Realname"
+            v-model="inputArtistInfoData.Realname"
             :class="{ 'border-[#DC3545]': props.errors.真實姓名 }"
+            :placeholder="artistInfoData.Realname"
           />
           <Icon
             name="ic:baseline-error-outline"
@@ -34,8 +35,9 @@
             :rules="isUnder20"
             name="名稱"
             class="formInput"
-            v-model="artistInfoData.Nickname"
+            v-model="inputArtistInfoData.Nickname"
             :class="{ 'border-[#DC3545]': props.errors.名稱 }"
+            :placeholder="artistInfoData.Nickname"
           />
           <Icon
             name="ic:baseline-error-outline"
@@ -56,8 +58,9 @@
             name="手機"
             class="formInput"
             placeholder="0912345678"
-            v-model="artistInfoData.Phone"
+            v-model="inputArtistInfoData.Phone"
             :class="{ 'border-[#DC3545]': props.errors.手機 }"
+            :placeholder="artistInfoData.Phone"
           />
           <Icon
             name="ic:baseline-error-outline"
@@ -98,9 +101,9 @@
             rules="integer: true"
             name="資歷"
             class="formInput"
-            placeholder="8"
-            v-model="artistInfoData.Experience"
+            v-model="inputArtistInfoData.Experience"
             :class="{ 'border-[#DC3545]': props.errors.資歷 }"
+            :placeholder="artistInfoData.Experience || 1"
           />
           <Icon
             name="ic:baseline-error-outline"
@@ -117,7 +120,7 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { artistInfoData } = storeToRefs(store)
+const { inputArtistInfoData, artistInfoData } = storeToRefs(store)
 
 const { isUnder20, isPhone } = useValidate()
 

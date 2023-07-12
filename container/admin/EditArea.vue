@@ -14,7 +14,7 @@
       </div>
       <button
         type="button"
-        @click="editArtistInfo"
+        @click.prevent="editArtistInfo"
         :disabled="!meta.valid"
         class="btn-neutral btn mb-20 w-full bg-black text-white"
       >
@@ -33,6 +33,7 @@ import UpdateTime from '~/components/admin/UpdateTime.vue'
 import UpdatePassword from '~/components/admin/UpdatePassword.vue'
 import UpdatePersonalBrief from '~/components/admin/UpdatePersonalBrief.vue'
 import UpdateStyle from '~/components/admin/UpdateStyle.vue'
+
 const store = useAccountStore()
 const { editArtistInfo } = store
 </script>
