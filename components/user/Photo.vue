@@ -20,7 +20,7 @@
             </label>
             <input
               type="file"
-              accept=".jpg, .png, .svg "
+              accept=".jpg, .png, .svg .gif"
               @change="handleOnPreview"
               class="hidden"
               id="photo"
