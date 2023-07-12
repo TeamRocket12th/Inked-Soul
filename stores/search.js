@@ -8,19 +8,13 @@ export const useSearchStore = defineStore('search', () => {
 
   const filterArr = ref([])
   const searchCity = async () => {
-    // 組字串
-    let str = ''
-    for (let i = 0; i < cityArr.value.length; i++) {
-      str += `${cityArr.value[i]}、`
-    }
-    let newStr = ''
-    newStr = str.slice(0, str.length - 1)
-    // 發API
+    let str = cityArr.value.join(',')
     // 放路徑或放body
     try {
-      const { data } = await useFetch(`${APIBASE}/api/getImage/artistcity/${newStr}`, {
-        body: newStr
+      const { data } = await useFetch(`${APIBASE}/api/getImage/artistcity/${str}`, {
+        body: str
       })
+      console.log(str)
       console.log('成功取得地區', data)
     } catch (error) {}
   }

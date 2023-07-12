@@ -26,7 +26,7 @@
           <UpdateStyle> 風格（最多選擇兩項） </UpdateStyle>
           <UpdateElement />
         </div>
-        <button @click="uploadTattoo" type="button" class="btn w-full">確認上傳</button>
+        <button @click="uploadTattoo()" type="button" class="btn w-full">確認上傳</button>
       </div>
     </div>
   </div>
