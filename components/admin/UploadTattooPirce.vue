@@ -17,9 +17,9 @@
           :class="{ 'border-[#DC3545]': errors.設計理念 }"
         />
         <Icon
+          v-if="errors.設計理念"
           name="ic:baseline-error-outline"
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-          v-if="errors.設計理念"
         />
       </div>
     </div>
@@ -41,9 +41,9 @@
               disabled
             />
             <Icon
+              v-if="errors.訂金"
               name="ic:baseline-error-outline"
               class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-              v-if="errors.訂金"
             />
           </div>
         </div>
@@ -63,9 +63,9 @@
               disabled
             />
             <Icon
+              v-if="errors.尾款"
               name="ic:baseline-error-outline"
               class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-              v-if="errors.尾款"
             />
           </div>
         </div>
@@ -86,9 +86,9 @@
               :class="{ 'border-[#DC3545]': errors.總金額 }"
             />
             <Icon
+              v-if="errors.總金額"
               name="ic:baseline-error-outline"
               class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-              v-if="errors.總金額"
             />
           </div>
         </div>
@@ -101,8 +101,8 @@
   </VForm>
 </template>
 <script setup>
-import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
@@ -110,18 +110,18 @@ const { uploadTattooData } = storeToRefs(store)
 const designIdea = ref()
 const totalPrice = ref(7000)
 const deposit = ref()
-// Math.floor(totalPrice.value * 0.3)
 const balance = ref()
-// Math.floor(totalPrice.value - deposit.value)
+
 watch(totalPrice, (newTotalPrice) => {
   deposit.value = Math.floor(newTotalPrice * 0.3)
   balance.value = Math.floor(newTotalPrice - deposit.value)
+  uploadTattooData.value.pictotal = totalPrice.value
+  uploadTattooData.value.picdeposit = deposit.value.toString()
+  uploadTattooData.value.picbalance = balance.value.toString()
 })
 
-// uploadTattooData.value.Payment.Total = totalPrice.value
-// uploadTattooData.value.Payment.Balance = balance.value
-// uploadTattooData.value.Payment.Deposit = deposit.value
-// uploadTattooData.value.Idea = designIdea.value
-// uploadTattooData.value.Payment = deposit.value
+watch(designIdea, (nV) => {
+  uploadTattooData.value.picidea = designIdea.value
+})
 </script>
 <style scoped></style>

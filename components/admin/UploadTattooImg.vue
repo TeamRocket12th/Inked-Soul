@@ -13,7 +13,7 @@
     <img
       :src="url"
       alt=""
-      class="absolute top-[50%] max-h-[400px] w-full -translate-y-[50%] bg-gray-100 object-contain"
+      class="absolute top-[50%] h-full w-full -translate-y-[50%] bg-black object-contain"
     />
     <input
       type="file"
@@ -46,32 +46,6 @@ const handleOnPreview = (event) => {
   }
   url.value = URL.createObjectURL(event.target.files[0])
   uploadTattooData.value.Image = event.target.files[0]
-  console.log(event.target.files)
-  console.log(uploadTattooData.value.Image)
-  console.log(authToken.value)
-}
-
-const selectImage = () => {
-  const formData = new FormData()
-  formData.append('image', file)
-}
-
-const postImage = async () => {
-  // 📌 如果上傳次數 > 5 無法再上傳 (應該在頁面中 run)
-  // if (token.uploadTattooCount > 5) {
-  //   return false
-  // }
-  try {
-    const res = await $fetch(`${apiBase}/postImg`, {
-      header: {
-        Authorization: `Bearer ${token}`
-      },
-      method: 'POST',
-      body: tattooImage
-    })
-  } catch (error) {
-    console.log('error', error)
-  }
 }
 </script>
 <style scoped></style>

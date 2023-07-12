@@ -4,11 +4,11 @@
     <ul class="flex flex-wrap gap-2">
       <li v-for="(style, key) in elements" :key="key">
         <button
-          @click="styleToggle(style)"
           ref="styleBtn"
           type="button"
           :class="{ 'bg-black text-white': tattooElement.includes(style) }"
           class="whitespace-nowrap rounded-full border px-3 py-1"
+          @click="styleToggle(style)"
         >
           {{ style }}
         </button>
@@ -17,8 +17,8 @@
   </div>
 </template>
 <script setup>
-import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
@@ -51,7 +51,7 @@ const styleToggle = (addStyle) => {
     tattooElement.value.splice(0, 1, addStyle)
   }
   const elementStr = tattooElement.value.join()
-  uploadTattooData.value.Element = elementStr
+  uploadTattooData.value.picelement = elementStr
 }
 </script>
 <style scoped></style>

@@ -1,14 +1,16 @@
 export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const uploadTattooData = ref({
     Image: '',
-    Name: '',
-    BodyPart: '',
-    Size: '',
-    Idea: '',
-    Hour: '',
-    Payment: '',
-    Style: '',
-    Element: ''
+    picname: '',
+    picbodypart: '',
+    picsize: '',
+    picidea: '',
+    pichour: '',
+    pictotal: '',
+    picdeposit: '',
+    picbalance: '',
+    picstyle: '',
+    picelement: ''
   })
 
   const runtimeConfig = useRuntimeConfig()
@@ -18,26 +20,39 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const authCookie = useCookie('data')
   const artistID = authCookie.value.Id // 對應刺青師ID
 
-  const uploadTattoo = async () => {
-    console.log(uploadTattooData.value)
-    // try {
-    //   const { data, error } = await useFetch(`${APIBASE}/api/uploadimage`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-type': 'application/json',
-    //       Authorization: authToken
-    //     },
-    //     body: uploadTattooData.value // 待確認
-    //   })
+  const formKey = {}
+  // 打包成form data
+  const formData = new FormData()
+  const selectImage = () => {
+    for (const key in uploadTattooData.value) {
+      formKey[key] = uploadTattooData.value[key]
+      formData.append(key, uploadTattooData.value[key])
+    }
+  }
+  // 限制上傳次數
+  const postImageLimit = () => {
+    // 📌 如果上傳次數 > 5 無法再上傳 (應該在頁面中 run)
+    if (authToken.uploadTattooCount > 5) {
+      console.log('上傳次數超過限制')
+      return false
+    }
+  }
 
-    //   if (error.value) {
-    //     console.log('err', error.value)
-    //   } else {
-    //     console.log('data', data.value)
-    //   }
-    // } catch (error) {
-    //   console.log(error)
-    // }
+  const uploadTattoo = async () => {
+    selectImage()
+    postImageLimit()
+    try {
+      const { data } = await useFetch(`${APIBASE}/api/uploadimage`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`
+        },
+        body: formData
+      })
+      console.log(data)
+    } catch (error) {
+      console.log('上傳錯誤', error)
+    }
   }
 
   const getTattooData = async () => {

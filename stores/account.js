@@ -48,7 +48,6 @@ export const useAccountStore = defineStore('account', () => {
     Intro: '',
     IsVerified: 0,
     MemberShip: 0,
-    Style: '',
     Guid: '',
     Follower: 0,
     TimeFrame: '',
@@ -164,6 +163,7 @@ export const useAccountStore = defineStore('account', () => {
         body: userInfoData
       })
       getUserInfo()
+      console.log(data)
     } catch (error) {
       console.log(error)
     }

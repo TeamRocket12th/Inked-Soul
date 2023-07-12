@@ -17,9 +17,9 @@
           :class="{ 'border-[#DC3545]': errors.作品名稱 }"
         />
         <Icon
+          v-if="errors.作品名稱"
           name="ic:baseline-error-outline"
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-          v-if="errors.作品名稱"
         />
       </div>
     </div>
@@ -38,8 +38,8 @@
           <li
             v-for="(part, key) in bodyParts"
             :key="key"
-            @click="SelectRecommendPositions(part)"
             class="m-1"
+            @click="SelectRecommendPositions(part)"
           >
             <a :class="{ 'bg-gray-100': selectBodyParts.includes(part) }">{{ part }}</a>
           </li>
@@ -55,16 +55,16 @@
       <div class="relative">
         <input
           id="studio"
+          v-model.lazy="tattooSize"
           type="text"
           placeholder="12cm*12cm"
-          v-model.lazy="tattooSize"
           class="formInput"
           :class="{ 'border-[#DC3545]': sizeErrorMessage }"
         />
         <Icon
+          v-if="sizeErrorMessage"
           name="ic:baseline-error-outline"
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-          v-if="sizeErrorMessage"
         />
       </div>
     </div>
@@ -93,8 +93,8 @@
   </VForm>
 </template>
 <script setup>
-import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
@@ -117,8 +117,13 @@ const tattooName = ref()
 const selectBodyParts = ref([bodyParts[0]])
 const tattooSize = ref('')
 const hour = ref()
-uploadTattooData.value.Hour = hour
-uploadTattooData.value.Name = tattooName
+
+watch(tattooName, (newVal, oldVal) => {
+  uploadTattooData.value.picname = tattooName.value
+})
+watch(hour, (newVal, oldVal) => {
+  uploadTattooData.value.pichour = hour.value
+})
 
 const SelectRecommendPositions = (part) => {
   const index = selectBodyParts.value.indexOf(part)
@@ -130,7 +135,7 @@ const SelectRecommendPositions = (part) => {
     selectBodyParts.value.splice(0, 1, part)
   }
   const bodypartStr = selectBodyParts.value.join(',')
-  uploadTattooData.value.BodyPart = bodypartStr
+  uploadTattooData.value.picbodypart = bodypartStr
 }
 
 const sizeErrorMessage = ref('')
@@ -142,7 +147,7 @@ watch(tattooSize, (newValue, oldValue) => {
     if (/^\d+(\*|\s)\d+$/.test(newValue)) {
       const parts = newValue.split(/(\*|\s)/)
       tattooSize.value = `${parts[0]}cm*${parts[2]}cm`
-      uploadTattooData.value.Size = tattooSize.value
+      uploadTattooData.value.picsize = tattooSize.value
       sizeErrorMessage.value = ''
     } else if (/^\d+$/.test(newValue)) {
       tattooSize.value = `${newValue}cm*${newValue}cm`

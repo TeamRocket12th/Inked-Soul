@@ -6,11 +6,11 @@
     <ul class="flex flex-wrap gap-2">
       <li v-for="(style, key) in styles" :key="key">
         <button
-          @click="styleToggle(style)"
           ref="styleBtn"
           type="button"
           :class="{ 'bg-black text-white': personalStyle.includes(style) }"
           class="whitespace-nowrap rounded-full border px-3 py-1"
+          @click="styleToggle(style)"
         >
           {{ style }}
         </button>
@@ -19,9 +19,9 @@
   </div>
 </template>
 <script setup>
+import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { useAccountStore } from '~/stores/account'
-import { storeToRefs } from 'pinia'
 
 const editStore = useAccountStore()
 const { artistInfoData } = storeToRefs(editStore)
@@ -57,7 +57,7 @@ const styleToggle = (addStyle) => {
   }
 
   // 上傳刺青風格
-  uploadTattooData.value.Style = personalStyle.value.join()
+  uploadTattooData.value.picstyle = personalStyle.value.join()
 
   // 編輯個人風格
   artistInfoData.value.Style = personalStyle.value.join()
