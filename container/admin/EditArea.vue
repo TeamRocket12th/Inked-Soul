@@ -14,7 +14,7 @@
       </div>
       <button
         type="button"
-        @click="editArtistInfo"
+        @click.prevent="editArtistInfo"
         :disabled="!meta.valid"
         class="btn-neutral btn mb-20 w-full bg-black text-white"
       >

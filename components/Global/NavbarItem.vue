@@ -1,15 +1,18 @@
 <template>
   <nav
-    class="flex min-h-[114px] items-center justify-between px-[60px] py-4 text-secondary shadow-md duration-200 ease-in-out"
+    class="flex min-h-[114px] items-center justify-between px-[60px] py-4 text-black shadow-md duration-200 ease-in-out"
     :class="[
       { 'text-white': scrollY < 400 && route.path === '/' },
       { 'bg-[#FFF] text-black': route.path !== '/' },
       { 'bg-[#FFF]': scrollY > 400 }
     ]"
   >
-    <h1 class="logo">
-      <NuxtLink to="/" class="text-4xl">Inked Soul</NuxtLink>
-    </h1>
+    <NuxtLink to="/">
+      <div class="flex items-center justify-center gap-3">
+        <img src="" alt="" class="" />
+        <h2 class="font-heading-typo">Inked Soul</h2>
+      </div>
+    </NuxtLink>
     <ul class="flex flex-row items-center gap-4">
       <li>
         <NuxtLink to="/designs">認領圖</NuxtLink>

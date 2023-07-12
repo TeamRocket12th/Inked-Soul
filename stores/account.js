@@ -15,11 +15,11 @@ export const useAccountStore = defineStore('account', () => {
   const guid = ref('')
 
   // 通用 (user|artist)
-  const name = ref()
   const photo = ref('')
 
+  const name = ref()
   const tel = ref()
-  const Id = ref(0)
+  const Id = ref(1)
   const userInfoData = reactive({
     Id: Id.value,
     Nickname: '',
@@ -30,15 +30,12 @@ export const useAccountStore = defineStore('account', () => {
     Id: '',
     Account: '',
     Password: '',
-    Salt: '',
-    Photo: '',
     Realname: '',
     Nickname: '',
     StudioName: '',
-    Registration: '',
+    License: '',
     Phone: '',
     Tel: '',
-    Role: '',
     Style: '',
     StartTime: '',
     EndTime: '',
@@ -60,15 +57,12 @@ export const useAccountStore = defineStore('account', () => {
     Id: '',
     Account: '',
     Password: '',
-    Salt: '',
-    Photo: '',
     Realname: '',
     Nickname: '',
     StudioName: '',
-    Registration: '',
+    License: '',
     Phone: '',
     Tel: '',
-    Role: '',
     Style: '',
     StartTime: '',
     EndTime: '',
@@ -209,6 +203,9 @@ export const useAccountStore = defineStore('account', () => {
         method: 'GET'
       })
       Object.assign(artistInfoData, data.value.Data)
+      Object.keys(inputArtistInfoData).forEach((key) => {
+        inputArtistInfoData[key] = ''
+      })
 
       photo.value = data.value.Data.Photo
 
@@ -221,7 +218,7 @@ export const useAccountStore = defineStore('account', () => {
 
   // 修改刺青師個人資料
   const editArtistInfo = async () => {
-    artistInfoData.Nickname = name.value
+    Object.assign(artistInfoData, inputArtistInfoData)
 
     try {
       const { data, error } = await useFetch(`${APIBASE}/api/editartistinfo`, {

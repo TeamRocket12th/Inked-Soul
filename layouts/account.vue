@@ -3,7 +3,10 @@
     <div class="relative">
       <img src="/account-left.jpeg" alt="" class="h-screen object-cover" />
       <NuxtLink to="/" class="absolute left-0 right-0 top-[50%] -translate-y-[50%] text-center"
-        ><h1>Logo</h1>
+        ><div class="flex items-center justify-center gap-3">
+          <h1>Logo</h1>
+          <h2 class="font-heading-typo">Inked Soul</h2>
+        </div>
       </NuxtLink>
     </div>
 
