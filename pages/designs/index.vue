@@ -54,9 +54,13 @@ import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
 const { allData, filterArr, cityArr, styleArr, elementArr } = storeToRefs(store)
+const { searchAllCity } = store
+
 const { data } = await useFetch('/api/getDesign/getAllDesign')
+
+// console.log('data 1', data)
 const designData = ref([])
-designData.value = data.value.design
+// designData.value = data.value.Data
 
 const defaultRender = () => {
   if (filterArr.value.length === 0) {
@@ -82,7 +86,8 @@ const { mydata } = await useAsyncData(
   }
 )
 
-onMounted(() => {
+onMounted(async () => {
+  // 瀑布流
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.intersectionRatio > 0) {
@@ -94,6 +99,8 @@ onMounted(() => {
 
   observer.observe(root.value)
 
+  // 取得認領圖
+  // searchAllCity()
   defaultRender()
 })
 </script>
