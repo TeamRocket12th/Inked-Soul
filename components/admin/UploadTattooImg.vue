@@ -13,27 +13,23 @@
     <img
       :src="url"
       alt=""
-      class="absolute top-[50%] max-h-[400px] w-full -translate-y-[50%] bg-gray-100 object-contain"
+      class="absolute top-[50%] h-full w-full -translate-y-[50%] bg-black object-contain"
     />
     <input
+      id="file"
       type="file"
       accept=".jpg, .png, .svg "
-      id="file"
       class="hidden"
       @change.stop="handleOnPreview"
     />
   </label>
 </template>
 <script setup>
-import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { storeToRefs } from 'pinia'
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
-const runtimeConfig = useRuntimeConfig()
-const apiBase = runtimeConfig.public.apiBase
-
-const authToken = useCookie('token')
 
 const isFileSizeAlert = ref(false)
 
@@ -45,31 +41,7 @@ const handleOnPreview = (event) => {
     return
   }
   url.value = URL.createObjectURL(event.target.files[0])
-  uploadTattooData.value.Image = url.value
-  console.log(authToken.value.token)
-}
-
-const selectImage = () => {
-  const formData = new FormData()
-  formData.append('image', file)
-}
-
-const postImage = async () => {
-  // 📌 如果上傳次數 > 5 無法再上傳 (應該在頁面中 run)
-  // if (token.uploadTattooCount > 5) {
-  //   return false
-  // }
-  try {
-    const res = await $fetch(`${apiBase}/postImg`, {
-      header: {
-        Authorization: `Bearer ${token}`
-      },
-      method: 'POST',
-      body: tattooImage
-    })
-  } catch (error) {
-    console.log('error', error)
-  }
+  uploadTattooData.value.Image = event.target.files[0]
 }
 </script>
 <style scoped></style>
