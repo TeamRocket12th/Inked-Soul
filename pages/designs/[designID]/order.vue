@@ -66,17 +66,18 @@ const {
   headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
 })
 
-designInfo.value = design.value.Data
-
+///
 const { data } = await useFetch(`/api/getDesign/${designID}`)
-const designData = data.value.data
 const artistData = data.value.data.artistData
+////
+
+designInfo.value = design.value.Data
 
 const store = useOrderStore()
 const { designData: orderData } = storeToRefs(store)
 orderData.value.ID = designID
-orderData.value.name = designData.designName
-orderData.value.deposit = designData.deposit
+orderData.value.name = designInfo.Name
+orderData.value.deposit = designInfo.Deposit
 
 const toPreviousPage = () => {
   router.push(`/designs/${designID}`)
