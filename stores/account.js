@@ -14,29 +14,55 @@ export const useAccountStore = defineStore('account', () => {
   const confirmPassword = ref('A1234567')
   const guid = ref('')
 
+  // 通用 (user|artist)
+  const photo = ref('')
+
   const name = ref()
   const tel = ref()
-  const Id = ref(0)
-
-  const photo = ref('')
+  const Id = ref(1)
   const userInfoData = reactive({
     Id: Id.value,
     Nickname: '',
     Tel: ''
   })
+
+  const inputArtistInfoData = reactive({
+    Id: '',
+    Account: '',
+    Password: '',
+    Realname: '',
+    Nickname: '',
+    StudioName: '',
+    License: '',
+    Phone: '',
+    Tel: '',
+    Style: '',
+    StartTime: '',
+    EndTime: '',
+    City: '',
+    Address: '',
+    ClosedDays: '',
+    DayOff: '',
+    Experience: 0,
+    Intro: '',
+    IsVerified: 0,
+    MemberShip: 0,
+    Style: '',
+    Guid: '',
+    Follower: 0,
+    TimeFrame: '',
+    PasswordTime: ''
+  })
   const artistInfoData = reactive({
     Id: '',
     Account: '',
     Password: '',
-    Salt: '',
-    Photo: '',
     Realname: '',
     Nickname: '',
     StudioName: '',
-    Registration: '',
+    License: '',
     Phone: '',
     Tel: '',
-    Role: '',
     Style: '',
     StartTime: '',
     EndTime: '',
@@ -133,10 +159,6 @@ export const useAccountStore = defineStore('account', () => {
         headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
         method: 'GET'
       })
-      // 接收輸入
-      // name.value = data.value.Data.Nickname
-      // tel.value = data.value.Data.Tel
-
       userInfoData.Nickname = data.value.Data.Nickname
       userInfoData.Tel = data.value.Data.Tel
       photo.value = data.value.Data.Photo
@@ -180,8 +202,15 @@ export const useAccountStore = defineStore('account', () => {
         },
         method: 'GET'
       })
-      console.log('get', data)
-      // 補上artistInfoData重新賦值，以便畫面渲染新值
+      Object.assign(artistInfoData, data.value.Data)
+      Object.keys(inputArtistInfoData).forEach((key) => {
+        inputArtistInfoData[key] = ''
+      })
+
+      photo.value = data.value.Data.Photo
+
+      authCookie.value.Nickname = data.value.Data.Nickname
+      authCookie.value.Photo = data.value.Data.Photo
     } catch (error) {
       console.log('get', error)
     }
@@ -189,7 +218,8 @@ export const useAccountStore = defineStore('account', () => {
 
   // 修改刺青師個人資料
   const editArtistInfo = async () => {
-    console.log(authCookie)
+    Object.assign(artistInfoData, inputArtistInfoData)
+
     try {
       const { data, error } = await useFetch(`${APIBASE}/api/editartistinfo`, {
         headers: {
@@ -199,8 +229,10 @@ export const useAccountStore = defineStore('account', () => {
         method: 'POST',
         body: artistInfoData
       })
-      console.log('edit', data)
-      getArtistInfo()
+      if (data.value) {
+        await getArtistInfo()
+      }
+      console.log('edit', data.value)
     } catch (error) {
       console.log(error)
     }
@@ -264,7 +296,8 @@ export const useAccountStore = defineStore('account', () => {
         authCookie.value.Photo = defaultPhoto
       }
       if (
-        (authCookie.value.Nickname === '' || authCookie.value.Nickname) === 'null' ||
+        authCookie.value.Nickname === '' ||
+        authCookie.value.Nickname === 'null' ||
         !authCookie.value.Nickname
       ) {
         const defaultNickname = 'xxx'
@@ -289,6 +322,7 @@ export const useAccountStore = defineStore('account', () => {
     photo,
     userInfoData,
     artistInfoData,
+    inputArtistInfoData,
     showTxt,
     getUserInfo,
     editArtistInfo,

@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto flex flex-col items-center">
-    <SearchBar class="mb-5">搜尋認領圖</SearchBar>
-    <div class="flex w-full justify-between">
+    <SearchBar class="mb-14">搜尋認領圖</SearchBar>
+    <div class="mb-8 flex w-full justify-between">
       <p class="text-left">
         認領圖的
         <span v-if="cityArr.length === 0">全部</span>
@@ -17,14 +17,16 @@
           >{{ item }}<span>&nbsp;</span></span
         ><span>&nbsp;</span>元素， 共{{ filterArr.length }}個結果
       </p>
-      <Icon name="ic:round-sync-alt" class="origin-center rotate-90 bg-white p-1" />
+      <div class="cursor-pointer rounded-lg border bg-white p-1">
+        <Icon name="ic:round-sync-alt" size="24" class="origin-center rotate-90" />
+      </div>
     </div>
     <masonry-wall
       v-if="filterArr"
       :items="filterArr"
       :ssr-columns="3"
       :column-width="300"
-      :gap="16"
+      :gap="32"
     >
       <template #default="{ item }">
         <div class="rounded-xl">

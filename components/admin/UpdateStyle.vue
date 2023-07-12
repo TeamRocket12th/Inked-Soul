@@ -24,7 +24,7 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { useAccountStore } from '~/stores/account'
 
 const editStore = useAccountStore()
-const { artistInfoData } = storeToRefs(editStore)
+const { artistInfoData, inputArtistInfoData } = storeToRefs(editStore)
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
@@ -44,7 +44,7 @@ const styles = [
   'Traditional Japanese 日式傳統',
   '其他'
 ]
-const personalStyle = ref([])
+const personalStyle = ref(artistInfoData.value.Style ? artistInfoData.value.Style.split(',') : [])
 
 const styleToggle = (addStyle) => {
   const index = personalStyle.value.indexOf(addStyle)
@@ -60,7 +60,7 @@ const styleToggle = (addStyle) => {
   uploadTattooData.value.picstyle = personalStyle.value.join()
 
   // 編輯個人風格
-  artistInfoData.value.Style = personalStyle.value.join()
+  inputArtistInfoData.value.Style = personalStyle.value.join()
 }
 </script>
 <style scoped></style>

@@ -10,7 +10,7 @@
           >
             <span>
               <!-- v-for="(day, key) in ArtistCloseDay" :key="key" -->
-              {{ artistInfoData.ClosedDays }}
+              {{ inputArtistInfoData.ClosedDays || artistInfoData.ClosedDays }}
               <!-- {{ day.week }} -->
             </span>
           </label>
@@ -27,11 +27,11 @@
       <div class="w-full">
         <p class="mb-2">新增臨時公休日</p>
         <div>
-          <VDatePicker v-model="selectDayoff" color="gray">
+          <VDatePicker v-model="selectDayoff" :attributes="selectedDayoff" color="gray">
             <template #default="{ togglePopover }">
               <button
                 class="formInput rounded-md px-3 py-2 text-sm font-semibold text-black"
-                @click="togglePopover"
+                @click.prevent="togglePopover"
               >
                 {{ formatDate }}
               </button>
@@ -45,9 +45,12 @@
       <div class="flex flex-1 flex-col items-start gap-1">
         <span>開店時間</span>
         <div class="dropdown-hover dropdown w-full">
-          <label tabindex="0" class="btn-outline btn mb-1 w-full border-[#D0D0D0]">{{
-            ArtistOpenTime
-          }}</label>
+          <label
+            tabindex="0"
+            class="btn-outline btn mb-1 w-full border-[#D0D0D0]"
+            :class="{ 'border-[#DC3545]': AlertSelect }"
+            >{{ ArtistOpenTime }}</label
+          >
           <ul
             tabindex="0"
             class="dropdown-content menu rounded-box z-10 h-[300px] w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -66,9 +69,12 @@
       <div class="flex flex-1 flex-col items-start gap-1">
         <span>閉店時間</span>
         <div class="dropdown-hover dropdown w-full">
-          <label tabindex="0" class="btn-outline btn mb-1 w-full border-[#D0D0D0]">{{
-            ArtistCloseTime
-          }}</label>
+          <label
+            tabindex="0"
+            class="btn-outline btn mb-1 w-full border-[#D0D0D0]"
+            :class="{ 'border-[#DC3545]': AlertSelect }"
+            >{{ ArtistCloseTime }}</label
+          >
           <ul
             tabindex="0"
             class="dropdown-content menu rounded-box z-10 h-[300px] w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -85,18 +91,17 @@
         </div>
       </div>
     </div>
-    <p v-if="AlertSelect">{{ AlertSelect }}</p>
     <div class="flex flex-col items-start gap-1">
       <span>可供預約時段</span>
       <ul class="flex flex-wrap gap-2">
         <li
-          v-for="(part, key) in timeFrame"
+          v-for="(time, key) in timeFrame"
           :key="key"
-          @click="SelectTimeFrame(part.id)"
+          @click="SelectTimeFrame(time)"
           class="rounded-full border px-3 py-1 text-center"
-          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(part.id) }"
+          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(time) }"
         >
-          <a>{{ part.time }}</a>
+          <a>{{ time }}</a>
         </li>
       </ul>
     </div>
@@ -141,32 +146,39 @@ const time = [
   '23:00',
   '24:00'
 ]
-const timeFrame = [
-  { id: 0, time: '上午（開店時間～12:00）' },
-  { id: 1, time: '下午（12:00~18:00' },
-  { id: 2, time: '晚上（18:00~閉店時間）' }
-]
+const timeFrame = ['上午（開店時間～12:00）', '下午（12:00~18:00)', '晚上（18:00~閉店時間）']
 
 const store = useAccountStore()
-const { artistInfoData } = storeToRefs(store)
+const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
 const { formatDate, formattedOutput } = useFormatted()
 
 // 要get API 的值（需要轉換格式）
-const ArtistCloseDay = ref([weeks[0]])
-const ArtistOpenTime = ref('請選擇')
-const ArtistCloseTime = ref('請選擇')
-const ArtistAvailableTimeFrame = ref([])
+const ArtistCloseDay = ref([])
+const ArtistOpenTime = ref(
+  artistInfoData.value.StartTime ? artistInfoData.value.StartTime : '請選擇'
+)
+const ArtistCloseTime = ref(artistInfoData.value.EndTime ? artistInfoData.value.EndTime : '請選擇')
+const ArtistAvailableTimeFrame = ref(artistInfoData.value.TimeFrame || [])
 const ArtistDayoff = ref('')
 
 const date = new Date()
 const selectDayoff = ref('')
+const selectedDayoff = ref([
+  {
+    key: 'today',
+    highlight: {
+      fillMode: 'light'
+    },
+    dates: artistInfoData.value.DayOff
+  }
+])
 
 onMounted(() => {
   ArtistDayoff.value = formattedOutput(date)
 })
 watch(selectDayoff, (newValue) => {
   ArtistDayoff.value = formattedOutput(newValue)
-  artistInfoData.value.DayOff = ArtistDayoff.value
+  inputArtistInfoData.value.DayOff = ArtistDayoff.value
 })
 
 const AlertSelect = ref(false)
@@ -187,7 +199,7 @@ const SelectCloseDays = (day) => {
     }
   }
 
-  artistInfoData.value.ClosedDays = ArtistCloseDay.value
+  inputArtistInfoData.value.ClosedDays = ArtistCloseDay.value
     .map((item) => {
       return item.week
     })
@@ -201,21 +213,18 @@ const SelectTime = (status, time) => {
   }
 
   if (ArtistCloseTime.value <= ArtistOpenTime.value) {
-    AlertSelect.value = '你確定'
+    AlertSelect.value = true
   } else {
     AlertSelect.value = false
   }
 
-  artistInfoData.value.StartTime = ArtistOpenTime.value
-  artistInfoData.value.EndTime = ArtistCloseTime.value
+  inputArtistInfoData.value.StartTime = ArtistOpenTime.value
+  inputArtistInfoData.value.EndTime = ArtistCloseTime.value
 }
 
 const SelectTimeFrame = (part) => {
   if (ArtistAvailableTimeFrame.value.includes(part) === false) {
     ArtistAvailableTimeFrame.value.push(part)
-    ArtistAvailableTimeFrame.value.sort((a, b) => {
-      return a - b
-    })
   } else {
     const index = ArtistAvailableTimeFrame.value.indexOf(part)
     ArtistAvailableTimeFrame.value.splice(index, 1)
@@ -230,7 +239,7 @@ const SelectTimeFrame = (part) => {
     2: '時段三'
   }
 
-  artistInfoData.value.TimeFrame = ArtistAvailableTimeFrame.value
+  inputArtistInfoData.value.TimeFrame = ArtistAvailableTimeFrame.value
     .map((item) => timeFrameMapping[item])
     .join()
 }
