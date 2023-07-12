@@ -31,7 +31,7 @@
     >
       <template #default="{ item }">
         <div class="rounded-xl">
-          <NuxtLink :key="item.id" :to="`/designs/${item.id}`">
+          <NuxtLink :key="item.Id" :to="`/designs/${item.Id}`">
             <DesignCard
               :id="item.Id"
               :image="item.Photo"

@@ -42,12 +42,12 @@
   </div>
 </template>
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useOrderStore } from '~/stores/order'
 import DesignIntro from '~/components/design/DesignIntro'
 import OrderData from '~/components/design/OrderData'
 import PaymentData from '~/components/design/PaymentData'
 import PaymentBtn from '~/components/design/PaymentBtn'
-import { useOrderStore } from '~/stores/order'
-import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const route = useRoute()
@@ -66,18 +66,20 @@ const {
   headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
 })
 
-///
+//
 const { data } = await useFetch(`/api/getDesign/${designID}`)
 const artistData = data.value.data.artistData
-////
+//
 
 designInfo.value = design.value.Data
 
 const store = useOrderStore()
-const { designData: orderData } = storeToRefs(store)
+const { designData: orderData, artistID } = storeToRefs(store)
 orderData.value.ID = designID
 orderData.value.name = designInfo.Name
 orderData.value.deposit = designInfo.Deposit
+
+artistID.value = designInfo.value.ArtistID
 
 const toPreviousPage = () => {
   router.push(`/designs/${designID}`)
