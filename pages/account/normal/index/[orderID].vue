@@ -8,7 +8,6 @@
       />
     </NuxtLink>
     <div class="relative">
-      {{ orderInfo }}
       <OrderArea>
         <template #orderContext>
           <Icon :name="titleInfo.icon" size="40" />
@@ -20,15 +19,16 @@
           </p>
         </template>
         <template #steps>
-          <OrderStep :step="orderStatus" step3Title="評價刺青師" />
+          <!-- 📌要帶入props orderStatus -->
+          <OrderStep :current-status="3" :step-date="orderDate" role="user" />
         </template>
         <template #orderDetail>
-          <OrderData :order="orderInfo" :status="order.Data.Status" role="刺青師" />
+          <OrderData :order="orderInfo" role="刺青師" />
         </template>
       </OrderArea>
       <!-- 評價區 -->
       <!-- 出現時機視訂單狀態而定 -->
-      <PostComments v-if="orderStatus.Step2.Status === true" class="absolute right-12 top-0" />
+      <PostComments />
     </div>
   </div>
 </template>
@@ -46,6 +46,8 @@ const APIBASE = runtimeConfig.public.APIBASE
 // 取得單一訂單資訊
 const imageId = 2
 const orderInfo = ref('')
+const orderStatus = ref('')
+const orderDate = ref('')
 const titleInfo = reactive({
   title: '',
   icon: '',
@@ -60,12 +62,16 @@ const getOrderInfo = async () => {
   })
 
   orderInfo.value = orderResponse.value.Data[0]
+  orderStatus.value = orderInfo.value.OrderStatus
+  orderDate.value = orderResponse.value
 
-  const status = orderInfo.value.OrderStatus
-  titleInfo.title = orderContext[status].title
-  titleInfo.icon = orderContext[status].icon
-  titleInfo.content = orderContext[status].content
+  titleInfo.title = orderContext[orderStatus.value].title
+  titleInfo.icon = orderContext[orderStatus.value].icon
+  titleInfo.content = orderContext[orderStatus.value].content
 }
+
+// 發送確認訂單
+// const confirmOrder = async
 
 const orderContext = {
   0: {
@@ -90,38 +96,21 @@ const orderContext = {
   }
 }
 
-// 📌 ＡＰＩ
-const order = ref({
-  Data: {
-    Id: '123eqwda',
-    Image: 'https://fakeimg.pl/300/?text=Design',
-    Name: 'Tenetur nisi.',
-    User: 'Benny.Rippin39',
-    ArtistImg:
-      'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/842.jpg',
-    OrderDay: '2023-06-20',
-    Date: '2023-06-30',
-    Time: '晚上',
-    Deposit: '2000',
-    Status: '取消訂單'
-  }
-})
-
 // 狀態 ＡＰＩ
-const orderStatus = ref({
-  Step1: {
-    Status: true,
-    Date: '2023-06-20'
-  },
-  Step2: {
-    Status: true,
-    Date: '2023-06-20'
-  },
-  Step3: {
-    Status: false,
-    Date: null
-  }
-})
+// const orderStatus = ref({
+//   Step1: {
+//     Status: true,
+//     Date: '2023-06-20'
+//   },
+//   Step2: {
+//     Status: true,
+//     Date: '2023-06-20'
+//   },
+//   Step3: {
+//     Status: false,
+//     Date: null
+//   }
+// })
 
 onMounted(() => {
   nextTick(() => {
