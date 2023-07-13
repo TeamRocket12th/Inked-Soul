@@ -47,7 +47,6 @@ export const useAccountStore = defineStore('account', () => {
     Intro: '',
     IsVerified: 0,
     MemberShip: 0,
-    Style: '',
     Guid: '',
     Follower: 0,
     TimeFrame: '',

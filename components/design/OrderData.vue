@@ -127,10 +127,12 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
 
 const store = useOrderStore()
-const { userData } = storeToRefs(store)
-
+const { userData, artistID } = storeToRefs(store)
+console.log('artistID', artistID)
 const props = defineProps({
   time: {
     require: true
@@ -141,6 +143,13 @@ const closeDays = props.time.ClosedDays
 const dayOff = props.time.DayOff
 const _startTime = props.time.StartTime
 const _endTime = props.time.EndTime
+
+// 取得刺青師不行的時間
+const { data: noTime } = await useFetch(`${APIBASE}/api/artistbooking`, {
+  method: 'POST',
+  body: artistID.value
+})
+console.log('noTime', noTime)
 
 const date = new Date()
 date.setDate(date.getDate() + 5)
