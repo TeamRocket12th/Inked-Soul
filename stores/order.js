@@ -8,44 +8,32 @@ export const useOrderStore = defineStore('order', () => {
   const orderID = ref()
   const artistID = ref()
   const designData = ref({
-    ID: 0,
+    ID: '',
     name: '',
-    deposit: 0
-  })
-  const userData = ref({
-    name: '',
-    tel: '',
-    email: '',
-    date: '',
-    time: '預約時段'
+    deposit: ''
   })
 
+  const inputPaymentInfo = reactive({
+    Realname: '',
+    Phone: '',
+    Email: '',
+    BookedDate: '',
+    BookedTimeFrame: '',
+    ImagesId: designData.ID,
+    PayWay: ''
+  })
   const AllOrderRecord = ref()
   const allNum = ref()
-  // 送出訂單
-  const postOrder = async () => {
-    const orderData = {
-      designData: designData.value,
-      userData: userData.value
-    }
-    try {
-      const { data } = await useFetch('http://localhost:5005/order', {
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
-        },
-        method: 'post',
-        body: orderData
-      })
-      orderID.value = data.value.orderID
-      if (data.value.status === 200) {
-        console.log('送出訂單成功', data)
-        await router.push(`/designs/${designData.value.ID}/complete`)
-      }
-    } catch (error) {
-      console.log('送出訂單失敗', error)
-    }
-  }
+
+  const paymentInfo = reactive({
+    Realname: '',
+    Phone: '',
+    Email: '',
+    BookedDate: '',
+    BookedTimeFrame: '',
+    ImagesId: '',
+    PayWay: ''
+  })
 
   // 取得訂單資料
   const getOrder = async () => {
@@ -104,10 +92,10 @@ export const useOrderStore = defineStore('order', () => {
     orderID,
     artistID,
     designData,
-    userData,
+    inputPaymentInfo,
     AllOrderRecord,
     allNum,
-    postOrder,
+    paymentInfo,
     getOrder,
     getStatus,
     getAllOrder

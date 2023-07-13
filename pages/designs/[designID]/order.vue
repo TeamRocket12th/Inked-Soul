@@ -9,7 +9,7 @@
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-2">
         <div class="mb-10 rounded-lg bg-white p-4 shadow">
-          <OrderData :time="artistData" />
+          <OrderData :time="artistData" :artistId="designInfo.ArtistID" />
           <PaymentData :payment="designInfo" />
         </div>
         <div class="flex flex-col gap-3">
@@ -53,7 +53,6 @@ const router = useRouter()
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
-const authToken = useCookie('token')
 
 const designID = route.params.designID
 const designInfo = ref()
@@ -63,7 +62,7 @@ const {
   error,
   pending
 } = await useFetch(`${APIBASE}/api/getimage/imgid/${designID}`, {
-  headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
+  headers: { 'Content-type': 'application/json' }
 })
 
 //
@@ -74,12 +73,10 @@ const artistData = data.value.data.artistData
 designInfo.value = design.value.Data
 
 const store = useOrderStore()
-const { designData: orderData, artistID } = storeToRefs(store)
-orderData.value.ID = designID
-orderData.value.name = designInfo.Name
-orderData.value.deposit = designInfo.Deposit
-
-artistID.value = designInfo.value.ArtistID
+const { designData } = storeToRefs(store)
+designData.value.ID = designID
+designData.value.name = designInfo.Name
+designData.value.deposit = designInfo.Deposit
 
 const toPreviousPage = () => {
   router.push(`/designs/${designID}`)

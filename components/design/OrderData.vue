@@ -10,7 +10,7 @@
         <div class="relative">
           <VField
             id="realName"
-            v-model="userData.name"
+            v-model="inputPaymentInfo.Realname"
             name="真實姓名"
             rules="required"
             class="formInput"
@@ -31,7 +31,7 @@
         <div class="relative">
           <VField
             id="phone"
-            v-model="userData.tel"
+            v-model="inputPaymentInfo.Phone"
             name="聯絡電話"
             :rules="isPhone"
             class="formInput"
@@ -51,7 +51,7 @@
         </div>
         <div class="relative">
           <VField
-            v-model="userData.email"
+            v-model="inputPaymentInfo.Email"
             name="電子信箱"
             rules="required|email"
             class="formInput"
@@ -91,7 +91,10 @@
         <div>
           <p class="mb-2">預約時段</p>
           <div class="dropdown-bottom dropdown-end dropdown w-full">
-            <label tabindex="0" class="btn w-full">{{ userData.time }}</label>
+            <!-- 📌 加 disabled 判斷 -->
+            <label tabindex="0" class="btn w-full">{{
+              inputPaymentInfo.BookedTimeFrame || '請選擇'
+            }}</label>
             <ul
               tabindex="0"
               class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -122,62 +125,135 @@
         </div>
       </div>
     </VForm>
+    <!-- ❌ -->
+    <div>
+      <p>artistInfo</p>
+      {{ artistInfo }}
+    </div>
+    <div>
+      <p>input</p>
+      {{ inputPaymentInfo }}
+    </div>
+    <div>
+      <p>payment</p>
+      {{ paymentInfo }}
+      <p>123</p>
+      {{ bookedDate }}
+    </div>
+    <button @click="postOrder">test</button>
   </div>
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
+
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
+const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { userData, artistID } = storeToRefs(store)
-console.log('artistID', artistID)
+const { inputPaymentInfo, paymentInfo } = storeToRefs(store)
+
 const props = defineProps({
   time: {
-    require: true
+    required: true
+  },
+  artistId: {
+    required: true
   }
 })
 
-const closeDays = props.time.ClosedDays
-const dayOff = props.time.DayOff
+// 取得刺青師可預約時間
+const { data: artistInfo, error } = await useFetch(`${APIBASE}/api/artistbooking`, {
+  headers: { 'Content-type': 'application/json' },
+  method: 'POST',
+  body: props.artistId
+})
+
+// 發送用戶下單資料
+/////
+const postOrder = async () => {
+  const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
+  Object.assign(paymentInfo.value, inputPaymentInfo.value)
+  paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
+
+  if (!authToken.value) {
+    return
+  } else {
+    const {
+      data: orderResponse,
+      error: userError,
+      pending
+    } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
+      headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
+      method: 'POST',
+      body: paymentInfo.value
+    })
+    if (!orderResponse.value) {
+      console.log(orderResponse.value)
+    }
+  }
+}
+////
+
+const closeDays = ref(artistInfo.value.response.ClosedDays)
+const dayOff = ref(artistInfo.value.response.DayOff)
+const bookedDate = artistInfo.value.Data.map((item) => {
+  const formattedBookedDate = item.BookedDate.replace(/\//g, '-')
+  const formattedBookedTimeFrame = []
+
+  if (item.BookedTimeFrame.includes('上午（開店時間-12:00）')) {
+    formattedBookedTimeFrame.push('0')
+  }
+  if (item.BookedTimeFrame.includes('下午（12:00-18:00）')) {
+    formattedBookedTimeFrame.push('1')
+  }
+  if (item.BookedTimeFrame.includes('晚上（18:00-閉店時間）')) {
+    formattedBookedTimeFrame.push('2')
+  }
+  return [formattedBookedDate, formattedBookedTimeFrame]
+})
 const _startTime = props.time.StartTime
 const _endTime = props.time.EndTime
 
-// 取得刺青師不行的時間
-const { data: noTime } = await useFetch(`${APIBASE}/api/artistbooking`, {
-  method: 'POST',
-  body: artistID.value
-})
-console.log('noTime', noTime)
-
 const date = new Date()
 date.setDate(date.getDate() + 5)
-userData.date = date
+inputPaymentInfo.value.BookedDate = date
 const minDate = date.toISOString().slice(0, 10)
 
-// output: '7,1' -> ['7','1']
-const toArray = (string) => {
-  return string.split(',').map((item) => {
-    return parseInt(item)
+const toNumber = (week) => {
+  const closeDaysMapping = {
+    星期日: 1,
+    星期一: 2,
+    星期二: 3,
+    星期三: 4,
+    星期四: 5,
+    星期五: 6,
+    星期六: 7
+  }
+  return week.map((item) => {
+    return closeDaysMapping[item]
   })
 }
 
 const disabledTime = ref('')
-const selectDate = ref(userData.value.date)
+const selectDate = ref(inputPaymentInfo.value.BookedDate)
 const selectTime = (time) => {
   switch (time) {
     case 0:
-      userData.value.time = '上午（開店時間-12:00）'
+      inputPaymentInfo.value.BookedTimeFrame = '上午（開店時間-12:00）'
+      paymentInfo.value.BookedTimeFrame = '時段一'
       break
     case 1:
-      userData.value.time = '下午（12:00-18:00）'
+      inputPaymentInfo.value.BookedTimeFrame = '下午（12:00-18:00）'
+      paymentInfo.value.BookedTimeFrame = '時段二'
       break
     case 2:
-      userData.value.time = '晚上（18:00-閉店時間）'
+      inputPaymentInfo.value.BookedTimeFrame = '晚上（18:00-閉店時間）'
+      paymentInfo.value.BookedTimeFrame = '時段三'
       break
     default:
-      userData.value.time = '預約時段'
+      inputPaymentInfo.value.BookedTimeFrame = '預約時段'
       break
   }
 }
@@ -185,10 +261,10 @@ const selectTime = (time) => {
 const disabledDates = ref([
   {
     repeat: {
-      weekdays: toArray(closeDays) // 📌 放入公休日 1~7
+      weekdays: toNumber(closeDays.value) // 📌 放入公休日 1~7
     }
   },
-  dayOff
+  ...dayOff.value
 ])
 
 // Composable
@@ -196,23 +272,18 @@ const { isPhone } = useValidate()
 const { formatDate, formattedOutput } = useFormatted()
 
 onMounted(() => {
-  userData.value.date = formattedOutput(date)
+  inputPaymentInfo.value.BookedDate = formattedOutput(date)
   isBookAvailable()
 })
 
 watch(selectDate, (newValue) => {
-  userData.value.date = formattedOutput(newValue)
+  inputPaymentInfo.value.BookedDate = formattedOutput(newValue)
   isBookAvailable()
 })
 
-// 已被預約時間
-const booked = [
-  ['2023-07-27', ['0', '1', '2']],
-  ['2023-07-31', ['0', '2']]
-]
-
+// 判斷時段，還要加上可預約時段 （未完成）
 const isBookAvailable = () => {
-  booked.map((item) => {
+  bookedDate.map((item) => {
     if (item[1].length >= 3) {
       disabledDates.value.push(item[0])
     } else if (item[0] === formatDate.value) {
