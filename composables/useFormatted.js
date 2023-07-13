@@ -1,6 +1,7 @@
 export const useFormatted = () => {
   const formatDate = ref(new Date())
 
+  // new Date() -> 'yyyy-mm-dd'
   const formattedOutput = (date) => {
     const year = date.getFullYear()
     const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -10,7 +11,33 @@ export const useFormatted = () => {
     return `${year}-${month}-${day}`
   }
 
-  return { formatDate, formattedOutput }
+  // 'yyyy/mm/dd' -> 'yyyy-mm-dd'
+  const transformDate = (date) => {
+    const dateParts = date.slice(0, 10).split('/')
+    const year = dateParts[0]
+    const month = dateParts[1]
+    const day = dateParts[2]
+
+    return `${year}-${month}-${day}`
+  }
+
+  const transformOrderStatus = (num, role) => {
+    const status = {
+      0: '訂單取消',
+      1: '訂單成立',
+      2: '完成訂單',
+      3: '評價刺青師', //獲得評價
+      4: '完成退款'
+    }
+
+    if (role === 'artist') {
+      status[3] = '獲得評價'
+    }
+
+    return status[num]
+  }
+
+  return { formatDate, formattedOutput, transformDate, transformOrderStatus }
 }
 
 // 使用方法
