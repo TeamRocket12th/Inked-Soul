@@ -5,10 +5,10 @@
       <ul>
         <li><NuxtLink to="/">首頁</NuxtLink></li>
         <li>
-          <NuxtLink :to="`/artists/${artistID}`">{{ artistName }}</NuxtLink>
+          <NuxtLink :to="`/artists/${artistId}`">{{ artistName }}</NuxtLink>
         </li>
         <li>
-          <NuxtLink :to="`/designs/${designID}`" class="underline">{{ designName }}</NuxtLink>
+          <NuxtLink :to="`/designs/${designId}`" class="underline">{{ designName }}</NuxtLink>
         </li>
       </ul>
     </div>
@@ -65,6 +65,7 @@ const {
 })
 
 designInfo.value = design.value.Data
-const artistName = design.value.Data.ArtistName
-const designName = design.value.Data.Name
+const artistName = ref(design.value.Data.ArtistName)
+const artistId = ref(design.value.Data.ArtistID)
+const designName = ref(design.value.Data.Name)
 </script>

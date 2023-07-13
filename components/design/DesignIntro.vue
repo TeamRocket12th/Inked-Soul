@@ -26,9 +26,9 @@
         <div class="flex flex-row items-center gap-2">
           <Icon name="ic:round-access-time" size="24" />
           <p>
-            {{ props.designData.StartTime }}
+            {{ props.designData.StartTime || '00:00' }}
             <span>-</span>
-            {{ props.designData.EndTime }}
+            {{ props.designData.EndTime || '00:00' }}
           </p>
         </div>
       </div>

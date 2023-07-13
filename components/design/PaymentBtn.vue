@@ -30,8 +30,8 @@
   </div>
 </template>
 <script setup>
-import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   deposit: {
@@ -40,14 +40,30 @@ const props = defineProps({
   }
 })
 
-const route = useRoute()
-const designID = route.params.designID
-
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
 const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { postOrder } = store
-const { id } = storeToRefs(store)
+const { inputPaymentInfo, paymentInfo } = storeToRefs(store)
 
-id.value = designID
+// 發送用戶下單資料
+const postOrder = async () => {
+  const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
+  Object.assign(paymentInfo.value, inputPaymentInfo.value)
+  paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
+
+  const {
+    data: orderResponse,
+    error: userError,
+    pending
+  } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
+    headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
+    method: 'POST',
+    body: paymentInfo.value
+  })
+  if (!orderResponse.value) {
+    console.log(orderResponse.value)
+  }
+}
 </script>
