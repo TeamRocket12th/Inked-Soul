@@ -20,8 +20,10 @@ export const useOrderStore = defineStore('order', () => {
     time: '預約時段'
   })
 
+  const AllOrderRecord = ref()
+
+  // 送出訂單
   const postOrder = async () => {
-    // 送出訂單
     const orderData = {
       designData: designData.value,
       userData: userData.value
@@ -48,7 +50,7 @@ export const useOrderStore = defineStore('order', () => {
   // 取得訂單資料
   const getOrder = async () => {
     try {
-      const { data } = await useFetch(`${APIBASE}/api/${orderID}`, {
+      const { data } = await useFetch(`${APIBASE}/api/getimage/imgorder`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
@@ -74,15 +76,25 @@ export const useOrderStore = defineStore('order', () => {
     }
   }
   // 取得全部訂單
-  const getAllOrder = async () => {
+  const getAllOrder = async (role, pageNum) => {
     try {
-      const { data } = useFetch(`${APIBASE}/api/`, {
+      const { data } = useFetch(`${APIBASE}/api/getimage/imgorder`, {
+        method: 'POST',
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
+        },
+        body: {
+          role: `${role}`
+        },
+        query: {
+          pageNumber: pageNum,
+          pageSize: 10
         }
       })
       console.log('成功取得所有訂單資料', data)
+      // 賦值
+      AllOrderRecord.value = data.value
     } catch (error) {
       console.log('取得所有訂單失敗', error)
     }
@@ -93,6 +105,7 @@ export const useOrderStore = defineStore('order', () => {
     artistID,
     designData,
     userData,
+    AllOrderRecord,
     postOrder,
     getOrder,
     getStatus,
