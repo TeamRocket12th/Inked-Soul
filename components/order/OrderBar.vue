@@ -7,6 +7,7 @@
       />
     </td>
     <td>
+      <!-- 認領圖名稱和尺寸 -->
       <div class="flex flex-col items-center">
         <p>{{ props.order.Name }}</p>
         <p>{{ props.order.size }}</p>
@@ -22,10 +23,13 @@
     </td>
     <td>
       <!-- 交易日期 -->
-      {{ props.order.PayDate }}
+      {{ payDate }}
     </td>
     <!-- 預約時間 -->
-    <td>{{ props.order.BookedDate }} {{ props.order.BookedTimeFrame }}</td>
+    <td>
+      {{ bookedDate }}<br />
+      {{ props.order.BookedTimeFrame }}
+    </td>
     <!-- 價格(訂金) -->
     <td>$ {{ props.order.Deposit }}</td>
     <!-- 訂單狀態 -->
@@ -39,5 +43,15 @@ const props = defineProps({
     required: true
   }
 })
+const { formattedOutput } = useFormatted()
+const payDate = ref()
+const bookedDate = ref()
+const newPayDate = ref()
+const newBookedDate = ref()
+
+newPayDate.value = new Date(props.order.PayDate)
+newBookedDate.value = new Date(props.order.BookedDate)
+payDate.value = formattedOutput(newPayDate.value)
+bookedDate.value = formattedOutput(newBookedDate.value)
 </script>
 <style scoped></style>
