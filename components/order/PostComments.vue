@@ -1,15 +1,12 @@
 <template>
   <div class="relative h-[10vh] w-full">
-    <div class="dropdown-bottom dropdown-end dropdown absolute right-0">
-      <label tabindex="0" class="btn m-1 bg-black px-4 py-0 text-white focus:bg-gray-500"
+    <div class="dropdown-bottom dropdown-end dropdown absolute right-[16.5%] translate-x-[50%]">
+      <label tabindex="0" class="btn rounded-lg bg-black px-4 py-2 text-white focus:bg-[#D0D0D0]"
         >撰寫評價</label
       >
-      <div
-        tabindex="0"
-        class="dropdown-content menu rounded-box absolute !-right-10 top-5 z-[1] w-[38rem] bg-base-100 p-2"
-      >
+      <div tabindex="0" class="dropdown-content menu absolute !-right-10 top-5 z-[1] w-[38rem]">
         <!-- 星星 -->
-        <div class="flex">
+        <div class="mb-5 flex items-center gap-3">
           <p>星級評價</p>
           <div class="rating">
             <input type="radio" name="rating-9" class="mask mask-star" @change="updateRating(1)" />
@@ -20,16 +17,15 @@
           </div>
         </div>
         <!-- 文字輸入框 -->
-        <div>
-          <label class="flex justify-between">
-            <p>撰寫評語</p>
-            <textarea
-              v-model="txt"
-              class="textarea-bordered textarea w-full"
-              maxlength="30"
-            ></textarea>
-          </label>
-        </div>
+        <label class="mb-[30px] flex items-start gap-3">
+          <p class="whitespace-nowrap">撰寫評語</p>
+          <textarea
+            v-model="txt"
+            class="textarea-bordered textarea h-[100px] w-full rounded-lg"
+            placeholder="請填入30字(含)內評語"
+            maxlength="30"
+          ></textarea>
+        </label>
         <div class="">
           <div class="row-reverse comment-btn absolute right-0">
             <button class="btn bg-black text-white" @click="postComments">評價</button>

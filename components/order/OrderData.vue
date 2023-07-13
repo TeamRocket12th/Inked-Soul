@@ -57,10 +57,6 @@ const props = defineProps({
   order: {
     required: true
   },
-  status: {
-    type: String,
-    required: true
-  },
   role: {
     default: '訂購人'
   }
