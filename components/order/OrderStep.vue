@@ -62,10 +62,14 @@ const props = defineProps({
     required: true,
     type: String
   }
-  // step3Title: {
-  //   default: '獲得評價'
-  // 評價刺青師
-  // }
+})
+
+const { transformDate } = useFormatted()
+
+const doneDate = computed(() => {
+  if (props.stepDate) {
+    return transformDate(props.stepDate)
+  }
 })
 
 const step3Info = reactive({
