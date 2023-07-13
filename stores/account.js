@@ -100,8 +100,8 @@ export const useAccountStore = defineStore('account', () => {
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
-        console.log('login', authCookie.value.Photo)
         Id.value = res.Data.Id
+
         let newIdentity = ''
         if (identity.value === 'user') {
           newIdentity = 'normal'

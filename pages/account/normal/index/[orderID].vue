@@ -8,21 +8,22 @@
       />
     </NuxtLink>
     <div class="relative">
+      {{ orderInfo }}
       <OrderArea>
         <template #orderContext>
-          <Icon :name="orderContext[order.Data.Status].icon" size="40" />
+          <Icon :name="titleInfo.icon" size="40" />
           <h4>
-            {{ orderContext[order.Data.Status].title }}
+            {{ titleInfo.title }}
           </h4>
           <p class="text-base text-secondary">
-            {{ orderContext[order.Data.Status].content }}
+            {{ titleInfo.content }}
           </p>
         </template>
         <template #steps>
           <OrderStep :step="orderStatus" step3Title="評價刺青師" />
         </template>
         <template #orderDetail>
-          <OrderData :order="order.Data" :status="order.Data.Status" role="刺青師" />
+          <OrderData :order="orderInfo" :status="order.Data.Status" role="刺青師" />
         </template>
       </OrderArea>
       <!-- 評價區 -->
@@ -33,58 +34,61 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia'
-import { useAccountStore } from '~/stores/account'
 import OrderArea from '~/container/order/OrderArea'
 import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
-const store = useAccountStore()
-const { authCookie } = storeToRefs(store)
-const route = useRoute(store)
+
+const authToken = useCookie('token')
 const runtimeConfig = useRuntimeConfig()
-const apiBase = runtimeConfig.public.apiBase
+const APIBASE = runtimeConfig.public.APIBASE
 
-// const data = await $fetch(`/api/getOrder/${orderID}`)
-// console.log('single order', data)
-// const status = data.status
-// console.log('satus', status)
+// 取得單一訂單資訊
+const imageId = 2
+const orderInfo = ref('')
+const titleInfo = reactive({
+  title: '',
+  icon: '',
+  content: ''
+})
+const getOrderInfo = async () => {
+  const { data: orderResponse, error } = await useFetch(`${APIBASE}/api/orderinfo/${imageId}`, {
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${authToken.value}`
+    }
+  })
 
-// 有真資料後再使用以下
-// const order = ref()
-// order.value = data.value.data
-// console.log('single order reassigned', order)
+  orderInfo.value = orderResponse.value.Data[0]
 
-// const cookie = useCookie('token')
-// const orderID = route.params.orderID
-// const userID = authCookie.value.data.Id
-console.log('authCookie', authCookie)
-console.log('route', route)
+  const status = orderInfo.value.OrderStatus
+  titleInfo.title = orderContext[status].title
+  titleInfo.icon = orderContext[status].icon
+  titleInfo.content = orderContext[status].content
+}
 
 const orderContext = {
-  訂單成立: {
+  0: {
+    title: '訂單已取消',
+    icon: 'ic:outline-backspace',
+    content: '等待 7-14 日(含)退款工作日'
+  },
+  1: {
     title: '付款成功！訂單成立',
     icon: 'ic:sharp-event-available',
     content: '等候刺青師三個工作日(含)內確認'
   },
-  完成訂單: {
+  2: {
     title: '刺青師已確認，完成訂單',
     icon: 'ic:sharp-event-available',
     content: '請於預約時間內前往刺青'
   },
-  評價刺青師: {
+  3: {
     title: '刺青師已確認，完成訂單',
     icon: 'ic:sharp-event-available',
     content: '您已評價刺青師'
-  },
-  取消訂單: {
-    title: '訂單已取消',
-    icon: 'ic:outline-backspace',
-    content: '等待 7-14 日(含)退款工作日'
   }
 }
-
-// const { data } = useFetch(`${apiBase}/user/${orderID}`)
 
 // 📌 ＡＰＩ
 const order = ref({
@@ -117,6 +121,12 @@ const orderStatus = ref({
     Status: false,
     Date: null
   }
+})
+
+onMounted(() => {
+  nextTick(() => {
+    getOrderInfo()
+  })
 })
 </script>
 <style scoped></style>

@@ -24,14 +24,14 @@ const menu = [
     link: 'editinfo'
   },
   {
+    icon: 'ic:outline-list-alt',
+    title: '訂單資訊',
+    link: 'orderRecords'
+  },
+  {
     icon: 'ic:outline-bookmark-border',
     title: '追蹤刺青師',
     link: 'follows'
-  },
-  {
-    icon: 'ic:baseline-monetization-on',
-    title: '交易紀錄',
-    link: 'orderRecords'
   }
   // {
   //   icon: 'ic:outline-stars',
