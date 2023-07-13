@@ -61,11 +61,15 @@ import OrderData from '~/components/order/OrderData'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+///
 const apiBase = runtimeConfig.public.apiBase
+////
+const authToken = useCookie('token')
+const authCookie = useCookie('data')
 
-const cookie = useCookie('token')
 const orderID = route.params.orderID
-const artistID = cookie.value.data.ID
+const artistID = authCookie.value.Id
 
 // 透過 API 最後一個
 const orderContext = {
@@ -96,6 +100,9 @@ const orderContext = {
 // 取得訂單狀態
 // 發送是否接收訂單
 
+const { data: orderData } = await useFetch(`${APIBASE}/api`, {
+  headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
+})
 const { data, error } = await useFetch(`${apiBase}/artist/${artistID}/${orderID}`)
 // order.value = data.value
 
