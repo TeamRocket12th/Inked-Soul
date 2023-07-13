@@ -73,10 +73,10 @@ const artistData = data.value.data.artistData
 designInfo.value = design.value.Data
 
 const store = useOrderStore()
-const { designData: orderData } = storeToRefs(store)
-orderData.value.ID = designID
-orderData.value.name = designInfo.Name
-orderData.value.deposit = designInfo.Deposit
+const { designData } = storeToRefs(store)
+designData.value.ID = designID
+designData.value.name = designInfo.Name
+designData.value.deposit = designInfo.Deposit
 
 const toPreviousPage = () => {
   router.push(`/designs/${designID}`)

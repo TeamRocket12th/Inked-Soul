@@ -2,8 +2,9 @@
   <div class="pt-10">
     <h4 class="mb-5">付款方式</h4>
     <div class="mb-20">
-      <select class="formInput">
-        <option class="p-2">線上信用卡付款</option>
+      <select class="formInput" v-model="inputPaymentInfo.PayWay">
+        <option value="" selected disabled>請選擇</option>
+        <option value="線上信用卡付款">線上信用卡付款</option>
       </select>
     </div>
     <h4 class="mb-5">訂單金額</h4>
@@ -20,9 +21,15 @@
   </div>
 </template>
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useOrderStore } from '~/stores/order'
+
 const props = defineProps({
   payment: {
     required: true
   }
 })
+
+const store = useOrderStore()
+const { inputPaymentInfo } = storeToRefs(store)
 </script>
