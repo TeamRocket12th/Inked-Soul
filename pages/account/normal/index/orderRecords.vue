@@ -1,6 +1,6 @@
 <template>
-  <div class="overflow-x-scroll rounded-lg">
-    <div>
+  <div>
+    <div class="mb-4 overflow-x-scroll rounded-lg">
       <table class="w-full">
         <thead class="h-12 bg-primary">
           <tr>
@@ -16,7 +16,7 @@
         </thead>
         <tbody>
           <OrderBar
-            v-for="item in data"
+            v-for="item in AllOrderRecord"
             :key="item.Id"
             :order="item"
             :status="item.Status"
@@ -26,30 +26,25 @@
         </tbody>
       </table>
     </div>
+    <!-- 分頁 -->
+    <PaginationBtn />
   </div>
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
+import PaginationBtn from '~/components/global/PaginationBtn'
+import OrderBar from '~/components/order/OrderBar'
 const store = useOrderStore()
 const { getAllOrder } = store
-import OrderBar from '~/components/order/OrderBar'
+const { AllOrderRecord, allNum } = storeToRefs(store)
 
-// 資料庫建置完成後改用store.js的getAllOrder
-const data = await $fetch('/api/getOrder/getAllOrder')
-
-console.log('data:', data)
-// 有真資料後再使用已下這段
-// const order = ref([])
-// order.value = data.value.OrderData
-// order.value = data.value
-// console.log('order:', order)
+onMounted(() => {
+  getAllOrder('user', 1)
+})
 
 const jump = (input) => {
   navigateTo(`/account/normal/${input}`)
 }
-
-// onMounted(()=>{
-//   getAllOrder()
-// })
 </script>

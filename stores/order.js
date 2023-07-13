@@ -22,6 +22,8 @@ export const useOrderStore = defineStore('order', () => {
     ImagesId: designData.ID,
     PayWay: ''
   })
+  const AllOrderRecord = ref()
+  const allNum = ref()
 
   const paymentInfo = reactive({
     Realname: '',
@@ -36,7 +38,7 @@ export const useOrderStore = defineStore('order', () => {
   // 取得訂單資料
   const getOrder = async () => {
     try {
-      const { data } = await useFetch(`${APIBASE}/api/${orderID}`, {
+      const { data } = await useFetch(`${APIBASE}/api/getimage/imgorder`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
@@ -62,15 +64,25 @@ export const useOrderStore = defineStore('order', () => {
     }
   }
   // 取得全部訂單
-  const getAllOrder = async () => {
+  const getAllOrder = (role, pageNum) => {
     try {
-      const { data } = useFetch(`${APIBASE}/api/`, {
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
-        }
+      nextTick(async () => {
+        const { data } = await useFetch(`${APIBASE}/api/getimage/imgorder`, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${authToken.value}`
+          },
+          body: JSON.stringify(`${role}`),
+          query: {
+            pageNumber: pageNum
+          }
+        })
+        console.log('成功取得所有訂單資料', data)
+        // 賦值
+        AllOrderRecord.value = data.value.order
+        allNum.value = data.value.TotalNum
       })
-      console.log('成功取得所有訂單資料', data)
     } catch (error) {
       console.log('取得所有訂單失敗', error)
     }
@@ -81,6 +93,8 @@ export const useOrderStore = defineStore('order', () => {
     artistID,
     designData,
     inputPaymentInfo,
+    AllOrderRecord,
+    allNum,
     paymentInfo,
     getOrder,
     getStatus,
