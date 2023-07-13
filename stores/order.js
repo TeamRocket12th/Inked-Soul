@@ -21,7 +21,7 @@ export const useOrderStore = defineStore('order', () => {
   })
 
   const AllOrderRecord = ref()
-
+  const allNum = ref()
   // 送出訂單
   const postOrder = async () => {
     const orderData = {
@@ -76,25 +76,25 @@ export const useOrderStore = defineStore('order', () => {
     }
   }
   // 取得全部訂單
-  const getAllOrder = async (role, pageNum) => {
+  const getAllOrder = (role, pageNum) => {
     try {
-      const { data } = useFetch(`${APIBASE}/api/getimage/imgorder`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
-        },
-        body: {
-          role: `${role}`
-        },
-        query: {
-          pageNumber: pageNum,
-          pageSize: 10
-        }
+      nextTick(async () => {
+        const { data } = await useFetch(`${APIBASE}/api/getimage/imgorder`, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${authToken.value}`
+          },
+          body: JSON.stringify(`${role}`),
+          query: {
+            pageNumber: pageNum
+          }
+        })
+        console.log('成功取得所有訂單資料', data)
+        // 賦值
+        AllOrderRecord.value = data.value.order
+        allNum.value = data.value.TotalNum
       })
-      console.log('成功取得所有訂單資料', data)
-      // 賦值
-      AllOrderRecord.value = data.value
     } catch (error) {
       console.log('取得所有訂單失敗', error)
     }
@@ -106,6 +106,7 @@ export const useOrderStore = defineStore('order', () => {
     designData,
     userData,
     AllOrderRecord,
+    allNum,
     postOrder,
     getOrder,
     getStatus,
