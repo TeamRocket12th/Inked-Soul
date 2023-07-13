@@ -216,6 +216,13 @@ const bookedDate = artistInfo.value.Data.map((item) => {
 const _startTime = props.time.StartTime
 const _endTime = props.time.EndTime
 
+// 取得刺青師不行的時間
+const { data: noTime } = await useFetch(`${APIBASE}/api/artistbooking`, {
+  method: 'POST',
+  body: artistID.value
+})
+console.log('noTime', noTime)
+
 const date = new Date()
 date.setDate(date.getDate() + 5)
 inputPaymentInfo.value.BookedDate = date

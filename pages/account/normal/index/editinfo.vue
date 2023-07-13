@@ -138,15 +138,23 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
-
+const authToken = useCookie('token')
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
 const store = useAccountStore()
 const { email, password, confirmPassword, tel, name, userInfoData } = storeToRefs(store)
 const { getUserInfo, editInfo } = store
 
 const { isUnder20, isPhone, isPassword } = useValidate()
 
-onMounted(async () => {
-  await getUserInfo()
+const { data } = await useFetch(`${APIBASE}/api/userinfo`, {
+  headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
 })
+
+setTimeout(() => {
+  userInfoData.value.Nickname = data.value.Data.Nickname
+  userInfoData.value.Tel = data.value.Data.Tel
+  console.log('userInfoData', userInfoData)
+}, 100)
 </script>
 <style scoped></style>

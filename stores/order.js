@@ -6,6 +6,7 @@ export const useOrderStore = defineStore('order', () => {
   const router = useRouter()
   const id = ref()
   const orderID = ref()
+  const artistID = ref()
   const designData = ref({
     ID: '',
     name: '',
@@ -77,6 +78,7 @@ export const useOrderStore = defineStore('order', () => {
   return {
     id,
     orderID,
+    artistID,
     designData,
     inputPaymentInfo,
     paymentInfo,

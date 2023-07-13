@@ -1,7 +1,8 @@
 <template>
+  <!-- 所有認領圖 -->
   <div class="container mx-auto flex flex-col items-center">
     <SearchBar class="mb-14">搜尋認領圖</SearchBar>
-    <div class="mb-8 flex w-full justify-between">
+    <div v-if="showResult" class="mb-8 flex w-full justify-between">
       <p class="text-left">
         認領圖的
         <span v-if="cityArr.length === 0">全部</span>
@@ -15,32 +16,32 @@
         <span v-if="elementArr.length === 0">全部</span>
         <span v-for="(item, index) in elementArr" :key="index" class="font-bold"
           >{{ item }}<span>&nbsp;</span></span
-        ><span>&nbsp;</span>元素， 共{{ filterArr.length }}個結果
+        ><span>&nbsp;</span>元素， 共{{ allDesignData.length }}個結果
       </p>
       <div class="cursor-pointer rounded-lg border bg-white p-1">
         <Icon name="ic:round-sync-alt" size="24" class="origin-center rotate-90" />
       </div>
     </div>
     <masonry-wall
-      v-if="filterArr"
-      :items="filterArr"
+      v-if="allDesignData"
+      :items="allDesignData"
       :ssr-columns="3"
       :column-width="300"
       :gap="32"
     >
       <template #default="{ item }">
         <div class="rounded-xl">
-          <NuxtLink :key="item.id" :to="`/designs/${item.id}`">
+          <NuxtLink :key="item.Id" :to="`/designs/${item.Id}`">
             <DesignCard
-              :id="item.id"
-              :image="item.image"
-              :design-name="item.designName"
-              :artist-name="item.artistName"
-              :artist-img="item.artistImg"
-              :price="item.price"
-              :city="item.city"
-              :style="item.style"
-              :element="item.element"
+              :id="item.Id"
+              :image="item.Photo"
+              :design-name="item.Name"
+              :artist-name="item.Nickname"
+              :artist-img="item.Photo"
+              :price="item.Total"
+              :city="item.City"
+              :style="item.Style"
+              :element="item.Element"
             />
           </NuxtLink>
         </div>
@@ -52,17 +53,28 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
-const store = useSearchStore()
-const { allData, filterArr, cityArr, styleArr, elementArr } = storeToRefs(store)
-const { data } = await useFetch('/api/getDesign/getAllDesign')
-const designData = ref([])
-designData.value = data.value.design
 
-const defaultRender = () => {
-  if (filterArr.value.length === 0) {
-    allData.value = designData.value
-    filterArr.value = allData.value
+const store = useSearchStore()
+const { allDesignData, cityArr, styleArr, elementArr, showResult, cityStr, styleStr, elementStr } =
+  storeToRefs(store)
+const { arrToString } = store
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+
+arrToString()
+const { data } = await useFetch(`${APIBASE}/api/artistcity`, {
+  method: 'POST',
+  body: {
+    City: cityStr ? cityStr : '',
+    Style: styleStr ? styleStr : '',
+    Element: elementStr ? elementStr : ''
   }
+})
+
+if (data.value) {
+  allDesignData.value = data.value.Data
+} else {
+  alert('無搜尋結果')
 }
 
 // 參考用
@@ -82,7 +94,8 @@ const { mydata } = await useAsyncData(
   }
 )
 
-onMounted(() => {
+onMounted(async () => {
+  // 瀑布流
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.intersectionRatio > 0) {
@@ -93,7 +106,5 @@ onMounted(() => {
   })
 
   observer.observe(root.value)
-
-  defaultRender()
 })
 </script>

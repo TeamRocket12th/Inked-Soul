@@ -42,12 +42,12 @@
   </div>
 </template>
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useOrderStore } from '~/stores/order'
 import DesignIntro from '~/components/design/DesignIntro'
 import OrderData from '~/components/design/OrderData'
 import PaymentData from '~/components/design/PaymentData'
 import PaymentBtn from '~/components/design/PaymentBtn'
-import { useOrderStore } from '~/stores/order'
-import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const route = useRoute()
@@ -65,10 +65,10 @@ const {
   headers: { 'Content-type': 'application/json' }
 })
 
-///
+//
 const { data } = await useFetch(`/api/getDesign/${designID}`)
 const artistData = data.value.data.artistData
-////
+//
 
 designInfo.value = design.value.Data
 
