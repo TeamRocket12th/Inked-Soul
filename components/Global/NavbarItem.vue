@@ -109,16 +109,13 @@
               </div>
             </div>
             <li>
-              <NuxtLink to="/artists" class="rounded-none border-b px-8 py-4">加入刺青師</NuxtLink>
-            </li>
-            <li>
               <NuxtLink to="/account/normal/editinfo" class="rounded-none px-8 py-4"
                 >編輯個人資料</NuxtLink
               >
             </li>
             <li>
               <NuxtLink to="/account/normal/orderRecords" class="rounded-none px-8 py-4"
-                >交易紀錄</NuxtLink
+                >訂單資訊</NuxtLink
               >
             </li>
             <li>

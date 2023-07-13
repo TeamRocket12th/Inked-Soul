@@ -1,23 +1,4 @@
 <template>
-  <!-- <div
-    v-if="props.status === '已評價'"
-    class="absolute right-0 top-16 hidden w-[300px] border-[1px] border-black p-4 group-hover:block"
-  >
-    <div class="flex justify-between">
-      <div class="flex">
-        <img :src="`${props.order.ArtistImg}`" alt="" class="rounede-full w-[20%]" />
-        <span>{{ props.order.Artist }}</span>
-      </div>
-      <p>{{ props.order.CommentDate }}</p>
-    </div>
-    <div class="flex">
-      <Icon :name="`${item}`" size:24 v-for="(item, index) in starArr" :key="index" />
-    </div>
-    <div class="">
-      <p>{{ props.order.Comment }}</p>
-    </div>
-  </div> -->
-
   <div class="overflow-x-auto rounded-lg border">
     <div>
       <table class="w-full">
@@ -37,31 +18,34 @@
           <tr class="h-[108px]">
             <td class="flex h-[108px] items-center justify-center">
               <img
-                :src="`${props.order.Image}`"
+                :src="`${props.order.Url}`"
                 class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
               />
             </td>
             <td>
               <div class="flex flex-col items-center">
-                <p>name</p>
-                <p>12cm*12cm</p>
+                <p>{{ props.order.Name }}</p>
+                <p>{{ props.order.Size }}</p>
               </div>
             </td>
             <td>
               <!-- 購買人 -->
-              {{ props.order.User || props.order.Artist }}
+              <p v-if="props.role === '訂購人'">{{ props.order.BuPurchaser }}</p>
+              <p v-if="props.role === '刺青師'">{{ props.order.ArtistName }}</p>
             </td>
             <td>
               <!-- 訂單編號 -->
-              {{ props.order.Id }}
+              <p class="line-clamp-1 px-2">
+                {{ props.order.Number }}
+              </p>
             </td>
             <td>
               <!-- 交易日期 -->
-              {{ props.order.OrderDay }}
+              {{ payDate }}
             </td>
-            <td>{{ props.order.Date }} {{ props.order.Time }}</td>
+            <td>{{ bookedDate }} {{ bookedTimeFrame }}</td>
             <td>$ {{ props.order.Deposit }}</td>
-            <td>{{ props.order.Status }}</td>
+            <td>{{ orderStatus }}</td>
           </tr>
         </tbody>
       </table>
@@ -71,7 +55,6 @@
 <script setup>
 const props = defineProps({
   order: {
-    type: Object,
     required: true
   },
   status: {
@@ -80,6 +63,30 @@ const props = defineProps({
   },
   role: {
     default: '訂購人'
+  }
+})
+
+const { transformDate, transformOrderStatus } = useFormatted()
+
+const payDate = computed(() => {
+  if (props.order) {
+    return props.order.PayDate.slice(0, 10)
+  }
+})
+const bookedDate = computed(() => {
+  if (props.order) {
+    return transformDate(props.order.BookedDate)
+  }
+})
+const bookedTimeFrame = computed(() => {
+  if (props.order) {
+    return props.order.BookedTimeFrame.slice(0, 2)
+  }
+})
+const orderStatus = computed(() => {
+  if (props.order) {
+    const status = props.order.OrderStatus
+    return transformOrderStatus(status)
   }
 })
 
