@@ -1,12 +1,12 @@
 <template>
-  <div v-if="props" class="flex flex-col items-center gap-10 rounded-lg bg-white p-5">
+  <div class="flex flex-col items-center gap-10 rounded-lg bg-white p-5">
     <div class="flex w-full flex-col gap-3">
-      <h2>{{ props.artistData.nickname }}</h2>
-      <img :src="props.artistData.photo" class="rounded-lg object-cover shadow" />
+      <h2>{{ artistInfo.name }}</h2>
+      <img :src="artistInfo.img" class="rounded-lg object-cover shadow" />
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-row items-center">
           <Icon name="ic:baseline-bookmark" class="h-6 w-6" />
-          {{ props.artistData.Follower }}
+          {{ artistInfo.followers }}
         </div>
         <div>
           <div class="dropdown-end dropdown">
@@ -25,25 +25,25 @@
 
     <div class="flex w-full flex-col gap-3">
       <p class="bg-primary px-5 py-3">關於我</p>
-      <p>資歷｜{{ props.artistData.experience }}年</p>
-      <p>工作室｜{{ props.artistData.studioName }}</p>
+      <p>資歷｜{{ artistInfo.exp }}年</p>
+      <p>工作室｜{{ artistInfo.studio }}</p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-phone" class="h-6 w-6" /> {{ props.artistData.tel }}
+        <Icon name="ic:outline-phone" class="h-6 w-6" /> {{ artistInfo.tel }}
       </p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-home" class="h-6 w-6" /> {{ props.artistData.location }}
+        <Icon name="ic:outline-home" class="h-6 w-6" /> {{ artistInfo.add }}
       </p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-access-time" class="h-6 w-6" />{{ props.artistData.businessHours }}
+        <Icon name="ic:outline-access-time" class="h-6 w-6" />{{ artistInfo.time }}
       </p>
     </div>
 
     <div class="flex w-full flex-col gap-3">
       <p class="bg-primary px-5 py-3">作品風格</p>
-      <p class="mb-2">{{ props.artistData.Intro }}</p>
-      <ul class="flex flex-col items-start gap-2">
+      <p class="mb-2">{{ artistInfo.intro }}</p>
+      <ul class="flex flex-col items-start gap-2" v-if="artistInfo.style !== null">
         <li
-          v-for="(style, key) in props.artistData.Style"
+          v-for="(style, key) in styleArr"
           :key="key"
           class="rounded-full border border-[#D0D0D0] px-3 py-1"
         >
@@ -51,25 +51,36 @@
         </li>
       </ul>
     </div>
-
-    <!-- <div>
-      <div v-for="(item, index) in chStyleArr" :key="index" class="badge">{{ item }}</div>
-    </div> -->
   </div>
 </template>
 <script setup>
-// import { useChNameStore } from '~/stores/useChNameStore'
-// const chNameStore = useChNameStore()
-const props = defineProps({
-  artistData: {
-    type: Object,
-    required: true
-  }
+import { storeToRefs } from 'pinia'
+import { useGetImageStore } from '~/stores/getImage'
+const store = useGetImageStore()
+const { userGetTattooData } = store
+const { allData } = storeToRefs(store)
+
+const artistInfo = ref({})
+const styleArr = ref()
+watch(allData, (nV) => {
+  artistInfo.value.name = allData.value[0].ArtistNickname
+  artistInfo.value.img = allData.value[0].Photo
+  artistInfo.value.followers = allData.value[0].Follower
+  artistInfo.value.exp = allData.value[0].Experience
+  artistInfo.value.studio = allData.value[0].StudioName
+  artistInfo.value.tel = allData.value[0].Phone
+  artistInfo.value.add = allData.value[0].Address
+  artistInfo.value.time = `${allData.value[0].StartTime}-${allData.value[0].EndTime}`
+  artistInfo.value.intro = allData.value[0].Intro
+  // artistInfo.value.style = allData.value[0].Style
+  styleArr.value = allData.value[0].Style.split(',')
+  return { artistInfo, styleArr }
 })
 
-// 風格編號轉文字
-// const chStyleArr = ref([])
-// props.artistData.style.forEach((item) => {
-//   chStyleArr.value.push(chNameStore.chStyle[item])
-// })
+const route = useRoute()
+const id = route.params.artistID
+
+onMounted(() => {
+  userGetTattooData(id, 1)
+})
 </script>
