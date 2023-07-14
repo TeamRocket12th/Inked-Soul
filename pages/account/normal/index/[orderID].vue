@@ -28,7 +28,8 @@
       </OrderArea>
       <!-- 評價區 -->
       <!-- 出現時機視訂單狀態而定 -->
-      <PostComments v-if="orderStatus.Step2.Status === true" class="absolute top-0" />
+      <!-- v-if="orderStatus === 3" -->
+      <PostComments class="absolute top-0" />
     </div>
   </div>
 </template>
