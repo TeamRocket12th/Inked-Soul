@@ -57,7 +57,7 @@ const APIBASE = runtimeConfig.public.APIBASE
 const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { stretchShow } = store
+const { isComment, stretchShow } = store
 
 const imageId = route.params.orderID
 const comment = ref('')
@@ -82,6 +82,8 @@ const postComments = async () => {
     method: 'POST',
     body: commentInfo.value
   })
+
+  isComment.value = true
   console.log(data)
 }
 </script>

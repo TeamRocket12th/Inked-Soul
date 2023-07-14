@@ -7,6 +7,7 @@ export const useOrderStore = defineStore('order', () => {
   const id = ref()
   const orderID = ref()
   const artistID = ref()
+  const isComment = ref(false)
   const designData = ref({
     ID: '',
     name: '',
@@ -103,6 +104,7 @@ export const useOrderStore = defineStore('order', () => {
     id,
     orderID,
     artistID,
+    isComment,
     designData,
     inputPaymentInfo,
     AllOrderRecord,
