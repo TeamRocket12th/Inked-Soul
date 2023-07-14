@@ -74,21 +74,15 @@ const doneDate = reactive({
 
 const { stepDate } = toRefs(props)
 
-watch(
-  stepDate,
-  (newStepDate) => {
-    for (const key in doneDate) {
-      if (newStepDate[key].OrderDate) {
-        doneDate[key] = newStepDate[key].OrderDate.slice(0, 10)
-      } else {
-        doneDate[key] = ''
-      }
+watch(stepDate, (newStepDate) => {
+  for (const key in doneDate) {
+    if (newStepDate[key].OrderDate) {
+      doneDate[key] = newStepDate[key].OrderDate.slice(0, 10)
+    } else {
+      doneDate[key] = ''
     }
-  },
-  {
-    immediate: true
   }
-)
+})
 
 const step3Info = reactive({
   title: '',
