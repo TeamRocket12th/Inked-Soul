@@ -39,7 +39,9 @@ export const useSearchStore = defineStore('search', () => {
         showResult.value = true
         if (data.value.Data !== null) {
           allDesignData.value = data.value.Data
+          allNum.value = allDesignData.value.length
         } else {
+          allNum.value = 0
           alert('認領圖中無相對刺青師在此縣市')
         }
       })
@@ -69,6 +71,7 @@ export const useSearchStore = defineStore('search', () => {
           allArtistsData.value = data.value.Data
           allNum.value = data.value.response.TotalNum
         } else {
+          allNum.value = 0
           alert('認領圖中無相對刺青師在此縣市')
         }
       })
