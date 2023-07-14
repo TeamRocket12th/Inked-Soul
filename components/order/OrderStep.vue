@@ -9,7 +9,7 @@
       </div>
       <p class="text-base">訂單成立</p>
       <p v-if="props.currentStatus" class="font-noto-tc text-sm font-normal">
-        {{ props.stepDate.Step01 }}
+        {{ doneDate.Step01 }}
       </p>
     </li>
     <li class="col-span-2 col-start-3 px-10 pt-8">
@@ -24,7 +24,7 @@
       </div>
       <p class="text-base">完成訂單</p>
       <p v-if="props.currentStatus >= 2" class="font-noto-tc text-sm font-normal">
-        {{ props.stepDate.Step02 }}
+        {{ doneDate.Step02 }}
       </p>
     </li>
     <li class="col-span-2 col-start-6 px-10 pt-8">
@@ -39,7 +39,7 @@
       </div>
       <p class="whitespace-nowrap text-base">{{ step3Info.title }}</p>
       <p v-if="props.currentStatus >= 3" class="font-noto-tc text-sm font-normal">
-        {{ props.stepDate.Step03 }}
+        {{ doneDate.Step03 }}
       </p>
       <!-- <button
         v-if="props.currentStatus >= 3"
@@ -64,13 +64,31 @@ const props = defineProps({
   }
 })
 
-const { transformDate } = useFormatted()
-
-const doneDate = computed(() => {
-  if (props.stepDate) {
-    return transformDate(props.stepDate)
-  }
+const doneDate = reactive({
+  Step01: '',
+  Step02: '',
+  Step03: '',
+  Step04: '',
+  Step05: ''
 })
+
+const { stepDate } = toRefs(props)
+
+watch(
+  stepDate,
+  (newStepDate) => {
+    for (const key in doneDate) {
+      if (newStepDate[key].OrderDate) {
+        doneDate[key] = newStepDate[key].OrderDate.slice(0, 10)
+      } else {
+        doneDate[key] = ''
+      }
+    }
+  },
+  {
+    immediate: true
+  }
+)
 
 const step3Info = reactive({
   title: '',
