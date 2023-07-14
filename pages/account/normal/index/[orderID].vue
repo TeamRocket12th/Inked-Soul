@@ -7,7 +7,7 @@
         class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
       />
     </NuxtLink>
-    <div class="relative">
+    <div class="relative flex h-auto flex-col items-center">
       <OrderArea>
         <template #orderContext>
           <Icon :name="titleInfo.icon" size="40" />
@@ -28,7 +28,7 @@
       </OrderArea>
       <!-- 評價區 -->
       <!-- 出現時機視訂單狀態而定 -->
-      <PostComments />
+      <PostComments v-if="orderStatus.Step2.Status === true" class="absolute top-0" />
     </div>
   </div>
 </template>
@@ -117,5 +117,9 @@ onMounted(() => {
     getOrderInfo()
   })
 })
+
+// watch(stretch, (nV) => {
+//   console.log(stretch.value)
+// })
 </script>
 <style scoped></style>

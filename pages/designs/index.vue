@@ -74,7 +74,7 @@ const { data } = await useFetch(`${APIBASE}/api/artistcity`, {
 if (data.value) {
   allDesignData.value = data.value.Data
 } else {
-  alert('無搜尋結果')
+  console.log('無搜尋結果')
 }
 
 // 參考用
