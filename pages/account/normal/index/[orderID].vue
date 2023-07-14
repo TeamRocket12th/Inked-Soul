@@ -39,12 +39,13 @@ import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
 
+const route = useRoute()
 const authToken = useCookie('token')
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
 
 // 取得單一訂單資訊
-const imageId = 2
+const imageId = route.params.orderID
 const orderInfo = ref('')
 const orderStatus = ref('')
 const orderDate = ref('')
@@ -53,6 +54,7 @@ const titleInfo = reactive({
   icon: '',
   content: ''
 })
+
 const getOrderInfo = async () => {
   const { data: orderResponse, error } = await useFetch(`${APIBASE}/api/orderinfo/${imageId}`, {
     headers: {
@@ -69,9 +71,6 @@ const getOrderInfo = async () => {
   titleInfo.icon = orderContext[orderStatus.value].icon
   titleInfo.content = orderContext[orderStatus.value].content
 }
-
-// 發送確認訂單
-// const confirmOrder = async
 
 const orderContext = {
   0: {
@@ -95,22 +94,6 @@ const orderContext = {
     content: '您已評價刺青師'
   }
 }
-
-// 狀態 ＡＰＩ
-// const orderStatus = ref({
-//   Step1: {
-//     Status: true,
-//     Date: '2023-06-20'
-//   },
-//   Step2: {
-//     Status: true,
-//     Date: '2023-06-20'
-//   },
-//   Step3: {
-//     Status: false,
-//     Date: null
-//   }
-// })
 
 onMounted(() => {
   nextTick(() => {
