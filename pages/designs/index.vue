@@ -22,7 +22,7 @@
         <Icon name="ic:round-sync-alt" size="24" class="origin-center rotate-90" />
       </div>
     </div>
-    <masonry-wall
+    <!--<masonry-wall
       v-if="allDesignData"
       :items="allDesignData"
       :ssr-columns="3"
@@ -31,7 +31,7 @@
     >
       <template #default="{ item }">
         <div class="rounded-xl">
-          <NuxtLink :key="item.Id" :to="`/designs/${item.Id}`">
+           <NuxtLink :key="item.Id" :to="`/designs/${item.Id}`">
             <DesignCard
               :id="item.Id"
               :image="item.Photo"
@@ -43,10 +43,10 @@
               :style="item.Style"
               :element="item.Element"
             />
-          </NuxtLink>
+          </NuxtLink> 
         </div>
       </template>
-    </masonry-wall>
+    </masonry-wall>-->
     <div ref="root">loading</div>
   </div>
 </template>
@@ -62,14 +62,14 @@ const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
 
 arrToString()
-const { data } = await useFetch(`${APIBASE}/api/artistcity`, {
-  method: 'POST',
-  body: {
-    City: cityStr ? cityStr : '',
-    Style: styleStr ? styleStr : '',
-    Element: elementStr ? elementStr : ''
-  }
-})
+// const { data } = await useFetch(`${APIBASE}/api/artistcity`, {
+//   method: 'POST',
+//   body: {
+//     City: cityStr ? cityStr : '',
+//     Style: styleStr ? styleStr : '',
+//     Element: elementStr ? elementStr : ''
+//   }
+// })
 
 if (data.value) {
   allDesignData.value = data.value.Data

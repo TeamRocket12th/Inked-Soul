@@ -18,6 +18,23 @@ export const useSearchStore = defineStore('search', () => {
     elementStr.value = elementArr.value.join()
   }
 
+  // 取得刺青師
+  const getArtists = () => {
+    arrToString()
+    nextTick(async () => {
+      const { data } = await useFetch(`${APIBASE}/api/searchartist`, {
+        method: 'POST',
+        body: {
+          City: '',
+          Style: '',
+          Element: ''
+        }
+      })
+      allArtistsData.value = data.value.Data
+      showResult.value = true
+    })
+  }
+
   return {
     APIBASE,
     allDesignData,
@@ -30,6 +47,7 @@ export const useSearchStore = defineStore('search', () => {
     styleStr,
     elementStr,
     showResult,
-    arrToString
+    arrToString,
+    getArtists
   }
 })
