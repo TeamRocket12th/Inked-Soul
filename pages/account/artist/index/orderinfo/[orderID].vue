@@ -1,14 +1,10 @@
 <template>
   <NuxtLink to="/account/artist/orderinfo">
-    <Icon
-      name="ic:outline-keyboard-arrow-left"
-      size="48"
-      class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-    />
+    <Icon name="ic:outline-keyboard-arrow-left" size="48" class="goBack" />
   </NuxtLink>
 
   <div>
-    <OrderArea>
+    <OrderArea class="mb-20">
       <template #orderContext>
         <div class="flex flex-col items-center gap-5">
           <Icon :name="titleInfo.icon" size="40" />
@@ -21,7 +17,7 @@
         </div>
       </template>
       <template #steps>
-        <OrderStep :current-status="orderStatus" :step-date="orderDate" role="user" />
+        <OrderStep :current-status="orderStatus" :step-date="orderDate" role="artist" />
       </template>
       <template #orderDetail>
         <OrderData :order="orderInfo" role="訂購人" />
@@ -104,14 +100,14 @@ const orderContext = {
     content: '等候刺青師三個工作日(含)內確認'
   },
   2: {
-    title: '刺青師已確認，完成訂單',
+    title: '完成訂單！請於預約時間完成',
     icon: 'ic:sharp-event-available',
-    content: '請於預約時間內前往刺青'
+    content: '系統將於14日後自動撥款到您的帳戶'
   },
   3: {
-    title: '刺青師已確認，完成訂單',
+    title: '您已獲得評價',
     icon: 'ic:sharp-event-available',
-    content: '您已評價刺青師'
+    content: ''
   }
 }
 
@@ -129,6 +125,7 @@ const confirmOrder = async (status) => {
     }
   })
   console.log(confirmResponse.value)
+  getOrderInfo()
 }
 
 onMounted(() => {

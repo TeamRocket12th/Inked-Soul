@@ -1,6 +1,6 @@
 <template>
   <ul class="grid grid-cols-9 font-roboto-nl text-xl font-bold">
-    <li class="col-start-2 flex flex-col items-center gap-1">
+    <li class="col-start-2 flex flex-col items-center gap-1 whitespace-nowrap">
       <div
         :class="{ 'bg-black text-white': props.currentStatus >= 1 }"
         class="flex h-16 w-16 items-center justify-center rounded-full border border-black"
@@ -15,7 +15,7 @@
     <li class="col-span-2 col-start-3 px-10 pt-8">
       <div class="border-b border-secondary"></div>
     </li>
-    <li class="col-start-5 flex flex-col items-center gap-1">
+    <li class="col-start-5 flex flex-col items-center gap-1 whitespace-nowrap">
       <div
         :class="{ 'bg-black text-white': props.currentStatus >= 2 }"
         class="flex h-16 w-16 items-center justify-center rounded-full border border-black"
@@ -30,14 +30,14 @@
     <li class="col-span-2 col-start-6 px-10 pt-8">
       <div class="border-b border-secondary"></div>
     </li>
-    <li class="col-start-8 flex flex-col items-center gap-1">
+    <li class="col-start-8 flex flex-col items-center gap-1 whitespace-nowrap">
       <div
         :class="{ 'bg-black text-white': props.currentStatus >= 3 }"
         class="flex h-16 w-16 items-center justify-center rounded-full border border-black"
       >
         <p>03</p>
       </div>
-      <p class="whitespace-nowrap text-base">{{ step3Info.title }}</p>
+      <p class="text-base">{{ step3Info.title }}</p>
       <p v-if="props.currentStatus >= 3" class="font-noto-tc text-sm font-normal">
         {{ doneDate.Step03 }}
       </p>
