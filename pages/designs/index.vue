@@ -20,9 +20,6 @@
               :artist-name="item.Nickname"
               :artist-img="item.Photo"
               :price="item.Total"
-              :city="item.City"
-              :style="item.Style"
-              :element="item.Element"
             />
           </NuxtLink>
         </div>
