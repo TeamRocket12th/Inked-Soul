@@ -16,10 +16,9 @@
       </div>
       <div
         class="col-span-8 self-start rounded-lg border bg-white p-10"
-        :class="stretch === false ? '' : 'h-[1300px] md:h-[1200px]'"
+        :class="stretch === false ? '' : 'h-[1400px] md:h-[1300px]'"
         @click.capture="stretchHide()"
       >
-        <!-- @click.capture="stretchHide()" -->
         <NuxtPage />
       </div>
     </div>

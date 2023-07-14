@@ -10,6 +10,7 @@
       <div
         tabindex="0"
         class="dropdown-content menu rounded-box absolute top-5 z-[1] w-[10rem] bg-base-100 p-2 sm:w-[15rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] 2xl:w-[38rem]"
+        @click.prevent="stretchShow()"
       >
         <!-- 星星 -->
         <div class="mb-4 flex items-center">
@@ -25,10 +26,10 @@
         <!-- 文字輸入框 -->
         <div class="mb-2">
           <label class="flex justify-between">
-            <p>撰寫評語</p>
+            <p class="mr-2 w-20">撰寫評語</p>
             <textarea
               v-model="txt"
-              class="textarea-bordered textarea w-[60%]"
+              class="textarea-bordered textarea w-full"
               maxlength="30"
             ></textarea>
           </label>
