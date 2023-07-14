@@ -14,7 +14,11 @@
           </slot>
         </div>
       </div>
-      <div class="col-span-8 self-start rounded-lg border bg-white p-10">
+      <div
+        class="col-span-8 self-start rounded-lg border bg-white p-10"
+        :class="stretch === false ? '' : 'h-[1400px] md:h-[1300px]'"
+        @click.capture="stretchHide()"
+      >
         <NuxtPage />
       </div>
     </div>
@@ -23,5 +27,10 @@
 <script setup>
 import Photo from '~/components/admin/Photo.vue'
 import Navbar from '~/components/admin/Navbar.vue'
+import { storeToRefs } from 'pinia'
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { stretch } = storeToRefs(store)
+const { stretchHide } = store
 </script>
 <style scoped></style>

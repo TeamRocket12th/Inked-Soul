@@ -87,6 +87,18 @@ export const useOrderStore = defineStore('order', () => {
       console.log('取得所有訂單失敗', error)
     }
   }
+
+  // 評價區hide/show
+  const stretch = ref(false)
+
+  const stretchShow = () => {
+    stretch.value = true
+    console.log('show', stretch.value)
+  }
+  const stretchHide = () => {
+    stretch.value = false
+    console.log('hide', stretch.value)
+  }
   return {
     id,
     orderID,
@@ -96,8 +108,11 @@ export const useOrderStore = defineStore('order', () => {
     AllOrderRecord,
     allNum,
     paymentInfo,
+    stretch,
     getOrder,
     getStatus,
-    getAllOrder
+    getAllOrder,
+    stretchShow,
+    stretchHide
   }
 })

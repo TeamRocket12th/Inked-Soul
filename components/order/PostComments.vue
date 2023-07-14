@@ -1,35 +1,45 @@
 <template>
   <div class="relative h-[10vh] w-full">
-    <div class="dropdown-bottom dropdown-end dropdown absolute right-[16.5%] translate-x-[50%]">
-      <label tabindex="0" class="btn rounded-lg bg-black px-4 py-2 text-white focus:bg-[#D0D0D0]"
+    <div class="dropdown-bottom dropdown-end dropdown absolute right-0">
+      <label
+        tabindex="0"
+        class="btn bg-black px-4 py-2 text-white focus:bg-[#D0D0D0] md:mr-4 lg:mr-12"
+        @click.prevent="stretchShow()"
         >撰寫評價</label
       >
-      <div tabindex="0" class="dropdown-content menu absolute !-right-10 top-5 z-[1] w-[38rem]">
+      <div
+        tabindex="0"
+        class="dropdown-content menu rounded-box absolute top-5 z-[1] w-[10rem] bg-base-100 p-2 sm:w-[15rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] 2xl:w-[38rem]"
+        @click.prevent="stretchShow()"
+      >
         <!-- 星星 -->
-        <div class="mb-5 flex items-center gap-3">
-          <p>星級評價</p>
-          <div class="rating">
-            <input type="radio" name="rating-9" class="mask mask-star" @change="updateRating(1)" />
-            <input type="radio" name="rating-9" class="mask mask-star" @change="updateRating(2)" />
-            <input type="radio" name="rating-9" class="mask mask-star" @change="updateRating(3)" />
-            <input type="radio" name="rating-9" class="mask mask-star" @change="updateRating(4)" />
-            <input type="radio" name="rating-9" class="mask mask-star" @change="updateRating(5)" />
+        <div class="mb-4 flex items-center">
+          <p class="mr-2">星級評價</p>
+          <div class="rating rating-sm">
+            <input type="radio" name="rating-5" class="mask mask-star" @change="updateRating(1)" />
+            <input type="radio" name="rating-5" class="mask mask-star" @change="updateRating(2)" />
+            <input type="radio" name="rating-5" class="mask mask-star" @change="updateRating(3)" />
+            <input type="radio" name="rating-5" class="mask mask-star" @change="updateRating(4)" />
+            <input type="radio" name="rating-5" class="mask mask-star" @change="updateRating(5)" />
           </div>
         </div>
         <!-- 文字輸入框 -->
-        <label class="mb-[30px] flex items-start gap-3">
-          <p class="whitespace-nowrap">撰寫評語</p>
-          <textarea
-            v-model="txt"
-            class="textarea-bordered textarea h-[100px] w-full rounded-lg"
-            placeholder="請填入30字(含)內評語"
-            maxlength="30"
-          ></textarea>
-        </label>
+        <div class="mb-2">
+          <label class="flex justify-between">
+            <p class="mr-2 w-20">撰寫評語</p>
+            <textarea
+              v-model="txt"
+              class="textarea-bordered textarea w-full"
+              maxlength="30"
+            ></textarea>
+          </label>
+        </div>
         <div class="">
           <div class="row-reverse comment-btn absolute right-0">
-            <button class="btn bg-black text-white" @click="postComments">評價</button>
-            <p><Icon name="ic:baseline-warning-amber" />評論送出後將無法修改</p>
+            <button class="btn bg-black py-1 text-xs text-white" @click="postComments">評價</button>
+            <p class="text-secondary">
+              <Icon name="ic:baseline-warning-amber" />評價送出後將無法修改
+            </p>
           </div>
         </div>
       </div>
@@ -38,6 +48,10 @@
 </template>
 
 <script setup>
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { stretchShow } = store
+
 const rate = ref(0)
 const updateRating = (num) => {
   rate.value = num
