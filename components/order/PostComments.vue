@@ -28,7 +28,7 @@
           <label class="flex justify-between">
             <p class="mr-2 w-20">撰寫評語</p>
             <textarea
-              v-model="txt"
+              v-model="comment"
               class="textarea-bordered textarea w-full"
               maxlength="30"
             ></textarea>
@@ -49,29 +49,40 @@
 
 <script setup>
 import { useOrderStore } from '~/stores/order'
+
+const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+
+const authToken = useCookie('token')
+
 const store = useOrderStore()
 const { stretchShow } = store
 
+const imageId = route.params.orderID
+const comment = ref('')
 const rate = ref(0)
+
 const updateRating = (num) => {
   rate.value = num
 }
-const txt = ref()
-const originalDate = new Date()
-const date = originalDate.toISOString()
-const newDate = date.split('T')
 
+// ❌
 const postComments = async () => {
-  const comment = ref({
-    star: rate.value,
-    txt: txt.value,
-    commentDate: newDate[0]
+  const commentInfo = ref({
+    imageID: imageId,
+    comment: comment.value,
+    star: rate.value
   })
-  await useFetch('http://localhost:5005/comments', {
+  const { data, error } = await useFetch(`${APIBASE}/api/artistfinishcomment`, {
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${authToken.value}`
+    },
     method: 'POST',
-    body: comment
+    body: commentInfo.value
   })
-  console.log(comment)
+  console.log(data)
 }
 </script>
 
