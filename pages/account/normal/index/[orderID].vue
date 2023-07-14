@@ -7,7 +7,7 @@
         class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
       />
     </NuxtLink>
-    <div class="relative">
+    <div class="relative flex h-auto flex-col items-center">
       <OrderArea>
         <template #orderContext>
           <Icon :name="orderContext[order.Data.Status].icon" size="40" />
@@ -27,7 +27,7 @@
       </OrderArea>
       <!-- 評價區 -->
       <!-- 出現時機視訂單狀態而定 -->
-      <PostComments v-if="orderStatus.Step2.Status === true" class="absolute right-12 top-0" />
+      <PostComments v-if="orderStatus.Step2.Status === true" class="absolute top-0" />
     </div>
   </div>
 </template>
@@ -35,12 +35,16 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
+// import { useOrderStore } from '~/stores/order'
 import OrderArea from '~/container/order/OrderArea'
 import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
 const store = useAccountStore()
+// const store2 = useOrderStore()
 const { authCookie } = storeToRefs(store)
+// const { stretch } = storeToRefs(store2)
+// const { stretchHide } = store2
 const route = useRoute(store)
 const runtimeConfig = useRuntimeConfig()
 const apiBase = runtimeConfig.public.apiBase
@@ -118,5 +122,9 @@ const orderStatus = ref({
     Date: null
   }
 })
+
+// watch(stretch, (nV) => {
+//   console.log(stretch.value)
+// })
 </script>
 <style scoped></style>
