@@ -44,6 +44,7 @@
         </table>
       </div>
     </div>
+    <!-- 分頁 -->
     <PaginationBtn />
   </div>
 </template>
@@ -51,7 +52,6 @@
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 import OrderBar from '~/components/order/OrderBar.vue'
-import PaginationBtn from '~/components/global/PaginationBtn'
 const store = useOrderStore()
 const { getAllOrder } = store
 const { AllOrderRecord } = storeToRefs(store)

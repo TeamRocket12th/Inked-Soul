@@ -19,7 +19,6 @@
             v-for="item in AllOrderRecord"
             :key="item.Id"
             :order="item"
-            :status="item.Status"
             class="hover:cursor-pointer hover:bg-gray-300"
             @click="jump(item.Id)"
           />
@@ -34,11 +33,14 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
-import PaginationBtn from '~/components/global/PaginationBtn'
 import OrderBar from '~/components/order/OrderBar'
 const store = useOrderStore()
 const { getAllOrder } = store
-const { AllOrderRecord, allNum } = storeToRefs(store)
+const { AllOrderRecord } = storeToRefs(store)
+watch(AllOrderRecord, (nV) => {
+  AllOrderRecord.value = nV
+  return AllOrderRecord
+})
 
 onMounted(() => {
   getAllOrder('user', 1)
