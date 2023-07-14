@@ -80,7 +80,7 @@ export const useOrderStore = defineStore('order', () => {
         })
         console.log('成功取得所有訂單資料', data)
         // 賦值
-        AllOrderRecord.value = data.value.Order
+        AllOrderRecord.value = data.value.Data
         allNum.value = data.value.TotalNum
       })
     } catch (error) {

@@ -19,7 +19,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const authToken = useCookie('token')
   const authCookie = useCookie('data')
   const artistID = authCookie.value.Id // 對應刺青師ID
-
+  const allImg = ref()
   const formKey = {}
   // 打包成form data
   const formData = new FormData()
@@ -55,16 +55,36 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     }
   }
 
-  const getTattooData = async () => {
-    const { data, error } = await useFetch(`http://localhost:5005/artist/design/${artistID}`)
-    if (data) {
-      console.log('res', data.value) // data.value.Data
-      return data.value
-    } else if (error) {
-      console.log(error)
+  // 刺青師後台取得認領圖
+  const artistGetTattooData = (sold, page) => {
+    const bodyObject = {
+      page: page
     }
+    if (sold !== '') {
+      bodyObject.IsSoldout = sold
+      console.log(bodyObject)
+    }
+
+    nextTick(async () => {
+      const { data, error } = await useFetch(`${APIBASE}/api/artistgetallimg`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        },
+        body: bodyObject
+      })
+
+      if (data) {
+        console.log('刺青師取得認領圖資料', data.value)
+        allImg.value = data.value.Data
+        console.log('allImg', allImg)
+      } else if (error) {
+        console.log(error)
+      }
+    })
   }
 
   // POST API
-  return { uploadTattooData, uploadTattoo, getTattooData }
+  return { uploadTattooData, allImg, uploadTattoo, artistGetTattooData }
 })
