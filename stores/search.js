@@ -11,6 +11,7 @@ export const useSearchStore = defineStore('search', () => {
   const styleStr = ref()
   const elementStr = ref()
   const showResult = ref(false)
+  const allNum = ref()
   // 重組字串
   const arrToString = () => {
     cityStr.value = cityArr.value.join()
@@ -18,21 +19,63 @@ export const useSearchStore = defineStore('search', () => {
     elementStr.value = elementArr.value.join()
   }
 
-  // 取得刺青師
-  const getArtists = () => {
+  // 取得認領圖
+  const getDesigns = (num) => {
     arrToString()
-    nextTick(async () => {
-      const { data } = await useFetch(`${APIBASE}/api/searchartist`, {
-        method: 'POST',
-        body: {
-          City: '',
-          Style: '',
-          Element: ''
+
+    try {
+      nextTick(async () => {
+        const { data } = await useFetch(`${APIBASE}/api/artistcity`, {
+          method: 'POST',
+          body: {
+            City: cityStr.value,
+            Style: styleStr.value,
+            Element: elementStr.value
+          },
+          query: {
+            page: num
+          }
+        })
+        showResult.value = true
+        if (data.value.Data !== null) {
+          allDesignData.value = data.value.Data
+        } else {
+          alert('認領圖中無相對刺青師在此縣市')
         }
       })
-      allArtistsData.value = data.value.Data
-      showResult.value = true
-    })
+    } catch (error) {
+      console.log('取得認領圖資料失敗', error)
+    }
+  }
+  // 取得刺青師
+  const getArtists = (num) => {
+    arrToString()
+    try {
+      nextTick(async () => {
+        const { data } = await useFetch(`${APIBASE}/api/searchartist`, {
+          method: 'POST',
+          body: {
+            City: cityStr.value,
+            Style: styleStr.value,
+            Element: elementStr.value
+          },
+          query: {
+            page: num
+          }
+        })
+        showResult.value = true
+
+        if (data.value.Data !== null) {
+          allArtistsData.value = data.value.Data
+          allNum.value = data.value.response.TotalNum
+        } else {
+          alert('認領圖中無相對刺青師在此縣市')
+        }
+      })
+    } catch (error) {
+      console.log('取得刺青師資料失敗', error)
+      alert(error)
+    }
   }
 
   return {
@@ -47,7 +90,9 @@ export const useSearchStore = defineStore('search', () => {
     styleStr,
     elementStr,
     showResult,
+    allNum,
     arrToString,
+    getDesigns,
     getArtists
   }
 })

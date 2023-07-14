@@ -73,14 +73,14 @@ export const useOrderStore = defineStore('order', () => {
             'Content-type': 'application/json',
             Authorization: `Bearer ${authToken.value}`
           },
-          body: JSON.stringify(`${role}`),
+          body: JSON.stringify(`${role.toLowerCase()}`),
           query: {
             pageNumber: pageNum
           }
         })
         console.log('成功取得所有訂單資料', data)
         // 賦值
-        AllOrderRecord.value = data.value.order
+        AllOrderRecord.value = data.value.Order
         allNum.value = data.value.TotalNum
       })
     } catch (error) {
