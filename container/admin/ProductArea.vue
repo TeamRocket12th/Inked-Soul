@@ -68,7 +68,8 @@
               <th>認領圖</th>
               <th>名稱</th>
               <th>尺寸</th>
-              <th>預計時間</th>
+              <th>作業時間</th>
+              <th>上架日期</th>
               <th>訂金</th>
               <th>總金額</th>
               <th>狀態</th>
@@ -87,10 +88,11 @@
               </td>
               <td>{{ item.Imgname }}</td>
               <td>{{ item.Size }}</td>
-              <td>{{ item.InitTime }}hr</td>
+              <td>{{ item.Hour }}hr</td>
+              <td>{{ formattedOutput(new Date(item.InitTime)) }}</td>
               <td>$ {{ item.Deposit }}</td>
               <td>$ {{ item.Total }}</td>
-              <td>{{ item.isSoldout }}</td>
+              <td>{{ item.IsSoldout }}</td>
               <!-- 編輯鈕 -->
               <td class="cursor-pointer text-center">
                 <details class="dropdown-right dropdown">
@@ -124,12 +126,13 @@
 import { storeToRefs } from 'pinia'
 import UploadTattooArea from '~/container/admin/UploadTattooArea.vue'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
-
+const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
 const { allImg } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
+
 // const productData = [
 //   {
 //     Image:
