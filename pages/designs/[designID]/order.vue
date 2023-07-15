@@ -1,11 +1,6 @@
 <template>
   <div class="container">
-    <Icon
-      name="ic:outline-keyboard-arrow-left"
-      size="48"
-      class="mb-5 cursor-pointer rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-      @click="toPreviousPage"
-    />
+    <Icon name="ic:outline-keyboard-arrow-left" size="48" class="goBack" @click="toPreviousPage" />
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-2">
         <div class="mb-10 rounded-lg bg-white p-4 shadow">

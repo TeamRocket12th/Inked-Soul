@@ -20,7 +20,7 @@ export const useOrderStore = defineStore('order', () => {
     Email: '',
     BookedDate: '',
     BookedTimeFrame: '',
-    ImagesId: designData.ID,
+    ImagesId: designData.value.ID,
     PayWay: ''
   })
   const AllOrderRecord = ref()

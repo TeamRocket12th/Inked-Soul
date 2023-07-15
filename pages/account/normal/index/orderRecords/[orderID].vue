@@ -25,6 +25,7 @@
       <!-- 評價區 -->
       <!--評價完成改成查看評價 -->
       <PostComments v-if="orderStatus === 2" class="absolute top-0" />
+      <!-- <GetComments /> -->
     </div>
   </div>
 </template>
@@ -34,7 +35,9 @@ import OrderArea from '~/container/order/OrderArea'
 import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
+import GetComments from '~/components/order/GetComments.vue'
 import { useOrderStore } from '~/stores/order'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const authToken = useCookie('token')
@@ -42,7 +45,7 @@ const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
 
 const store = useOrderStore()
-const { isComment } = store
+const { isComment } = storeToRefs(store)
 
 // 取得單一訂單資訊
 const imageId = route.params.orderID

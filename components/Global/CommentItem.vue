@@ -1,7 +1,11 @@
 <template>
   <ul v-for="item in commentsData" :key="item.id" class="rounded-lg">
     <li class="flex flex-row gap-1 border-b bg-white p-3">
-      <img :src="`${item.artistImage}`" alt="" class="h-6 w-6 rounded-full" />
+      <img
+        :src="`${item.artistImage}`"
+        alt=""
+        class="h-6 w-6 rounded-full object-fill object-center"
+      />
       <div class="flex w-full flex-col gap-3">
         <div class="flex flex-col">
           <div class="flex flex-row gap-10">

@@ -62,6 +62,7 @@ const postOrder = async () => {
     method: 'POST',
     body: paymentInfo.value
   })
+
   if (!orderResponse.value) {
     console.log(orderResponse.value)
   }

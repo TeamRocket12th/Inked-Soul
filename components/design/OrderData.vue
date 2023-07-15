@@ -152,7 +152,7 @@ const APIBASE = runtimeConfig.public.APIBASE
 const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { inputPaymentInfo, paymentInfo } = storeToRefs(store)
+const { inputPaymentInfo, paymentInfo, designData } = storeToRefs(store)
 
 const props = defineProps({
   time: {
@@ -173,9 +173,11 @@ const { data: artistInfo, error } = await useFetch(`${APIBASE}/api/artistbooking
 // 發送用戶下單資料
 /////
 const postOrder = async () => {
-  const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
-  Object.assign(paymentInfo.value, inputPaymentInfo.value)
-  paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
+  inputPaymentInfo.value.ImagesId = designData.value.ID
+
+  // const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
+  // Object.assign(paymentInfo.value, inputPaymentInfo.value)
+  // paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
 
   if (!authToken.value) {
     return
@@ -187,7 +189,11 @@ const postOrder = async () => {
     } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
       headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
       method: 'POST',
-      body: paymentInfo.value
+      body: {
+        BookedDate: inputPaymentInfo.value.BookedDate,
+        BookedTimeFrame: PaymentData.value.BookedTimeFrame,
+        ImagesId: inputPaymentInfo.value.ImagesId
+      }
     })
     if (!orderResponse.value) {
       console.log(orderResponse.value)
