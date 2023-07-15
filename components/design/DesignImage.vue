@@ -1,6 +1,19 @@
 <template>
   <div class="flex w-full flex-col items-start gap-3 rounded-lg bg-white p-5 shadow">
-    <img :src="`${props.designData.Url}`" alt="" class="w-full rounded-lg border object-contain" />
+    <div class="relative w-full overflow-hidden rounded-lg">
+      <img
+        :src="`${props.designData.Url}`"
+        alt=""
+        class="w-full rounded-lg object-contain object-center"
+      />
+      <div v-if="props.designData.IsSoldout" class="soldOut absolute bottom-0 left-0 right-0 top-0">
+        <p
+          class="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] rounded-full bg-black bg-opacity-50 px-6 py-9 text-base font-bold text-white"
+        >
+          已售出
+        </p>
+      </div>
+    </div>
     <div class="flex w-full flex-col gap-5">
       <div class="flex w-full flex-col items-start gap-2">
         <div class="flex w-full flex-row items-center justify-between">

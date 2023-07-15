@@ -34,13 +34,13 @@
               請注意，一旦訂單取消，平台將協助退款給買家。<br />
               同時您的認領圖將被自動解除， 請您重新上架，以便其他買家繼續認領。
             </p>
-            <button @click="confirmOrder(false)" class="btn-neutral btn bg-black text-white">
+            <button @click="confirmOrder('false')" class="btn-neutral btn bg-black text-white">
               確認取消
             </button>
           </div>
         </form>
       </dialog>
-      <button @click="confirmOrder(true)" class="btn-neutral btn bg-black text-white">
+      <button @click="confirmOrder('true')" class="btn-neutral btn bg-black text-white">
         接受訂單
       </button>
     </div>
@@ -120,7 +120,7 @@ const confirmOrder = async (status) => {
     },
     method: 'POST',
     body: {
-      imgID: imageId,
+      imageId: imageId,
       chose: status // Boolean
     }
   })
