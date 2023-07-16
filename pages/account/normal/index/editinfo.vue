@@ -154,7 +154,13 @@ const { data } = await useFetch(`${APIBASE}/api/userinfo`, {
 setTimeout(() => {
   userInfoData.value.Nickname = data.value.Data.Nickname
   userInfoData.value.Tel = data.value.Data.Tel
-  console.log('userInfoData', userInfoData)
+  // console.log('userInfoData', userInfoData)
 }, 100)
+
+onMounted(() => {
+  nextTick(() => {
+    getUserInfo()
+  })
+})
 </script>
 <style scoped></style>
