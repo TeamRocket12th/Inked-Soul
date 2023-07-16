@@ -1,11 +1,7 @@
 <template>
   <div>
     <NuxtLink to="/account/normal/orderRecords">
-      <Icon
-        name="ic:outline-keyboard-arrow-left"
-        size="48"
-        class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-      />
+      <Icon name="ic:outline-keyboard-arrow-left" size="48" class="goBack" />
     </NuxtLink>
     <div class="relative flex h-auto flex-col items-center">
       <OrderArea>
@@ -20,16 +16,16 @@
         </template>
         <template #steps>
           <!-- 📌要帶入props orderStatus -->
-          <OrderStep :current-status="3" :step-date="orderDate" role="user" />
+          <OrderStep :current-status="orderStatus" :step-date="orderDate" role="user" />
         </template>
         <template #orderDetail>
           <OrderData :order="orderInfo" role="刺青師" />
         </template>
       </OrderArea>
       <!-- 評價區 -->
-      <!-- 出現時機視訂單狀態而定 -->
-      <!-- v-if="orderStatus === 3" -->
-      <PostComments class="absolute top-0" />
+      <!--評價完成改成查看評價 -->
+      <PostComments v-if="orderStatus === 2" class="absolute top-0" />
+      <!-- <GetComments /> -->
     </div>
   </div>
 </template>
@@ -39,11 +35,17 @@ import OrderArea from '~/container/order/OrderArea'
 import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
+import GetComments from '~/components/order/GetComments.vue'
+import { useOrderStore } from '~/stores/order'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const authToken = useCookie('token')
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
+
+const store = useOrderStore()
+const { isComment } = storeToRefs(store)
 
 // 取得單一訂單資訊
 const imageId = route.params.orderID
@@ -102,8 +104,10 @@ onMounted(() => {
   })
 })
 
-// watch(stretch, (nV) => {
-//   console.log(stretch.value)
-// })
+watch(isComment, (newValue) => {
+  if (newValue === true) {
+    getOrderInfo()
+  }
+})
 </script>
 <style scoped></style>

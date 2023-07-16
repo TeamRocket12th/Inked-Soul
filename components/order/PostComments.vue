@@ -49,6 +49,7 @@
 
 <script setup>
 import { useOrderStore } from '~/stores/order'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -58,6 +59,7 @@ const authToken = useCookie('token')
 
 const store = useOrderStore()
 const { stretchShow } = store
+const { isComment } = storeToRefs(store)
 
 const imageId = route.params.orderID
 const comment = ref('')
@@ -67,10 +69,9 @@ const updateRating = (num) => {
   rate.value = num
 }
 
-// ❌
 const postComments = async () => {
   const commentInfo = ref({
-    imageID: imageId,
+    ImagesId: imageId,
     comment: comment.value,
     star: rate.value
   })
@@ -82,6 +83,8 @@ const postComments = async () => {
     method: 'POST',
     body: commentInfo.value
   })
+
+  isComment.value = true
   console.log(data)
 }
 </script>

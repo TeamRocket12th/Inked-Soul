@@ -1,14 +1,10 @@
 <template>
   <NuxtLink to="/account/artist/orderinfo">
-    <Icon
-      name="ic:outline-keyboard-arrow-left"
-      size="48"
-      class="mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-    />
+    <Icon name="ic:outline-keyboard-arrow-left" size="48" class="goBack" />
   </NuxtLink>
 
   <div>
-    <OrderArea>
+    <OrderArea class="mb-20">
       <template #orderContext>
         <div class="flex flex-col items-center gap-5">
           <Icon :name="titleInfo.icon" size="40" />
@@ -21,7 +17,7 @@
         </div>
       </template>
       <template #steps>
-        <OrderStep :current-status="orderStatus" :step-date="orderDate" role="user" />
+        <OrderStep :current-status="orderStatus" :step-date="orderDate" role="artist" />
       </template>
       <template #orderDetail>
         <OrderData :order="orderInfo" role="訂購人" />
@@ -38,13 +34,13 @@
               請注意，一旦訂單取消，平台將協助退款給買家。<br />
               同時您的認領圖將被自動解除， 請您重新上架，以便其他買家繼續認領。
             </p>
-            <button @click="confirmOrder(false)" class="btn-neutral btn bg-black text-white">
+            <button @click="confirmOrder('false')" class="btn-neutral btn bg-black text-white">
               確認取消
             </button>
           </div>
         </form>
       </dialog>
-      <button @click="confirmOrder(true)" class="btn-neutral btn bg-black text-white">
+      <button @click="confirmOrder('true')" class="btn-neutral btn bg-black text-white">
         接受訂單
       </button>
     </div>
@@ -104,14 +100,14 @@ const orderContext = {
     content: '等候刺青師三個工作日(含)內確認'
   },
   2: {
-    title: '刺青師已確認，完成訂單',
+    title: '完成訂單！請於預約時間完成',
     icon: 'ic:sharp-event-available',
-    content: '請於預約時間內前往刺青'
+    content: '系統將於14日後自動撥款到您的帳戶'
   },
   3: {
-    title: '刺青師已確認，完成訂單',
+    title: '您已獲得評價',
     icon: 'ic:sharp-event-available',
-    content: '您已評價刺青師'
+    content: ''
   }
 }
 
@@ -124,11 +120,12 @@ const confirmOrder = async (status) => {
     },
     method: 'POST',
     body: {
-      imgID: imageId,
+      imageId: imageId,
       chose: status // Boolean
     }
   })
   console.log(confirmResponse.value)
+  getOrderInfo()
 }
 
 onMounted(() => {

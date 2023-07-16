@@ -25,8 +25,13 @@
               <span class="text-base text-[#6C6C6C]"> 訂金 </span>
               <span class="text-4xl font-bold">${{ designInfo.Deposit }}</span>
             </p>
-            <NuxtLink :to="`/designs/${designId}/order`">
-              <button class="btn-neutral btn mb-3 w-full bg-black text-white">認領圖</button>
+            <NuxtLink :to="`/designs/${designId}/order`" :disabled="designInfo.IsSoldout">
+              <button
+                class="btn-neutral btn mb-3 w-full bg-black text-white"
+                :disabled="designInfo.IsSoldout"
+              >
+                認領圖
+              </button>
             </NuxtLink>
             <p class="mb-3 flex flex-row items-center gap-[18px]">
               <span>總金額 ${{ designInfo.Total }}</span>

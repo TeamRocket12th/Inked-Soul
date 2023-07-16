@@ -39,4 +39,11 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
     /* lightgray 0px -5.437px / 100% 149.982% no-repeat; */
   }
+  .soldOut {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
+  }
+
+  .goBack {
+    @apply mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary hover:bg-primary active:bg-[#D0D0D0];
+  }
 }

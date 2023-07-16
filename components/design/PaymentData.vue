@@ -15,7 +15,7 @@
       </div>
       <div class="flex flex-row items-end gap-5">
         <h4>應付金額</h4>
-        <p class="text-[32px] font-bold leading-[40px]">${{ props.payment.Total }}</p>
+        <p class="text-[32px] font-bold leading-[40px]">${{ props.payment.Deposit }}</p>
       </div>
     </div>
   </div>

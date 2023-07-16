@@ -47,6 +47,6 @@ onMounted(() => {
 })
 
 const jump = (input) => {
-  navigateTo(`/account/normal/${input}`)
+  navigateTo(`/account/normal/orderRecords/${input}`)
 }
 </script>
