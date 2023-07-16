@@ -7,8 +7,11 @@ import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
 const { getArtistInfo } = store
+
 onMounted(() => {
-  getArtistInfo()
+  nextTick(() => {
+    getArtistInfo()
+  })
 })
 </script>
 <style scoped></style>
