@@ -33,11 +33,25 @@ export const useFormatted = () => {
     if (role === 'artist') {
       status[3] = '獲得評價'
     }
-
     return status[num]
   }
 
-  return { formatDate, formattedOutput, transformDate, transformOrderStatus }
+  const transformWeek = (week) => {
+    const closeDaysMapping = {
+      星期日: 1,
+      星期一: 2,
+      星期二: 3,
+      星期三: 4,
+      星期四: 5,
+      星期五: 6,
+      星期六: 7
+    }
+    return week.map((item) => {
+      return closeDaysMapping[item]
+    })
+  }
+
+  return { formatDate, formattedOutput, transformDate, transformOrderStatus, transformWeek }
 }
 
 // 使用方法

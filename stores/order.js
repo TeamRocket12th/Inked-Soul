@@ -94,11 +94,11 @@ export const useOrderStore = defineStore('order', () => {
 
   const stretchShow = () => {
     stretch.value = true
-    console.log('show', stretch.value)
+    // console.log('show', stretch.value)
   }
   const stretchHide = () => {
     stretch.value = false
-    console.log('hide', stretch.value)
+    // console.log('hide', stretch.value)
   }
   return {
     id,

@@ -19,7 +19,9 @@
     </td>
     <td>
       <!-- 訂單編號 -->
-      {{ props.order.Id[0] }}
+      <p class="line-clamp-1 px-2">
+        {{ props.order.Number }}
+      </p>
     </td>
     <td>
       <!-- 交易日期 -->
@@ -33,7 +35,7 @@
     <!-- 價格(訂金) -->
     <td>$ {{ props.order.Deposit }}</td>
     <!-- 訂單狀態 -->
-    <td>{{ props.order.OrderStatus }}</td>
+    <td>{{ orderStatus }}</td>
   </tr>
 </template>
 <script setup>
@@ -43,11 +45,17 @@ const props = defineProps({
     required: true
   }
 })
-const { formattedOutput } = useFormatted()
+const { formattedOutput, transformOrderStatus } = useFormatted()
 const payDate = ref()
 const bookedDate = ref()
 const newPayDate = ref()
 const newBookedDate = ref()
+const orderStatus = computed(() => {
+  if (props.order) {
+    const status = props.order.OrderStatus
+    return transformOrderStatus(status)
+  }
+})
 
 newPayDate.value = new Date(props.order.PayDate)
 newBookedDate.value = new Date(props.order.BookedDate)
