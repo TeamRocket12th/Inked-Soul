@@ -13,51 +13,35 @@
         <img :src="props.artistImg" alt="" class="mr-2 h-[40px] w-[40px] rounded-full" />
         <p class="text-white">{{ props.artistName }}</p>
       </div>
-      <div>
-        <p class="text-white">地區：{{ props.city }}</p>
-        <p class="text-white">風格：{{ props.style }}</p>
-        <p class="text-white">元素：{{ props.element }}</p>
-      </div>
     </div>
   </div>
 </template>
 <script setup>
 const props = defineProps({
   id: {
-    required: true,
-    type: Number
+    required: true
+    // type: Number
   },
   image: {
-    required: true,
-    type: String
+    required: true
+    // type: String
   },
   designName: {
-    required: true,
-    type: String
+    required: true
+    // type: String
   },
   artistName: {
     required: true,
-    type: String
+    // type: String,
+    default: 'dafeult artist name'
   },
   artistImg: {
-    required: true,
-    type: String
+    required: true
+    // type: String
   },
   price: {
-    required: true,
-    type: Number
-  },
-  city: {
-    required: true,
-    type: String
-  },
-  style: {
-    required: true,
-    type: String // mockAPI回傳格式是字串，注意以後可能須改為陣列
-  },
-  element: {
-    required: true,
-    type: String // mockAPI回傳格式是字串，注意以後可能須改為陣列
+    required: true
+    // type: Number
   }
 })
 

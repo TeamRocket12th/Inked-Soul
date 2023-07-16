@@ -6,7 +6,12 @@
     >
       <div class="flex flex-col items-center gap-3 hover:flex">
         <p>{{ props.nickname }}</p>
-        <span class="rounded-full border px-3 py-1">寫實主義 Realism</span>
+        <span
+          class="rounded-full border px-3 py-1 text-xs"
+          v-for="(item, index) in styleArr"
+          :key="index"
+          >{{ item }}</span
+        >
       </div>
     </div>
     <!-- <p>{{ props.category }}</p> -->
@@ -18,20 +23,23 @@
 <script setup>
 const props = defineProps({
   image: {
-    type: String,
+    // type: String,
     required: true
   },
   nickname: {
-    type: String,
-    required: true
-  },
-  studioname: {
-    type: String,
+    // type: String,
     required: true
   },
   category: {
-    type: Array,
+    // type: Array,
     required: true
   }
 })
+
+const styleArr = ref([])
+
+if (props.category !== null) {
+  styleArr.value = props.category.split(',')
+  console.log(styleArr)
+}
 </script>

@@ -2,7 +2,7 @@
   <div>
     <!-- <p>刺青師ID：{{ route.params.artistID }}</p> -->
     <div class="container grid grid-cols-3 gap-8">
-      <IntroArea :artist-data="data.data.artistData" class="h-fit shadow" />
+      <IntroArea class="h-fit shadow" />
       <div class="col-span-2 flex flex-col gap-10">
         <ul class="flex flex-row items-center">
           <li
@@ -36,8 +36,8 @@
 import IntroArea from '~/container/artists/IntroArea'
 const route = useRoute()
 const id = route.params.artistID
-const { data } = await useFetch(`/api/getArtists/${id}`)
-console.log(data.value)
+// const { data } = await useFetch(`/api/getArtists/${id}`)
+// console.log(data.value)
 
 const currentPage = ref('designs')
 const isActive = (btn) => {
