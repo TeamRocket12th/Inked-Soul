@@ -117,7 +117,6 @@
         </div>
       </div>
     </div>
-    {{ scheduleData }}
   </div>
 </template>
 <script setup>
@@ -171,7 +170,9 @@ const getSchedule = async () => {
   closeDate.value = transformWeek(scheduleResponse.value.response.ClosedDays)
 
   dayOff.value = scheduleResponse.value.response.DayOff
-  scheduleData.value = scheduleResponse.value.Data[0].BookedDate
+  scheduleData.value = scheduleResponse.value.Data.map((item) => {
+    return item.BookedDate
+  })
 }
 
 watch(
