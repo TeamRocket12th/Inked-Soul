@@ -3,7 +3,7 @@
     <button
       v-for="(item, index) in pageNumArr"
       :key="index"
-      class="join-item join-item btn focus:bg-black focus:text-white"
+      class="join-item btn focus:bg-black focus:text-white"
       :class="item === 0 ? 'bg-black text-white' : ''"
       @click="getAllOrder(role, item + 1)"
     >

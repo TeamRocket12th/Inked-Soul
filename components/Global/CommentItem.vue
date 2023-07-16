@@ -36,9 +36,12 @@ const prop = defineProps({
     require: true
   }
 })
+
 const { data } = await useFetch(`/api/getArtists/getComments/${prop.artistId}`)
 
+///
 const commentsData = ref([])
 commentsData.value = data.value.data.comments
+///
 </script>
 <style scoped></style>

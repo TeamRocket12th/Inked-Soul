@@ -25,7 +25,7 @@
       <!-- 評價區 -->
       <!--評價完成改成查看評價 -->
       <PostComments v-if="orderStatus === 2" class="absolute top-0" />
-      <!-- <GetComments /> -->
+      <GetComments v-if="orderStatus === 3" :image-id="imageId" />
     </div>
   </div>
 </template>
