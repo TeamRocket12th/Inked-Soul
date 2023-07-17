@@ -9,19 +9,19 @@
         ><span>&nbsp;</span>
         <span>縣市</span>
       </div>
-      <div v-if="styleArr.length !== 0">
+      <div v-if="path === '/designs'">
         <span v-if="styleArr.length === 0">全部</span>
         <span v-for="(item, index) in styleArr" :key="index" class="font-bold"
           >{{ item }}<span>&nbsp;</span></span
         ><span>&nbsp;</span>風格
       </div>
-      <div v-if="elementArr.length !== 0">
+      <div v-if="path === '/designs'">
         <span v-if="elementArr.length === 0">全部</span>
         <span v-for="(item, index) in elementArr" :key="index" class="font-bold"
           >{{ item }}<span>&nbsp;</span></span
         ><span>&nbsp;</span>元素
       </div>
-      <div class="">，共{{ allDesignData.length || allArtistsData.length }}個結果</div>
+      <div>，共{{ allNum ? allNum : 0 }}個結果</div>
     </div>
 
     <div class="cursor-pointer rounded-lg border bg-white p-1">
@@ -34,8 +34,10 @@
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
-const { allDesignData, allArtistsData, showResult, cityArr, styleArr, elementArr } =
+const { allDesignData, allArtistsData, showResult, cityArr, styleArr, elementArr, allNum } =
   storeToRefs(store)
+const route = useRoute()
+const path = route.path
 </script>
 
 <style lang="scss" scoped></style>
