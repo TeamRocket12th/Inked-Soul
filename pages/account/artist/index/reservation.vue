@@ -10,7 +10,6 @@
         expanded
       />
     </div>
-
     <div class="col-span-4">
       <p class="mb-10 text-xl font-bold">{{ selectDate }} 的預約</p>
       <div class="overflow-x-auto">
@@ -189,7 +188,7 @@ watch(
         BookedDate: selectDate.value
       }
     })
-    if (dateResponse.value) {
+    if (dateResponse.value && dateResponse.value !== '此日期無訂單') {
       dateDetail.value = dateResponse.value.Data
     } else {
       dateDetail.value = { Data: [] }
