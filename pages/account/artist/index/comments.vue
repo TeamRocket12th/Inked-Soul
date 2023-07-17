@@ -1,8 +1,11 @@
 <template>
   <div>
-    <div class="flex flex-col overflow-hidden rounded-lg border border-[#D0D0D0]">
-      <CommentItem :data="commentData" class="" />
+    <div class="overflow-hidden rounded-lg border border-[#D0D0D0]">
+      <ul class="flex flex-col">
+        <CommentItem v-for="(data, key) in commentData" :key="key" :data="data" />
+      </ul>
     </div>
+    <!-- <PaginationBtn /> -->
   </div>
 </template>
 <script setup>
