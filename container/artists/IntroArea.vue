@@ -5,7 +5,13 @@
       <img :src="artistInfo.img" class="rounded-lg object-cover shadow" />
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-row items-center">
-          <Icon name="ic:baseline-bookmark" class="h-6 w-6" />
+          <Icon
+            :name="
+              followingStatus === false ? 'ic:baseline-bookmark-border' : 'ic:baseline-bookmark'
+            "
+            class="h-6 w-6 hover:cursor-pointer"
+            @click="followFn()"
+          />
           {{ artistInfo.followers }}
         </div>
         <div>
@@ -79,6 +85,46 @@ watch(allData, (nV) => {
 
 const route = useRoute()
 const id = route.params.artistID
+
+// 追蹤
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+const authToken = useCookie('token')
+const followingStatus = ref(false)
+const followFn = () => {
+  if (followingStatus.value === false) {
+    nextTick(async () => {
+      const { data } = await useFetch(`${APIBASE}/api/trackartists`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        },
+        query: {
+          artistid: id
+        }
+      })
+      followingStatus.value = true
+      userGetTattooData(id, 1) // 待補page
+    })
+  } else if (followingStatus.value === true) {
+    nextTick(async () => {
+      const { data } = await useFetch(`${APIBASE}/api/canceltrackartists`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        },
+        query: {
+          artistid: id
+        }
+      })
+      followingStatus.value = false
+      userGetTattooData(id, 1) // 待補page
+    })
+  }
+}
+// 取消追蹤
 
 onMounted(() => {
   userGetTattooData(id, 1)
