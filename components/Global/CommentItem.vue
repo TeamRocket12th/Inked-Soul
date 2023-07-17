@@ -1,6 +1,6 @@
 <template>
   <li
-    :class="{ 'border-primay': false }"
+    :class="{ 'border-primary': false }"
     class="flex flex-row gap-1 border-b border-[#D0D0D0] bg-white p-5 last:border-b-0"
   >
     <img

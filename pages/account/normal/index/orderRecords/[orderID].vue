@@ -92,9 +92,9 @@ const orderContext = {
     content: '請於預約時間內前往刺青'
   },
   3: {
-    title: '刺青師已確認，完成訂單',
-    icon: 'ic:sharp-event-available',
-    content: '您已評價刺青師'
+    title: '您已評價刺青師',
+    icon: 'ic:outline-stars',
+    content: ''
   }
 }
 

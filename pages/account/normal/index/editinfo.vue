@@ -143,7 +143,7 @@ const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
 const store = useAccountStore()
 const { email, password, confirmPassword, tel, name, userInfoData } = storeToRefs(store)
-const { getUserInfo, editInfo } = store
+const { editInfo } = store
 
 const { isUnder20, isPhone, isPassword } = useValidate()
 
@@ -156,11 +156,5 @@ setTimeout(() => {
   userInfoData.value.Tel = data.value.Data.Tel
   // console.log('userInfoData', userInfoData)
 }, 100)
-
-onMounted(() => {
-  nextTick(() => {
-    getUserInfo()
-  })
-})
 </script>
 <style scoped></style>
