@@ -44,6 +44,7 @@
         接受訂單
       </button>
     </div>
+    <GetComments v-if="orderStatus === 3" :image-id="imageId" />
   </div>
 </template>
 
@@ -51,6 +52,7 @@
 import OrderArea from '~/container/order/OrderArea'
 import OrderStep from '~/components/order/OrderStep'
 import OrderData from '~/components/order/OrderData'
+import GetComments from '~/components/order/GetComments.vue'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -58,7 +60,7 @@ const APIBASE = runtimeConfig.public.APIBASE
 
 const authToken = useCookie('token')
 const authCookie = useCookie('data')
-const artistID = authCookie.value.Id
+const _artistID = authCookie.value.Id
 
 // 取得單一訂單資訊
 
@@ -120,7 +122,7 @@ const confirmOrder = async (status) => {
     },
     method: 'POST',
     body: {
-      imageId: imageId,
+      ImageId: imageId,
       chose: status // Boolean
     }
   })
