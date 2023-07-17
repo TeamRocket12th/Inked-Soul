@@ -4,13 +4,13 @@
       <label
         tabindex="0"
         class="btn bg-black px-4 py-2 text-white focus:bg-[#D0D0D0] md:mr-4 lg:mr-12"
-        @click.prevent="stretchShow()"
+        @click="stretchToggle()"
         >撰寫評價</label
       >
       <div
         tabindex="0"
         class="dropdown-content menu rounded-box absolute top-5 z-[1] w-[10rem] bg-base-100 p-2 sm:w-[15rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] 2xl:w-[38rem]"
-        @click.prevent="stretchShow()"
+        @click.self="handleClickOutside()"
       >
         <!-- 星星 -->
         <div class="mb-4 flex items-center">
@@ -34,11 +34,12 @@
             ></textarea>
           </label>
         </div>
+        <!-- 警示文字 -->
         <div class="">
           <div class="row-reverse comment-btn absolute right-0">
             <button class="btn bg-black py-1 text-xs text-white" @click="postComments">評價</button>
             <p class="text-secondary">
-              <Icon name="ic:baseline-warning-amber" />評價送出後將無法修改
+              評價送出後將無法修改<Icon name="ic:baseline-warning-amber" />
             </p>
           </div>
         </div>
@@ -58,8 +59,8 @@ const APIBASE = runtimeConfig.public.APIBASE
 const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { stretchShow } = store
-const { isComment } = storeToRefs(store)
+const { handleClickOutside, stretchToggle } = store
+const { isComment, stretchContainer } = storeToRefs(store)
 
 const imageId = route.params.orderID
 const comment = ref('')

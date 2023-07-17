@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="container grid grid-cols-12 gap-8">
+    <div class="container grid grid-cols-12 gap-8" @click.self="handleClickOutside()">
       <div class="col-span-4 flex flex-col gap-[43px]">
         <div class="rounded-lg border bg-white">
           <slot name="userImg">
@@ -17,7 +17,7 @@
       <div
         class="col-span-8 self-start rounded-lg border bg-white p-10"
         :class="stretch === false ? '' : 'h-[1400px] md:h-[1300px]'"
-        @click.capture="stretchHide()"
+        @click.self="handleClickOutside()"
       >
         <NuxtPage />
       </div>
@@ -31,6 +31,6 @@ import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 const store = useOrderStore()
 const { stretch } = storeToRefs(store)
-const { stretchHide } = store
+const { handleClickOutside } = store
 </script>
 <style scoped></style>

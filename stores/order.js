@@ -91,15 +91,15 @@ export const useOrderStore = defineStore('order', () => {
 
   // 評價區hide/show
   const stretch = ref(false)
-
-  const stretchShow = () => {
+  // 評價區伸縮
+  const stretchToggle = () => {
     stretch.value = true
-    // console.log('show', stretch.value)
   }
-  const stretchHide = () => {
+  // 外層容器伸縮
+  const handleClickOutside = () => {
     stretch.value = false
-    // console.log('hide', stretch.value)
   }
+
   return {
     id,
     orderID,
@@ -114,7 +114,7 @@ export const useOrderStore = defineStore('order', () => {
     getOrder,
     getStatus,
     getAllOrder,
-    stretchShow,
-    stretchHide
+    stretchToggle,
+    handleClickOutside
   }
 })
