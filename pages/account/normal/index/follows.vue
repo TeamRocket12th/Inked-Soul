@@ -4,6 +4,18 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+// 取得追蹤刺青師列表
+const followingData = ref()
+// const getFollowings = () => {
+//   nextTick(async()=>{})
+//   const {data}=await useFetch(`${APIBASE}/api/`)
+// }
+onMounted(() => {
+  getFollowings()
+})
+</script>
 
 <style lang="scss" scoped></style>
