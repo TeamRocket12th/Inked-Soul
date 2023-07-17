@@ -23,15 +23,15 @@
 <script setup>
 const props = defineProps({
   image: {
-    // type: String,
+    type: null, //  String
     required: true
   },
   nickname: {
-    // type: String,
+    type: null, // String
     required: true
   },
   category: {
-    // type: Array,
+    type: null, //  Array
     required: true
   }
 })

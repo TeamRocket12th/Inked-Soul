@@ -9,7 +9,12 @@
     >
       {{ item }}
     </button>
-    <Icon name="ic:baseline-keyboard-arrow-right" size="24" @click="nextPage()" />
+    <Icon
+      name="ic:baseline-keyboard-arrow-right"
+      size="24"
+      class="cursor-pointer"
+      @click="nextPage()"
+    />
   </div>
 </template>
 <script setup>

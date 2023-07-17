@@ -3,41 +3,105 @@
     <p class="mb-6 font-bold">留言區</p>
     <div class="mb-5 flex w-full flex-row items-center justify-between gap-5">
       <input
+        v-model="comment"
         type="text"
         placeholder="發表留言"
         class="w-full border-b border-black bg-transparent px-6 py-3 outline-none"
       />
-      <button type="button" class="btn-neutral btn">留言</button>
+      <button
+        type="button"
+        class="btn-neutral btn rounded-lg bg-black text-white"
+        @click="postComment"
+      >
+        留言
+      </button>
     </div>
     <ul class="flex flex-col gap-7">
-      <li class="flex flex-row items-center gap-3">
-        <img src="" alt="" class="h-9 w-9 rounded-full" />
+      <li v-for="(item, key) in commentList" :key="key" class="flex flex-row items-center gap-3">
+        <img
+          :src="item.photo"
+          alt=""
+          :class="{ 'rounded-full': item.role === 'user' }"
+          class="h-9 w-9 rounded-lg object-cover object-center"
+        />
         <div class="flex flex-col">
-          <div class="flex flex-row items-center gap-3">
-            <p>cat</p>
-            <p>2023-05-24</p>
+          <div class="flex flex-row items-center gap-3 font-roboto-nl">
+            <p class="text-base">{{ item.name }}</p>
+            <p class="text-xs text-secondary">{{ item.time }}</p>
           </div>
-          <p>我可以在購買刺青圖片後做修改嗎？</p>
+          <p class="font-noto-tc">{{ item.content }}</p>
         </div>
       </li>
     </ul>
   </div>
 </template>
 <script setup>
-const runtimeConfig = useRuntimeConfig()
-const apiBase = runtimeConfig.public.apiBase
 const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+const authToken = useCookie('token')
 
-const postComment = () => {
-  const { data, error } = useFetch()
+const commentList = ref([])
+const comment = ref()
+
+const imageId = route.params.designID
+const postComment = async () => {
+  if (comment.value) {
+    const { data } = await useFetch(`${APIBASE}/api/imgmessage`, {
+      headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
+      method: 'POST',
+      body: {
+        ImagesId: imageId,
+        Message: comment.value
+      }
+    })
+    comment.value = ''
+    if (data.value.Status) {
+      getComment()
+    } else {
+      console.log('請登入')
+    }
+  } else {
+    console.log('請輸入')
+  }
 }
 
-// v-for="(comment, key) in data.value.Data"
-// {{comment.Photo}}
-// {{comment.Nickname}}
-// {{comment.Date}}
-// {{comment.Content}}
-const { data, error } = await useFetch(`${apiBase}/design/comment/${route.params.designID}`)
-// console.log('fetch', data.value)
+const getComment = async () => {
+  const { data } = await useFetch(`${APIBASE}/api/getimgmessage`, {
+    headers: { 'Content-type': 'application/json' },
+    query: {
+      imgid: imageId
+    }
+  })
+  if (data.value.Data) {
+    commentList.value = data.value.Data.map((item) => {
+      if (item.Role === 'artist') {
+        return {
+          role: 'artist',
+          name: item.ArtistName,
+          photo: item.ArtistPhoto,
+          content: item.Message,
+          time: item.InitTime.slice(0, 10)
+        }
+      } else if (item.Role === 'user') {
+        return {
+          role: 'user',
+          name: item.UserName,
+          photo: item.UserPhoto,
+          content: item.Message,
+          time: item.InitTime.slice(0, 10)
+        }
+      } else {
+        return ''
+      }
+    })
+  }
+}
+
+onMounted(() => {
+  nextTick(() => {
+    getComment()
+  })
+})
 </script>
 <style scoped></style>
