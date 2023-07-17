@@ -39,7 +39,7 @@ const id = route.params.artistID
 // const { data } = await useFetch(`/api/getArtists/${id}`)
 // console.log(data.value)
 
-const currentPage = ref('') // 待修改 -> route.params | .query
+const currentPage = ref('designs') // 待修改 -> route.params | .query
 const isActive = (btn) => {
   return (currentPage.value = btn)
 }

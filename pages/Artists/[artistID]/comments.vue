@@ -1,6 +1,9 @@
 <template>
-  <div class="flex flex-col overflow-hidden rounded-lg">
-    <CommentItem :data="commentData" />
+  <div class="overflow-hidden rounded-lg">
+    <ul class="flex flex-col">
+      <CommentItem v-for="(data, key) in commentData" :key="key" :data="data" />
+    </ul>
+    <!-- <PaginationBtn /> -->
   </div>
 </template>
 <script setup>
