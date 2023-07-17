@@ -37,12 +37,15 @@ export const useSearchStore = defineStore('search', () => {
           }
         })
         showResult.value = true
-        if (data.value.Data !== null) {
+        if (data.value.Data) {
           allDesignData.value = data.value.Data
           allNum.value = allDesignData.value.length
+          console.log('allNum y', allNum)
         } else {
+          allDesignData.value = []
           allNum.value = 0
-          alert('認領圖中無相對刺青師在此縣市')
+          console.log('allNum = 0', allNum)
+          // alert('認領圖中無相對刺青師在此縣市')
         }
       })
     } catch (error) {

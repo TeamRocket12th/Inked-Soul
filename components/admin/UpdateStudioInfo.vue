@@ -8,7 +8,7 @@
           <VErrorMessage name="店名" class="whitespace-nowrap text-[#DC3545]" />
         </div>
         <div class="relative">
-          <VField
+          <!-- <VField
             id="studio"
             v-model="artistInfoData.StudioName"
             :rules="isUnder20"
@@ -16,7 +16,7 @@
             class="formInput text-[#D0D0D0]"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
             disabled
-          />
+          /> -->
           <!-- 正確的，因為篩選功能所以不能被改 -->
           <VField
             v-if="!artistInfoData.StudioName"
@@ -41,7 +41,7 @@
           <VErrorMessage name="營業登記號" class="whitespace-nowrap text-[#DC3545]" />
         </div>
         <div class="relative">
-          <VField
+          <!-- <VField
             id="license"
             v-model="artistInfoData.License"
             name="營業登記號"
@@ -49,7 +49,7 @@
             :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
             :placeholder="artistInfoData.License"
             disabled
-          />
+          /> -->
           <!-- 正確的，因為篩選功能所以不能被改 -->
           <VField
             v-if="!artistInfoData.License"
