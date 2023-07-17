@@ -92,7 +92,7 @@
           <p class="mb-2">預約時段</p>
           <div class="dropdown-bottom dropdown-end dropdown w-full">
             <!-- 📌 加 disabled 判斷  -->
-            <button tabindex="0" class="formInput flex items-center justify-between">
+            <label tabindex="0" class="formInput flex items-center justify-between">
               {{ inputPaymentInfo.BookedTimeFrame || '請選擇' }}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@
                   fill="#6C6C6C"
                 />
               </svg>
-            </button>
+            </label>
             <ul
               tabindex="0"
               class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
