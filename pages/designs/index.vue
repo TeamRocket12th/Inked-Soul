@@ -15,7 +15,7 @@
           <NuxtLink :key="item.Id" :to="`/designs/${item.Id}`">
             <DesignCard
               :id="item.Id"
-              :image="item.Photo"
+              :image="item.Url"
               :design-name="item.Name"
               :artist-name="item.Nickname"
               :artist-img="item.Photo"
@@ -26,6 +26,14 @@
       </template>
     </masonry-wall>
     <div ref="root">loading</div>
+    <!-- 無搜尋結果 -->
+    <div class="text-center" v-if="allNum === 0">
+      <Icon name="ic:round-find-replace" size="64" />
+      <p>
+        很抱歉，查無符合此搜尋條件的任何結果。<br />
+        請嘗試選擇其他搜尋內容。
+      </p>
+    </div>
   </div>
 </template>
 <script setup>
@@ -33,7 +41,7 @@ import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 
 const store = useSearchStore()
-const { allDesignData } = storeToRefs(store)
+const { allDesignData, allNum } = storeToRefs(store)
 const { getDesigns } = store
 
 // 參考用
