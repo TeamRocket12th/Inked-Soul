@@ -13,6 +13,9 @@
   h4 {
     @apply text-[20px] font-bold leading-6;
   }
+  p {
+    @apply text-base font-normal;
+  }
 
   th:first-child {
     @apply min-w-[100px];
@@ -44,6 +47,6 @@
   }
 
   .goBack {
-    @apply mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary hover:bg-primary active:bg-[#D0D0D0];
+    @apply mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary  active:border-black;
   }
 }

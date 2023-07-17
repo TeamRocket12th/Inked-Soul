@@ -79,11 +79,6 @@ export const useAccountStore = defineStore('account', () => {
     PasswordTime: ''
   })
 
-  // if (authToken.value) {
-  //   artistInfoData.Nickname = authCookie.value.Nickname || ''
-  //   artistInfoData.Account = authCookie.value.Email
-  // }
-
   // 一般流程登入
   const loginFn = async () => {
     const { data, error } = await useFetch(`${APIBASE}/api/login${identity.value}`, {
@@ -100,7 +95,9 @@ export const useAccountStore = defineStore('account', () => {
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
+
         Id.value = res.Data.Id
+        // photo.value = res.Data.Photo
 
         let newIdentity = ''
         if (identity.value === 'user') {
@@ -164,6 +161,8 @@ export const useAccountStore = defineStore('account', () => {
 
       authCookie.value.Nickname = data.value.Data.Nickname
       authCookie.value.Photo = data.value.Data.Photo
+
+      handleDefaultInfo()
     } catch (error) {
       console.log('get', error)
     }
@@ -210,6 +209,8 @@ export const useAccountStore = defineStore('account', () => {
 
       authCookie.value.Nickname = data.value.Data.Nickname
       authCookie.value.Photo = data.value.Data.Photo
+
+      handleDefaultInfo()
     } catch (error) {
       console.log('get', error)
     }

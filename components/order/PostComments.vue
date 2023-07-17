@@ -74,7 +74,7 @@ const postComments = async () => {
   const commentInfo = ref({
     ImagesId: imageId,
     comment: comment.value,
-    star: rate.value
+    star: JSON.stringify(rate.value)
   })
   const { data, error } = await useFetch(`${APIBASE}/api/artistfinishcomment`, {
     headers: {

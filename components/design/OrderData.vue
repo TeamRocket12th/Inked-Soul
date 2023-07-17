@@ -81,7 +81,7 @@
                     class="formInput rounded-md px-3 py-2 text-sm font-semibold text-black"
                     @click.prevent="togglePopover"
                   >
-                    {{ formatDate }}
+                    {{ inputPaymentInfo.BookedDate }}
                   </button>
                 </template>
               </VDatePicker>
@@ -91,10 +91,22 @@
         <div>
           <p class="mb-2">預約時段</p>
           <div class="dropdown-bottom dropdown-end dropdown w-full">
-            <!-- 📌 加 disabled 判斷 -->
-            <label tabindex="0" class="btn w-full">{{
-              inputPaymentInfo.BookedTimeFrame || '請選擇'
-            }}</label>
+            <!-- 📌 加 disabled 判斷  -->
+            <label tabindex="0" class="formInput flex items-center justify-between">
+              {{ inputPaymentInfo.BookedTimeFrame || '請選擇' }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M15.2 9.2C15.3926 9.05557 15.6308 8.98545 15.8709 9.00252C16.111 9.01958 16.3369 9.12268 16.5071 9.29289C16.6773 9.46311 16.7804 9.689 16.7975 9.92911C16.8145 10.1692 16.7444 10.4074 16.6 10.6L12.6 14.6C12.4131 14.7832 12.1618 14.8859 11.9 14.8859C11.6382 14.8859 11.3869 14.7832 11.2 14.6L7.2 10.6C7.05557 10.4074 6.98545 10.1692 7.00252 9.92911C7.01958 9.689 7.12268 9.46311 7.29289 9.29289C7.46311 9.12268 7.689 9.01958 7.92911 9.00252C8.16922 8.98545 8.40743 9.05557 8.6 9.2L11.9 12.49L15.2 9.19V9.2Z"
+                  fill="#6C6C6C"
+                />
+              </svg>
+            </label>
             <ul
               tabindex="0"
               class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -125,11 +137,8 @@
         </div>
       </div>
     </VForm>
+
     <!-- ❌ -->
-    <div>
-      <p>artistInfo</p>
-      {{ artistInfo }}
-    </div>
     <div>
       <p>input</p>
       {{ inputPaymentInfo }}
@@ -137,7 +146,7 @@
     <div>
       <p>payment</p>
       {{ paymentInfo }}
-      <p>123</p>
+      <p>已被預約時間</p>
       {{ bookedDate }}
     </div>
     <button @click="postOrder">test</button>
@@ -153,6 +162,10 @@ const authToken = useCookie('token')
 
 const store = useOrderStore()
 const { inputPaymentInfo, paymentInfo, designData } = storeToRefs(store)
+
+// Composable
+const { isPhone } = useValidate()
+const { formattedOutput } = useFormatted()
 
 const props = defineProps({
   time: {
@@ -171,10 +184,9 @@ const { data: artistInfo, error } = await useFetch(`${APIBASE}/api/artistbooking
 })
 
 // 發送用戶下單資料
-/////
 const postOrder = async () => {
   inputPaymentInfo.value.ImagesId = designData.value.ID
-
+  // ⭕️ 正確的，測試先關掉
   // const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
   // Object.assign(paymentInfo.value, inputPaymentInfo.value)
   // paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
@@ -191,7 +203,7 @@ const postOrder = async () => {
       method: 'POST',
       body: {
         BookedDate: inputPaymentInfo.value.BookedDate,
-        BookedTimeFrame: PaymentData.value.BookedTimeFrame,
+        BookedTimeFrame: paymentInfo.value.BookedTimeFrame,
         ImagesId: inputPaymentInfo.value.ImagesId
       }
     })
@@ -200,25 +212,24 @@ const postOrder = async () => {
     }
   }
 }
-////
 
 const closeDays = ref(artistInfo.value.response.ClosedDays)
 const dayOff = ref(artistInfo.value.response.DayOff)
 const bookedDate = artistInfo.value.Data.map((item) => {
   const formattedBookedDate = item.BookedDate.replace(/\//g, '-')
   const formattedBookedTimeFrame = []
-
-  if (item.BookedTimeFrame.includes('上午（開店時間-12:00）')) {
+  if (item.BookedTimeFrame.includes('上午（開店時間～12:00）')) {
     formattedBookedTimeFrame.push('0')
   }
-  if (item.BookedTimeFrame.includes('下午（12:00-18:00）')) {
+  if (item.BookedTimeFrame.includes('下午（12:00～18:00）')) {
     formattedBookedTimeFrame.push('1')
   }
-  if (item.BookedTimeFrame.includes('晚上（18:00-閉店時間）')) {
+  if (item.BookedTimeFrame.includes('晚上（18:00～閉店時間）')) {
     formattedBookedTimeFrame.push('2')
   }
   return [formattedBookedDate, formattedBookedTimeFrame]
 })
+
 const _startTime = props.time.StartTime
 const _endTime = props.time.EndTime
 
@@ -242,7 +253,6 @@ const toNumber = (week) => {
   })
 }
 
-const disabledTime = ref('')
 const selectDate = ref(inputPaymentInfo.value.BookedDate)
 const selectTime = (time) => {
   switch (time) {
@@ -264,6 +274,7 @@ const selectTime = (time) => {
   }
 }
 
+const disabledTime = ref('')
 const disabledDates = ref([
   {
     repeat: {
@@ -273,27 +284,26 @@ const disabledDates = ref([
   ...dayOff.value
 ])
 
-// Composable
-const { isPhone } = useValidate()
-const { formatDate, formattedOutput } = useFormatted()
-
 onMounted(() => {
   inputPaymentInfo.value.BookedDate = formattedOutput(date)
   isBookAvailable()
 })
 
 watch(selectDate, (newValue) => {
+  inputPaymentInfo.value.BookedTimeFrame = ''
   inputPaymentInfo.value.BookedDate = formattedOutput(newValue)
   isBookAvailable()
 })
 
 // 判斷時段，還要加上可預約時段 （未完成）
 const isBookAvailable = () => {
+  console.log(bookedDate)
   bookedDate.map((item) => {
     if (item[1].length >= 3) {
       disabledDates.value.push(item[0])
-    } else if (item[0] === formatDate.value) {
+    } else if (item[0] === inputPaymentInfo.value.BookedDate) {
       disabledTime.value = item[1]
+      console.log(disabledTime.value)
     } else {
       disabledTime.value = ''
     }

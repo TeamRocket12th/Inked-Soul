@@ -144,7 +144,6 @@ const authCookie = useCookie('data')
 
 const store = useAccountStore()
 const { userInfoData, photo, artistInfoData } = storeToRefs(store)
-const { handleDefaultInfo } = store
 
 const { Role, Email } = authCookie.value ? authCookie.value : ''
 
@@ -173,8 +172,4 @@ const logout = () => {
   authToken.value = undefined || null
   authCookie.value = undefined || null
 }
-
-onMounted(() => {
-  handleDefaultInfo()
-})
 </script>

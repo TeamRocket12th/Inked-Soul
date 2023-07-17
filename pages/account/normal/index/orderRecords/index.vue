@@ -2,7 +2,7 @@
   <div>
     <div class="mb-4 overflow-x-scroll rounded-lg">
       <table class="w-full">
-        <thead class="h-12 bg-primary">
+        <thead class="h-12 border-b border-[#D0D0D0] bg-primary">
           <tr>
             <th>認領圖</th>
             <th>名稱</th>
@@ -19,7 +19,7 @@
             v-for="item in AllOrderRecord"
             :key="item.Id"
             :order="item"
-            class="hover:cursor-pointer hover:bg-gray-300"
+            class="hover:cursor-pointer hover:bg-primary active:bg-[#D0D0D0]"
             @click="jump(item.Id)"
           />
         </tbody>
