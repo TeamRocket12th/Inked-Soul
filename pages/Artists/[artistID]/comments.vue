@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col">
-    <CommentItem :artistId="artistId" />
+  <div class="flex flex-col overflow-hidden rounded-lg">
+    <CommentItem :data="commentData" />
   </div>
 </template>
 <script setup>
@@ -8,18 +8,20 @@ const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
 
-const artistId = route.params.artistId
+const artistId = route.params.artistID
+
+const commentData = ref('')
 
 const getComment = async () => {
-  const { data } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
+  const { data: res } = await useFetch(`${APIBASE}/api/getartistallcomment`, {
     headers: { 'Content-type': 'application/json' },
     method: 'POST',
-    body: {
+    query: {
       artistId: artistId,
       page: 1
     }
   })
-  console.log(data)
+  commentData.value = res.value.Data
 }
 
 onMounted(() => {

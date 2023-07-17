@@ -48,7 +48,7 @@
                     <img
                       :src="dateDetail[0].BuPurchaserPhoto"
                       alt=""
-                      class="h-6 w-6 rounded-full bg-white object-fill object-center"
+                      class="h-6 w-6 rounded-full bg-white object-cover object-center"
                     />
                     <p>{{ dateDetail[0].BuPurchaser }}</p>
                   </div>
@@ -77,7 +77,7 @@
                   <div v-if="dateDetail[1]" class="flex items-center justify-center gap-2">
                     <img
                       :src="dateDetail[1].BuPurchaserPhoto"
-                      class="h-6 w-6 rounded-full bg-white object-fill object-center"
+                      class="h-6 w-6 rounded-full bg-white object-cover object-center"
                     />
                     <p>{{ dateDetail[1].BuPurchaser }}</p>
                   </div>
@@ -136,7 +136,6 @@ const closeDate = ref('')
 const dayOff = ref('')
 const scheduleData = ref('')
 const dateDetail = ref('')
-const isLoading = ref('')
 
 const disabledDates = computed(() => [
   {
@@ -191,7 +190,7 @@ watch(
       }
     })
     if (dateResponse.value) {
-      isLoading.value = dateDetail.value = dateResponse.value.Data
+      dateDetail.value = dateResponse.value.Data
     } else {
       dateDetail.value = { Data: [] }
     }

@@ -37,7 +37,7 @@
               <img
                 :src="`${commentData.ImgUrl}`"
                 alt=""
-                class="h-[100px] w-[100px] rounded-lg object-fill object-center"
+                class="h-[100px] w-[100px] rounded-lg border border-primary object-fill object-center"
               />
               <div class="flex flex-col items-start">
                 <p>{{ commentData.ImgName }}</p>
