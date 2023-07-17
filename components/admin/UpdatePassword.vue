@@ -17,9 +17,9 @@
             :class="{ 'border-[#DC3545]': errors.新密碼 }"
           />
           <Icon
+            v-if="errors.新密碼"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.新密碼"
           />
         </div>
       </div>
@@ -38,9 +38,9 @@
             :class="{ 'border-[#DC3545]': errors.確認新密碼 }"
           />
           <Icon
+            v-if="errors.確認新密碼"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="errors.確認新密碼"
           />
         </div>
       </div>

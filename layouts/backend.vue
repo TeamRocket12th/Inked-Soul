@@ -4,13 +4,13 @@
       <div class="col-span-4 flex flex-col gap-[43px]">
         <div class="rounded-lg border bg-white">
           <slot name="userImg">
-            <Photo />
+            <PhotoItem />
           </slot>
         </div>
 
         <div class="rounded-lg border bg-white">
           <slot name="navbar">
-            <Navbar />
+            <NavbarItem />
           </slot>
         </div>
       </div>
@@ -25,10 +25,10 @@
   </ClientOnly>
 </template>
 <script setup>
-import Photo from '~/components/admin/Photo.vue'
-import Navbar from '~/components/admin/Navbar.vue'
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
+import PhotoItem from '~/components/admin/PhotoItem.vue'
+import NavbarItem from '~/components/admin/NavbarItem.vue'
 const store = useOrderStore()
 const { stretch } = storeToRefs(store)
 const { handleClickOutside } = store

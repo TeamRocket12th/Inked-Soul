@@ -36,10 +36,10 @@ const props = defineProps({
   }
 })
 
-const styleArr = ref([])
-
-if (props.category !== null) {
-  styleArr.value = props.category.split(',')
-  console.log(styleArr)
-}
+const styleArr = computed(() => {
+  if (props.category.value) {
+    styleArr.value = props.category.value.split(',')
+    console.log(styleArr)
+  }
+})
 </script>

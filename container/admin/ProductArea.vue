@@ -5,11 +5,11 @@
       <div class="flex flex-row gap-10">
         <label for="all" class="flex cursor-pointer flex-row items-center gap-2">
           <input
+            id="all"
+            v-model="selectedStatus"
             type="radio"
             name="filter"
-            id="all"
             class="radio radio-xs"
-            v-model="selectedStatus"
             value="全部"
             @click="artistGetTattooData('', 1)"
           />
@@ -17,11 +17,11 @@
         </label>
         <label for="sale" class="flex cursor-pointer flex-row items-center gap-2">
           <input
+            id="sale"
+            v-model="selectedStatus"
             type="radio"
             name="filter"
-            id="sale"
             class="radio radio-xs"
-            v-model="selectedStatus"
             value="上架中"
             @click="artistGetTattooData(false, 1)"
           />
@@ -29,11 +29,11 @@
         </label>
         <label for="sold" class="flex cursor-pointer flex-row items-center gap-2">
           <input
+            id="sold"
+            v-model="selectedStatus"
             type="radio"
             name="filter"
-            id="sold"
             class="radio radio-xs"
-            v-model="selectedStatus"
             value="已售出"
             @click="artistGetTattooData(true, 1)"
           />

@@ -3,10 +3,10 @@
     <ul class="flex flex-col">
       <NuxtLink
         v-for="(item, key) in menu"
-        :to="`/account/artist/${item.link || 'editinfo'}`"
         :key="key"
-        :class="{ 'bg-gray-100': isActive(item.link) }"
-        class="flex flex-row items-center gap-3 rounded border-b py-[18.5px] pl-8 last:border-0"
+        :to="`/account/artist/${item.link || 'editinfo'}`"
+        :class="{ 'bg-black text-white hover:bg-black': isActive(item.link) }"
+        class="flex flex-row items-center gap-3 rounded border-b py-[18.5px] pl-8 last:border-0 hover:bg-primary"
       >
         <Icon :name="item.icon" class="h-[25px] w-[25px]" />
         <p>
@@ -35,7 +35,8 @@ const menu = [
   },
   {
     icon: 'ic:baseline-wallpaper',
-    title: '作品集'
+    title: '作品集',
+    link: 'albumn'
   },
   {
     icon: 'ic:outline-event-available',
