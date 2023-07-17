@@ -4,7 +4,7 @@
       <img
         :src="`${props.designData.Url}`"
         alt=""
-        class="w-full rounded-lg object-contain object-center"
+        class="w-full rounded-lg border border-primary object-contain object-center"
       />
       <div v-if="props.designData.IsSoldout" class="soldOut absolute bottom-0 left-0 right-0 top-0">
         <p
@@ -34,7 +34,11 @@
         <p class="text-secondary">{{ props.designData.Idea }}</p>
       </div>
       <ul class="flex flex-row items-center gap-2">
-        <li v-for="(style, key) in props.designData.Style" class="rounded-full border px-3 py-1">
+        <li
+          v-for="(style, key) in props.designData.Style"
+          :key="key"
+          class="rounded-full border px-3 py-1"
+        >
           {{ style }}
         </li>
       </ul>

@@ -7,9 +7,9 @@
       <div class="flex flex-col items-center gap-3 hover:flex">
         <p>{{ props.nickname }}</p>
         <span
-          class="rounded-full border px-3 py-1 text-xs"
           v-for="(item, index) in styleArr"
           :key="index"
+          class="rounded-full border px-3 py-1 text-xs"
           >{{ item }}</span
         >
       </div>
@@ -23,23 +23,22 @@
 <script setup>
 const props = defineProps({
   image: {
-    // type: String,
+    type: null, //  String
     required: true
   },
   nickname: {
-    // type: String,
+    type: null, // String
     required: true
   },
   category: {
-    // type: Array,
+    type: null, //  Array
     required: true
   }
 })
 
 const styleArr = computed(() => {
-  if (props.category.value) {
-    styleArr.value = props.category.value.split(',')
-    console.log(styleArr)
+  if (props.category) {
+    styleArr.value = props.category.split(',')
   }
 })
 </script>

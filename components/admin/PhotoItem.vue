@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col items-center gap-10 rounded px-[104] py-10">
-    <div class="avatar flex flex-col items-center gap-2">
+    <div class="avatar relative flex flex-col items-center gap-2">
+      <!-- 追蹤人數 -->
+      <div class="absolute left-0 flex items-center">
+        <Icon name="ic:outline-bookmark" size="24" />
+        <span class="text-black">{{ artistInfoData.Follower }}</span>
+      </div>
+      <!-- 大頭照 -->
       <div class="group relative w-20 rounded-lg">
         <label for="photo" class="cursor-pointer">
           <img v-if="!previewUrl" :src="Photo" alt="" class="bg-white object-cover object-center" />
@@ -28,8 +34,9 @@
           </div>
         </div>
       </div>
+      <!-- 暱稱 -->
       <h2>{{ nickname }}</h2>
-
+      <!-- 上傳大頭照 -->
       <button
         v-show="previewUrl"
         class="m-2 flex items-center gap-2 rounded-lg border border-black px-3 py-1"

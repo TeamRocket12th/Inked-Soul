@@ -16,7 +16,7 @@
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-2 flex flex-col gap-10">
         <DesignImage v-if="designInfo" :id="designId" :design-data="designInfo" />
-        <!-- <DesignComment /> -->
+        <DesignComment />
       </div>
       <DesignIntro v-if="designInfo" :design-data="designInfo" class="sticky top-[120px] h-fit">
         <template #price>
@@ -61,11 +61,7 @@ const route = useRoute()
 const designId = route.params.designID
 const designInfo = ref()
 
-const {
-  data: design,
-  error,
-  pending
-} = await useFetch(`${APIBASE}/api/getimage/imgid/${designId}`, {
+const { data: design } = await useFetch(`${APIBASE}/api/getimage/imgid/${designId}`, {
   headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
 })
 
