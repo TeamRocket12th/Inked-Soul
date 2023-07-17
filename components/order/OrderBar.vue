@@ -28,10 +28,7 @@
       {{ payDate }}
     </td>
     <!-- 預約時間 -->
-    <td>
-      {{ bookedDate }}<br />
-      {{ props.order.BookedTimeFrame }}
-    </td>
+    <td>{{ bookedDate }} {{ bookedTimeFrame }}</td>
     <!-- 價格(訂金) -->
     <td>$ {{ props.order.Deposit }}</td>
     <!-- 訂單狀態 -->
@@ -54,6 +51,11 @@ const orderStatus = computed(() => {
   if (props.order) {
     const status = props.order.OrderStatus
     return transformOrderStatus(status)
+  }
+})
+const bookedTimeFrame = computed(() => {
+  if (props.order) {
+    return props.order.BookedTimeFrame.slice(0, 2)
   }
 })
 

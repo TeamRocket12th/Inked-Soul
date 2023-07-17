@@ -3,7 +3,6 @@ export const useOrderStore = defineStore('order', () => {
   const APIBASE = runtimeConfig.public.APIBASE
   const authToken = useCookie('token')
 
-  const router = useRouter()
   const id = ref()
   const orderID = ref()
   const artistID = ref()
@@ -24,7 +23,7 @@ export const useOrderStore = defineStore('order', () => {
     PayWay: ''
   })
   const AllOrderRecord = ref()
-  const allNum = ref()
+  const totalPage = ref()
 
   const paymentInfo = reactive({
     Realname: '',
@@ -53,7 +52,7 @@ export const useOrderStore = defineStore('order', () => {
   // 取得訂單狀態
   const getStatus = async () => {
     try {
-      const { status } = useFetch(`${APIBASE}/api/`, {
+      const { status } = await useFetch(`${APIBASE}/api/`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
@@ -79,10 +78,9 @@ export const useOrderStore = defineStore('order', () => {
             pageNumber: pageNum
           }
         })
-        console.log('成功取得所有訂單資料', data)
         // 賦值
         AllOrderRecord.value = data.value.Data
-        allNum.value = data.value.TotalNum
+        totalPage.value = Math.floor(data.value.TotalNum / 10) + 1
       })
     } catch (error) {
       console.log('取得所有訂單失敗', error)
@@ -108,7 +106,7 @@ export const useOrderStore = defineStore('order', () => {
     designData,
     inputPaymentInfo,
     AllOrderRecord,
-    allNum,
+    totalPage,
     paymentInfo,
     stretch,
     getOrder,

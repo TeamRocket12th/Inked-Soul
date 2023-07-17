@@ -55,9 +55,11 @@
 <script setup>
 const props = defineProps({
   order: {
+    type: null,
     required: true
   },
   role: {
+    type: String,
     default: '訂購人'
   }
 })

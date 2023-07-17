@@ -1,9 +1,9 @@
 <template>
-  <NuxtLink to="/account/artist/orderinfo">
-    <Icon name="ic:outline-keyboard-arrow-left" size="48" class="goBack" />
-  </NuxtLink>
-
   <div>
+    <NuxtLink to="/account/artist/orderinfo">
+      <Icon name="ic:outline-keyboard-arrow-left" size="48" class="goBack" />
+    </NuxtLink>
+
     <OrderArea class="mb-20">
       <template #orderContext>
         <div class="flex flex-col items-center gap-5">
@@ -60,6 +60,7 @@ const APIBASE = runtimeConfig.public.APIBASE
 
 const authToken = useCookie('token')
 const authCookie = useCookie('data')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _artistID = authCookie.value.Id
 
 // 取得單一訂單資訊
@@ -75,6 +76,7 @@ const titleInfo = reactive({
 })
 
 const getOrderInfo = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: orderResponse, error } = await useFetch(`${APIBASE}/api/orderinfo/${imageId}`, {
     headers: {
       'Content-type': 'application/json',
@@ -115,6 +117,7 @@ const orderContext = {
 
 // 確認訂單 API
 const confirmOrder = async (status) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: confirmResponse, error } = await useFetch(`${APIBASE}/api/artistfinishbooking`, {
     headers: {
       'Content-type': 'application/json',
@@ -122,11 +125,10 @@ const confirmOrder = async (status) => {
     },
     method: 'POST',
     body: {
-      ImageId: imageId,
+      ImagesId: imageId,
       chose: status // Boolean
     }
   })
-  console.log(confirmResponse.value)
   getOrderInfo()
 }
 
