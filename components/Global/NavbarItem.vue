@@ -30,7 +30,7 @@
         <div class="dropdown-end dropdown" v-if="authToken">
           <label tabindex="0" class="avatar cursor-pointer align-middle">
             <div
-              class="w-10"
+              class="w-10 bg-white"
               :class="{
                 'rounded-lg': Role === 'artist' || Role === 'Artist',
                 'rounded-full': Role === 'user' || Role === 'User'
@@ -56,40 +56,52 @@
               </div>
             </div>
             <li>
-              <NuxtLink to="/account/artist/editinfo" class="rounded-none border-b px-8 py-4"
-                >刺青師後台</NuxtLink
-              >
+              <NuxtLink to="/account/artist/editinfo" class="rounded-none px-8 py-4">
+                <Icon name="ic:outline-account-circle" size="24" />
+                <p>編輯個人資料</p>
+              </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/editinfo" class="rounded-none px-8 py-4"
-                >個人資料</NuxtLink
-              >
+              <NuxtLink to="/account/artist/membership" class="rounded-none border-b px-8 py-4">
+                <Icon name="ic:outline-how-to-reg" size="24" />
+                <p>會員資格</p>
+              </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/membership" class="rounded-none px-8 py-4"
-                >會員資格</NuxtLink
-              >
-            </li>
-            <li><NuxtLink class="rounded-none border-b px-8 py-4">作品集</NuxtLink></li>
-            <li>
-              <NuxtLink to="/account/artist/reservation" class="rounded-none px-8 py-4"
-                >預約狀況</NuxtLink
-              >
+              <NuxtLink to="/account/artist/productlist" class="rounded-none px-8 py-4">
+                <Icon name="ic:outline-collections-bookmark" size="24" />
+                <p>認領圖</p>
+              </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/orderinfo" class="rounded-none px-8 py-4"
-                >訂單資訊</NuxtLink
-              >
+              <NuxtLink to="/account/artist/albumn" class="rounded-none border-b px-8 py-4">
+                <Icon name="ic:baseline-wallpaper" size="24" />
+                <p>作品集</p>
+              </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/comments" class="rounded-none border-b px-8 py-4"
-                >獲得評價</NuxtLink
-              >
+              <NuxtLink to="/account/artist/reservation" class="rounded-none px-8 py-4">
+                <Icon name="ic:outline-event-available" size="24" />
+                <p>預約狀況</p>
+              </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4"
-                >登出</NuxtLink
-              >
+              <NuxtLink to="/account/artist/orderinfo" class="rounded-none px-8 py-4">
+                <Icon name="ic:round-list-alt" size="24" />
+                <p>訂單資訊</p>
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/account/artist/comments" class="rounded-none border-b px-8 py-4">
+                <Icon name="ic:outline-stars" size="24" />
+                <p>獲得評價</p>
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4">
+                <Icon name="ic:baseline-log-out" size="24" />
+                <p>登出</p>
+              </NuxtLink>
             </li>
           </ul>
           <ul
@@ -109,23 +121,27 @@
               </div>
             </div>
             <li>
-              <NuxtLink to="/account/normal/editinfo" class="rounded-none px-8 py-4"
-                >編輯個人資料</NuxtLink
+              <NuxtLink to="/account/normal/editinfo" class="rounded-none px-8 py-4">
+                <Icon name="ic:outline-account-circle" size="24" />
+                <p>編輯個人資料</p>
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/account/normal/orderRecords" class="rounded-none px-8 py-4">
+                <Icon name="ic:outline-list-alt" size="24" />
+                <p>訂單資訊</p>
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/account/normal/follows" class="rounded-none border-b px-8 py-4">
+                <Icon name="ic:outline-bookmark-border" size="24" />
+                <p>追蹤刺青師</p></NuxtLink
               >
             </li>
             <li>
-              <NuxtLink to="/account/normal/orderRecords" class="rounded-none px-8 py-4"
-                >訂單資訊</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/account/normal/follows" class="rounded-none border-b px-8 py-4"
-                >追蹤刺青師</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4"
-                >登出</NuxtLink
+              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4">
+                <Icon name="ic:baseline-log-out" size="24" />
+                <p>登出</p></NuxtLink
               >
             </li>
           </ul>
@@ -144,6 +160,7 @@ const authCookie = useCookie('data')
 
 const store = useAccountStore()
 const { userInfoData, photo, artistInfoData } = storeToRefs(store)
+const { getUserInfo, getArtistInfo } = store
 
 const { Role, Email } = authCookie.value ? authCookie.value : ''
 
@@ -172,4 +189,16 @@ const logout = () => {
   authToken.value = undefined || null
   authCookie.value = undefined || null
 }
+
+watchEffect(() => {
+  if (authCookie.value) {
+    if (authCookie.value.Role.toLowerCase() === 'artist') {
+      getArtistInfo()
+    } else if (authCookie.value.Role.toLowerCase() === 'user') {
+      getUserInfo()
+    } else {
+      return
+    }
+  }
+})
 </script>

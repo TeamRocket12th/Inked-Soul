@@ -8,19 +8,19 @@
       <div class="relative">
         <VField
           id="intro"
+          v-model="inputArtistInfoData.Intro"
           as="textarea"
           name="簡介"
           rules="max:30"
           :placeholder="artistInfoData.Intro || '填寫您的個人簡介'"
           class="textarea-bordered textarea min-h-[72px] w-full"
           style="outline: none"
-          v-model="inputArtistInfoData.Intro"
           :class="{ 'border-[#DC3545]': props.errors.簡介 }"
         />
         <Icon
+          v-if="props.errors.個人簡介"
           name="ic:baseline-error-outline"
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-          v-if="props.errors.個人簡介"
         />
       </div>
     </div>

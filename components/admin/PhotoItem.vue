@@ -19,11 +19,11 @@
               <Icon name="ic:outline-photo-camera" size="20" class="text-white" />
             </label>
             <input
+              id="photo"
               type="file"
               accept=".jpg, .png, .svg, .gif "
-              @change="handleOnPreview"
               class="hidden"
-              id="photo"
+              @change="handleOnPreview"
             />
           </div>
         </div>
@@ -32,8 +32,8 @@
 
       <button
         v-show="previewUrl"
-        @click="postImg"
         class="m-2 flex items-center gap-2 rounded-lg border border-black px-3 py-1"
+        @click="postImg"
       >
         <Icon name="ic:baseline-upgrade" size="24" />
         <p>上傳認領圖</p>
@@ -42,15 +42,14 @@
   </div>
 </template>
 <script setup>
-import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
 
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
 
 const authToken = useCookie('token')
 const authCookie = useCookie('data')
-const { MemberShip, Follower } = authCookie.value
 
 const store = useAccountStore()
 const { artistInfoData, photo } = storeToRefs(store)
@@ -79,21 +78,18 @@ const postImg = async () => {
   const formData = new FormData()
   formData.append('file', userImage.value)
   try {
-    const { data, error } = useFetch(`${APIBASE}/api/uploadartistprofile`, {
+    const { data } = useFetch(`${APIBASE}/api/uploadartistprofile`, {
       headers: {
         Authorization: `Bearer ${authToken.value}`
       },
       method: 'POST',
       body: formData
     })
-    console.log('postImg', data.value)
     if (data.value.Message) {
       await getArtistInfo()
     }
     previewUrl.value = false
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }
 
 onMounted(() => {
