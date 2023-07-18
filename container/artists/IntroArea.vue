@@ -4,16 +4,16 @@
       <h2>{{ artistInfo.name }}</h2>
       <img :src="artistInfo.img" class="rounded-lg object-cover shadow" />
       <div class="flex flex-row items-center justify-between">
+        <!-- 追蹤 -->
         <div class="flex flex-row items-center">
           <Icon
-            :name="
-              followingStatus === false ? 'ic:baseline-bookmark-border' : 'ic:baseline-bookmark'
-            "
+            :name="followStatus === false ? 'ic:baseline-bookmark-border' : 'ic:baseline-bookmark'"
             class="h-6 w-6 hover:cursor-pointer"
             @click="followFn()"
           />
           {{ artistInfo.followers }}
         </div>
+        <!-- 分享 -->
         <div>
           <div class="dropdown-end dropdown">
             <label
@@ -62,9 +62,14 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useGetImageStore } from '~/stores/getImage'
+import { useFollowsStore } from '~/stores/follows'
 const store = useGetImageStore()
 const { userGetTattooData } = store
 const { allData } = storeToRefs(store)
+
+const followStore = useFollowsStore()
+const { checkFollow, follow, unFollow } = followStore
+const { followStatus } = storeToRefs(followStore)
 
 const artistInfo = ref({})
 const styleArr = ref()
@@ -87,46 +92,18 @@ const route = useRoute()
 const id = route.params.artistID
 
 // 追蹤
-const runtimeConfig = useRuntimeConfig()
-const APIBASE = runtimeConfig.public.APIBASE
-const authToken = useCookie('token')
-const followingStatus = ref(false)
-const followFn = () => {
-  if (followingStatus.value === false) {
-    nextTick(async () => {
-      const { data } = await useFetch(`${APIBASE}/api/trackartists`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
-        },
-        query: {
-          artistid: id
-        }
-      })
-      followingStatus.value = true
-      userGetTattooData(id, 1) // 待補page
-    })
-  } else if (followingStatus.value === true) {
-    nextTick(async () => {
-      const { data } = await useFetch(`${APIBASE}/api/canceltrackartists`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
-        },
-        query: {
-          artistid: id
-        }
-      })
-      followingStatus.value = false
-      userGetTattooData(id, 1) // 待補page
-    })
+const followFn = async () => {
+  if (followStatus.value === false) {
+    await follow(id)
+    userGetTattooData(id, 1)
+  } else if (followStatus.value === true) {
+    await unFollow(id)
+    userGetTattooData(id, 1)
   }
 }
-// 取消追蹤
 
 onMounted(() => {
   userGetTattooData(id, 1)
+  // checkFollow(id)
 })
 </script>
