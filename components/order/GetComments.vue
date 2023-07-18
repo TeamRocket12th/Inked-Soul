@@ -4,14 +4,14 @@
       <label
         tabindex="0"
         class="btn absolute right-[10%] max-h-10 bg-black px-4 text-white focus:bg-[#D0D0D0]"
-        @click.prevent="stretchShow()"
+        @click.prevent="stretchToggle()"
         >查看評價</label
       >
       <div
         tabindex="0"
         class="dropdown-content absolute z-[1] w-full rounded-lg border border-primary bg-base-100 p-5"
         style="top: 68px"
-        @click.prevent="stretchShow()"
+        @click.prevent="stretchToggle()"
       >
         <div class="flex flex-row gap-1 bg-white p-3">
           <img
@@ -26,7 +26,7 @@
                 <p>{{ commentTime }}</p>
               </div>
               <!-- 評價星星數 -->
-              <ul class="flex flex-row">
+              <ul class="flex">
                 <li v-for="(star, key) in commentData.Star" :key="key">
                   <Icon name="ic:baseline-star" size="20" class="p-0" />
                 </li>
@@ -67,7 +67,7 @@ const APIBASE = runtimeConfig.public.APIBASE
 const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { stretchShow } = store
+const { stretchToggle } = store
 
 const commentData = ref('')
 const commentTime = computed(() => {

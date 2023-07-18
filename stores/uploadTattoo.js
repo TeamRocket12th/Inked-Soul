@@ -20,6 +20,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const authCookie = useCookie('data')
   const artistID = authCookie.value.Id // 對應刺青師ID
   const allImg = ref()
+  const allAlbum = ref()
   const formKey = {}
   // 打包成form data
   const formData = new FormData()
@@ -37,7 +38,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       return false
     }
   }
-
+  // 上傳認領圖
   const uploadTattoo = async () => {
     selectImage()
     postImageLimit()
@@ -50,6 +51,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         body: formData
       })
       console.log(data)
+      artistGetTattooData()
     } catch (error) {
       console.log('上傳錯誤', error)
     }
@@ -85,6 +87,56 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     })
   }
 
-  // POST API
-  return { uploadTattooData, allImg, uploadTattoo, artistGetTattooData }
+  // 刺青師後台取得作品集
+  // 待補
+  const getAlbumn = () => {
+    nextTick(async () => {
+      const { data } = await useFetch(`${APIBASE}/api/`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        }
+      })
+      console.log('取得所有作品集', data)
+    })
+  }
+
+  // 上傳作品集
+  const uploadAlbumData = ref({
+    image: '',
+    picdescription: ''
+  })
+  const albumnKey = {}
+  const albumData = new FormData()
+  const selectAlbum = () => {
+    for (const key in uploadAlbumData.value) {
+      albumnKey[key] = uploadAlbumData.value[key]
+      albumData.append(key, uploadAlbumData.value[key])
+    }
+  }
+  const uploadAlbum = () => {
+    selectAlbum()
+
+    nextTick(async () => {
+      const { data } = await useFetch(`${APIBASE}/api/uploadalbum`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`
+        },
+        body: albumData
+      })
+      console.log('成功上傳作品集'.data)
+    })
+  }
+  return {
+    uploadTattooData,
+    allImg,
+    allAlbum,
+    uploadAlbumData,
+    uploadTattoo,
+    artistGetTattooData,
+    getAlbumn,
+    uploadAlbum
+  }
 })

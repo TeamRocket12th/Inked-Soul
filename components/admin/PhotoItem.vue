@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col items-center gap-10 rounded px-[104] py-10">
-    <div class="avatar relative flex flex-col items-center gap-2">
-      <!-- 追蹤人數 -->
-      <div class="absolute left-0 flex items-center">
-        <Icon name="ic:outline-bookmark" size="24" />
-        <span class="text-black">{{ artistInfoData.Follower }}</span>
-      </div>
+  <div class="relative flex flex-col items-center gap-10 rounded p-8">
+    <!-- 追蹤人數 -->
+    <div class="absolute left-8 flex items-center">
+      <Icon name="ic:outline-bookmark" size="24" />
+      <span class="text-black">{{ artistInfoData.Follower }}</span>
+    </div>
+    <div class="avatar flex flex-col items-center gap-2">
       <!-- 大頭照 -->
       <div class="group relative w-20 rounded-lg">
         <label for="photo" class="cursor-pointer">
