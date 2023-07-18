@@ -1,5 +1,5 @@
 <template>
-  <div class="boreder-black rounded border-2">
+  <div class="boreder-black overflow-hidden rounded-xl border-2">
     <img :src="`${props.image}`" alt="" />
   </div>
 </template>
