@@ -120,7 +120,7 @@ watch(totalPrice, (newTotalPrice) => {
   uploadTattooData.value.picbalance = balance.value.toString()
 })
 
-watch(designIdea, (nV) => {
+watch(designIdea, (_newValue) => {
   uploadTattooData.value.picidea = designIdea.value
 })
 </script>

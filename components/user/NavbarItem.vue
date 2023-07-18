@@ -5,8 +5,11 @@
         v-for="(item, key) in menu"
         :key="key"
         :to="`/account/normal/${item.link}`"
-        :class="{ 'bg-black text-white hover:bg-none': isActive(item.link) }"
-        class="flex flex-row items-center gap-3 rounded border-b py-[18.5px] pl-8 last:border-0 hover:bg-primary"
+        :class="{
+          'bg-black text-white hover:bg-none': isActive(item.link),
+          'hover:bg-primary': !isActive(item.link)
+        }"
+        class="flex flex-row items-center gap-3 rounded border-b py-[18.5px] pl-8 duration-200 ease-in last:border-0"
       >
         <Icon :name="item.icon" class="h-[25px] w-[25px]" />
         <p>
