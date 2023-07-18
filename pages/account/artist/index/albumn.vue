@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="flex flex-row-reverse">
+    <!-- 上傳 -->
+    <div class="mb-4 flex flex-row-reverse">
       <button
         class="btn bg-black text-white hover:bg-secondary hover:text-black"
         onclick="upload_album.showModal()"
@@ -61,21 +62,34 @@
         </form>
       </dialog>
     </div>
-    <table>
+    <!-- 上傳成功 -->
+    <!-- 表格 -->
+    <table class="w-full">
       <thead>
-        <tr>
-          <td>置頂</td>
-          <td>作品集</td>
-          <td>上架日期</td>
-          <td></td>
+        <tr class="flex justify-between rounded-t-lg border-b-2 border-secondary bg-primary p-2">
+          <td class="w-[10%]">置頂</td>
+          <td class="w-[30%]">作品集</td>
+          <td class="w-[30%]">上架日期</td>
+          <td class="w-[30%]"></td>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+      <tbody class="w-full overflow-hidden rounded-xl">
+        <tr
+          v-for="(item, index) in allAlbum"
+          :key="index"
+          class="flex items-center justify-between border-b-2 border-primary p-2"
+        >
+          <td class="w-[10%]">
+            <input type="checkbox" />
+          </td>
+          <td class="flex w-[30%] justify-center">
+            <div
+              class="h-[100px] w-[100px] overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat"
+              :style="`background-image: url('${item.Url}')`"
+            ></div>
+          </td>
+          <td class="w-[30%]">{{ formattedOutput(new Date(item.InitTime)) }}</td>
+          <td class="flex w-[30%] flex-row-reverse"><Icon name="ic:round-more-vert" /></td>
         </tr>
       </tbody>
     </table>
@@ -85,12 +99,18 @@
 import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 const store = useUploadTattooStore()
-const { getAlbum, uploadAlbum } = store
+const { getAlbumn, uploadAlbum } = store
 const { allAlbum, uploadAlbumData } = storeToRefs(store)
+
+const { formattedOutput } = useFormatted()
+
+const token = useCookie('data')
+const artistID = token.value.Id
 
 const isFileSizeAlert = ref(false)
 
 const albumnIdea = ref()
+const initTime = ref()
 watch(albumnIdea, (nV) => {
   uploadAlbumData.value.picdescription = albumnIdea.value
 })
@@ -107,7 +127,7 @@ const handleOnPreview = (event) => {
   uploadAlbumData.value.image = event.target.files[0]
 }
 onMounted(() => {
-  // getAlbum()
+  getAlbumn(artistID, 1)
 })
 </script>
 <style></style>

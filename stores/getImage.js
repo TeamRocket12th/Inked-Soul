@@ -19,7 +19,7 @@ export const useGetImageStore = defineStore('getImage', () => {
       allData.value = data.value.Data
     })
   }
-
+  // 刺青師前台取得所有作品集
   const userGetAlbum = (ID, page) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/getartistallalbum`, {
@@ -34,6 +34,7 @@ export const useGetImageStore = defineStore('getImage', () => {
       artistName.value = data.value.Data[0].ArtistNickname
     })
   }
+  // 刺青師前台取得單一作品集
   const userGetSingleAlbum = (albumId, artistId) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/getartistalbum`, {
