@@ -5,6 +5,7 @@ export const useGetImageStore = defineStore('getImage', () => {
   const allData = ref()
   const allAlbum = ref()
   const singleAlbum = ref()
+  const artistName = ref()
   const userGetTattooData = (ID, page) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/usergetallimg`, {
@@ -30,6 +31,7 @@ export const useGetImageStore = defineStore('getImage', () => {
       })
       console.log('用戶取得刺青師所有作品集', data)
       allAlbum.value = data.value.Data
+      artistName.value = data.value.Data[0].ArtistNickname
     })
   }
   const userGetSingleAlbum = (albumId, artistId) => {
@@ -41,14 +43,24 @@ export const useGetImageStore = defineStore('getImage', () => {
           albumId: albumId
         }
       })
-      console.log('取得單一作品集', data)
-      singleAlbum.value = data.value.Data[0]
-      console.log('singleAlbum', singleAlbum)
+      if (data.value) {
+        console.log('取得單一作品集', data)
+        singleAlbum.value = data.value.Data[0]
+        console.log('singleAlbum', singleAlbum)
+      }
     })
   }
   //   params: {
   //   artistId: ID,
   //   page: page
   // }
-  return { allData, allAlbum, singleAlbum, userGetTattooData, userGetAlbum, userGetSingleAlbum }
+  return {
+    allData,
+    allAlbum,
+    singleAlbum,
+    artistName,
+    userGetTattooData,
+    userGetAlbum,
+    userGetSingleAlbum
+  }
 })
