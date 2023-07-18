@@ -26,7 +26,10 @@
     <div class="flex flex-col gap-2">
       <span>建議部位（最多選擇兩個部位）</span>
       <div class="dropdown-end dropdown">
-        <label tabindex="0" class="btn-outline btn my-1 mb-1 h-auto w-full border-[#D0D0D0] py-2">
+        <label
+          tabindex="0"
+          class="btn-outline btn my-1 mb-1 h-auto w-full border-[#D0D0D0] py-2 hover:bg-white hover:text-black"
+        >
           <span v-for="(part, key) in selectBodyParts" :key="key">
             {{ part }}
           </span>
@@ -84,9 +87,9 @@
           :class="{ 'border-[#DC3545]': errors.預計作業時間 }"
         />
         <Icon
+          v-if="errors.預計作業時間"
           name="ic:baseline-error-outline"
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-          v-if="errors.預計作業時間"
         />
       </div>
     </div>
@@ -118,10 +121,10 @@ const selectBodyParts = ref([bodyParts[0]])
 const tattooSize = ref('')
 const hour = ref()
 
-watch(tattooName, (newVal, oldVal) => {
+watch(tattooName, (_newValue, _oldValue) => {
   uploadTattooData.value.picname = tattooName.value
 })
-watch(hour, (newVal, oldVal) => {
+watch(hour, (_newValue, _oldValue) => {
   uploadTattooData.value.pichour = hour.value
 })
 
@@ -139,7 +142,7 @@ const SelectRecommendPositions = (part) => {
 }
 
 const sizeErrorMessage = ref('')
-watch(tattooSize, (newValue, oldValue) => {
+watch(tattooSize, (newValue, _oldValue) => {
   if (/^\d+cm\*\d+cm$/.test(newValue)) {
     return
   }

@@ -24,10 +24,10 @@
         <NuxtLink to="/tips">知識點</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/account/login" v-if="!authToken">
+        <NuxtLink v-if="!authToken" to="/account/login">
           <Icon name="mdi:account" size="24"
         /></NuxtLink>
-        <div class="dropdown-end dropdown" v-if="authToken">
+        <div v-if="authToken" class="dropdown-end dropdown">
           <label tabindex="0" class="avatar cursor-pointer align-middle">
             <div
               class="w-10 bg-white"
@@ -98,7 +98,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4">
+              <NuxtLink to="/account/login" class="rounded-none px-8 py-4" @click="logout">
                 <Icon name="ic:baseline-log-out" size="24" />
                 <p>登出</p>
               </NuxtLink>
@@ -139,7 +139,7 @@
               >
             </li>
             <li>
-              <NuxtLink to="/account/login" @click="logout" class="rounded-none px-8 py-4">
+              <NuxtLink to="/account/login" class="rounded-none px-8 py-4" @click="logout">
                 <Icon name="ic:baseline-log-out" size="24" />
                 <p>登出</p></NuxtLink
               >
@@ -151,8 +151,8 @@
   </nav>
 </template>
 <script setup>
-import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
 
 const route = useRoute()
 const authToken = useCookie('token')
@@ -196,8 +196,6 @@ watchEffect(() => {
       getArtistInfo()
     } else if (authCookie.value.Role.toLowerCase() === 'user') {
       getUserInfo()
-    } else {
-      return
     }
   }
 })
