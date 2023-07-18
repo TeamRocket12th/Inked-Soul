@@ -64,7 +64,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     }
     if (sold !== '') {
       bodyObject.IsSoldout = sold
-      console.log(bodyObject)
     }
 
     nextTick(async () => {
@@ -88,17 +87,17 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
 
   // 刺青師後台取得作品集
-  // 待補
-  const getAlbumn = () => {
+  const getAlbumn = (ID, page) => {
     nextTick(async () => {
-      const { data } = await useFetch(`${APIBASE}/api/`, {
+      const { data } = await useFetch(`${APIBASE}/api/getartistallalbum`, {
         method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
+        query: {
+          artistId: ID,
+          page: page
         }
       })
-      console.log('取得所有作品集', data)
+      console.log('取得刺青師所有作品集', data)
+      allAlbum.value = data.value.Data
     })
   }
 
