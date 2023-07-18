@@ -31,13 +31,13 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useOrderStore } from '~/stores/order'
 import OrderArea from '~/container/order/OrderArea'
 import OrderData from '~/components/order/OrderData'
 import OrderStep from '~/components/order/OrderStep.vue'
 import PostComments from '~/components/order/PostComments'
 import GetComments from '~/components/order/GetComments.vue'
-import { useOrderStore } from '~/stores/order'
-import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const authToken = useCookie('token')
