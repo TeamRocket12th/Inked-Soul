@@ -4,7 +4,7 @@
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-2">
         <div class="mb-10 rounded-lg bg-white p-4 shadow">
-          <OrderData :time="artistData" :artistId="designInfo.ArtistID" />
+          <OrderData :artist-id="designInfo.ArtistID" />
           <PaymentData :payment="designInfo" />
         </div>
         <div class="flex flex-col gap-3">
@@ -18,7 +18,7 @@
       </div>
       <!-- 右側訂單內容 -->
       <div>
-        <DesignIntro :design-data="designInfo" :id="designID">
+        <DesignIntro :id="designID" :design-data="designInfo">
           <template #image>
             <div>
               <h4 class="mb-5">訂單內容</h4>
@@ -52,18 +52,9 @@ const APIBASE = runtimeConfig.public.APIBASE
 const designID = route.params.designID
 const designInfo = ref()
 
-const {
-  data: design,
-  error,
-  pending
-} = await useFetch(`${APIBASE}/api/getimage/imgid/${designID}`, {
+const { data: design } = await useFetch(`${APIBASE}/api/getimage/imgid/${designID}`, {
   headers: { 'Content-type': 'application/json' }
 })
-
-//
-const { data } = await useFetch(`/api/getDesign/${designID}`)
-const artistData = data.value.data.artistData
-//
 
 designInfo.value = design.value.Data
 

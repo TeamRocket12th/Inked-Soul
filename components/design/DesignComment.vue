@@ -20,9 +20,8 @@
       <li v-for="(item, key) in commentList" :key="key" class="flex flex-row items-center gap-3">
         <img
           :src="item.photo"
-          alt=""
-          :class="{ 'rounded-full': item.role === 'user' }"
-          class="h-9 w-9 rounded-lg object-cover object-center"
+          :class="item.role === 'user' ? 'rounded-full' : 'rounded-lg'"
+          class="h-9 w-9 bg-white object-cover object-center"
         />
         <div class="flex flex-col">
           <div class="flex flex-row items-center gap-3 font-roboto-nl">
