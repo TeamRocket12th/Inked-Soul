@@ -4,15 +4,15 @@
       <label
         tabindex="0"
         class="btn bg-black px-4 py-2 text-white focus:bg-[#D0D0D0] md:mr-4 lg:mr-12"
-        @click.prevent="stretchShow()"
+        @click.prevent="stretchToggle()"
         >查看評價</label
       >
       <div
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute top-5 z-[1] w-[10rem] bg-base-100 p-2 sm:w-[15rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] 2xl:w-[38rem]"
-        @click.prevent="stretchShow()"
+        class="dropdown-content menu rounded-box absolute top-5 z-[1] w-[10rem] border-[1px] border-primary bg-base-100 p-2 sm:w-[15rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] 2xl:w-[38rem]"
+        @click.prevent="stretchToggle()"
       >
-        <div class="flex flex-row gap-1 border-b bg-white p-3">
+        <div class="flex flex-row gap-1 bg-white p-3">
           <img
             :src="`${commentData.BuPurchaserPhoto}`"
             alt=""
@@ -25,9 +25,9 @@
                 <p>{{ commentTime }}</p>
               </div>
               <!-- 評價星星數 -->
-              <ul class="flex flex-row">
+              <ul class="flex">
                 <li v-for="(star, key) in commentData.Star" :key="key">
-                  <Icon name="ic:baseline-star" />
+                  <Icon name="ic:baseline-star" size="24" class="text-black" />
                 </li>
               </ul>
             </div>
@@ -65,7 +65,7 @@ const APIBASE = runtimeConfig.public.APIBASE
 const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { stretchShow } = store
+const { stretchToggle } = store
 
 const commentData = ref('')
 const commentTime = computed(() => {
