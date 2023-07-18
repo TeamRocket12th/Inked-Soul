@@ -1,12 +1,15 @@
 <template>
   <div class="relative h-[10vh] w-full">
-    <div class="dropdown-bottom dropdown-end dropdown w-full">
+    <div class="dropdown-bottom dropdown-end dropdown grid w-full grid-cols-9">
       <label
         tabindex="0"
-        class="btn absolute right-[10%] max-h-10 bg-black px-4 text-white focus:bg-[#D0D0D0]"
+        class="col-start-8 flex cursor-pointer items-center justify-center whitespace-nowrap"
         @click.prevent="stretchToggle()"
-        >查看評價</label
       >
+        <span class="rounded-lg bg-black px-3 py-2 text-white focus:border-none focus:bg-[#D0D0D0]">
+          查看評價
+        </span>
+      </label>
       <div
         tabindex="0"
         class="dropdown-content absolute z-[1] w-full rounded-lg border border-primary bg-base-100 p-5"
@@ -38,7 +41,7 @@
               <img
                 :src="`${commentData.ImgUrl}`"
                 alt=""
-                class="h-[100px] w-[100px] rounded-lg border border-primary bg-white object-fill object-center"
+                class="h-[100px] w-[100px] rounded-lg border border-primary bg-white object-cover object-center"
               />
               <div class="flex flex-col items-start">
                 <p>{{ commentData.ImgName }}</p>

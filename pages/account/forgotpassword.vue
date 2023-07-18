@@ -4,7 +4,7 @@
     <VForm class="flex flex-col">
       <label class="flex flex-col items-start">
         <span>電子信箱</span>
-        <VField name="電子信箱" rules="required|email" class="accountInput" v-model="email" />
+        <VField v-model="email" name="電子信箱" rules="required|email" class="accountInput" />
         <VErrorMessage name="電子信箱" class="whitespace-nowrap" />
       </label>
     </VForm>

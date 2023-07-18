@@ -53,9 +53,11 @@
 <script setup>
 const props = defineProps({
   currentStatus: {
+    type: null,
     required: true
   },
   stepDate: {
+    type: null,
     required: true
   },
   role: {
