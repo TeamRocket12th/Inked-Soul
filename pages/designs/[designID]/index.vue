@@ -25,7 +25,9 @@
               <span class="text-base text-[#6C6C6C]"> 訂金 </span>
               <span class="text-4xl font-bold">${{ designInfo.Deposit }}</span>
             </p>
-            <NuxtLink :to="`/designs/${designId}/order`" :disabled="designInfo.IsSoldout">
+            <NuxtLink
+              :to="!designInfo.IsSoldout ? `/designs/${designId}/order` : `/designs/${designId}`"
+            >
               <button
                 class="btn-neutral btn mb-3 w-full bg-black text-white"
                 :disabled="designInfo.IsSoldout"
