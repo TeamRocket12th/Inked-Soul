@@ -1,6 +1,7 @@
 <template>
   <ClientOnly>
     <div class="container grid grid-cols-12 gap-8" @click.self="handleClickOutside()">
+      <!-- @click.self="handleClickOutside()" -->
       <div class="col-span-4 flex flex-col gap-[43px]">
         <div class="rounded-lg border bg-white">
           <slot name="userImg">
@@ -16,7 +17,7 @@
       </div>
       <div
         class="col-span-8 self-start rounded-lg border bg-white p-10"
-        :class="stretch === false ? '' : 'h-[1400px] md:h-[1300px]'"
+        :class="stretch === false ? '' : 'h-[1200px]'"
         @click.self="handleClickOutside()"
       >
         <NuxtPage />

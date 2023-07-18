@@ -4,14 +4,14 @@
       <label
         tabindex="0"
         class="btn absolute right-[10%] max-h-10 bg-black px-4 text-white focus:bg-[#D0D0D0]"
-        @click.prevent="stretchShow()"
+        @click.prevent="stretchToggle()"
         >查看評價</label
       >
       <div
         tabindex="0"
         class="dropdown-content absolute z-[1] w-full rounded-lg border border-primary bg-base-100 p-5"
         style="top: 68px"
-        @click.prevent="stretchShow()"
+        @click.prevent="stretchToggle()"
       >
         <div class="flex flex-row gap-1 bg-white p-3">
           <img
