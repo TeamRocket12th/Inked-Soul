@@ -16,15 +16,23 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useSearchStore } from '~/stores/search'
+const store = useSearchStore()
+const { getArtists } = store
+const { allArtistsData } = storeToRefs(store)
 const artistsData = ref([])
-const { data } = await useFetch('/api/getArtists/getAllArtists')
 
 for (let i = 0; i < 6; i++) {
-  artistsData.value.push(data.value.data[i])
+  artistsData.value.push(allArtistsData.value[i])
 }
 
 const toPage = () => {
   const router = useRouter()
   router.push('/artists')
 }
+
+onMounted(() => {
+  getArtists(1)
+})
 </script>
