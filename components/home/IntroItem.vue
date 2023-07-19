@@ -51,85 +51,94 @@
   <!-- 最獨特的刺青風格 -->
   <div class="flex flex-col items-center">
     <h2 class="mb-10">最獨特的刺青風格</h2>
-    <ul class="grid grid-cols-4 gap-1">
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element1.png" alt="" />
-        <img
-          src="/element-text1.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element2.png" alt="" />
-        <img
-          src="/element-text2.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element3.png" alt="" />
-        <img
-          src="/element-text3.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element4.png" alt="" />
-        <img
-          src="/element-text4.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element5.png" alt="" />
-        <img
-          src="/element-text5.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element6.png" alt="" />
-        <img
-          src="/element-text6.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element7.png" alt="" />
-        <img
-          src="/element-text7.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-      <li class="relative flex flex-col items-center">
-        <img src="/home-element8.png" alt="" />
-        <img
-          src="/element-text8.svg"
-          alt=""
-          class="absolute bottom-0 left-0 right-0 mx-auto object-contain"
-        />
-      </li>
-    </ul>
+    <div class="relative">
+      <div
+        class="via-opacity-20 absolute bottom-0 left-0 top-0 z-10 bg-gradient-to-r from-white to-transparent 2xl:w-20"
+      ></div>
+      <div
+        class="via-opacity-20 absolute bottom-0 right-0 top-0 z-10 bg-gradient-to-l from-white to-transparent 2xl:w-20"
+      ></div>
+      <ul class="grid grid-cols-4 gap-1">
+        <li
+          v-for="(item, key) in style"
+          :key="key"
+          class="relative flex cursor-pointer flex-col items-center text-white"
+          @click="toDesignPage(item.link)"
+        >
+          <img :src="item.image" alt="" />
+          <div class="absolute bottom-0 left-0 right-0 mx-auto py-5">
+            <div class="flex flex-col items-center gap-3">
+              <h2 class="font-bold">{{ item.chinese }}</h2>
+              <h3 class="font-heading-typo text-base font-normal">{{ item.english }}</h3>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-
-  <!-- <div class="container mx-auto grid grid-cols-2">
-    <div class="h-[250px]">
-      <p>墨魂是藝術的殿堂</p>
-      <NuxtLink class="underline">探索認領圖</NuxtLink>
-    </div>
-    <div class="h-[250px]"><img src="https://fakeimg.pl/250/" /></div>
-    <div class="h-[250px]"><img src="https://fakeimg.pl/250/" /></div>
-    <div class="h-[250px]">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, qui.</p>
-      <NuxtLink class="underline">探索刺青師</NuxtLink>
-    </div>
-  </div> -->
 </template>
-<script setup></script>
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useSearchStore } from '~/stores/search'
+
+const store = useSearchStore()
+const { styleArr } = storeToRefs(store)
+const { getDesigns } = store
+
+const style = [
+  {
+    chinese: '黑灰派',
+    english: 'Black and Grey',
+    image: '/home-element1.png',
+    link: 'Black and Grey 黑灰派'
+  },
+  {
+    chinese: '日式傳統',
+    english: 'Traditional Japanese',
+    image: '/home-element2.png',
+    link: 'Traditional Japanese 日式傳統'
+  },
+  {
+    chinese: '新傳統',
+    english: 'New Traditional',
+    image: '/home-element3.png',
+    link: 'New Traditional 新傳統'
+  },
+  {
+    chinese: '老派風',
+    english: 'Old School',
+    image: '/home-element4.png',
+    link: 'Old School 老派風'
+  },
+  {
+    chinese: '幾何',
+    english: 'Geometric',
+    image: '/home-element5.png',
+    link: 'Geometric 幾何'
+  },
+  {
+    chinese: '寫實主義',
+    english: 'Realism',
+    image: '/home-element6.png',
+    link: 'Realism 寫實主義'
+  },
+  {
+    chinese: '單針',
+    english: 'Fine Line',
+    image: '/home-element7.png',
+    link: 'Fine Line 單針'
+  },
+  {
+    chinese: '極黑風格',
+    english: 'Blackwork',
+    image: '/home-element8.png',
+    link: 'Blackwork 極黑風格'
+  }
+]
+
+const toDesignPage = (style) => {
+  styleArr.value.splice(0, 1, style)
+  getDesigns(1)
+  navigateTo('/designs')
+}
+</script>
