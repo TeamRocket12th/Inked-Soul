@@ -197,8 +197,7 @@ export const useAccountStore = defineStore('account', () => {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
-        },
-        method: 'GET'
+        }
       })
       Object.assign(artistInfoData, data.value.Data)
       Object.keys(inputArtistInfoData).forEach((key) => {

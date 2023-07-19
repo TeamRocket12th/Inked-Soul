@@ -96,19 +96,24 @@
               <!-- 編輯鈕 -->
               <td class="cursor-pointer text-center">
                 <details class="dropdown-right dropdown">
-                  <summary class="btn border-none bg-white">
+                  <summary class="btn border-none bg-white hover:bg-white">
                     <Icon name="ic:baseline-more-vert" size="24" />
                   </summary>
                   <ul
-                    class="dropdown-content menu flex w-[180px] flex-row gap-5 rounded-lg bg-base-100 p-5 shadow"
+                    class="dropdown-content flex -translate-y-[25%] flex-row gap-5 rounded-lg bg-base-100 p-5 shadow"
                   >
                     <li>
-                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
+                      <a
+                        class="flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in-out hover:bg-black hover:text-white"
+                      >
                         <Icon name="ic:baseline-edit" size="24" />
                       </a>
                     </li>
                     <li>
-                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
+                      <a
+                        class="flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in-out hover:bg-black hover:text-white"
+                        @click="deleteDesign(item.Id)"
+                      >
                         <Icon name="ic:baseline-delete" size="24" />
                       </a>
                     </li>
@@ -124,8 +129,14 @@
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'
-import UploadTattooArea from '~/container/admin/UploadTattooArea.vue'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import UploadTattooArea from '~/container/admin/UploadTattooArea.vue'
+
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+
+const authToken = useCookie('token')
+
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
@@ -133,46 +144,14 @@ const { allImg } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
 
-// const productData = [
-//   {
-//     Image:
-//       'https://images.unsplash.com/photo-1597852075234-fd721ac361d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHRhdHRvb3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60',
-//     Name: '墨水中的靈魂',
-//     Size: {
-//       Height: '12',
-//       Width: '12'
-//     },
-//     Time: '4',
-//     Payment: {
-//       Deposit: '3000',
-//       Total: '7000'
-//     },
-//     isSoldout: '上架中' // '上架中','已售出'
-//   },
-//   {
-//     Image:
-//       'https://images.unsplash.com/photo-1597852075234-fd721ac361d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHRhdHRvb3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60',
-//     Name: '墨水中的靈魂',
-//     Size: {
-//       Height: '12',
-//       Width: '12'
-//     },
-//     Time: '4',
-//     Payment: {
-//       Deposit: '3000',
-//       Total: '7000'
-//     },
-//     isSoldout: '已售出' // '上架中','已售出'
-//   }
-// ]
-
-// const filterData = computed(() => {
-//   if (selectedStatus.value === '全部') {
-//     return productData
-//   } else {
-//     return productData.filter((item) => item.isSoldout === selectedStatus.value)
-//   }
-// })
+const deleteDesign = (imageId) => {
+  const { data } = useFetch(`${APIBASE}/api/deleteimage`, {
+    headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
+    query: {
+      imgid: imageId
+    }
+  })
+}
 
 onMounted(() => {
   artistGetTattooData('', 1)
