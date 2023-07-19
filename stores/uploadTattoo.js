@@ -19,6 +19,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const authToken = useCookie('token')
   const authCookie = useCookie('data')
   const artistID = authCookie.value.Id // 對應刺青師ID
+
   const allImg = ref()
   const allAlbum = ref()
   const formKey = {}
@@ -50,8 +51,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         },
         body: formData
       })
-      console.log(data)
-      artistGetTattooData()
+      artistGetTattooData('', 1)
     } catch (error) {
       console.log('上傳錯誤', error)
     }
@@ -59,9 +59,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
 
   // 刺青師後台取得認領圖
   const artistGetTattooData = (sold, page) => {
-    const bodyObject = {
-      page: page
-    }
+    const bodyObject = { page }
     if (sold !== '') {
       bodyObject.IsSoldout = sold
     }
@@ -93,7 +91,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         method: 'POST',
         query: {
           artistId: ID,
-          page: page
+          page
         }
       })
       console.log('取得刺青師所有作品集', data)
