@@ -108,6 +108,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   })
   const albumnKey = {}
   const albumData = new FormData()
+  const res = ref()
   const selectAlbum = () => {
     for (const key in uploadAlbumData.value) {
       albumnKey[key] = uploadAlbumData.value[key]
@@ -116,7 +117,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
   const uploadAlbum = () => {
     selectAlbum()
-
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/uploadalbum`, {
         method: 'POST',
@@ -125,7 +125,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         },
         body: albumData
       })
-      console.log('成功上傳作品集'.data)
+      console.log('成功上傳作品集', data)
+      res.value = data.value.Status
     })
   }
   return {
@@ -133,6 +134,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     allImg,
     allAlbum,
     uploadAlbumData,
+    res,
     uploadTattoo,
     artistGetTattooData,
     getAlbumn,

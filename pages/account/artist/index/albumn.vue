@@ -53,16 +53,30 @@
             placeholder="請填入創作想法、作品解說，30字內。"
             v-model="albumnIdea"
           ></textarea>
-          <button class="w-full rounded bg-black p-3 text-white" @click="uploadAlbum()">
+          <button
+            class="w-full rounded bg-black p-3 text-white"
+            @click="uploadAlbum(), showModal()"
+          >
             確認上架
           </button>
         </form>
-        <form method="dialog" class="modal-backdrop">
-          <button>close</button>
-        </form>
       </dialog>
     </div>
-    <!-- 上傳成功 -->
+    <!-- 上傳成功燈箱 -->
+    <dialog ref="successModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <Icon name="ic:baseline-check" size="60" class="mb-4" />
+        <p class="mb-10 font-bold">已成功上架您的作品集</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+      </div>
+    </dialog>
+    <!-- 上傳失敗燈箱 -->
+    <dialog ref="failedModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <p class="mb-10 font-bold">上架失敗，請重新上架</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+      </div>
+    </dialog>
     <!-- 表格 -->
     <table class="w-full">
       <thead>
@@ -100,7 +114,7 @@ import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 const store = useUploadTattooStore()
 const { getAlbumn, uploadAlbum } = store
-const { allAlbum, uploadAlbumData } = storeToRefs(store)
+const { allAlbum, uploadAlbumData, res } = storeToRefs(store)
 
 const { formattedOutput } = useFormatted()
 
@@ -126,8 +140,28 @@ const handleOnPreview = (event) => {
 
   uploadAlbumData.value.image = event.target.files[0]
 }
+
+// 上傳成功燈箱
+const successModal = ref(null)
+const failedModal = ref(null)
+let sucModal
+let faModal
+const showModal = () => {
+  if (res.value === 200) {
+    sucModal.showModal()
+  } else {
+    faModal.showModal()
+  }
+}
+const closeModal = () => {
+  sucModal.close()
+  faModal.close()
+}
+
 onMounted(() => {
   getAlbumn(artistID, 1)
+  sucModal = successModal.value
+  faModal = failedModal.value
 })
 </script>
 <style></style>
