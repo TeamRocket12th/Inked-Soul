@@ -6,6 +6,7 @@
     <div
       class="relative pb-20"
       :class="[{ 'pt-[160px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
+      @click.capture="handleClickOutside('click default')"
     >
       <span
         v-show="isLoading"
@@ -18,6 +19,9 @@
 </template>
 
 <script setup>
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { handleClickOutside } = store
 const route = useRoute()
 
 const nuxtApp = useNuxtApp()
