@@ -39,7 +39,10 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     }
   }
   // 上傳認領圖
+  const response = ref()
+  const show = ref(false)
   const uploadTattoo = async () => {
+    show.value = true
     selectImage()
     postImageLimit()
     try {
@@ -51,6 +54,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         body: formData
       })
       console.log(data)
+      response.value = data.value.Status
       artistGetTattooData()
     } catch (error) {
       console.log('上傳錯誤', error)
@@ -134,7 +138,9 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     allImg,
     allAlbum,
     uploadAlbumData,
+    response,
     res,
+    show,
     uploadTattoo,
     artistGetTattooData,
     getAlbumn,

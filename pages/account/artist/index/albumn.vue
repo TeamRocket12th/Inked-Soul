@@ -141,7 +141,7 @@ const handleOnPreview = (event) => {
   uploadAlbumData.value.image = event.target.files[0]
 }
 
-// 上傳成功燈箱
+// 上傳結果燈箱
 const successModal = ref(null)
 const failedModal = ref(null)
 let sucModal

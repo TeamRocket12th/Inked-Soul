@@ -57,6 +57,21 @@
         </form>
       </dialog>
     </div>
+    <!-- 上傳成功燈箱 -->
+    <dialog ref="successModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <Icon name="ic:baseline-check" size="60" class="mb-4" />
+        <p class="mb-10 font-bold">已成功上傳您的認領圖</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他認領圖</button>
+      </div>
+    </dialog>
+    <!-- 上傳失敗燈箱 -->
+    <dialog ref="failedModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <p class="mb-10 font-bold">上架失敗，請重新上架</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+      </div>
+    </dialog>
 
     <!-- 訂單列表 -->
     <div class="overflow-x-scroll rounded-lg">
@@ -140,7 +155,7 @@ const authToken = useCookie('token')
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
-const { allImg } = storeToRefs(store)
+const { allImg, response, show } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
 
@@ -153,8 +168,34 @@ const deleteDesign = (imageId) => {
   })
 }
 
+// 上傳結果燈箱
+
+const successModal = ref(null)
+const failedModal = ref(null)
+let sucModal
+let faModal
+
+const showModal = () => {
+  if (response.value === 200) {
+    sucModal.showModal()
+  } else {
+    faModal.showModal()
+  }
+}
+const closeModal = () => {
+  sucModal.close()
+  faModal.close()
+}
+watch(show, (nV) => {
+  if (show.value === true) {
+    showModal()
+  }
+})
+
 onMounted(() => {
   artistGetTattooData('', 1)
+  sucModal = successModal.value
+  faModal = failedModal.value
 })
 </script>
 <style scoped></style>
