@@ -6,6 +6,7 @@
     <div
       class="relative pb-20"
       :class="[{ 'pt-[160px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
+      @click.capture="handleClickOutside('click default')"
     >
       <span
         v-show="isLoading"
@@ -18,9 +19,9 @@
 </template>
 
 <script setup>
-import NavbarItem from '~/components/global/NavbarItem.vue'
-import FooterItem from '~/components/global/FooterItem.vue'
-
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { handleClickOutside } = store
 const route = useRoute()
 
 const nuxtApp = useNuxtApp()
