@@ -2,7 +2,7 @@
   <div>
     <search-result />
     <div class="grid w-full grid-cols-3 gap-8">
-      <NuxtLink v-for="item in allArtistsData" :key="item.id" :to="`/artists/${item.Id}`">
+      <NuxtLink v-for="item in allArtistsData" :key="item.Id" :to="`/artists/${item.Id}`">
         <ArtistCard :data="item"></ArtistCard>
       </NuxtLink>
     </div>
