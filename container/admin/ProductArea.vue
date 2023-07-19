@@ -155,7 +155,7 @@ const authToken = useCookie('token')
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
-const { allImg, response, show } = storeToRefs(store)
+const { allImg, response, showImage } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
 
@@ -176,18 +176,20 @@ let sucModal
 let faModal
 
 const showModal = () => {
-  if (response.value === 200) {
-    sucModal.showModal()
-  } else {
-    faModal.showModal()
-  }
+  watch(response, (nv) => {
+    if (response.value === 200) {
+      sucModal.showModal()
+    } else {
+      faModal.showModal()
+    }
+  })
 }
 const closeModal = () => {
   sucModal.close()
   faModal.close()
 }
-watch(show, (nV) => {
-  if (show.value === true) {
+watch(showImage, (nV) => {
+  if (showImage.value === true) {
     showModal()
   }
 })

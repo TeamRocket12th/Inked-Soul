@@ -40,22 +40,25 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
   // 上傳認領圖
   const response = ref()
-  const show = ref(false)
-  const uploadTattoo = async () => {
-    show.value = true
+  const showImage = ref(false)
+  const uploadTattoo = () => {
+    showImage.value = true
     selectImage()
     postImageLimit()
     try {
-      const { data } = await useFetch(`${APIBASE}/api/uploadimage`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${authToken.value}`
-        },
-        body: formData
+      nextTick(async () => {
+        const { data } = await useFetch(`${APIBASE}/api/uploadimage`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${authToken.value}`
+          },
+          body: formData
+        })
+        console.log('成功上傳認領圖', data)
+        response.value = data.value.Status
+        showImage.value = true
+        artistGetTattooData('', 1)
       })
-      console.log(data)
-      response.value = data.value.Status
-      artistGetTattooData()
     } catch (error) {
       console.log('上傳錯誤', error)
     }
@@ -105,14 +108,14 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
 
   // 上傳作品集
-  const show = ref(false)
+  const showAlbum = ref(false)
   const uploadAlbumData = ref({
     image: '',
     picdescription: ''
   })
   const albumnKey = {}
   const albumData = new FormData()
-  const res = ref()
+
   const selectAlbum = () => {
     for (const key in uploadAlbumData.value) {
       albumnKey[key] = uploadAlbumData.value[key]
@@ -129,12 +132,13 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         },
         body: albumData
       })
-      console.log('成功上傳作品集'.data)
+      console.log('成功上傳作品集', data)
     })
-    show.value = true
+    showAlbum.value = true
   }
 
   // 修改作品集(含置頂)
+  const res = ref()
   const editAlbum = (albumnID, artistID, des, isTop) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/editalbumlist`, {
@@ -148,6 +152,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
           IsTop: isTop
         }
       })
+      res.value = data.value.Status
       getAlbumn(artistID, 1)
     })
   }
@@ -159,7 +164,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     uploadAlbumData,
     response,
     res,
-    show,
+    showImage,
+    showAlbum,
     uploadTattoo,
     artistGetTattooData,
     getAlbumn,
