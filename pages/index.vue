@@ -12,7 +12,6 @@
 </template>
 
 <script setup>
-import SearchBar from '~/components/global/SearchBar.vue'
 import BannerItem from '~/components/home/BannerItem.vue'
 import IntroItem from '~/components/home/IntroItem.vue'
 import ArtistArea from '~/container/home/ArtistArea.vue'
