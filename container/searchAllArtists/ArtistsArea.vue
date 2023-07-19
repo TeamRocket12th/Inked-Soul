@@ -3,11 +3,7 @@
     <search-result />
     <div class="grid w-full grid-cols-3 gap-8">
       <NuxtLink v-for="item in allArtistsData" :key="item.id" :to="`/artists/${item.Id}`">
-        <ArtistCard
-          :image="item.Photo"
-          :nickname="item.Nickname"
-          :category="item.Style"
-        ></ArtistCard>
+        <ArtistCard :data="item"></ArtistCard>
       </NuxtLink>
     </div>
     <PaginationBtn />
