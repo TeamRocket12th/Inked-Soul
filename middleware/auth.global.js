@@ -1,9 +1,4 @@
-import { useAccountStore } from '~/stores/account'
-
 export default defineNuxtRouteMiddleware((to, _from) => {
-  const store = useAccountStore()
-  const { checkAuth } = store
-
   const router = useRouter()
 
   const authToken = useCookie('token')
@@ -11,7 +6,6 @@ export default defineNuxtRouteMiddleware((to, _from) => {
   const { Role } = authCookie.value ? authCookie.value : ''
 
   if (to.path.includes('normal' || 'artist')) {
-    checkAuth()
     if (!authToken.value) {
       router.replace('/account/login')
     }
@@ -19,7 +13,7 @@ export default defineNuxtRouteMiddleware((to, _from) => {
 
   const isLogin = () => {
     if (!authToken.value) {
-      return
+      return false
     } else {
       if (to.path.includes('/account/normal') && Role.toLowerCase() !== 'user') {
         router.replace('/account/login')
