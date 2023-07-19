@@ -1,14 +1,9 @@
 <template>
   <div class="container flex flex-col items-center gap-8">
     <h2 class="mb-10 text-center">本月精選刺青師</h2>
-    <div v-if="data" class="grid grid-cols-3 gap-[32px]">
-      <NuxtLink v-for="item in artistsData" :key="item.id" :to="`/artists/${item.id}`">
-        <ArtistCard
-          :image="item.photo"
-          :nickname="item.nickname"
-          :studioname="item.studioName"
-          :category="item.style"
-        ></ArtistCard>
+    <div v-if="artistsData" class="grid grid-cols-3 gap-[32px]">
+      <NuxtLink v-for="item in artistsData" :key="item.Id" :to="`/artists/${item.Id}`">
+        <ArtistCard :data="item"></ArtistCard>
       </NuxtLink>
     </div>
     <button type="button" class="btn-neutral btn" @click="toPage">更多刺青師</button>
@@ -23,9 +18,11 @@ const { getArtists } = store
 const { allArtistsData } = storeToRefs(store)
 const artistsData = ref([])
 
-for (let i = 0; i < 6; i++) {
-  artistsData.value.push(allArtistsData.value[i])
-}
+watch(allArtistsData, (nV) => {
+  for (let i = 0; i < 6; i++) {
+    artistsData.value.push(allArtistsData.value[i])
+  }
+})
 
 const toPage = () => {
   const router = useRouter()
