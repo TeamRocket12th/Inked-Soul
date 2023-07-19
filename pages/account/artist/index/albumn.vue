@@ -10,55 +10,7 @@
       </button>
       <dialog id="upload_album" class="modal">
         <form method="dialog" class="modal-box">
-          <div class="mb-8 grid grid-cols-3 items-center justify-center">
-            <button class="h-12 w-12 cursor-pointer">
-              <Icon
-                name="ic:outline-keyboard-arrow-left"
-                size="48"
-                class="rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-              />
-            </button>
-            <!-- @click="toPreviousPage" -->
-            <h4 class="text-center">上架作品集</h4>
-            <div></div>
-          </div>
-          <label
-            for="file"
-            :class="{ 'border-[#DC3545]': isFileSizeAlert }"
-            class="border-1 relative overflow-hidden rounded-lg border-black"
-          >
-            <div class="mb-4 flex h-full flex-col items-center justify-center gap-[20px]">
-              <Icon name="ic:baseline-add-circle-outline" class="h-[100px] w-[100px]" />
-              <p>上傳您的原創作品集</p>
-              <p>最大文件大小：4mb</p>
-            </div>
-            <img
-              :src="url"
-              alt=""
-              class="absolute top-0 h-full w-full object-contain"
-              :class="url ? 'bg-black' : ''"
-            />
-            <input
-              id="file"
-              type="file"
-              accept=".jpg, .png, .svg "
-              class="hidden"
-              @change.stop="handleOnPreview"
-            />
-          </label>
-          <label for="idea" class="mb-2 block">設計理念</label>
-          <textarea
-            id="idea"
-            class="textarea mb-4 block w-full"
-            placeholder="請填入創作想法、作品解說，30字內。"
-            v-model="albumnIdea"
-          ></textarea>
-          <button class="w-full rounded bg-black p-3 text-white" @click="uploadAlbum()">
-            確認上架
-          </button>
-        </form>
-        <form method="dialog" class="modal-backdrop">
-          <button>close</button>
+          <UploadAlbumArea />
         </form>
       </dialog>
     </div>
@@ -98,7 +50,27 @@
             ></div>
           </td>
           <td class="w-[30%]">{{ formattedOutput(new Date(item.InitTime)) }}</td>
-          <td class="flex w-[30%] flex-row-reverse"><Icon name="ic:round-more-vert" /></td>
+          <td class="flex w-[30%] flex-row-reverse">
+            <div class="dropdown">
+              <label tabindex="0" class="btn m-1"><Icon name="ic:round-more-vert" /></label>
+              <ul
+                tabindex="0"
+                class="dropdown-right dropdown-content menu rounded-box z-[1] flex w-20 bg-base-100 p-2 shadow"
+              >
+                <li>
+                  <div class="h-15 w-15 flex justify-center rounded-full">
+                    <Icon name="ic:baseline-edit" />
+                  </div>
+                </li>
+                <li>
+                  <div class="h-15 w-15 flex justify-center rounded-full">
+                    <Icon name="ic:baseline-delete-outline" />
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </td>
+          <!-- <Icon name="ic:round-more-vert" /> -->
         </tr>
       </tbody>
     </table>
@@ -107,6 +79,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import { UploadAlbumArea } from '~/container/admin/UploadAlbumArea.vue'
 const store = useUploadTattooStore()
 const { getAlbumn, uploadAlbum, editAlbum } = store
 const { allAlbum, uploadAlbumData } = storeToRefs(store)
