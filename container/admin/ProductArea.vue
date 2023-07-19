@@ -96,24 +96,19 @@
               <!-- 編輯鈕 -->
               <td class="cursor-pointer text-center">
                 <details class="dropdown-right dropdown">
-                  <summary class="btn border-none bg-white hover:bg-white">
+                  <summary class="btn border-none bg-white">
                     <Icon name="ic:baseline-more-vert" size="24" />
                   </summary>
                   <ul
-                    class="dropdown-content flex -translate-y-[25%] flex-row gap-5 rounded-lg bg-base-100 p-5 shadow"
+                    class="dropdown-content menu flex w-[180px] flex-row gap-5 rounded-lg bg-base-100 p-5 shadow"
                   >
                     <li>
-                      <a
-                        class="flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in-out hover:bg-black hover:text-white"
-                      >
+                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
                         <Icon name="ic:baseline-edit" size="24" />
                       </a>
                     </li>
                     <li>
-                      <a
-                        class="flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in-out hover:bg-black hover:text-white"
-                        @click="deleteDesign(item.Id)"
-                      >
+                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
                         <Icon name="ic:baseline-delete" size="24" />
                       </a>
                     </li>
@@ -129,29 +124,14 @@
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'
-import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import UploadTattooArea from '~/container/admin/UploadTattooArea.vue'
-
-const runtimeConfig = useRuntimeConfig()
-const APIBASE = runtimeConfig.public.APIBASE
-
-const authToken = useCookie('token')
-
+import { useUploadTattooStore } from '~/stores/uploadTattoo'
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
 const { allImg } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
-
-const deleteDesign = (imageId) => {
-  const { data } = useFetch(`${APIBASE}/api/deleteimage`, {
-    headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
-    query: {
-      imgid: imageId
-    }
-  })
-}
 
 onMounted(() => {
   artistGetTattooData('', 1)
