@@ -79,7 +79,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       if (data) {
         console.log('刺青師取得認領圖資料', data.value)
         allImg.value = data.value.Data
-        console.log('allImg', allImg)
       } else if (error) {
         console.log(error)
       }
@@ -87,12 +86,12 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
 
   // 刺青師後台取得作品集
-  const getAlbumn = (ID, page) => {
+  const getAlbumn = (artistID, page) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/getartistallalbum`, {
         method: 'POST',
         query: {
-          artistId: ID,
+          artistId: artistID,
           page: page
         }
       })
@@ -129,20 +128,23 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       console.log('成功上傳作品集'.data)
     })
     show.value = true
-    console.log(show.value)
   }
 
   // 修改作品集(含置頂)
-  const editAlbum = (albumnID, des, isTop) => {
+  const editAlbum = (albumnID, artistID, des, isTop) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/editalbumlist`, {
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`
+        },
         body: {
           AlbumsId: albumnID,
           Description: des,
           IsTop: isTop
         }
       })
+      getAlbumn(artistID, 1)
     })
   }
 

@@ -80,7 +80,16 @@
           class="flex items-center justify-between border-b-2 border-primary p-2"
         >
           <td class="w-[10%]">
-            <input type="checkbox" />
+            <Icon
+              v-if="item.IsTop === false"
+              name="ic:baseline-check-box-outline-blank"
+              @click="editAlbum(item.Id, artistID, item.Description, true)"
+            />
+            <Icon
+              v-if="item.IsTop === true"
+              name="ic:outline-push-pin"
+              @click="editAlbum(item.Id, artistID, item.Description, false)"
+            />
           </td>
           <td class="flex w-[30%] justify-center">
             <div
@@ -99,7 +108,7 @@
 import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 const store = useUploadTattooStore()
-const { getAlbumn, uploadAlbum } = store
+const { getAlbumn, uploadAlbum, editAlbum } = store
 const { allAlbum, uploadAlbumData } = storeToRefs(store)
 
 const { formattedOutput } = useFormatted()
@@ -126,6 +135,7 @@ const handleOnPreview = (event) => {
 
   uploadAlbumData.value.image = event.target.files[0]
 }
+
 onMounted(() => {
   getAlbumn(artistID, 1)
 })
