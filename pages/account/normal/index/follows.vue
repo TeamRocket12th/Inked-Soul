@@ -29,7 +29,7 @@
       </div>
       <div class="">
         <!-- 追蹤按鈕 -->
-        <Icon name="ic:baseline-bookmark" size="36" @click="unFollow()" />
+        <Icon name="ic:baseline-bookmark" size="36" @click="unFollow(item.ArtistId)" />
       </div>
     </div>
     <!-- <PaginationBtn/> -->

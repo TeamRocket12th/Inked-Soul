@@ -56,6 +56,7 @@ export const useFollowsStore = defineStore('follows', () => {
       console.log('unfollow', data.value)
       followStatus.value = false
       alert('已取消追蹤此刺青師')
+      getFollows(1)
     })
   }
 
