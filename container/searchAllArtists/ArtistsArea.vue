@@ -6,12 +6,13 @@
         <ArtistCard :data="item"></ArtistCard>
       </NuxtLink>
     </div>
-    <PaginationBtn :num="allNum" />
+    <div v-if="allNum">
+      <PaginationBtn :num="allNum" state="front" />
+    </div>
   </div>
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'
-
 import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
 const { allArtistsData, allNum } = storeToRefs(store)

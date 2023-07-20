@@ -1,5 +1,5 @@
 <template>
-  <div v-if="allOrderNum || allSearchNum" class="join flex w-full justify-center">
+  <div v-if="props.num" class="join flex w-full justify-center">
     <button
       v-for="(item, index) in numArr"
       :key="index"
@@ -49,9 +49,19 @@ const props = defineProps({
   num: {
     type: Number,
     required: true
+  },
+  state: {
+    type: String,
+    required: true
   }
 })
-const pageNum = Math.ceil(props.num / 10)
+
+let pageNum = 0
+if (props.state === 'front') {
+  pageNum = Math.ceil(props.num / 30)
+} else if (props.state === 'back') {
+  pageNum = Math.ceil(props.num / 10)
+}
 const numArr = []
 for (let i = 0; i < pageNum; i++) {
   numArr.push(i)
