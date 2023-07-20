@@ -13,7 +13,10 @@
 </template>
 <script setup>
 const props = defineProps({
-  time: { default: 0 },
+  time: {
+    type: Number,
+    default: 0
+  },
   image: {
     type: String,
     required: true

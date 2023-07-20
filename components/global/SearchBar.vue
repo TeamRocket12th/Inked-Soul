@@ -7,7 +7,7 @@
     >
       <label
         tabindex="0"
-        class="height-auto mb-5 flex h-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-3"
+        class="height-auto mb-5 flex h-full items-center gap-2 rounded-e-none rounded-s-lg border border-secondary bg-white p-3"
       >
         <Icon name="ic:outline-room" class="h-6 w-6" />
         <p v-if="cityArr.length === 0" class="text-[#D0D0D0]">選擇縣市</p>
@@ -101,32 +101,28 @@
     <div v-if="route.path !== '/artists'" class="dropdown h-full w-[40%]">
       <label
         tabindex="0"
-        class="mb-5 flex h-full items-center border border-secondary bg-white p-3"
+        class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-3"
       >
         <Icon name="ic:outline-tune" class="h-6 w-6" />
         <p v-if="styleArr.length === 0 && elementArr.length === 0" class="text-[#D0D0D0]">
           風格及元素
         </p>
-        <div v-if="styleArr.length !== 0" class="">
-          <span v-for="(item, index) in styleArr" :key="index" class="text-black"
-            >{{ item }}<span>&nbsp;</span></span
-          >
-        </div>
-        <div v-if="elementArr.length !== 0" class="">
-          <span v-for="(item, index) in elementArr" :key="index" class="text-black"
+        <div v-if="searchSelect.length !== 0" class="line-clamp-1 w-full">
+          <span v-for="(item, index) in searchSelect" :key="index" class="text-black"
             >{{ item }}<span>&nbsp;</span></span
           >
         </div>
       </label>
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -right-32 z-[1] flex w-[800px] flex-wrap bg-base-100 p-2 shadow"
+        class="dropdown-content menu rounded-box absolute -right-[50%] z-[1] flex w-[800px] flex-wrap bg-base-100 p-5 shadow"
       >
         <!-- 所有風格 -->
         <li>
-          <ul class="flex flex-wrap border-b-4 border-primary pb-4 before:w-0">
+          <ul class="ml-0 flex flex-wrap border-b-2 border-[#D0D0D0] pb-4 pl-0 before:w-0">
             <li>
               <button
+                class="px-3 py-1"
                 :class="
                   styleArr.length === 0
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -139,6 +135,7 @@
             </li>
             <li v-for="(style, index) in styles" :key="index">
               <button
+                class="px-3 py-1"
                 :class="
                   styleArr.includes(style)
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -153,9 +150,10 @@
         </li>
         <!-- 所有元素 -->
         <li>
-          <ul class="flex flex-wrap pt-4 before:w-0">
+          <ul class="ml-0 flex flex-wrap pl-0 pt-4 before:w-0">
             <li>
               <button
+                class="px-3 py-1"
                 :class="
                   elementArr.length === 0
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -168,6 +166,7 @@
             </li>
             <li v-for="(element, index) in elements" :key="index">
               <button
+                class="px-3 py-1"
                 :class="
                   elementArr.includes(element)
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -184,7 +183,7 @@
     </div>
     <button
       type="button"
-      class="btn-neutral btn h-fit h-full w-[20%] rounded-none rounded-r-lg border-0 bg-black p-3 text-base"
+      class="btn-neutral btn h-full w-[20%] rounded-none rounded-r-lg border-0 bg-black p-3 text-base text-white"
       @click="searchDesign()"
     >
       <slot></slot>
@@ -195,7 +194,8 @@
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
-const { cityArr, styleArr, elementArr, showResult } = storeToRefs(store)
+const { allDesignData, allArtistsData, cityArr, styleArr, elementArr, showResult } =
+  storeToRefs(store)
 const { getDesigns, getArtists } = store
 
 const taiwanCities = {
@@ -234,6 +234,9 @@ const elements = [
   '其他'
 ]
 
+// render 選擇的風格與元素
+const searchSelect = ref([])
+
 // 選擇城市
 const cityToggle = (input) => {
   const cityIndex = cityArr.value.indexOf(input)
@@ -247,31 +250,35 @@ const cityToggle = (input) => {
 // 選擇風格
 const styleToggle = (input) => {
   const styleIndex = styleArr.value.indexOf(input)
+  const selectIndex = searchSelect.value.indexOf(input)
   if (styleIndex === -1) {
     styleArr.value.push(input)
+    searchSelect.value.push(input)
   } else if (styleIndex !== -1) {
     styleArr.value.splice(styleIndex, 1)
+    searchSelect.value.splice(selectIndex, 1)
   }
-  console.log(styleArr.value)
 }
 // 選擇元素
 const elementToggle = (input) => {
   const elementIndex = elementArr.value.indexOf(input)
+  const selectIndex = searchSelect.value.indexOf(input)
   if (elementIndex === -1) {
     elementArr.value.push(input)
+    searchSelect.value.push(input)
   } else if (elementIndex !== -1) {
     elementArr.value.splice(elementIndex, 1)
+    searchSelect.value.splice(selectIndex, 1)
   }
-  console.log(elementArr.value)
 }
 // 清除選擇
 const clear = (input) => {
   if (input === 'style') {
     styleArr.value = []
-    console.log('clear style', styleArr.value)
+    // console.log('clear style', styleArr.value)
   } else if (input === 'element') {
     elementArr.value = []
-    console.log('clear elementArr', elementArr.value)
+    // console.log('clear elementArr', elementArr.value)
   } else if (input === 'city') {
     cityArr.value = []
   }
@@ -284,8 +291,10 @@ const searchDesign = () => {
   if (route.path === '/') {
     navigateTo('/designs')
   } else if (route.path === '/designs') {
+    allDesignData.value = []
     getDesigns(1)
   } else if (route.path === '/artists') {
+    allArtistsData.value = []
     getArtists(1)
   }
 }

@@ -55,8 +55,8 @@
           </div>
           <div class="relative">
             <VField
-              v-model="email"
               id="email"
+              v-model="email"
               rules="email"
               name="電子信箱"
               class="formInput text-gray-200"

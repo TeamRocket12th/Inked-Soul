@@ -6,7 +6,13 @@
         <ArtistCard :data="item"></ArtistCard>
       </NuxtLink>
     </div>
-    <button type="button" class="btn-neutral btn" @click="toPage">更多刺青師</button>
+    <button
+      type="button"
+      class="btn-neutral btn rounded-lg bg-black px-6 py-3 text-white"
+      @click="toPage"
+    >
+      更多刺青師
+    </button>
   </div>
 </template>
 
@@ -18,7 +24,7 @@ const { getArtists } = store
 const { allArtistsData } = storeToRefs(store)
 const artistsData = ref([])
 
-watch(allArtistsData, (nV) => {
+watch(allArtistsData, (_nV) => {
   for (let i = 0; i < 6; i++) {
     artistsData.value.push(allArtistsData.value[i])
   }
