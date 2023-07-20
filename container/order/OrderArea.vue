@@ -10,7 +10,7 @@
       <slot name="orderDetail"></slot>
     </div>
     <!-- 步驟 -->
-    <div class="">
+    <div class="w-full">
       <slot name="steps"></slot>
     </div>
   </div>
@@ -18,4 +18,4 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
