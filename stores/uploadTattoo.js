@@ -41,8 +41,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   // 上傳認領圖
   const response = ref()
   const showImage = ref(false)
+  const closeUpload = ref(false)
   const uploadTattoo = () => {
-    showImage.value = true
     selectImage()
     postImageLimit()
     try {
@@ -57,6 +57,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         console.log('成功上傳認領圖', data)
         response.value = data.value.Status
         showImage.value = true
+        closeUpload.value = true
         artistGetTattooData('', 1)
       })
     } catch (error) {
@@ -165,6 +166,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     allImg,
     allAlbum,
     uploadAlbumData,
+    closeUpload,
     response,
     res,
     showImage,

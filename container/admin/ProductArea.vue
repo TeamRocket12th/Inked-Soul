@@ -48,7 +48,7 @@
         上架認領圖
       </button>
       <!-- UploadTattooArea -->
-      <dialog id="upload_product" class="modal grid grid-cols-12">
+      <dialog id="upload_product" ref="uploadImage" class="modal grid grid-cols-12">
         <form method="dialog" class="modal-box col-span-8 col-start-3 max-w-none rounded-lg">
           <UploadTattooArea />
         </form>
@@ -155,7 +155,7 @@ const authToken = useCookie('token')
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
-const { allImg, response, showImage } = storeToRefs(store)
+const { allImg, response, showImage, closeUpload } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
 
@@ -167,6 +167,9 @@ const deleteDesign = (imageId) => {
     }
   })
 }
+// 關閉uploadTattooArea
+const uploadImage = ref(null)
+let uploadDesign
 
 // 上傳結果燈箱
 
@@ -176,13 +179,11 @@ let sucModal
 let faModal
 
 const showModal = () => {
-  watch(response, (nv) => {
-    if (response.value === 200) {
-      sucModal.showModal()
-    } else {
-      faModal.showModal()
-    }
-  })
+  if (response.value === 200) {
+    sucModal.showModal()
+  } else {
+    faModal.showModal()
+  }
 }
 const closeModal = () => {
   sucModal.close()
@@ -194,10 +195,17 @@ watch(showImage, (nV) => {
   }
 })
 
+watch(closeUpload, (nv) => {
+  if (closeUpload.value === true) {
+    uploadDesign.close()
+  }
+})
+
 onMounted(() => {
   artistGetTattooData('', 1)
   sucModal = successModal.value
   faModal = failedModal.value
+  uploadDesign = uploadImage.value
 })
 </script>
 <style scoped></style>
