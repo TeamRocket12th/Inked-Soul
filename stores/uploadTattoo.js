@@ -19,6 +19,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const authToken = useCookie('token')
   const authCookie = useCookie('data')
   const artistID = authCookie.value.Id // 對應刺青師ID
+
   const allImg = ref()
   const allAlbum = ref()
   const formKey = {}
@@ -67,9 +68,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
 
   // 刺青師後台取得認領圖
   const artistGetTattooData = (sold, page) => {
-    const bodyObject = {
-      page: page
-    }
+    const bodyObject = { page }
     if (sold !== '') {
       bodyObject.IsSoldout = sold
     }

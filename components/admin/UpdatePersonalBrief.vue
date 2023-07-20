@@ -35,7 +35,8 @@ const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
 
 const props = defineProps({
   errors: {
-    require: true
+    type: null,
+    required: true
   }
 })
 </script>
