@@ -5,7 +5,7 @@
     </div>
     <div
       class="relative pb-20"
-      :class="[{ 'pt-[160px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
+      :class="[{ 'pt-[140px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
       @click.capture="handleClickOutside('click default')"
     >
       <span

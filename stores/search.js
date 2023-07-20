@@ -14,6 +14,7 @@ export const useSearchStore = defineStore('search', () => {
   const allNum = ref()
 
   const isPending = ref(false)
+  const isNoResult = ref(false)
   // 重組字串
   const arrToString = () => {
     cityStr.value = cityArr.value.join()
@@ -25,7 +26,7 @@ export const useSearchStore = defineStore('search', () => {
       allDesignData.value.length === 0
     ) {
       allDesignData.value = []
-    } else if (allNum.value) {
+    } else if (!allNum.value) {
       allDesignData.value = []
     }
   }
@@ -51,10 +52,14 @@ export const useSearchStore = defineStore('search', () => {
         if (data.value.Data) {
           allDesignData.value = [...allDesignData.value, ...data.value.Data]
           allNum.value = allDesignData.value.length
-        } else if (!data.value.Data && !allNum.value) {
+        } else if (!data.value.Data && allNum.value) {
+          console.log('沒有值，但原本的還有')
           allNum.value = allDesignData.value.length
+          isNoResult.value = true
         } else {
+          console.log('從來沒有')
           allNum.value = 0
+          isNoResult.value = true
         }
         isPending.value = false
       })
@@ -108,6 +113,7 @@ export const useSearchStore = defineStore('search', () => {
     showResult,
     allNum,
     isPending,
+    isNoResult,
     arrToString,
     getDesigns,
     getArtists
