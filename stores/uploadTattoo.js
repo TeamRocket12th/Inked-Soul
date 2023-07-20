@@ -21,7 +21,9 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const artistID = authCookie.value.Id // 對應刺青師ID
 
   const allImg = ref()
+  const allImgNum = ref()
   const allAlbum = ref()
+  const allAlbumNum = ref()
   const formKey = {}
   // 打包成form data
   const formData = new FormData()
@@ -67,6 +69,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
 
   // 刺青師後台取得認領圖
+  const radio = ref()
   const artistGetTattooData = (sold, page) => {
     const bodyObject = { page }
     if (sold !== '') {
@@ -86,6 +89,15 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       if (data) {
         console.log('刺青師取得認領圖資料', data.value)
         allImg.value = data.value.Data
+        allImgNum.value = data.value.response.TotalNum
+
+        if (sold === '') {
+          radio.value = 1
+        } else if (sold === false) {
+          radio.value = 2
+        } else if (sold === true) {
+          radio.value = 3
+        }
       } else if (error) {
         console.log(error)
       }
@@ -104,6 +116,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       })
       console.log('取得刺青師所有作品集', data)
       allAlbum.value = data.value.Data
+      allAlbumNum.value = data.value.response.TotalNum
     })
   }
 
@@ -163,13 +176,16 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   return {
     uploadTattooData,
     allImg,
+    allImgNum,
     allAlbum,
+    allAlbumNum,
     uploadAlbumData,
     closeUpload,
     response,
     res,
     showImage,
     showAlbum,
+    radio,
     uploadTattoo,
     artistGetTattooData,
     getAlbumn,
