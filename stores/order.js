@@ -64,24 +64,25 @@ export const useOrderStore = defineStore('order', () => {
     }
   }
   // 取得全部訂單
-  const getAllOrder = (role, pageNum) => {
+  const getAllOrder = async (role, pageNum) => {
     try {
-      nextTick(async () => {
-        const { data } = await useFetch(`${APIBASE}/api/getimage/imgorder`, {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${authToken.value}`
-          },
-          body: JSON.stringify(`${role.toLowerCase()}`),
-          query: {
-            pageNumber: pageNum
-          }
-        })
-        // 賦值
+      const { data } = await useFetch(`${APIBASE}/api/getimage/imgorder`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${authToken.value}`
+        },
+        body: JSON.stringify(`${role.toLowerCase()}`),
+        query: {
+          pageNumber: pageNum
+        }
+      })
+      // 賦值
+      // if (data.value.TotalNum) {
+      if (data.value.Data) {
         AllOrderRecord.value = data.value.Data
         totalPage.value = Math.floor(data.value.TotalNum / 10) + 1
-      })
+      }
     } catch (error) {
       console.log('取得所有訂單失敗', error)
     }

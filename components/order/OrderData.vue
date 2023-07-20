@@ -64,6 +64,8 @@ const props = defineProps({
   }
 })
 
+const authCookie = useCookie('data')
+
 const { transformDate, transformOrderStatus } = useFormatted()
 
 const payDate = computed(() => {
@@ -84,13 +86,9 @@ const bookedTimeFrame = computed(() => {
 const orderStatus = computed(() => {
   if (props.order) {
     const status = props.order.OrderStatus
-    return transformOrderStatus(status)
+    const role = authCookie.value.Role
+
+    return transformOrderStatus(status, role)
   }
 })
-
-const starAmount = props.order.star
-const starArr = []
-for (let i = 0; i < starAmount; i++) {
-  starArr.push('ic:baseline-star')
-}
 </script>
