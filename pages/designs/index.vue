@@ -27,7 +27,7 @@
     </masonry-wall>
     <div ref="root" class="absolute bottom-[200px] py-20"></div>
     <!-- 無搜尋結果 -->
-    <div v-if="allNum === 0" class="text-center">
+    <div v-if="allNum === 0" class="mt-10 text-center">
       <Icon name="ic:round-find-replace" size="64" />
       <p>
         很抱歉，查無符合此搜尋條件的任何結果。<br />

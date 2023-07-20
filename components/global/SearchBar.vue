@@ -120,13 +120,14 @@
       </label>
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -right-32 z-[1] flex w-[800px] flex-wrap bg-base-100 p-2 shadow"
+        class="dropdown-content menu rounded-box absolute -right-[50%] z-[1] flex w-[800px] flex-wrap bg-base-100 p-5 shadow"
       >
         <!-- 所有風格 -->
         <li>
-          <ul class="flex flex-wrap border-b-4 border-primary pb-4 before:w-0">
+          <ul class="ml-0 flex flex-wrap border-b-2 border-[#D0D0D0] pb-4 pl-0 before:w-0">
             <li>
               <button
+                class="px-3 py-1"
                 :class="
                   styleArr.length === 0
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -139,6 +140,7 @@
             </li>
             <li v-for="(style, index) in styles" :key="index">
               <button
+                class="px-3 py-1"
                 :class="
                   styleArr.includes(style)
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -153,9 +155,10 @@
         </li>
         <!-- 所有元素 -->
         <li>
-          <ul class="flex flex-wrap pt-4 before:w-0">
+          <ul class="ml-0 flex flex-wrap pl-0 pt-4 before:w-0">
             <li>
               <button
+                class="px-3 py-1"
                 :class="
                   elementArr.length === 0
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -168,6 +171,7 @@
             </li>
             <li v-for="(element, index) in elements" :key="index">
               <button
+                class="px-3 py-1"
                 :class="
                   elementArr.includes(element)
                     ? 'styleBtn bg-black text-white focus:bg-black'
@@ -184,7 +188,7 @@
     </div>
     <button
       type="button"
-      class="btn-neutral btn h-fit h-full w-[20%] rounded-none rounded-r-lg border-0 bg-black p-3 text-base"
+      class="btn-neutral btn h-full w-[20%] rounded-none rounded-r-lg border-0 bg-black p-3 text-base text-white"
       @click="searchDesign()"
     >
       <slot></slot>

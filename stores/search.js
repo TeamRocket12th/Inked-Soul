@@ -25,10 +25,9 @@ export const useSearchStore = defineStore('search', () => {
       allDesignData.value.length === 0
     ) {
       allDesignData.value = []
+    } else if (allNum.value) {
+      allDesignData.value = []
     }
-    // else if (allNum.value) {
-    //   allDesignData.value = []
-    // }
   }
 
   // 取得認領圖
@@ -53,7 +52,7 @@ export const useSearchStore = defineStore('search', () => {
           allDesignData.value = [...allDesignData.value, ...data.value.Data]
           allNum.value = allDesignData.value.length
         } else if (!data.value.Data && !allNum.value) {
-          allNum.value = 0
+          allNum.value = allDesignData.value.length
         } else {
           allNum.value = 0
         }
