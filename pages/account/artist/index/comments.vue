@@ -5,41 +5,34 @@
         <CommentItem v-for="(data, key) in commentData" :key="key" :data="data" />
       </ul>
     </div>
-    <PageBtn
+    <!-- <PageBtn
       :current-page="emitNewPage"
       :total-page="totalPage"
       @update-current-page="getEmitPage"
-    />
+    /> -->
+    <div v-if="commentNum">
+      <PaginationBtn :num="commentNum" state="back" />
+    </div>
   </div>
 </template>
 <script setup>
-const runtimeConfig = useRuntimeConfig()
-const APIBASE = runtimeConfig.public.APIBASE
-const authCookie = useCookie('data')
+import { storeToRefs } from 'pinia'
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { getComment } = store
+const { commentNum, commentData } = storeToRefs(store)
 
-const artistId = authCookie.value.Id
+const cookie = useCookie('data')
+const artistID = cookie.value.Id
 
-const commentData = ref('')
 const emitNewPage = ref(1)
 const getEmitPage = (newPage) => {
   emitNewPage.value = newPage
 }
 
-const getComment = async () => {
-  const { data: res } = await useFetch(`${APIBASE}/api/getartistallcomment`, {
-    headers: { 'Content-type': 'application/json' },
-    method: 'POST',
-    query: {
-      artistId,
-      page: emitNewPage.value
-    }
-  })
-  commentData.value = res.value.Data
-}
-
 onMounted(() => {
   nextTick(() => {
-    getComment()
+    getComment(artistID, 1)
   })
 })
 </script>

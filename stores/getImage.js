@@ -5,6 +5,9 @@ export const useGetImageStore = defineStore('getImage', () => {
   const allData = ref()
   const allDesignData = ref([])
   const allAlbum = ref()
+  const commentData = ref()
+  const allAlbumNum = ref()
+  const allCommentNum = ref()
   const singleAlbum = ref()
   const artistName = ref()
 
@@ -39,6 +42,7 @@ export const useGetImageStore = defineStore('getImage', () => {
       })
       allAlbum.value = data.value.Data
       artistName.value = data.value.Data[0].ArtistNickname
+      allAlbumNum.value = data.value.response.TotalNum
     })
   }
 
@@ -58,15 +62,35 @@ export const useGetImageStore = defineStore('getImage', () => {
     })
   }
 
+  // 刺青師前台取得所有評價
+  const getComment = (artistId, num) => {
+    nextTick(async () => {
+      const { data } = await useFetch(`${APIBASE}/api/getartistallcomment`, {
+        method: 'POST',
+        query: {
+          artistId,
+          page: num
+        }
+      })
+      console.log('取得所有評價', data)
+      commentData.value = data.value.Data
+      allCommentNum.value = data.value.response.TotalNum
+    })
+  }
+
   return {
     allData,
     allAlbum,
     allDesignData,
+    allAlbumNum,
     singleAlbum,
+    allCommentNum,
+    commentData,
     artistName,
     isPending,
     userGetTattooData,
     userGetAlbum,
-    userGetSingleAlbum
+    userGetSingleAlbum,
+    getComment
   }
 })

@@ -35,11 +35,14 @@
       </div>
     </div>
     <!-- 分頁 -->
-    <PageBtn
+    <!-- <PageBtn
       :current-page="emitNewPage"
       :total-page="totalPage"
       @update-current-page="getEmitPage"
-    />
+    /> -->
+    <div v-if="allOrderNum">
+      <PaginationBtn :num="allOrderNum" state="back" />
+    </div>
   </div>
 </template>
 <script setup>
@@ -48,7 +51,7 @@ import { useOrderStore } from '~/stores/order'
 import OrderBar from '~/components/order/OrderBar.vue'
 const store = useOrderStore()
 const { getAllOrder } = store
-const { AllOrderRecord, totalPage } = storeToRefs(store)
+const { AllOrderRecord, totalPage, allOrderNum } = storeToRefs(store)
 
 onMounted(() => {
   nextTick(() => {
