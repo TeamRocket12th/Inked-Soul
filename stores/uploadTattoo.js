@@ -108,6 +108,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
 
   // 上傳作品集
+  const res = ref(0)
+
   const showAlbum = ref(false)
   const uploadAlbumData = ref({
     image: '',
@@ -122,7 +124,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       albumData.append(key, uploadAlbumData.value[key])
     }
   }
-  const uploadAlbum = () => {
+  const uploadAlbum = (artistID) => {
     selectAlbum()
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/uploadalbum`, {
@@ -133,12 +135,13 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         body: albumData
       })
       console.log('成功上傳作品集', data)
+      res.value = data.value.Status
+      showAlbum.value = true
+      getAlbumn(artistID, 1)
     })
-    showAlbum.value = true
   }
 
   // 修改作品集(含置頂)
-  const res = ref()
   const editAlbum = (albumnID, artistID, des, isTop) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/editalbumlist`, {
@@ -152,7 +155,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
           IsTop: isTop
         }
       })
-      res.value = data.value.Status
+      console.log('成功修改作品集', data)
       getAlbumn(artistID, 1)
     })
   }

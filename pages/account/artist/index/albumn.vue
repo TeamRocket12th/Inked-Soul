@@ -15,7 +15,7 @@
       </dialog>
     </div>
     <!-- 上傳成功燈箱 -->
-    <dialog ref="successModal" class="rounded-xl p-8">
+    <dialog ref="successAlbumModal" class="rounded-xl p-8">
       <div class="flex flex-col items-center">
         <Icon name="ic:baseline-check" size="60" class="mb-4" />
         <p class="mb-10 font-bold">已成功上架您的作品集</p>
@@ -23,7 +23,7 @@
       </div>
     </dialog>
     <!-- 上傳失敗燈箱 -->
-    <dialog ref="failedModal" class="rounded-xl p-8">
+    <dialog ref="failedAlbumModal" class="rounded-xl p-8">
       <div class="flex flex-col items-center">
         <p class="mb-10 font-bold">上架失敗，請重新上架</p>
         <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
@@ -93,57 +93,44 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
-import { UploadAlbumArea } from '~/container/admin/UploadAlbumArea.vue'
+import UploadAlbumArea from '~/container/admin/UploadAlbumArea'
+
 const store = useUploadTattooStore()
-const { getAlbumn, uploadAlbum, editAlbum } = store
-const { allAlbum, uploadAlbumData, res } = storeToRefs(store)
+const { getAlbumn, editAlbum } = store
+const { allAlbum, res, showAlbum } = storeToRefs(store)
 
 const { formattedOutput } = useFormatted()
 
 const token = useCookie('data')
 const artistID = token.value.Id
 
-const isFileSizeAlert = ref(false)
-
-const albumnIdea = ref()
-const initTime = ref()
-watch(albumnIdea, (nV) => {
-  uploadAlbumData.value.picdescription = albumnIdea.value
-})
-
-const url = ref()
-const handleOnPreview = (event) => {
-  const file = event.target.files[0]
-  if (file.size > 1024 * 1024 * 4) {
-    isFileSizeAlert.value = true
-    return
-  }
-  url.value = URL.createObjectURL(event.target.files[0])
-
-  uploadAlbumData.value.image = event.target.files[0]
-}
-
 // 上傳結果燈箱
-const successModal = ref(null)
-const failedModal = ref(null)
-let sucModal
-let faModal
-const showModal = () => {
+const successAlbumModal = ref(null)
+const failedAlbumModal = ref(null)
+let sucAlbumModal
+let faAlbumModal
+const showAlbumModal = () => {
   if (res.value === 200) {
-    sucModal.showModal()
+    sucAlbumModal.showModal()
   } else {
-    faModal.showModal()
+    faAlbumModal.showModal()
   }
 }
 const closeModal = () => {
-  sucModal.close()
-  faModal.close()
+  sucAlbumModal.close()
+  faAlbumModal.close()
 }
+
+watch(showAlbum, (nv, ov) => {
+  if (showAlbum.value === true) {
+    showAlbumModal()
+  }
+})
 
 onMounted(() => {
   getAlbumn(artistID, 1)
-  sucModal = successModal.value
-  faModal = failedModal.value
+  sucAlbumModal = successAlbumModal.value
+  faAlbumModal = failedAlbumModal.value
 })
 </script>
 <style></style>
