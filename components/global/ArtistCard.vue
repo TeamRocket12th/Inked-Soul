@@ -1,17 +1,19 @@
 <template>
-  <div class="group relative overflow-hidden rounded-lg">
+  <div
+    class="group relative flex h-[416px] w-full items-center justify-center overflow-hidden rounded-lg bg-white"
+  >
     <img
       v-if="props.data.Photo"
       :src="`${props.data.Photo}`"
       alt=""
-      class="w-[416px h-[416px] object-cover"
+      class="h-full w-full object-cover"
     />
     <div
       class="absolute bottom-0 left-0 right-0 hidden bg-black bg-opacity-50 p-4 text-white duration-300 group-hover:block"
     >
       <div class="flex flex-col items-center gap-3 hover:flex">
         <p v-if="props.data.Nickname">{{ props.data.Nickname }}</p>
-        <div class="flex flex-col items-center gap-3" v-if="typeof props.data.Style === 'string'">
+        <div v-if="typeof props.data.Style === 'string'" class="flex flex-col items-center gap-3">
           <span
             v-for="(item, index) in styleArr"
             :key="index"
