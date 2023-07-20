@@ -9,7 +9,11 @@
         </div>
         <div class="flex flex-col gap-3">
           <!-- 確認按鈕 -->
-          <PaymentBtn :deposit="designInfo.Deposit" />
+          <PaymentBtn
+            :design-id="designID"
+            :design-name="designInfo.Name"
+            :deposit="designInfo.Deposit"
+          />
           <p class="flex flex-row items-center gap-2 text-[#6C6C6C]">
             <Icon name="ic:outline-error-outline" size="24" />
             <span> 本平台僅收「訂金」，剩餘尾款請於預約當日與刺青師本人交易。 </span>

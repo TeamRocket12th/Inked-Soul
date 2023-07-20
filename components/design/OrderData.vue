@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-5">
     <h4>預約資料</h4>
-    <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
+    <VForm v-slot="{ errors }" class="flex flex-col gap-5">
       <div class="relative flex flex-col gap-2">
         <div class="flex flex-row items-center justify-between">
           <label for="realName" class="cursor-pointer">真實姓名</label>
@@ -129,7 +129,7 @@
                 <a
                   :class="{ 'pointer-events-none line-through': disabledTime.includes('2') }"
                   @click="selectTime(2)"
-                  >晚上（18:00～閉店時間））</a
+                  >晚上（18:00～閉店時間）</a
                 >
               </li>
             </ul>
@@ -139,17 +139,7 @@
     </VForm>
 
     <!-- ❌ -->
-    <div>
-      <p>input</p>
-      {{ inputPaymentInfo }}
-    </div>
-    <div>
-      <p>payment</p>
-      {{ paymentInfo }}
-      <p>已被預約時間</p>
-      {{ bookedDate }}
-    </div>
-    <button @click="postOrder">test</button>
+    <!-- <button @click="postOrder">test</button> -->
   </div>
 </template>
 <script setup>
@@ -158,10 +148,10 @@ import { useOrderStore } from '~/stores/order'
 
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
-const authToken = useCookie('token')
+// const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { inputPaymentInfo, paymentInfo, designData } = storeToRefs(store)
+const { inputPaymentInfo, paymentInfo } = storeToRefs(store)
 
 // Composable
 const { isPhone } = useValidate()
@@ -181,31 +171,37 @@ const { data: artistInfo } = await useFetch(`${APIBASE}/api/artistbooking`, {
   body: props.artistId
 })
 
-// 發送用戶下單資料
-const postOrder = async () => {
-  inputPaymentInfo.value.ImagesId = designData.value.ID
-  // ⭕️ 正確的，測試先關掉
-  // const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
-  // Object.assign(paymentInfo.value, inputPaymentInfo.value)
-  // paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
+// 發送用戶下單資料 (測試版本)
+// const paymentData = reactive({})
+// const postOrder = async () => {
+//   inputPaymentInfo.value.ImagesId = designData.value.ID
+//   // ⭕️ 正確的，測試先關掉
+//   const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
+//   Object.assign(paymentInfo.value, inputPaymentInfo.value)
+//   paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
 
-  if (!authToken.value) {
-    return ''
-  } else {
-    const { data: orderResponse } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
-      headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
-      method: 'POST',
-      body: {
-        BookedDate: inputPaymentInfo.value.BookedDate,
-        BookedTimeFrame: paymentInfo.value.BookedTimeFrame,
-        ImagesId: inputPaymentInfo.value.ImagesId
-      }
-    })
-    if (!orderResponse.value) {
-      console.log(orderResponse.value)
-    }
-  }
-}
+//   if (!authToken.value) {
+//     return ''
+//   } else {
+//     const { data: orderResponse } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
+//       headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
+//       method: 'POST',
+//       body: {
+//         itemDesc: '測試',
+//         itemDescid: paymentInfo.value.ImagesId,
+//         amt: 5000,
+//         Name: paymentInfo.value.Realname,
+//         Phone: paymentInfo.value.Phone,
+//         Email: paymentInfo.value.Realname,
+//         BookedDate: paymentInfo.value.BookedDate,
+//         BookedTimeFrame: paymentInfo.value.BookedTimeFrame
+//       }
+//     })
+//     if (!orderResponse.value) {
+//       console.log(orderResponse.value)
+//     }
+//   }
+// }
 
 const closeDays = ref(artistInfo.value.response.ClosedDays)
 const dayOff = ref(artistInfo.value.response.DayOff)
@@ -292,7 +288,7 @@ watch(selectDate, (newValue) => {
 
 // 判斷時段，還要加上可預約時段 （未完成）
 const isBookAvailable = () => {
-  bookedDate.map((item) => {
+  bookedDate.forEach((item) => {
     if (item[1].length >= 3) {
       disabledDates.value.push(item[0])
     } else if (item[0] === inputPaymentInfo.value.BookedDate) {

@@ -17,7 +17,7 @@
         <img
           :src="props.artistImg"
           alt=""
-          class="mr-2 h-[40px] w-[40px] rounded-lg object-cover object-center"
+          class="mr-2 h-[40px] w-[40px] rounded-lg bg-white object-cover object-center"
         />
         <p class="font-roboto-nl font-bold text-white">{{ props.artistName }}</p>
       </div>
