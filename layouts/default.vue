@@ -19,6 +19,9 @@
 </template>
 
 <script setup>
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { handleClickOutside } = store
 const route = useRoute()
 
 const nuxtApp = useNuxtApp()
