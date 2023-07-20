@@ -3,17 +3,17 @@
     <label class="relative flex flex-col items-start gap-1">
       <span class="mb-1">電子信箱</span>
       <VField
+        v-model="email"
         name="電子信箱"
         rules="required|email"
         class="accountInput"
-        v-model="email"
         placeholder="Email"
         :class="{ 'border-[#DC3545]': errors.電子信箱 }"
       />
       <Icon
+        v-if="errors.電子信箱"
         name="ic:baseline-error-outline"
         class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-        v-if="errors.電子信箱"
       />
       <div class="h-[14px]">
         <VErrorMessage name="電子信箱" class="whitespace-nowrap text-[#DC3545]" />
@@ -22,18 +22,18 @@
     <label class="relative flex flex-col items-start gap-1">
       <span class="mb-1">密碼</span>
       <VField
+        v-model="password"
         name="密碼"
         type="password"
         :rules="isPassword"
         class="accountInput"
-        v-model="password"
         placeholder="Password"
         :class="{ 'border-[#DC3545]': errors.密碼 }"
       />
       <Icon
+        v-if="errors.密碼"
         name="ic:baseline-error-outline"
         class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-        v-if="errors.密碼"
       />
       <div class="h-[14px]">
         <VErrorMessage name="密碼" class="whitespace-nowrap text-[#DC3545]" />

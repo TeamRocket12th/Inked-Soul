@@ -7,7 +7,7 @@
     >
       <label
         tabindex="0"
-        class="height-auto mb-5 flex h-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-3"
+        class="height-auto mb-5 flex h-full items-center gap-2 rounded-e-none rounded-s-lg border border-secondary bg-white p-3"
       >
         <Icon name="ic:outline-room" class="h-6 w-6" />
         <p v-if="cityArr.length === 0" class="text-[#D0D0D0]">選擇縣市</p>
@@ -101,18 +101,18 @@
     <div v-if="route.path !== '/artists'" class="dropdown h-full w-[40%]">
       <label
         tabindex="0"
-        class="mb-5 flex h-full items-center border border-secondary bg-white p-3"
+        class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-3"
       >
         <Icon name="ic:outline-tune" class="h-6 w-6" />
         <p v-if="styleArr.length === 0 && elementArr.length === 0" class="text-[#D0D0D0]">
           風格及元素
         </p>
-        <div v-if="styleArr.length !== 0" class="">
+        <div v-if="styleArr.length !== 0">
           <span v-for="(item, index) in styleArr" :key="index" class="text-black"
             >{{ item }}<span>&nbsp;</span></span
           >
         </div>
-        <div v-if="elementArr.length !== 0" class="">
+        <div v-if="elementArr.length !== 0">
           <span v-for="(item, index) in elementArr" :key="index" class="text-black"
             >{{ item }}<span>&nbsp;</span></span
           >

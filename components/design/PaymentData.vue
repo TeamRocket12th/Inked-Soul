@@ -1,8 +1,14 @@
 <template>
   <div class="pt-10">
     <h4 class="mb-5">付款方式</h4>
-    <div class="mb-20">
-      <select v-model="inputPaymentInfo.PayWay" class="formInput">
+    <div class="relative mb-20">
+      <Icon
+        name="ic:baseline-keyboard-arrow-down"
+        size="20"
+        class="absolute right-4 top-[50%] -translate-y-[50%]"
+      />
+
+      <select v-model="inputPaymentInfo.PayWay" class="formInput appearance-none">
         <option value="" selected disabled>請選擇</option>
         <option value="線上信用卡付款">線上信用卡付款</option>
       </select>
@@ -26,6 +32,7 @@ import { useOrderStore } from '~/stores/order'
 
 const props = defineProps({
   payment: {
+    type: null,
     required: true
   }
 })
