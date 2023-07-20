@@ -5,7 +5,7 @@
       <img :src="artistInfo.img" class="rounded-lg object-cover shadow" />
       <div class="flex flex-row items-center justify-between">
         <!-- 追蹤 -->
-        <div class="flex flex-row items-center">
+        <div v-if="show === true" class="flex flex-row items-center">
           <Icon
             :name="followStatus === false ? 'ic:baseline-bookmark-border' : 'ic:baseline-bookmark'"
             class="h-6 w-6 hover:cursor-pointer"
@@ -63,17 +63,19 @@
 import { storeToRefs } from 'pinia'
 import { useGetImageStore } from '~/stores/getImage'
 import { useFollowsStore } from '~/stores/follows'
+// 取得刺青師資料
 const store = useGetImageStore()
 const { userGetTattooData } = store
 const { allData } = storeToRefs(store)
-
+// 追蹤
 const followStore = useFollowsStore()
-const { checkFollow, follow, unFollow } = followStore
+const { follow, unFollow } = followStore
 const { followStatus } = storeToRefs(followStore)
 
+// 取得並渲染刺青師資料
 const artistInfo = ref({})
 const styleArr = ref()
-watch(allData, (nV) => {
+watch(allData, (nV, oV) => {
   artistInfo.value.name = allData.value[0].ArtistNickname
   artistInfo.value.img = allData.value[0].Photo
   artistInfo.value.followers = allData.value[0].Follower
@@ -88,22 +90,71 @@ watch(allData, (nV) => {
   return { artistInfo, styleArr }
 })
 
+// 刺青師ID
 const route = useRoute()
 const id = route.params.artistID
 
-// 追蹤
-const followFn = async () => {
+// 點擊追蹤ICON
+const followFn = () => {
   if (followStatus.value === false) {
-    await follow(id)
-    userGetTattooData(id, 1)
+    follow(id)
+    setTimeout(() => {
+      userGetTattooData(id, 1)
+    }, 2000)
+    followStatus.value = true
   } else if (followStatus.value === true) {
-    await unFollow(id)
-    userGetTattooData(id, 1)
+    unFollow(id)
+    setTimeout(() => {
+      userGetTattooData(id, 1)
+    }, 2000)
+    followStatus.value = false
+  }
+}
+// 檢查追蹤狀態
+const authToken = useCookie('token')
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+const checkFollow = (artistID) => {
+  nextTick(async () => {
+    const { data } = await useFetch(`${APIBASE}/api/tracktheartist`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${authToken.value}`
+      },
+      query: {
+        artistid: artistID
+      }
+    })
+    console.log('檢查追蹤狀態', data)
+    let msg = ''
+    if (data.value.Message) {
+      msg = data.value.Message
+    } else if (data.value.message) {
+      msg = data.value.message
+    }
+    if (msg === '使用者無追蹤此刺青師' || msg === '刺青師無追蹤此刺青師') {
+      followStatus.value = false
+    } else if (msg === '此使用者已追蹤此刺青師') {
+      followStatus.value = true
+    }
+  })
+}
+// 刺青師不能追蹤自己
+const token = useCookie('data')
+const role = token.value.Role
+const artistID = token.value.Id
+const show = ref(true)
+const prevent = () => {
+  if (role === 'artist' && artistID === id) {
+    show.value = false
   }
 }
 
 onMounted(() => {
   userGetTattooData(id, 1)
   // checkFollow(id)
+  checkFollow(id)
+  prevent()
 })
 </script>

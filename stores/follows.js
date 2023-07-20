@@ -2,28 +2,14 @@ export const useFollowsStore = defineStore('follows', () => {
   const runtimeConfig = useRuntimeConfig()
   const APIBASE = runtimeConfig.public.APIBASE
   const authToken = useCookie('token')
-  const followStatus = ref(false)
+
   const allNum = ref()
   const followingData = ref()
-  const checkFollow = (id) => {
-    nextTick(async () => {
-      const { data } = await useFetch(`${APIBASE}/api/`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${authToken.value}`
-        },
-        query: {
-          artistid: id
-        }
-      })
-      console.log('check follow', data.value)
-      if (data.value.message === '此使用者已追蹤此刺青師') {
-        followStatus.value = true
-      }
-    })
-  }
 
+  // 追蹤狀態
+  const followStatus = ref()
+
+  // 追蹤
   const follow = (id) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/trackartists`, {
@@ -36,11 +22,11 @@ export const useFollowsStore = defineStore('follows', () => {
           artistid: id
         }
       })
-      console.log('folloe', data.value)
-      followStatus.value = true
+      console.log('follow', data.value)
       alert('已追蹤此刺青師')
     })
   }
+  // 取消追蹤
   const unFollow = (id) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/canceltrackartists`, {
@@ -54,12 +40,11 @@ export const useFollowsStore = defineStore('follows', () => {
         }
       })
       console.log('unfollow', data.value)
-      followStatus.value = false
       alert('已取消追蹤此刺青師')
       getFollows(1)
     })
   }
-
+  // 用戶後台取得已追蹤列表
   const getFollows = (num) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/gettrackallartists`, {
@@ -79,5 +64,5 @@ export const useFollowsStore = defineStore('follows', () => {
       }
     })
   }
-  return { followingData, followStatus, checkFollow, follow, unFollow, getFollows }
+  return { followingData, followStatus, follow, unFollow, getFollows }
 })
