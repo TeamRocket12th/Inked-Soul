@@ -18,7 +18,7 @@ const { getArtists } = store
 const { allArtistsData } = storeToRefs(store)
 const artistsData = ref([])
 
-watch(allArtistsData, (nV) => {
+watch(allArtistsData, (_nV) => {
   for (let i = 0; i < 6; i++) {
     artistsData.value.push(allArtistsData.value[i])
   }
