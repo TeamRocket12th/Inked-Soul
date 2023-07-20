@@ -68,7 +68,12 @@
         <!-- 月曆 -->
         <div>
           <p class="mb-2">預約日期</p>
-          <div>
+          <div class="relative">
+            <Icon
+              name="ic:baseline-keyboard-arrow-down"
+              size="20"
+              class="absolute right-4 top-[50%] -translate-y-[50%]"
+            />
             <ClientOnly>
               <VDatePicker
                 v-model="selectDate"
@@ -94,18 +99,7 @@
             <!-- 📌 加 disabled 判斷  -->
             <label tabindex="0" class="formInput flex cursor-pointer items-center justify-between">
               {{ inputPaymentInfo.BookedTimeFrame || '請選擇' }}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M15.2 9.2C15.3926 9.05557 15.6308 8.98545 15.8709 9.00252C16.111 9.01958 16.3369 9.12268 16.5071 9.29289C16.6773 9.46311 16.7804 9.689 16.7975 9.92911C16.8145 10.1692 16.7444 10.4074 16.6 10.6L12.6 14.6C12.4131 14.7832 12.1618 14.8859 11.9 14.8859C11.6382 14.8859 11.3869 14.7832 11.2 14.6L7.2 10.6C7.05557 10.4074 6.98545 10.1692 7.00252 9.92911C7.01958 9.689 7.12268 9.46311 7.29289 9.29289C7.46311 9.12268 7.689 9.01958 7.92911 9.00252C8.16922 8.98545 8.40743 9.05557 8.6 9.2L11.9 12.49L15.2 9.19V9.2Z"
-                  fill="#6C6C6C"
-                />
-              </svg>
+              <Icon name="ic:baseline-keyboard-arrow-down" size="20" />
             </label>
             <ul
               tabindex="0"

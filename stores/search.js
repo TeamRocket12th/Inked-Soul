@@ -12,17 +12,28 @@ export const useSearchStore = defineStore('search', () => {
   const elementStr = ref()
   const showResult = ref(false)
   const allNum = ref()
+
+  const isPending = ref(false)
   // 重組字串
   const arrToString = () => {
     cityStr.value = cityArr.value.join()
     styleStr.value = styleArr.value.join()
     elementStr.value = elementArr.value.join()
+
+    if (
+      (!cityStr.value || !styleStr.value || !elementStr.value) &&
+      allDesignData.value.length === 0
+    ) {
+      allDesignData.value = []
+    } else if (allNum.value) {
+      allDesignData.value = []
+    }
   }
 
   // 取得認領圖
   const getDesigns = (num) => {
     arrToString()
-
+    isPending.value = true
     try {
       nextTick(async () => {
         const { data } = await useFetch(`${APIBASE}/api/artistcity`, {
@@ -38,15 +49,14 @@ export const useSearchStore = defineStore('search', () => {
         })
         showResult.value = true
         if (data.value.Data) {
-          allDesignData.value = data.value.Data
+          allDesignData.value = [...allDesignData.value, ...data.value.Data]
           allNum.value = allDesignData.value.length
-          console.log('allNum y', allNum)
+        } else if (!data.value.Data && !allNum.value) {
+          allNum.value = allDesignData.value.length
         } else {
-          allDesignData.value = []
           allNum.value = 0
-          console.log('allNum = 0', allNum)
-          // alert('認領圖中無相對刺青師在此縣市')
         }
+        isPending.value = false
       })
     } catch (error) {
       console.log('取得認領圖資料失敗', error)
@@ -97,6 +107,7 @@ export const useSearchStore = defineStore('search', () => {
     elementStr,
     showResult,
     allNum,
+    isPending,
     arrToString,
     getDesigns,
     getArtists
