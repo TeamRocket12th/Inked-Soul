@@ -64,8 +64,8 @@ const initIntersectionObserver = () => {
   }
 }
 
-watch(page, (newValue) => {
-  getDesigns(newValue)
+watch(page, (nextPage) => {
+  getDesigns(nextPage)
 })
 
 onMounted(() => {
