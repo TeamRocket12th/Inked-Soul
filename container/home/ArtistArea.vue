@@ -6,7 +6,13 @@
         <ArtistCard :data="item"></ArtistCard>
       </NuxtLink>
     </div>
-    <button type="button" class="btn-neutral btn" @click="toPage">更多刺青師</button>
+    <button
+      type="button"
+      class="btn-neutral btn rounded-lg bg-black px-6 py-3 text-white"
+      @click="toPage"
+    >
+      更多刺青師
+    </button>
   </div>
 </template>
 
