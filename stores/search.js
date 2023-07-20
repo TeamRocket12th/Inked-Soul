@@ -69,7 +69,7 @@ export const useSearchStore = defineStore('search', () => {
           }
         })
         showResult.value = true
-
+        console.log('成功取得所有刺青師', data)
         if (data.value.Data !== null) {
           allArtistsData.value = data.value.Data
           allNum.value = data.value.response.TotalNum

@@ -1,7 +1,7 @@
 <template>
   <div v-if="allOrderNum || allSearchNum" class="join flex w-full justify-center">
     <button
-      v-for="(item, index) in pageNumArr"
+      v-for="(item, index) in numArr"
       :key="index"
       class="join-item btn focus:bg-black focus:text-white"
       :class="item === 0 ? 'bg-black text-white' : ''"
@@ -19,13 +19,12 @@ import { useOrderStore } from '~/stores/order'
 import { useSearchStore } from '~/stores/search'
 const orderStore = useOrderStore()
 const { getAllOrder } = orderStore
-const { allNum: allOrderNum } = storeToRefs(orderStore)
 const searchStore = useSearchStore()
 const { getArtists, getDesigns } = searchStore
-const { allNum: allSearchNum } = storeToRefs(searchStore)
+// const { allNum: allSearchNum } = storeToRefs(searchStore)
 
-const pageNum = ref()
-const pageNumArr = ref([])
+// const pageNum = ref()
+// const pageNumArr = ref([])
 
 // watch(allOrderNum, (nV) => {
 //   pageNum.value = Math.ceil(allOrderNum.value / 10)
@@ -44,6 +43,19 @@ const pageNumArr = ref([])
 
 //   return pageNumArr
 // })
+
+// 計算總數
+const props = defineProps({
+  num: {
+    type: Number,
+    required: true
+  }
+})
+const pageNum = Math.ceil(props.num / 10)
+const numArr = []
+for (let i = 0; i < pageNum; i++) {
+  numArr.push(i)
+}
 
 // 發API
 const cookie = useCookie('data')
