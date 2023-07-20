@@ -40,18 +40,27 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     }
   }
   // 上傳認領圖
-  const uploadTattoo = async () => {
+  const response = ref()
+  const showImage = ref(false)
+  const closeUpload = ref(false)
+  const uploadTattoo = () => {
     selectImage()
     postImageLimit()
     try {
-      const { data } = await useFetch(`${APIBASE}/api/uploadimage`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${authToken.value}`
-        },
-        body: formData
+      nextTick(async () => {
+        const { data } = await useFetch(`${APIBASE}/api/uploadimage`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${authToken.value}`
+          },
+          body: formData
+        })
+        console.log('成功上傳認領圖', data)
+        response.value = data.value.Status
+        showImage.value = true
+        closeUpload.value = true
+        artistGetTattooData('', 1)
       })
-      artistGetTattooData('', 1)
     } catch (error) {
       console.log('上傳錯誤', error)
     }
@@ -77,7 +86,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       if (data) {
         console.log('刺青師取得認領圖資料', data.value)
         allImg.value = data.value.Data
-        console.log('allImg', allImg)
       } else if (error) {
         console.log(error)
       }
@@ -85,13 +93,13 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
 
   // 刺青師後台取得作品集
-  const getAlbumn = (ID, page) => {
+  const getAlbumn = (artistID, page) => {
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/getartistallalbum`, {
         method: 'POST',
         query: {
-          artistId: ID,
-          page
+          artistId: artistID,
+          page: page
         }
       })
       console.log('取得刺青師所有作品集', data)
@@ -100,21 +108,24 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
 
   // 上傳作品集
+  const res = ref(0)
+
+  const showAlbum = ref(false)
   const uploadAlbumData = ref({
     image: '',
     picdescription: ''
   })
   const albumnKey = {}
   const albumData = new FormData()
+
   const selectAlbum = () => {
     for (const key in uploadAlbumData.value) {
       albumnKey[key] = uploadAlbumData.value[key]
       albumData.append(key, uploadAlbumData.value[key])
     }
   }
-  const uploadAlbum = () => {
+  const uploadAlbum = (artistID) => {
     selectAlbum()
-
     nextTick(async () => {
       const { data } = await useFetch(`${APIBASE}/api/uploadalbum`, {
         method: 'POST',
@@ -123,17 +134,46 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         },
         body: albumData
       })
-      console.log('成功上傳作品集'.data)
+      console.log('成功上傳作品集', data)
+      res.value = data.value.Status
+      showAlbum.value = true
+      getAlbumn(artistID, 1)
     })
   }
+
+  // 修改作品集(含置頂)
+  const editAlbum = (albumnID, artistID, des, isTop) => {
+    nextTick(async () => {
+      const { data } = await useFetch(`${APIBASE}/api/editalbumlist`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`
+        },
+        body: {
+          AlbumsId: albumnID,
+          Description: des,
+          IsTop: isTop
+        }
+      })
+      console.log('成功修改作品集', data)
+      getAlbumn(artistID, 1)
+    })
+  }
+
   return {
     uploadTattooData,
     allImg,
     allAlbum,
     uploadAlbumData,
+    closeUpload,
+    response,
+    res,
+    showImage,
+    showAlbum,
     uploadTattoo,
     artistGetTattooData,
     getAlbumn,
-    uploadAlbum
+    uploadAlbum,
+    editAlbum
   }
 })

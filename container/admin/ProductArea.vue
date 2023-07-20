@@ -48,7 +48,7 @@
         上架認領圖
       </button>
       <!-- UploadTattooArea -->
-      <dialog id="upload_product" class="modal grid grid-cols-12">
+      <dialog id="upload_product" ref="uploadImage" class="modal grid grid-cols-12">
         <form method="dialog" class="modal-box col-span-8 col-start-3 max-w-none rounded-lg">
           <UploadTattooArea />
         </form>
@@ -57,6 +57,21 @@
         </form>
       </dialog>
     </div>
+    <!-- 上傳成功燈箱 -->
+    <dialog ref="successModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <Icon name="ic:baseline-check" size="60" class="mb-4" />
+        <p class="mb-10 font-bold">已成功上傳您的認領圖</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他認領圖</button>
+      </div>
+    </dialog>
+    <!-- 上傳失敗燈箱 -->
+    <dialog ref="failedModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <p class="mb-10 font-bold">上架失敗，請重新上架</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+      </div>
+    </dialog>
 
     <!-- 訂單列表 -->
     <div class="overflow-x-scroll rounded-lg">
@@ -129,12 +144,60 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
-const { allImg } = storeToRefs(store)
+const { allImg, response, showImage, closeUpload } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
 
+const deleteDesign = (imageId) => {
+  const { data } = useFetch(`${APIBASE}/api/deleteimage`, {
+    headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
+    query: {
+      imgid: imageId
+    }
+  })
+}
+// 關閉uploadTattooArea
+const uploadImage = ref(null)
+let uploadDesign
+
+// 上傳結果燈箱
+
+const successModal = ref(null)
+const failedModal = ref(null)
+let sucModal
+let faModal
+
+const showModal = () => {
+  if (response.value === 200) {
+    sucModal.showModal()
+    showImage.value = false
+  } else {
+    faModal.showModal()
+    showImage.value = false
+  }
+}
+const closeModal = () => {
+  sucModal.close()
+  faModal.close()
+}
+watch(showImage, (nV) => {
+  if (showImage.value === true) {
+    showModal()
+  }
+})
+
+watch(closeUpload, (nv) => {
+  if (closeUpload.value === true) {
+    uploadDesign.close()
+    closeUpload.value = false
+  }
+})
+
 onMounted(() => {
   artistGetTattooData('', 1)
+  sucModal = successModal.value
+  faModal = failedModal.value
+  uploadDesign = uploadImage.value
 })
 </script>
 <style scoped></style>
