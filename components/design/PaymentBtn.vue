@@ -89,7 +89,7 @@ const postOrder = async () => {
       body: {
         itemDesc: props.designName,
         itemDescid: paymentInfo.value.ImagesId,
-        amt: 5000,
+        amt: props.deposit,
         Name: paymentInfo.value.Realname,
         Phone: paymentInfo.value.Phone,
         Email: paymentInfo.value.Email,
