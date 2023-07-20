@@ -99,7 +99,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         method: 'POST',
         query: {
           artistId: artistID,
-          page: page
+          page
         }
       })
       console.log('取得刺青師所有作品集', data)

@@ -110,7 +110,7 @@
               <td>{{ item.IsSoldout }}</td>
               <!-- 編輯鈕 -->
               <td class="cursor-pointer text-center">
-                <details class="dropdown-right dropdown">
+                <!-- <details class="dropdown-right dropdown">
                   <summary class="btn border-none bg-white">
                     <Icon name="ic:baseline-more-vert" size="24" />
                   </summary>
@@ -122,13 +122,16 @@
                         <Icon name="ic:baseline-edit" size="24" />
                       </a>
                     </li>
-                    <li>
-                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
-                        <Icon name="ic:baseline-delete" size="24" />
-                      </a>
-                    </li>
-                  </ul>
-                </details>
+                <li> -->
+                <a
+                  class="mx-auto flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in hover:bg-black hover:text-white"
+                  @click="deleteDesign(item.Id)"
+                >
+                  <Icon name="ic:baseline-delete" size="24" />
+                </a>
+                <!-- </li>
+                </ul>
+                </details> -->
               </td>
             </tr>
           </tbody>
@@ -141,6 +144,11 @@
 import { storeToRefs } from 'pinia'
 import UploadTattooArea from '~/container/admin/UploadTattooArea.vue'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
+
+const runtimeConfig = useRuntimeConfig()
+const APIBASE = runtimeConfig.public.APIBASE
+const authToken = useCookie('token')
+
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
@@ -155,6 +163,7 @@ const deleteDesign = (imageId) => {
       imgid: imageId
     }
   })
+  artistGetTattooData('', 1)
 }
 // 關閉uploadTattooArea
 const uploadImage = ref(null)
