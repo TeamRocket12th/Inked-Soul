@@ -2,10 +2,9 @@ export const useOrderStore = defineStore('order', () => {
   const runtimeConfig = useRuntimeConfig()
   const APIBASE = runtimeConfig.public.APIBASE
   const authToken = useCookie('token')
-
+  const authCookie = useCookie('data')
   const id = ref()
   const orderID = ref()
-  const artistID = ref()
   const isComment = ref(false)
   const designData = ref({
     ID: '',
@@ -24,6 +23,7 @@ export const useOrderStore = defineStore('order', () => {
   })
   const AllOrderRecord = ref()
   const totalPage = ref()
+  const allOrderNum = ref()
 
   const paymentInfo = reactive({
     Realname: '',
@@ -81,10 +81,30 @@ export const useOrderStore = defineStore('order', () => {
         // 賦值
         AllOrderRecord.value = data.value.Data
         totalPage.value = Math.floor(data.value.TotalNum / 10) + 1
+        allOrderNum.value = data.value.TotalNum
       })
     } catch (error) {
       console.log('取得所有訂單失敗', error)
     }
+  }
+
+  // 取得評價
+  const commentData = ref()
+  const commentNum = ref()
+  const getComment = async (artistID, num) => {
+    const { data } = await useFetch(`${APIBASE}/api/getartistallcomment`, {
+      headers: { 'Content-type': 'application/json' },
+      method: 'POST',
+      query: {
+        artistId: artistID,
+        page: num
+      }
+    })
+    console.log('成功取得評價資料', data)
+    commentData.value = data.value.Data
+    commentNum.value = data.value.response.TotalNum
+    console.log('commentData', commentData)
+    console.log('commentNum', commentNum.value)
   }
 
   // 評價區hide/show
@@ -101,7 +121,6 @@ export const useOrderStore = defineStore('order', () => {
   return {
     id,
     orderID,
-    artistID,
     isComment,
     designData,
     inputPaymentInfo,
@@ -109,10 +128,14 @@ export const useOrderStore = defineStore('order', () => {
     totalPage,
     paymentInfo,
     stretch,
+    allOrderNum,
+    commentNum,
+    commentData,
     getOrder,
     getStatus,
     getAllOrder,
     stretchToggle,
-    handleClickOutside
+    handleClickOutside,
+    getComment
   }
 })

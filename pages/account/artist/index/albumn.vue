@@ -88,6 +88,9 @@
         </tr>
       </tbody>
     </table>
+    <div v-if="allAlbumNum">
+      <PaginationBtn :num="allAlbumNum" state="front" />
+    </div>
   </div>
 </template>
 <script setup>
@@ -97,7 +100,7 @@ import UploadAlbumArea from '~/container/admin/UploadAlbumArea'
 
 const store = useUploadTattooStore()
 const { getAlbumn, editAlbum } = store
-const { allAlbum, res, showAlbum } = storeToRefs(store)
+const { allAlbum, res, showAlbum, allAlbumNum } = storeToRefs(store)
 
 const { formattedOutput } = useFormatted()
 

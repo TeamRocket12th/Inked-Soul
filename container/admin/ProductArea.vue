@@ -134,6 +134,9 @@
           </tbody>
         </table>
       </div>
+      <div v-if="allImgNum">
+        <PaginationBtn :num="allImgNum" state="back" />
+      </div>
     </div>
   </div>
 </template>
@@ -144,7 +147,7 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 const { formattedOutput } = useFormatted()
 const store = useUploadTattooStore()
 const { artistGetTattooData } = store
-const { allImg, response, showImage, closeUpload } = storeToRefs(store)
+const { allImg, response, showImage, closeUpload, allImgNum } = storeToRefs(store)
 
 const selectedStatus = ref('全部')
 
