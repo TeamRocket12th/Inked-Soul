@@ -16,6 +16,11 @@
               <th>訂單狀態</th>
             </tr>
           </thead>
+          <tbody v-if="!AllOrderRecord">
+            <tr class="h-[108px] border-b border-[#D0D0D0] text-center">
+              <td colspan="10">您尚無任何訂單</td>
+            </tr>
+          </tbody>
           <tbody>
             <OrderBar
               v-for="item in AllOrderRecord"
@@ -46,7 +51,9 @@ const { getAllOrder } = store
 const { AllOrderRecord, totalPage } = storeToRefs(store)
 
 onMounted(() => {
-  getAllOrder('artist', emitNewPage)
+  nextTick(() => {
+    getAllOrder('artist', emitNewPage)
+  })
 })
 
 const emitNewPage = ref(1)

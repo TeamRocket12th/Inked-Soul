@@ -91,6 +91,11 @@
               <th></th>
             </tr>
           </thead>
+          <tbody v-if="!allImg">
+            <tr class="h-[108px] border-b border-[#D0D0D0] text-center">
+              <td colspan="10">您尚無任何訂單</td>
+            </tr>
+          </tbody>
           <tbody v-for="(item, key) in allImg" :key="key">
             <tr class="h-[108px] border-b border-[#D0D0D0]">
               <td><input type="checkbox" /></td>
@@ -189,13 +194,13 @@ const closeModal = () => {
   sucModal.close()
   faModal.close()
 }
-watch(showImage, (nV) => {
+watch(showImage, (_newValue) => {
   if (showImage.value === true) {
     showModal()
   }
 })
 
-watch(closeUpload, (nv) => {
+watch(closeUpload, (_newValue) => {
   if (closeUpload.value === true) {
     uploadDesign.close()
     closeUpload.value = false

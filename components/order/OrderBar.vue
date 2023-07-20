@@ -42,6 +42,9 @@ const props = defineProps({
     required: true
   }
 })
+
+const authCookie = useCookie('data')
+
 const { formattedOutput, transformOrderStatus } = useFormatted()
 const payDate = ref()
 const bookedDate = ref()
@@ -50,7 +53,9 @@ const newBookedDate = ref()
 const orderStatus = computed(() => {
   if (props.order) {
     const status = props.order.OrderStatus
-    return transformOrderStatus(status)
+    const role = authCookie.value.Role
+
+    return transformOrderStatus(status, role)
   }
 })
 const bookedTimeFrame = computed(() => {
