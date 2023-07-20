@@ -14,35 +14,15 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 import { useSearchStore } from '~/stores/search'
+import { useGetImageStore } from '~/stores/getImage'
 const orderStore = useOrderStore()
 const { getAllOrder } = orderStore
 const searchStore = useSearchStore()
-const { getArtists, getDesigns } = searchStore
-// const { allNum: allSearchNum } = storeToRefs(searchStore)
-
-// const pageNum = ref()
-// const pageNumArr = ref([])
-
-// watch(allOrderNum, (nV) => {
-//   pageNum.value = Math.ceil(allOrderNum.value / 10)
-//   for (let i = 0; i < pageNum.value; i++) {
-//     pageNumArr.value.push(i)
-//   }
-
-//   return pageNumArr
-// })
-
-// watch(allSearchNum, (nV) => {
-//   pageNum.value = Math.ceil(allSearchNum.value / 10)
-//   for (let i = 0; i < pageNum.value; i++) {
-//     pageNumArr.value.push(i)
-//   }
-
-//   return pageNumArr
-// })
+const { getArtists } = searchStore
+const imageStore = useGetImageStore()
+const { userGetAlbum, getComment } = imageStore
 
 // 計算總數
 const props = defineProps({
@@ -58,10 +38,19 @@ const props = defineProps({
 
 let pageNum = 0
 if (props.state === 'front') {
-  pageNum = Math.ceil(props.num / 30)
+  if (props.num % 30 !== 0) {
+    pageNum = Math.ceil(props.num / 30)
+  } else if (props.num % 30 === 0) {
+    pageNum = props.num / 30
+  }
 } else if (props.state === 'back') {
-  pageNum = Math.ceil(props.num / 10)
+  if (props.num % 10 !== 0) {
+    pageNum = Math.ceil(props.num / 10)
+  } else if (props.num % 10 === 0) {
+    pageNum = props.num / 10
+  }
 }
+
 const numArr = []
 for (let i = 0; i < pageNum; i++) {
   numArr.push(i)
@@ -71,11 +60,19 @@ for (let i = 0; i < pageNum; i++) {
 const cookie = useCookie('data')
 const route = useRoute()
 const path = route.path
+const artistID = route.params.artistID
+
+console.log('route', route)
+
 const sendRqst = (num) => {
   if (path === '/designs') {
     getDesigns(num)
   } else if (path === '/artists') {
     getArtists(num)
+  } else if (path === `/artists/${artistID}/albumn`) {
+    userGetAlbum(artistID, num)
+  } else if (path === `/artists/${artistID}/comments`) {
+    getComment(artistID, num)
   } else if (cookie) {
     const role = cookie.value.Role
     getAllOrder(role, num)
