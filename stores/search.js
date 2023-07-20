@@ -53,11 +53,9 @@ export const useSearchStore = defineStore('search', () => {
           allDesignData.value = [...allDesignData.value, ...data.value.Data]
           allNum.value = allDesignData.value.length
         } else if (!data.value.Data && allNum.value) {
-          console.log('沒有值，但原本的還有')
           allNum.value = allDesignData.value.length
           isNoResult.value = true
         } else {
-          console.log('從來沒有')
           allNum.value = 0
           isNoResult.value = true
         }
