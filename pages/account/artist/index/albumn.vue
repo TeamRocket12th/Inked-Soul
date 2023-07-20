@@ -112,8 +112,10 @@ let faAlbumModal
 const showAlbumModal = () => {
   if (res.value === 200) {
     sucAlbumModal.showModal()
+    showAlbum.value = false
   } else {
     faAlbumModal.showModal()
+    showAlbum.value = false
   }
 }
 const closeModal = () => {

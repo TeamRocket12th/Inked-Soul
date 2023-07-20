@@ -181,8 +181,10 @@ let faModal
 const showModal = () => {
   if (response.value === 200) {
     sucModal.showModal()
+    showImage.value = false
   } else {
     faModal.showModal()
+    showImage.value = false
   }
 }
 const closeModal = () => {
@@ -198,6 +200,7 @@ watch(showImage, (nV) => {
 watch(closeUpload, (nv) => {
   if (closeUpload.value === true) {
     uploadDesign.close()
+    closeUpload.value = false
   }
 })
 
