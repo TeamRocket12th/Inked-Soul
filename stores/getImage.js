@@ -23,8 +23,12 @@ export const useGetImageStore = defineStore('getImage', () => {
           page
         }
       })
-      allData.value = data.value.Data
-      allDesignData.value = [...allDesignData.value, ...data.value.Data]
+      if (page === 1 && data.value.Data) {
+        allData.value = data.value.Data
+        allDesignData.value = data.value.Data
+      } else if (data.value.Data) {
+        allDesignData.value = [...allDesignData.value, ...data.value.Data]
+      }
 
       isPending.value = false
     })

@@ -1,7 +1,7 @@
 <template>
   <div class="grid h-screen grid-cols-2">
     <div class="relative">
-      <img src="/account-left.jpeg" alt="" class="h-screen object-cover" />
+      <img src="/account-left.jpg" alt="" class="h-screen object-cover" />
       <NuxtLink to="/" class="absolute left-0 right-0 top-[50%] -translate-y-[50%] text-center"
         ><div class="flex items-center justify-center gap-3">
           <h1>Logo</h1>

@@ -9,7 +9,7 @@
   >
     <NuxtLink to="/">
       <div class="flex items-center justify-center gap-3">
-        <img src="" alt="" class="" />
+        <img :src="logoImage" alt="" class="h-6 w-6" />
         <h2 class="font-heading-typo">Inked Soul</h2>
       </div>
     </NuxtLink>
@@ -183,6 +183,13 @@ const Nickname = computed(() => {
     authCookie.value.Nickname ||
     'xxx'
   )
+})
+const logoImage = computed(() => {
+  if (scrollY.value < 250 && route.path === '/') {
+    return '/logo-white.png'
+  } else {
+    return '/logo.png'
+  }
 })
 
 const logout = () => {
