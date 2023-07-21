@@ -134,6 +134,10 @@ const confirmOrder = async (status) => {
   getOrderInfo()
 }
 
+setInterval(() => {
+  getOrderInfo()
+}, 10000)
+
 onMounted(() => {
   nextTick(() => {
     getOrderInfo()
