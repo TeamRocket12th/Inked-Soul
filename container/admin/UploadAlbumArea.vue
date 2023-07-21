@@ -15,24 +15,30 @@
     <label
       for="file"
       :class="{ 'border-[#DC3545]': isFileSizeAlert }"
-      class="border-1 relative overflow-hidden rounded-lg border-black"
+      class="relative overflow-hidden rounded-lg"
     >
-      <div class="mb-4 flex h-full flex-col items-center justify-center gap-[20px]">
-        <Icon name="ic:baseline-add-circle-outline" class="h-[100px] w-[100px]" />
+      <div
+        class="mb-5 flex h-full flex-col items-center justify-center rounded-lg border border-[#D0D0D0] py-[116px]"
+      >
+        <Icon
+          name="ic:baseline-plus"
+          class="mb-10 h-[64px] w-[64px] rounded-full border-2 text-secondary"
+        />
         <p>上傳您的原創作品集</p>
         <p>最大文件大小：4mb</p>
       </div>
       <img
+        v-if="url"
         :src="url"
         alt=""
-        class="absolute top-0 h-full w-full object-contain"
-        :class="url ? 'bg-black' : ''"
+        class="absolute top-0 h-full w-full rounded-lg border border-[#D0D0D0] bg-white object-contain"
       />
       <input
         id="file"
         type="file"
         accept=".jpg, .png, .svg "
         class="hidden"
+        placeholder="請填入創作想法、作品解說，30字內。"
         @change.stop="handleOnPreview"
       />
     </label>
@@ -40,7 +46,7 @@
     <textarea
       id="idea"
       v-model="albumnIdea"
-      class="textarea mb-4 block w-full"
+      class="textarea mb-10 block w-full rounded-lg outline outline-[#D0D0D0]"
       placeholder="請填入創作想法、作品解說，30字內。"
     ></textarea>
     <button class="w-full rounded bg-black p-3 text-white" @click="uploadAlbum(artistID)">
@@ -60,7 +66,7 @@ const artistID = token.value.Id
 const isFileSizeAlert = ref(false)
 
 const albumnIdea = ref()
-watch(albumnIdea, (nV) => {
+watch(albumnIdea, (_newValue) => {
   uploadAlbumData.value.picdescription = albumnIdea.value
 })
 

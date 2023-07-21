@@ -14,7 +14,7 @@
               name="訂金"
               rules="required"
               class="formInput"
-              placeholder="2100"
+              placeholder="3,000"
               disabled
             />
             <Icon
@@ -36,7 +36,7 @@
               name="尾款"
               rules="required"
               class="formInput"
-              placeholder="4100"
+              placeholder="7,000"
               disabled
             />
             <Icon
@@ -59,7 +59,7 @@
               name="總金額"
               rules="required|numeric"
               class="formInput"
-              :placeholder="`${totalPrice} `"
+              placeholder="10,000"
               :class="{ 'border-[#DC3545]': props.errors.總金額 }"
             />
             <Icon
@@ -91,14 +91,15 @@ const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
 
 const designIdea = ref()
-const totalPrice = ref(7000)
+const totalPrice = ref()
 const deposit = ref()
 const balance = ref()
 
 watch(totalPrice, (newTotalPrice) => {
-  deposit.value = Math.floor(newTotalPrice * 0.3)
-  balance.value = Math.floor(newTotalPrice - deposit.value)
-  uploadTattooData.value.pictotal = totalPrice.value
+  deposit.value = Math.floor(newTotalPrice * 0.3).toLocaleString()
+  const numericDeposit = Number(deposit.value.replace(/,/g, ''))
+  balance.value = Math.floor(newTotalPrice - numericDeposit).toLocaleString()
+  uploadTattooData.value.pictotal = totalPrice.value.toLocaleString()
   uploadTattooData.value.picdeposit = deposit.value.toString()
   uploadTattooData.value.picbalance = balance.value.toString()
 })

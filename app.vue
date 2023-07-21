@@ -19,3 +19,9 @@ configure({
 
 setLocale('zh_TW')
 </script>
+
+<style>
+.vc-disabled {
+  text-decoration: line-through;
+}
+</style>
