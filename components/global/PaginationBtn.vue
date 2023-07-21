@@ -19,6 +19,7 @@ import { useOrderStore } from '~/stores/order'
 import { useSearchStore } from '~/stores/search'
 import { useGetImageStore } from '~/stores/getImage'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import { useFollowsStore } from '~/stores/follows'
 
 // 所有認領圖頁
 const searchStore = useSearchStore()
@@ -33,6 +34,9 @@ const { radio } = storeToRefs(tattooStore)
 // 刺青師後台所有訂單+評價
 const orderStore = useOrderStore()
 const { getAllOrder, getComment: artistGetComment } = orderStore
+// 用戶前台取得追蹤列表
+const followStore = useFollowsStore()
+const { getFollows } = followStore
 
 // 計算總數
 const props = defineProps({
@@ -121,6 +125,9 @@ const sendRqst = (num) => {
   } else if (role === 'artist' && path === '/account/artist/comments') {
     // 刺青師後台取得所有評價
     artistGetComment(artistIDback, num)
+  } else if (role === 'user' && path === '/account/normal/follows') {
+    // 用戶後台取得追蹤列表
+    getFollows(num)
   }
 }
 

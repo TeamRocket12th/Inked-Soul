@@ -39,8 +39,9 @@
         />
       </div>
     </div>
-
-    <!-- <PaginationBtn/> -->
+    <div v-if="allNum">
+      <PaginationBtn :num="allNum" state="back" />
+    </div>
   </div>
 </template>
 
@@ -49,7 +50,7 @@ import { storeToRefs } from 'pinia'
 import { useFollowsStore } from '~/stores/follows'
 const store = useFollowsStore()
 const { getFollows, unFollow } = store
-const { followingData } = storeToRefs(store)
+const { followingData, allNum } = storeToRefs(store)
 
 // 跳轉前往刺青師個人頁
 const router = useRouter()
