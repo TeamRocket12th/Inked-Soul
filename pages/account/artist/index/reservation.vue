@@ -1,15 +1,16 @@
 <template>
   <div class="grid grid-cols-7 items-end gap-10">
-    <div class="col-span-3">
-      <VDatePicker
-        v-model="date"
-        :attributes="haveOrder"
-        :disabled-dates="disabledDates"
-        title-position="left"
-        color="gray"
-        expanded
-      />
-    </div>
+    <!-- <div class="col-span-3"> -->
+    <VDatePicker
+      v-model="date"
+      :attributes="haveOrder"
+      :disabled-dates="disabledDates"
+      title-position="left"
+      color="gray"
+      class="col-span-3 py-8"
+      expanded
+    />
+    <!-- </div> -->
     <div class="col-span-4">
       <p class="mb-10 text-xl font-bold">{{ selectDate }} 的預約</p>
       <div class="overflow-x-auto">
@@ -157,7 +158,7 @@ const haveOrder = computed(() => [
 
 // 先取得沒開的時間
 const getSchedule = async () => {
-  const { data: scheduleResponse, error } = await useFetch(`${APIBASE}/api/artistbooking`, {
+  const { data: scheduleResponse } = await useFetch(`${APIBASE}/api/artistbooking`, {
     headers: {
       'Content-type': 'application/json',
       Authorization: `Bearer ${authToken.value}`
@@ -178,7 +179,7 @@ watch(
   async () => {
     selectDate.value = formattedOutput(date.value)
 
-    const { data: dateResponse, error } = await useFetch(`${APIBASE}/api/orderday`, {
+    const { data: dateResponse } = await useFetch(`${APIBASE}/api/orderday`, {
       headers: {
         'Content-type': 'application/json',
         Authorization: `Bearer ${authToken.value}`

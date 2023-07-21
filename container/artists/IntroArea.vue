@@ -22,7 +22,7 @@
               ><Icon name="ic:outline-share" size="24"
             /></label>
             <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
-              <ShareModal />
+              <ShareModal :current-page="`/artists`" />
             </ul>
           </div>
         </div>
@@ -75,7 +75,7 @@ const { followStatus } = storeToRefs(followStore)
 // 取得並渲染刺青師資料
 const artistInfo = ref({})
 const styleArr = ref()
-watch(allData, (nV, oV) => {
+watch(allData, (_newValue, _oldValue) => {
   artistInfo.value.name = allData.value[0].ArtistNickname
   artistInfo.value.img = allData.value[0].Photo
   artistInfo.value.followers = allData.value[0].Follower

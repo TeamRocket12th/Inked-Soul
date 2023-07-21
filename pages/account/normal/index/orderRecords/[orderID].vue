@@ -60,7 +60,7 @@ const titleInfo = reactive({
 })
 
 const getOrderInfo = async () => {
-  const { data: orderResponse, error } = await useFetch(`${APIBASE}/api/orderinfo/${imageId}`, {
+  const { data: orderResponse } = await useFetch(`${APIBASE}/api/orderinfo/${imageId}`, {
     headers: {
       'Content-type': 'application/json',
       Authorization: `Bearer ${authToken.value}`
@@ -98,6 +98,10 @@ const orderContext = {
     content: ''
   }
 }
+
+setInterval(() => {
+  getOrderInfo()
+}, 10000)
 
 onMounted(() => {
   nextTick(() => {

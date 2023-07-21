@@ -2,7 +2,9 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Inked Soul'
+      title: 'Inked Soul',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+      charset: 'utf-8'
     }
   },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt', 'nuxt-swiper'],

@@ -131,7 +131,7 @@ const closeModal = () => {
   faAlbumModal.close()
 }
 
-watch(showAlbum, (nv, ov) => {
+watch(showAlbum, (_newValue, _oldValue) => {
   if (showAlbum.value === true) {
     showAlbumModal()
   }

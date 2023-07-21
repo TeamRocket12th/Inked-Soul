@@ -35,8 +35,6 @@
 import IntroArea from '~/container/artists/IntroArea'
 const route = useRoute()
 const id = route.params.artistID
-// const { data } = await useFetch(`/api/getArtists/${id}`)
-// console.log(data.value)
 
 const currentPage = computed(() => {
   return route.path
