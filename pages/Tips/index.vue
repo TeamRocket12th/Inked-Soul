@@ -35,7 +35,7 @@ const tipsData = ref(null)
 tipsData.value = [
   {
     Id: 1,
-    Image: '',
+    Image: '/tips/1.jpg',
     Title: '紋身的藝術表達 ｜ 探索紋身如何傳達身份故事',
     Date: '2023-03-25',
     Content:
@@ -43,7 +43,7 @@ tipsData.value = [
   },
   {
     Id: 2,
-    Image: '',
+    Image: '/tips/2.jpg',
     Title: '刺青歷史脈絡 ｜ 深入探索刺青意義',
     Date: '2023-03-25',
     Content:
@@ -51,7 +51,7 @@ tipsData.value = [
   },
   {
     Id: 3,
-    Image: '',
+    Image: '/tips/3.jpg',
     Title: '不同刺青風格解析',
     Date: '2023-03-25',
     Content:
@@ -59,7 +59,7 @@ tipsData.value = [
   },
   {
     Id: 4,
-    Image: '',
+    Image: '/tips/4.jpg',
     Title: '刺青設計指南',
     Date: '2023-03-25',
     Content:
@@ -67,14 +67,14 @@ tipsData.value = [
   },
   {
     Id: 5,
-    Image: '',
+    Image: '/tips/5.jpg',
     Title: '紋身的藝術表達 ｜ 探索紋身如何傳達身份故事',
     Date: '2023-03-25',
     Content: '刺青風格介紹：探索黑灰派、日式傳統和水彩等刺青風格的特點。'
   },
   {
     Id: 6,
-    Image: '',
+    Image: '/tips/6.jpg',
     Title: '刺青護理秘訣 ｜ 保持刺青的鮮艷和健康',
     Date: '2023-03-25',
     Content:
@@ -82,7 +82,7 @@ tipsData.value = [
   },
   {
     Id: 7,
-    Image: '',
+    Image: '/tips/7.jpg',
     Title: '紋身的藝術表達 ｜ 探索紋身如何傳達身份故事',
     Date: '2023-03-25',
     Content:
@@ -90,7 +90,7 @@ tipsData.value = [
   },
   {
     Id: 8,
-    Image: '',
+    Image: '/tips/8.jpg',
     Title: '刺青後的約束與注意事項',
     Date: '2023-03-25',
     Content:
@@ -98,7 +98,7 @@ tipsData.value = [
   },
   {
     Id: 9,
-    Image: '刺青師選擇要素',
+    Image: '/tips/9.jpg',
     Title: '紋身的藝術表達 ｜ 探索紋身如何傳達身份故事',
     Date: '2023-03-25',
     Content: '每位刺青師可能會給出特定的護理建議。請遵從他們的指示，並向他們尋求任何疑問或問題。'

@@ -18,7 +18,12 @@
 
     <div class="flex flex-row items-center justify-between py-[60px]">
       <div class="logo">
-        <NuxtLink to="/" class="text-4xl">Inked Soul</NuxtLink>
+        <NuxtLink to="/" class="text-4xl">
+          <div class="flex items-center justify-center gap-3">
+            <img src="/logo-white.png" alt="" class="h-6 w-6" />
+            <h2 class="font-heading-typo">Inked Soul</h2>
+          </div>
+        </NuxtLink>
       </div>
       <NuxtLink>使用者條款</NuxtLink>
     </div>
