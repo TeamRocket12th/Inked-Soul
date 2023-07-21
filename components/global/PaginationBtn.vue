@@ -10,6 +10,24 @@
       {{ item + 1 }}
     </button>
   </div>
+  <!-- <Swiper
+    v-if="newNumArr"
+    class="relative mt-4 !w-[150px]"
+    :modules="[SwiperNavigation]"
+    :slides-per-view="3"
+  >
+    <SwiperSlide v-for="(item, index) in newNumArr.value" :key="index">
+      <button
+        class="my-2 my-2 rounded px-[10px] py-[2.5px] hover:cursor-pointer hover:bg-primary hover:text-black"
+        :class="item + 1 === click ? 'bg-black text-white' : ''"
+        @click="sendRqst(item + 1)"
+      >
+        {{ item + 1 }}
+      </button>
+    </SwiperSlide>
+    <SwiperNavigation /> 
+    <SwiperControls />
+  </Swiper> -->
 </template>
 
 <script setup>
@@ -135,6 +153,16 @@ const sendRqst = (num) => {
     getAllOrder(role, num)
   }
 }
+
+// 輪播樣式
+// const swiper = new Swiper('.swiper', {
+//   // Navigation arrows
+//   navigation: {
+//     nextEl: '.swiper-button-next',
+//     prevEl: '.swiper-button-prev'
+//   }
+// })
+// const swiper = useSwiper()
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -5,7 +5,7 @@ export default defineNuxtConfig({
       title: 'Inked Soul'
     }
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt', 'nuxt-swiper'],
   css: ['~/assets/css/tailwind.css'],
   typescript: {
     // typeCheck: true
