@@ -142,9 +142,9 @@
           </tbody>
         </table>
       </div>
-      <div v-if="allImgNum">
-        <PaginationBtn :num="allImgNum" state="back" />
-      </div>
+    </div>
+    <div v-if="allImgNum">
+      <PaginationBtn :num="allImgNum" state="back" />
     </div>
   </div>
 </template>

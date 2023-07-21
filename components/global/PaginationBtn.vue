@@ -1,15 +1,14 @@
 <template>
-  <div v-if="newNumArr" class="join flex w-full justify-center">
+  <div v-if="newNumArr" class="mt-4 flex w-full justify-center">
     <button
       v-for="(item, index) in newNumArr.value"
       :key="index"
-      class="join-item btn focus:bg-black focus:text-white"
-      :class="item === 0 ? 'bg-black text-white' : ''"
+      class="my-2 my-2 rounded px-[10px] py-[2.5px] hover:cursor-pointer hover:bg-primary hover:text-black"
+      :class="item + 1 === click ? 'bg-black text-white' : ''"
       @click="sendRqst(item + 1)"
     >
       {{ item + 1 }}
     </button>
-    <!-- 預設"1"反黑 :class="item === 0 ? 'btn-active' : ''" -->
   </div>
 </template>
 
@@ -39,6 +38,9 @@ const { getAllOrder, getComment: artistGetComment } = orderStore
 const followStore = useFollowsStore()
 const { getFollows } = followStore
 
+// 點選樣式
+const click = ref(1)
+
 // 計算總數
 const props = defineProps({
   num: {
@@ -53,6 +55,7 @@ const props = defineProps({
 
 // 計算頁數
 const { num } = toRefs(props)
+
 const pageNum = ref()
 const newPageNum = computed(() => {
   if (props.state === 'front') {
@@ -99,6 +102,7 @@ const artistID = route.params.artistID
 const artistIDback = cookie.value.Id
 
 const sendRqst = (num) => {
+  click.value = num
   if (path === '/artists') {
     // 所有認領圖頁
     getArtists(num)
@@ -130,12 +134,6 @@ const sendRqst = (num) => {
     // 刺青師或用戶後台取得所有訂單
     getAllOrder(role, num)
   }
-}
-
-// 按鈕選擇樣式
-const click = ref(true)
-const clickFn = () => {
-  console.log('click')
 }
 </script>
 
