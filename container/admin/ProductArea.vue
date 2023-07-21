@@ -136,7 +136,7 @@
                 </a>
                 <!-- </li>
                 </ul>
-                </details> -->
+                </details > -->
               </td>
             </tr>
           </tbody>
@@ -173,12 +173,12 @@ const deleteDesign = (imageId) => {
   })
   artistGetTattooData('', 1)
 }
+
 // 關閉uploadTattooArea
 const uploadImage = ref(null)
 let uploadDesign
 
 // 上傳結果燈箱
-
 const successModal = ref(null)
 const failedModal = ref(null)
 let sucModal

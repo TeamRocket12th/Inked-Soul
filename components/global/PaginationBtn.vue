@@ -1,15 +1,15 @@
 <template>
-  <div v-if="props.num" class="join flex w-full justify-center">
+  <div v-if="newNumArr" class="join flex w-full justify-center">
     <button
-      v-for="(item, index) in numArr"
+      v-for="(item, index) in newNumArr.value"
       :key="index"
       class="join-item btn focus:bg-black focus:text-white"
       :class="item === 0 ? 'bg-black text-white' : ''"
       @click="sendRqst(item + 1)"
     >
       {{ item + 1 }}
-      <!-- 預設"1"反黑 :class="item === 0 ? 'btn-active' : ''" -->
     </button>
+    <!-- 預設"1"反黑 :class="item === 0 ? 'btn-active' : ''" -->
   </div>
 </template>
 
@@ -47,25 +47,43 @@ const props = defineProps({
 })
 
 // 計算頁數
-let pageNum = 0
-if (props.state === 'front') {
-  if (props.num % 30 !== 0) {
-    pageNum = Math.ceil(props.num / 30)
-  } else if (props.num % 30 === 0) {
-    pageNum = props.num / 30
+const { num } = toRefs(props)
+const pageNum = ref()
+const newPageNum = computed(() => {
+  if (props.state === 'front') {
+    if (num.value % 30 !== 0) {
+      pageNum.value = Math.ceil(num.value / 30)
+      return pageNum
+    } else if (num.value % 30 === 0) {
+      pageNum.value = num.value / 30
+      return pageNum
+    }
+  } else if (props.state === 'back') {
+    if (num.value % 10 !== 0) {
+      pageNum.value = Math.ceil(num.value / 10)
+      return pageNum
+    } else if (num.value % 10 === 0) {
+      pageNum.value = num.value / 10
+      return pageNum
+    }
   }
-} else if (props.state === 'back') {
-  if (props.num % 10 !== 0) {
-    pageNum = Math.ceil(props.num / 10)
-  } else if (props.num % 10 === 0) {
-    pageNum = props.num / 10
-  }
-}
+})
 
-const numArr = []
-for (let i = 0; i < pageNum; i++) {
-  numArr.push(i)
-}
+const numArr = ref([])
+const newNumArr = computed(() => {
+  if (newNumArr.value === undefined) {
+    for (let i = 0; i < newPageNum.value.value; i++) {
+      numArr.value.push(i)
+    }
+    return numArr
+  } else {
+    newNumArr.value.value.length = 0
+    for (let i = 0; i < newPageNum.value.value; i++) {
+      numArr.value.push(i)
+    }
+    return numArr
+  }
+})
 
 // 發API
 const cookie = useCookie('data')
@@ -74,9 +92,6 @@ const route = useRoute()
 const path = route.path
 const artistID = route.params.artistID
 const artistIDback = cookie.value.Id
-
-console.log('route', route)
-console.log('cookie', cookie)
 
 const sendRqst = (num) => {
   if (path === '/artists') {
