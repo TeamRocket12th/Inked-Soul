@@ -32,7 +32,7 @@ export const useSearchStore = defineStore('search', () => {
   }
 
   // 取得認領圖
-  const getDesigns = (num) => {
+  const getDesigns = (page) => {
     arrToString()
     isPending.value = true
     try {
@@ -45,10 +45,11 @@ export const useSearchStore = defineStore('search', () => {
             Element: elementStr.value
           },
           query: {
-            page: num
+            page
           }
         })
         showResult.value = true
+
         if (data.value.Data) {
           allDesignData.value = [...allDesignData.value, ...data.value.Data]
           allNum.value = allDesignData.value.length
@@ -62,7 +63,7 @@ export const useSearchStore = defineStore('search', () => {
         isPending.value = false
       })
     } catch (error) {
-      console.log('取得認領圖資料失敗', error)
+      // console.log('取得認領圖資料失敗', error)
     }
   }
   // 取得刺青師
@@ -82,7 +83,7 @@ export const useSearchStore = defineStore('search', () => {
           }
         })
         showResult.value = true
-        console.log('成功取得所有刺青師', data)
+        // console.log('成功取得所有刺青師', data)
         if (data.value.Data !== null) {
           allArtistsData.value = data.value.Data
           allNum.value = data.value.response.TotalNum
@@ -92,7 +93,7 @@ export const useSearchStore = defineStore('search', () => {
         }
       })
     } catch (error) {
-      console.log('取得刺青師資料失敗', error)
+      // console.log('取得刺青師資料失敗', error)
       alert(error)
     }
   }
