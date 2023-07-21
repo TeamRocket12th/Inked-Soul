@@ -9,6 +9,7 @@
         </div>
         <div class="relative">
           <VField
+            v-if="artistInfoData.StudioName"
             id="studio"
             v-model="artistInfoData.StudioName"
             :rules="isUnder20"
@@ -42,6 +43,7 @@
         </div>
         <div class="relative">
           <VField
+            v-if="artistInfoData.License"
             id="license"
             v-model="artistInfoData.License"
             name="營業登記號"
@@ -70,10 +72,17 @@
 
       <div class="flex flex-1 flex-col items-start gap-1">
         <span>縣市</span>
-        <div class="dropdown-end dropdown w-full">
-          <label tabindex="0" class="btn-outline btn mb-1 w-full border-[#D0D0D0]">{{
-            studioLoaction
-          }}</label>
+        <div class="dropdown-end dropdown relative w-full">
+          <label
+            tabindex="0"
+            class="btn-outline btn mb-1 w-full border-[#D0D0D0] hover:border-[#D0D0D0] hover:bg-white hover:text-black"
+            >{{ studioLoaction }}</label
+          >
+          <Icon
+            name="ic:baseline-keyboard-arrow-down"
+            size="20"
+            class="absolute right-4 top-[50%] -translate-y-[50%]"
+          />
           <ul
             tabindex="0"
             class="dropdown-content menu rounded-box z-10 h-[300px] w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
@@ -87,7 +96,7 @@
               <a
                 :class="{
                   'bg-gray-100': studioLoaction.includes(city),
-                  'pointer-events-none rounded-none  border-b font-bold hover:bg-white':
+                  'pointer-events-none rounded-none border-b font-bold hover:bg-white':
                     errorSelect.includes(city)
                 }"
                 >{{ city }}</a
