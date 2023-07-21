@@ -1,16 +1,33 @@
 <template>
-  <div v-if="props.num" class="join flex w-full justify-center">
+  <div v-if="newNumArr" class="mt-4 flex w-full justify-center">
     <button
-      v-for="(item, index) in numArr"
+      v-for="(item, index) in newNumArr.value"
       :key="index"
-      class="join-item btn focus:bg-black focus:text-white"
-      :class="item === 0 ? 'bg-black text-white' : ''"
+      class="my-2 my-2 rounded px-[10px] py-[2.5px] hover:cursor-pointer hover:bg-primary hover:text-black"
+      :class="item + 1 === click ? 'bg-black text-white' : ''"
       @click="sendRqst(item + 1)"
     >
       {{ item + 1 }}
-      <!-- 預設"1"反黑 :class="item === 0 ? 'btn-active' : ''" -->
     </button>
   </div>
+  <!-- <Swiper
+    v-if="newNumArr"
+    class="relative mt-4 !w-[150px]"
+    :modules="[SwiperNavigation]"
+    :slides-per-view="3"
+  >
+    <SwiperSlide v-for="(item, index) in newNumArr.value" :key="index">
+      <button
+        class="my-2 my-2 rounded px-[10px] py-[2.5px] hover:cursor-pointer hover:bg-primary hover:text-black"
+        :class="item + 1 === click ? 'bg-black text-white' : ''"
+        @click="sendRqst(item + 1)"
+      >
+        {{ item + 1 }}
+      </button>
+    </SwiperSlide>
+    <SwiperNavigation /> 
+    <SwiperControls />
+  </Swiper> -->
 </template>
 
 <script setup>
@@ -19,6 +36,7 @@ import { useOrderStore } from '~/stores/order'
 import { useSearchStore } from '~/stores/search'
 import { useGetImageStore } from '~/stores/getImage'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import { useFollowsStore } from '~/stores/follows'
 
 // 所有認領圖頁
 const searchStore = useSearchStore()
@@ -31,8 +49,15 @@ const tattooStore = useUploadTattooStore()
 const { artistGetTattooData, getAlbumn } = tattooStore
 const { radio } = storeToRefs(tattooStore)
 // 刺青師後台所有訂單+評價
+// 用戶後台取得所有訂單
 const orderStore = useOrderStore()
 const { getAllOrder, getComment: artistGetComment } = orderStore
+// 用戶前台取得追蹤列表
+const followStore = useFollowsStore()
+const { getFollows } = followStore
+
+// 點選樣式
+const click = ref(1)
 
 // 計算總數
 const props = defineProps({
@@ -47,25 +72,44 @@ const props = defineProps({
 })
 
 // 計算頁數
-let pageNum = 0
-if (props.state === 'front') {
-  if (props.num % 30 !== 0) {
-    pageNum = Math.ceil(props.num / 30)
-  } else if (props.num % 30 === 0) {
-    pageNum = props.num / 30
-  }
-} else if (props.state === 'back') {
-  if (props.num % 10 !== 0) {
-    pageNum = Math.ceil(props.num / 10)
-  } else if (props.num % 10 === 0) {
-    pageNum = props.num / 10
-  }
-}
+const { num } = toRefs(props)
 
-const numArr = []
-for (let i = 0; i < pageNum; i++) {
-  numArr.push(i)
-}
+const pageNum = ref()
+const newPageNum = computed(() => {
+  if (props.state === 'front') {
+    if (num.value % 30 !== 0) {
+      pageNum.value = Math.ceil(num.value / 30)
+      return pageNum
+    } else if (num.value % 30 === 0) {
+      pageNum.value = num.value / 30
+      return pageNum
+    }
+  } else if (props.state === 'back') {
+    if (num.value % 10 !== 0) {
+      pageNum.value = Math.ceil(num.value / 10)
+      return pageNum
+    } else if (num.value % 10 === 0) {
+      pageNum.value = num.value / 10
+      return pageNum
+    }
+  }
+})
+
+const numArr = ref([])
+const newNumArr = computed(() => {
+  if (newNumArr.value === undefined) {
+    for (let i = 0; i < newPageNum.value.value; i++) {
+      numArr.value.push(i)
+    }
+    return numArr
+  } else {
+    newNumArr.value.value.length = 0
+    for (let i = 0; i < newPageNum.value.value; i++) {
+      numArr.value.push(i)
+    }
+    return numArr
+  }
+})
 
 // 發API
 const cookie = useCookie('data')
@@ -75,10 +119,8 @@ const path = route.path
 const artistID = route.params.artistID
 const artistIDback = cookie.value.Id
 
-console.log('route', route)
-console.log('cookie', cookie)
-
 const sendRqst = (num) => {
+  click.value = num
   if (path === '/artists') {
     // 所有認領圖頁
     getArtists(num)
@@ -100,20 +142,27 @@ const sendRqst = (num) => {
   } else if (role === 'artist' && path === '/account/artist/albumn') {
     // 刺青師後台取得所有作品集
     getAlbumn(artistIDback, num)
-  } else if (role === 'artist' && path === '/account/artist/orderinfo') {
-    // 刺青師後台取得所有訂單
-    getAllOrder(role, num)
   } else if (role === 'artist' && path === '/account/artist/comments') {
     // 刺青師後台取得所有評價
     artistGetComment(artistIDback, num)
+  } else if (role === 'user' && path === '/account/normal/follows') {
+    // 用戶後台取得追蹤列表
+    getFollows(num)
+  } else if (path === '/account/artist/orderinfo' || path === '/account/normal/orderRecords') {
+    // 刺青師或用戶後台取得所有訂單
+    getAllOrder(role, num)
   }
 }
 
-// 按鈕選擇樣式
-const click = ref(true)
-const clickFn = () => {
-  console.log('click')
-}
+// 輪播樣式
+// const swiper = new Swiper('.swiper', {
+//   // Navigation arrows
+//   navigation: {
+//     nextEl: '.swiper-button-next',
+//     prevEl: '.swiper-button-prev'
+//   }
+// })
+// const swiper = useSwiper()
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

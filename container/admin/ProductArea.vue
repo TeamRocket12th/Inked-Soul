@@ -136,15 +136,15 @@
                 </a>
                 <!-- </li>
                 </ul>
-                </details> -->
+                </details > -->
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div v-if="allImgNum">
-        <PaginationBtn :num="allImgNum" state="back" />
-      </div>
+    </div>
+    <div v-if="allImgNum">
+      <PaginationBtn :num="allImgNum" state="back" />
     </div>
   </div>
 </template>
@@ -173,12 +173,12 @@ const deleteDesign = (imageId) => {
   })
   artistGetTattooData('', 1)
 }
+
 // 關閉uploadTattooArea
 const uploadImage = ref(null)
 let uploadDesign
 
 // 上傳結果燈箱
-
 const successModal = ref(null)
 const failedModal = ref(null)
 let sucModal

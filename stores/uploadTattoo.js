@@ -85,19 +85,18 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         },
         body: bodyObject
       })
+      if (sold === '') {
+        radio.value = 1
+      } else if (sold === false) {
+        radio.value = 2
+      } else if (sold === true) {
+        radio.value = 3
+      }
 
       if (data) {
         console.log('刺青師取得認領圖資料', data.value)
         allImg.value = data.value.Data
         allImgNum.value = data.value.response.TotalNum
-
-        if (sold === '') {
-          radio.value = 1
-        } else if (sold === false) {
-          radio.value = 2
-        } else if (sold === true) {
-          radio.value = 3
-        }
       } else if (error) {
         console.log(error)
       }

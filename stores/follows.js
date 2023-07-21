@@ -58,11 +58,11 @@ export const useFollowsStore = defineStore('follows', () => {
         }
       })
       if (data.value) {
-        console.log('followData', data)
+        console.log('用戶後台取得已追蹤列表', data)
         followingData.value = data.value.Data
-        allNum.value = data.value.response.TotlaNum
+        allNum.value = data.value.response.TotalNum
       }
     })
   }
-  return { followingData, followStatus, follow, unFollow, getFollows }
+  return { followingData, followStatus, allNum, follow, unFollow, getFollows }
 })
