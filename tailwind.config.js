@@ -36,6 +36,7 @@ module.exports = {
       colors: {
         primary: '#F0F0F0',
         secondary: '#6C6C6C',
+        custom: '#D0D0D0',
         btn: '#D9D9D9'
       }
     }
