@@ -22,7 +22,7 @@
               ><Icon name="ic:outline-share" size="24"
             /></label>
             <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
-              <ShareModal />
+              <ShareModal :current-page="`/artists`" />
             </ul>
           </div>
         </div>
