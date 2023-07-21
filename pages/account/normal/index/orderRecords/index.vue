@@ -31,7 +31,7 @@
       </table>
     </div>
     <!-- 分頁 -->
-    <PaginationBtn />
+    <PaginationBtn :num="allOrderNum" state="back" />
   </div>
 </template>
 
@@ -42,7 +42,7 @@ import OrderBar from '~/components/order/OrderBar'
 
 const store = useOrderStore()
 const { getAllOrder } = store
-const { AllOrderRecord } = storeToRefs(store)
+const { AllOrderRecord, allOrderNum } = storeToRefs(store)
 
 watch(AllOrderRecord, (newValue) => {
   AllOrderRecord.value = newValue

@@ -32,6 +32,7 @@ const tattooStore = useUploadTattooStore()
 const { artistGetTattooData, getAlbumn } = tattooStore
 const { radio } = storeToRefs(tattooStore)
 // 刺青師後台所有訂單+評價
+// 用戶後台取得所有訂單
 const orderStore = useOrderStore()
 const { getAllOrder, getComment: artistGetComment } = orderStore
 // 用戶前台取得追蹤列表
@@ -119,15 +120,15 @@ const sendRqst = (num) => {
   } else if (role === 'artist' && path === '/account/artist/albumn') {
     // 刺青師後台取得所有作品集
     getAlbumn(artistIDback, num)
-  } else if (role === 'artist' && path === '/account/artist/orderinfo') {
-    // 刺青師後台取得所有訂單
-    getAllOrder(role, num)
   } else if (role === 'artist' && path === '/account/artist/comments') {
     // 刺青師後台取得所有評價
     artistGetComment(artistIDback, num)
   } else if (role === 'user' && path === '/account/normal/follows') {
     // 用戶後台取得追蹤列表
     getFollows(num)
+  } else if (path === '/account/artist/orderinfo' || path === '/account/normal/orderRecords') {
+    // 刺青師或用戶後台取得所有訂單
+    getAllOrder(role, num)
   }
 }
 
