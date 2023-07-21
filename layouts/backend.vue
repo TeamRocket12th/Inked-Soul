@@ -16,7 +16,7 @@
       </div>
       <div
         class="col-span-8 self-start rounded-lg border bg-white p-10"
-        :class="stretch === false ? '' : 'h-[1200px]'"
+        :class="stretch === false ? '' : 'pb-[300px]'"
       >
         <NuxtPage />
       </div>
@@ -28,6 +28,7 @@ import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 import PhotoItem from '~/components/admin/PhotoItem.vue'
 import NavbarItem from '~/components/admin/NavbarItem.vue'
+
 const store = useOrderStore()
 const { stretch } = storeToRefs(store)
 </script>
