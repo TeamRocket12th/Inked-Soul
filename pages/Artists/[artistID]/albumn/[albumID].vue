@@ -8,11 +8,12 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useGetImageStore } from '~/stores/getImage'
+
 definePageMeta({
   layout: 'custom'
 })
-import { storeToRefs } from 'pinia'
-import { useGetImageStore } from '~/stores/getImage'
 const store = useGetImageStore()
 const { userGetSingleAlbum } = store
 const { singleAlbum } = storeToRefs(store)
