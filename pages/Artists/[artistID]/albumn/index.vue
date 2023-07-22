@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-3">
+    <div v-if="allAlbum" class="grid grid-cols-3">
       <NuxtLink
         v-for="item in allAlbum"
         :key="item.id"
@@ -8,6 +8,9 @@
       >
         <AlbumnCard :image="item.Url" />
       </NuxtLink>
+    </div>
+    <div v-if="allAlbumNum">
+      <PaginationBtn :num="allAlbumNum" state="front" />
     </div>
   </div>
 </template>
@@ -18,13 +21,11 @@ import AlbumnCard from '~/components/artists/AlbumnCard'
 
 const store = useGetImageStore()
 const { userGetAlbum } = store
-const { allAlbum } = storeToRefs(store)
+const { allAlbum, allAlbumNum } = storeToRefs(store)
 
 const route = useRoute()
 const artistID = route.params.artistID
-// const { data } = await useFetch(`/api/getArtists/getAlbumn/${id}`)
-// const albumnData = ref([])
-// albumnData.value = data.value.data.albumn
+
 onMounted(() => {
   userGetAlbum(artistID, 1)
 })
