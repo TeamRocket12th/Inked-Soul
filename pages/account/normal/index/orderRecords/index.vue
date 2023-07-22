@@ -6,12 +6,12 @@
           <tr>
             <th>認領圖</th>
             <th>名稱</th>
+            <th>預約時段</th>
+            <th>訂單狀態</th>
             <th>刺青師</th>
             <th>訂單編號</th>
             <th>交易日期</th>
-            <th>預約時段</th>
             <th>訂金</th>
-            <th>訂單狀態</th>
           </tr>
         </thead>
         <tbody v-if="!AllOrderRecord">
