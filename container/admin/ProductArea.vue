@@ -108,7 +108,7 @@
               </td>
               <td>{{ item.Imgname }}</td>
               <td>{{ item.Size }}</td>
-              <td>{{ item.Hour }}hr</td>
+              <td>{{ item.Hour }} 小時</td>
               <td>{{ formattedOutput(new Date(item.InitTime)) }}</td>
               <td>$ {{ item.Deposit }}</td>
               <td>$ {{ item.Total }}</td>
