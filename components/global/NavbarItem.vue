@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex min-h-[100px] items-center justify-between px-[60px] py-4 text-black shadow-md duration-200 ease-in-out"
+    class="flex min-h-[80px] items-center justify-between px-[60px] py-4 text-black shadow-md duration-200 ease-in-out"
     :class="[
       { 'text-white shadow-none': scrollY < 250 && route.path === '/' },
       { 'bg-[#FFF] text-black': route.path !== '/' },

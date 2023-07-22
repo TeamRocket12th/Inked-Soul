@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     head: {
       title: 'Inked Soul',
       viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-      charset: 'utf-8'
+      charset: 'utf-8',
+      link: [{ rel: 'icon', type: 'image/png', href: '/logo-white.png' }]
     }
   },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt', 'nuxt-swiper'],

@@ -55,7 +55,7 @@ const { AllOrderRecord, totalPage, allOrderNum } = storeToRefs(store)
 
 onMounted(() => {
   nextTick(() => {
-    getAllOrder('artist', emitNewPage)
+    getAllOrder('artist', emitNewPage.value)
   })
 })
 
