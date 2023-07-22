@@ -3,6 +3,7 @@ export const useOrderStore = defineStore('order', () => {
   const APIBASE = runtimeConfig.public.APIBASE
   const authToken = useCookie('token')
   const authCookie = useCookie('data')
+
   const id = ref()
   const orderID = ref()
   const isComment = ref(false)
@@ -66,7 +67,7 @@ export const useOrderStore = defineStore('order', () => {
   // 取得全部訂單
   const getAllOrder = async (role, pageNum) => {
     try {
-      const { data } = await useFetch(`${APIBASE}/api/getimage/imgorder`, {
+      const res = await $fetch(`${APIBASE}/api/getimage/imgorder`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -77,13 +78,10 @@ export const useOrderStore = defineStore('order', () => {
           pageNumber: pageNum
         }
       })
-      // 賦值
-      // if (data.value.TotalNum) {
-      if (data.value.Data) {
-        AllOrderRecord.value = data.value.Data
-        totalPage.value = Math.floor(data.value.TotalNum / 10) + 1
-        allOrderNum.value = data.value.TotalNum
-      }
+
+      AllOrderRecord.value = res.Data
+      totalPage.value = Math.floor(res.Data.TotalNum / 10) + 1
+      allOrderNum.value = res.Data.TotalNum
     } catch (error) {
       console.log('取得所有訂單失敗', error)
     }

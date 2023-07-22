@@ -165,7 +165,7 @@ const { allImg, response, showImage, closeUpload, allImgNum } = storeToRefs(stor
 const selectedStatus = ref('全部')
 
 const deleteDesign = (imageId) => {
-  const { data } = useFetch(`${APIBASE}/api/deleteimage`, {
+  const { data } = useFetch(() => `${APIBASE}/api/deleteimage`, {
     headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
     query: {
       imgid: imageId
