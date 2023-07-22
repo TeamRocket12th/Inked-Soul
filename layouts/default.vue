@@ -1,8 +1,6 @@
 <template>
-  <div class="relative">
-    <div class="fixed top-0 z-50 w-full">
-      <NavbarItem></NavbarItem>
-    </div>
+  <div>
+    <NavbarItem class="fixed top-0 z-50 w-full"></NavbarItem>
     <div
       class="relative pb-20"
       :class="[{ 'pt-[140px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
@@ -14,7 +12,7 @@
       ></span>
       <slot></slot>
     </div>
-    <FooterItem></FooterItem>
+    <FooterItem class=""></FooterItem>
   </div>
 </template>
 
