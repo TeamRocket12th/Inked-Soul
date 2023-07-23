@@ -33,6 +33,14 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       formData.append(key, uploadTattooData.value[key])
     }
   }
+
+  const clearFormData = () => {
+    for (const key in uploadTattooData.value) {
+      formData.delete(key)
+      uploadTattooData.value[key] = ''
+    }
+  }
+
   // 限制上傳次數
   const postImageLimit = () => {
     // 📌 如果上傳次數 > 5 無法再上傳 (應該在頁面中 run)
@@ -62,8 +70,10 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         showImage.value = true
         closeUpload.value = true
         artistGetTattooData('', 1)
+        clearFormData()
       })
     } catch (error) {
+      clearFormData()
       console.log('上傳錯誤', error)
     }
   }
