@@ -130,6 +130,7 @@ const tattooName = ref()
 const selectBodyParts = ref([bodyParts[0]])
 const tattooSize = ref('')
 const hour = ref()
+const sizeErrorMessage = ref('')
 
 watch(tattooName, (_newValue, _oldValue) => {
   uploadTattooData.value.picname = tattooName.value
@@ -151,7 +152,6 @@ const SelectRecommendPositions = (part) => {
   uploadTattooData.value.picbodypart = bodypartStr
 }
 
-const sizeErrorMessage = ref('')
 watch(tattooSize, (newValue, _oldValue) => {
   if (/^\d+cm\*\d+cm$/.test(newValue)) {
     return
@@ -173,5 +173,14 @@ watch(tattooSize, (newValue, _oldValue) => {
     sizeErrorMessage.value = '作品尺寸為必填'
   }
 })
+
+// watch(closeUpload, () => {
+//   if (closeUpload.value === true) {
+//     tattooName.value = ''
+//     selectBodyParts.value = ''
+//     tattooSize.value = ''
+//     hour.value = ''
+//   }
+// })
 </script>
 <style scoped></style>
