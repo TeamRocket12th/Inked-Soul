@@ -14,7 +14,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image',
-          content: '/logo-white.png'
+          content: '/logo.png'
         },
         {
           property: 'og:description',
