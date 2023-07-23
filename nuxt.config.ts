@@ -18,7 +18,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:description',
-          content: '找對最適合你的刺青'
+          content: '找到最適合你的刺青'
         }
       ]
     }
