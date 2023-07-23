@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       charset: 'utf-8'
     }
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt', 'nuxt-swiper'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt'],
   css: ['~/assets/css/tailwind.css'],
   typescript: {
     // typeCheck: true
