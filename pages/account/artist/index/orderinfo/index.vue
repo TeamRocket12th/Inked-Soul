@@ -8,12 +8,12 @@
             <tr>
               <th>認領圖</th>
               <th>名稱</th>
+              <th>預約時間</th>
+              <th>訂單狀態</th>
               <th>訂購人</th>
               <th>訂單編號</th>
               <th>交易日期</th>
-              <th>預約時間</th>
               <th>價格</th>
-              <th>訂單狀態</th>
             </tr>
           </thead>
           <tbody v-if="!AllOrderRecord">
@@ -55,7 +55,7 @@ const { AllOrderRecord, totalPage, allOrderNum } = storeToRefs(store)
 
 onMounted(() => {
   nextTick(() => {
-    getAllOrder('artist', emitNewPage)
+    getAllOrder('artist', emitNewPage.value)
   })
 })
 

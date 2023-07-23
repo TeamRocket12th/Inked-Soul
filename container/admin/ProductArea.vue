@@ -108,7 +108,7 @@
               </td>
               <td>{{ item.Imgname }}</td>
               <td>{{ item.Size }}</td>
-              <td>{{ item.Hour }}hr</td>
+              <td>{{ item.Hour }} 小時</td>
               <td>{{ formattedOutput(new Date(item.InitTime)) }}</td>
               <td>$ {{ item.Deposit }}</td>
               <td>$ {{ item.Total }}</td>
@@ -165,7 +165,7 @@ const { allImg, response, showImage, closeUpload, allImgNum } = storeToRefs(stor
 const selectedStatus = ref('全部')
 
 const deleteDesign = (imageId) => {
-  const { data } = useFetch(`${APIBASE}/api/deleteimage`, {
+  const { data } = useFetch(() => `${APIBASE}/api/deleteimage`, {
     headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
     query: {
       imgid: imageId

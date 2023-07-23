@@ -6,8 +6,8 @@
     <masonry-wall
       v-if="allDesignData"
       :items="allDesignData"
-      :ssr-columns="3"
-      :column-width="300"
+      :ssr-columns="4"
+      :column-width="270"
       :gap="32"
     >
       <template #default="{ item }">

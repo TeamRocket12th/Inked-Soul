@@ -27,7 +27,9 @@
     @apply text-center;
   }
   ::-webkit-scrollbar {
-    height: 2px;
+    height: 1px;
+    width: 5px;
+    background-color: rgba(240, 240, 240, 0.5);
   }
   ::-webkit-scrollbar-thumb {
     background: #d9d9d9;

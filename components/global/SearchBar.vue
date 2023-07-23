@@ -104,9 +104,7 @@
         class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-3"
       >
         <Icon name="ic:outline-tune" class="h-6 w-6" />
-        <p v-if="styleArr.length === 0 && elementArr.length === 0" class="text-[#D0D0D0]">
-          風格及元素
-        </p>
+        <p v-if="searchSelect.length === 0" class="text-[#D0D0D0]">風格及元素</p>
         <div v-if="searchSelect.length !== 0" class="line-clamp-1 w-full">
           <span v-for="(item, index) in searchSelect" :key="index" class="text-black"
             >{{ item }}<span>&nbsp;</span></span
@@ -274,11 +272,11 @@ const elementToggle = (input) => {
 // 清除選擇
 const clear = (input) => {
   if (input === 'style') {
+    searchSelect.value = searchSelect.value.filter((item) => !styleArr.value.includes(item))
     styleArr.value = []
-    // console.log('clear style', styleArr.value)
   } else if (input === 'element') {
+    searchSelect.value = searchSelect.value.filter((item) => !elementArr.value.includes(item))
     elementArr.value = []
-    // console.log('clear elementArr', elementArr.value)
   } else if (input === 'city') {
     cityArr.value = []
   }

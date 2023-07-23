@@ -77,7 +77,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     }
 
     nextTick(async () => {
-      const { data, error } = await useFetch(`${APIBASE}/api/artistgetallimg`, {
+      const res = await $fetch(`${APIBASE}/api/artistgetallimg`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -93,13 +93,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         radio.value = 3
       }
 
-      if (data) {
-        console.log('刺青師取得認領圖資料', data.value)
-        allImg.value = data.value.Data
-        allImgNum.value = data.value.response.TotalNum
-      } else if (error) {
-        console.log(error)
-      }
+      allImg.value = res.Data
+      allImgNum.value = res.response.TotalNum
     })
   }
 
