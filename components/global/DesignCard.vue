@@ -1,4 +1,6 @@
 <template>
+  <!-- <LoadingCard v-if="isPending" /> -->
+
   <div class="boreder-black group relative overflow-hidden rounded-lg border-2">
     <img
       :src="props.image"
@@ -25,6 +27,12 @@
   </div>
 </template>
 <script setup>
+// import { storeToRefs } from 'pinia'
+// import { useSearchStore } from '~/stores/search'
+
+// const store = useSearchStore()
+// const { isPending } = storeToRefs(store)
+
 const route = useRoute()
 const isArtistPage = computed(() => {
   if (route.params.artistID) {
@@ -61,10 +69,4 @@ const props = defineProps({
     required: true
   }
 })
-
-// 測試用（製作瀑布流）
-// const random = ref(Math.floor(Math.random() * 150))
-// const height = computed(() => {
-//   return 200 + random.value
-// })
 </script>
