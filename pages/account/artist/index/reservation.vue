@@ -190,7 +190,7 @@ watch(
       }
     })
     if (dateResponse.value && dateResponse.value !== '此日期無訂單') {
-      dateDetail.value = dateResponse.value.Data
+      dateDetail.value = dateResponse.value.DataList
     } else {
       dateDetail.value = { Data: [] }
     }

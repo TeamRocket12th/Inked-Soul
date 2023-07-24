@@ -1,6 +1,4 @@
 <template>
-  <!-- <LoadingCard v-if="isPending" /> -->
-
   <div class="boreder-black group relative overflow-hidden rounded-lg border-2">
     <img
       :src="props.image"
@@ -18,6 +16,7 @@
       <div class="flex items-center" :class="{ hidden: isArtistPage }">
         <img
           :src="props.artistImg"
+          loading="lazy"
           alt=""
           class="mr-2 h-[40px] w-[40px] rounded-lg bg-white object-cover object-center"
         />
@@ -27,12 +26,6 @@
   </div>
 </template>
 <script setup>
-// import { storeToRefs } from 'pinia'
-// import { useSearchStore } from '~/stores/search'
-
-// const store = useSearchStore()
-// const { isPending } = storeToRefs(store)
-
 const route = useRoute()
 const isArtistPage = computed(() => {
   if (route.params.artistID) {
