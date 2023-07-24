@@ -146,6 +146,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     }
   }
   const uploadAlbum = (artistID) => {
+    selectAlbum()
     // 發API
     nextTick(async () => {
       const data = await $fetch(`${APIBASE}/api/uploadalbum`, {
