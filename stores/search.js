@@ -13,8 +13,9 @@ export const useSearchStore = defineStore('search', () => {
   const showResult = ref(false)
   const allNum = ref()
 
-  const isPending = ref(false)
+  const isPending = ref(true)
   const isNoResult = ref(false)
+  const isSearch = ref(false)
   // 重組字串
   const arrToString = () => {
     cityStr.value = cityArr.value.join()
@@ -49,6 +50,7 @@ export const useSearchStore = defineStore('search', () => {
           }
         })
         showResult.value = true
+        isNoResult.value = false
 
         if (data.value.Data) {
           allDesignData.value = [...allDesignData.value, ...data.value.Data]
@@ -113,6 +115,7 @@ export const useSearchStore = defineStore('search', () => {
     allNum,
     isPending,
     isNoResult,
+    isSearch,
     arrToString,
     getDesigns,
     getArtists

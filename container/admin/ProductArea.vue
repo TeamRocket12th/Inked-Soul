@@ -83,11 +83,11 @@
               <th>認領圖</th>
               <th>名稱</th>
               <th>尺寸</th>
+              <th>狀態</th>
               <th>作業時間</th>
               <th>上架日期</th>
               <th>訂金</th>
               <th>總金額</th>
-              <th>狀態</th>
               <th></th>
             </tr>
           </thead>
@@ -108,11 +108,15 @@
               </td>
               <td>{{ item.Imgname }}</td>
               <td>{{ item.Size }}</td>
+              <td>
+                <span class="rounded-full bg-black px-3 py-1 text-white">
+                  {{ item.IsSoldout }}
+                </span>
+              </td>
               <td>{{ item.Hour }} 小時</td>
               <td>{{ formattedOutput(new Date(item.InitTime)) }}</td>
               <td>$ {{ item.Deposit }}</td>
               <td>$ {{ item.Total }}</td>
-              <td>{{ item.IsSoldout }}</td>
               <!-- 編輯鈕 -->
               <td class="cursor-pointer text-center">
                 <!-- <details class="dropdown-right dropdown">
@@ -128,12 +132,16 @@
                       </a>
                     </li>
                 <li> -->
-                <a
+                <button
+                  :disabled="item.IsSoldout === '已售出'"
+                  :class="{
+                    ' text-custom hover:bg-white hover:text-custom': item.IsSoldout === '已售出'
+                  }"
                   class="mx-auto flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in hover:bg-black hover:text-white"
                   @click="deleteDesign(item.Id)"
                 >
                   <Icon name="ic:baseline-delete" size="24" />
-                </a>
+                </button>
                 <!-- </li>
                 </ul>
                 </details > -->
