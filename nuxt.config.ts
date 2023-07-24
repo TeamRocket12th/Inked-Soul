@@ -5,9 +5,6 @@ export default defineNuxtConfig({
       title: 'Inked Soul',
       viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
       charset: 'utf-8',
-<<<<<<< Updated upstream
-      link: [{ rel: 'icon', type: 'image/png', href: '/logo-white.png' }]
-=======
       link: [{ rel: 'icon', type: 'image/png', href: '/logo-white.png' }],
       meta: [
         { name: 'description', content: '找尋最適合您的刺青' },
@@ -25,7 +22,6 @@ export default defineNuxtConfig({
           content: '找到最適合你的刺青'
         }
       ]
->>>>>>> Stashed changes
     }
   },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt', 'nuxt-swiper'],
