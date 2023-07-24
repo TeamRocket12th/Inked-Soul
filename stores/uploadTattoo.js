@@ -126,16 +126,20 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
 
   // 上傳作品集
   const res = ref(0)
-
+  const albumUrl = ref()
+  const albumIdea = ref()
   const showAlbum = ref(false)
   const uploadAlbumData = ref({
     image: '',
     picdescription: ''
   })
-  const albumnKey = {}
-  const albumData = new FormData()
 
+  // 組成formData
   const selectAlbum = () => {
+    // formData宣告為區域變數，每一次上傳都會有一個新的formData
+    const albumnKey = {}
+    const albumData = new FormData()
+
     for (const key in uploadAlbumData.value) {
       albumnKey[key] = uploadAlbumData.value[key]
       albumData.append(key, uploadAlbumData.value[key])
@@ -143,8 +147,9 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   }
   const uploadAlbum = (artistID) => {
     selectAlbum()
+    // 發API
     nextTick(async () => {
-      const { data } = await useFetch(`${APIBASE}/api/uploadalbum`, {
+      const data = await $fetch(`${APIBASE}/api/uploadalbum`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${authToken.value}`
@@ -152,9 +157,12 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
         body: albumData
       })
       console.log('成功上傳作品集', data)
-      res.value = data.value.Status
+      res.value = data.Status
       showAlbum.value = true
       getAlbumn(artistID, 1)
+      // 清空上一次上傳內容
+      albumUrl.value = ''
+      albumIdea.value = ''
     })
   }
 
@@ -187,6 +195,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     closeUpload,
     response,
     res,
+    albumUrl,
+    albumIdea,
     showImage,
     showAlbum,
     radio,

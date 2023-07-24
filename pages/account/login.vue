@@ -14,5 +14,11 @@ import LoginItem from '~/components/account/LoginItem.vue'
 definePageMeta({
   layout: false
 })
+
+const { meta } = useMeta()
+useHead({
+  title: meta.login.title,
+  meta: [{ name: 'description', content: meta.login.description }]
+})
 </script>
 <style scoped></style>
