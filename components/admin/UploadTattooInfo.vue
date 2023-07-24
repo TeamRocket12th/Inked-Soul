@@ -174,6 +174,8 @@ watch(tattooSize, (newValue, _oldValue) => {
   }
 })
 
+// 清除上一次上傳內容
+
 // watch(
 //   closeUpload,
 //   (nv, ov) => {
