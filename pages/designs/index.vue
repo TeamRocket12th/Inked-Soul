@@ -79,6 +79,12 @@ watch(page, (nextPage) => {
   getDesigns(nextPage)
 })
 
+const { meta } = useMeta()
+useHead({
+  title: meta.design.title,
+  meta: [{ name: 'description', content: meta.design.description }]
+})
+
 onMounted(() => {
   initIntersectionObserver()
 })

@@ -20,9 +20,6 @@ import FeatureItem from '~/components/home/FeatureItem.vue'
 const { meta } = useMeta()
 useHead({
   title: meta.index.title, // 會蓋掉nuxt.config的設定
-  viewport: meta.commonSettings.viewport, // 不會蓋掉nuxt.config的設定
-  meta: [{ name: meta.index.name, content: meta.index.content }],
-  link: meta.index.link
+  meta: [{ name: 'description', content: meta.index.description }]
 })
-//   viewport: meta.commentSettings.viewport,
 </script>
