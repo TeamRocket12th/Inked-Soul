@@ -192,7 +192,7 @@
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
-const { allDesignData, allArtistsData, cityArr, styleArr, elementArr, showResult } =
+const { allDesignData, allArtistsData, cityArr, styleArr, elementArr, showResult, isSearch } =
   storeToRefs(store)
 const { getDesigns, getArtists } = store
 
@@ -286,6 +286,7 @@ const clear = (input) => {
 const route = useRoute()
 const searchDesign = () => {
   showResult.value = true
+  isSearch.value = true
   if (route.path === '/') {
     navigateTo('/designs')
   } else if (route.path === '/designs') {

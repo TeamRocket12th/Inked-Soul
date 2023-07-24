@@ -3,6 +3,14 @@
   <div class="container relative mx-auto flex flex-col items-center">
     <SearchBar class="mb-14">搜尋認領圖</SearchBar>
     <search-result />
+
+    <div v-if="isPending" class="grid w-full grid-cols-4 gap-8">
+      <LoadingCard class="col-span-1" />
+      <LoadingCard class="col-span-1" />
+      <LoadingCard class="col-span-1" />
+      <LoadingCard class="col-span-1" />
+    </div>
+
     <masonry-wall
       v-if="allDesignData"
       :items="allDesignData"
@@ -41,25 +49,28 @@ import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 
 const store = useSearchStore()
-const { allDesignData, isPending, isNoResult } = storeToRefs(store)
+const { allDesignData, isPending, isNoResult, isSearch } = storeToRefs(store)
 const { getDesigns } = store
 
 // 參考用
 const page = ref(0)
-const skip = ref(0)
 const root = ref(null)
 
 const initIntersectionObserver = () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.intersectionRatio > 0) {
+      if (isSearch.value) {
+        page.value = 1
+        isSearch.value = false
+        return
+      }
+      if (entry.intersectionRatio > 0 && !isNoResult.value) {
         page.value += 1
-        skip.value += 1
       }
     })
   })
   // 如果沒有pending才會執行
-  if (!isPending.value) {
+  if (isPending.value) {
     observer.observe(root.value)
   }
 }

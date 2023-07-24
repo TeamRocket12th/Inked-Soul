@@ -32,11 +32,11 @@
     <!-- 表格 -->
     <table class="w-full">
       <thead>
-        <tr class="flex justify-between rounded-t-lg border-b-2 border-secondary bg-primary p-2">
+        <tr class="flex justify-between rounded-t-lg border-b border-custom bg-primary p-2">
           <td class="w-[10%]">置頂</td>
           <td class="w-[30%]">作品集</td>
           <td class="w-[30%]">上架日期</td>
-          <td class="w-[30%]"></td>
+          <td class="w-[10%]"></td>
         </tr>
       </thead>
       <tbody v-if="!allAlbum">
@@ -69,8 +69,8 @@
             ></div>
           </td>
           <td class="w-[30%]">{{ formattedOutput(new Date(item.InitTime)) }}</td>
-          <td class="flex w-[30%] flex-row-reverse">
-            <div class="dropdown">
+          <td class="flex w-[10%] flex-row-reverse">
+            <!-- <div class="dropdown">
               <label tabindex="0" class="btn m-1"><Icon name="ic:round-more-vert" /></label>
               <ul
                 tabindex="0"
@@ -87,7 +87,17 @@
                   </div>
                 </li>
               </ul>
-            </div>
+            </div> -->
+            <button
+              :disabled="item.IsSoldout === '已售出'"
+              :class="{
+                ' text-custom hover:bg-white hover:text-custom': item.IsSoldout === '已售出'
+              }"
+              class="mx-auto flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in hover:bg-black hover:text-white"
+              @click="deleteDesign(item.Id)"
+            >
+              <Icon name="ic:baseline-delete" size="24" />
+            </button>
           </td>
           <!-- <Icon name="ic:round-more-vert" /> -->
         </tr>
