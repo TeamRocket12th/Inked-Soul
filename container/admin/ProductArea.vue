@@ -2,7 +2,7 @@
   <div>
     <div class="mb-10 flex flex-row items-center justify-between">
       <!-- radio btn -->
-      <div class="flex flex-row gap-10">
+      <div class="mr-2 flex flex-row gap-4 md:gap-10">
         <label for="all" class="flex cursor-pointer flex-row items-center gap-2">
           <input
             id="all"
@@ -42,7 +42,7 @@
       </div>
       <!-- upload btn -->
       <button
-        class="btn-neutral btn rounded-lg bg-black px-6 py-3 text-white"
+        class="btn-neutral btn rounded-lg bg-black px-3 py-3 text-white md:px-6"
         onclick="upload_product.showModal()"
       >
         上架認領圖
