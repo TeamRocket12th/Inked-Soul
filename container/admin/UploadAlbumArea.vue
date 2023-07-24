@@ -28,8 +28,8 @@
         <p>最大文件大小：4mb</p>
       </div>
       <img
-        v-if="url"
-        :src="url"
+        v-if="albumUrl"
+        :src="albumUrl"
         alt=""
         class="absolute top-0 h-full w-full rounded-lg border border-[#D0D0D0] bg-white object-contain"
       />
@@ -45,7 +45,7 @@
     <label for="idea" class="mb-2 block">設計理念</label>
     <textarea
       id="idea"
-      v-model="albumnIdea"
+      v-model="albumIdea"
       class="textarea mb-10 block w-full rounded-lg outline outline-[#D0D0D0]"
       placeholder="請填入創作想法、作品解說，30字內。"
     ></textarea>
@@ -60,24 +60,22 @@ import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 const store = useUploadTattooStore()
 const { uploadAlbum } = store
-const { uploadAlbumData } = storeToRefs(store)
+const { uploadAlbumData, albumUrl, albumIdea } = storeToRefs(store)
 const token = useCookie('data')
 const artistID = token.value.Id
 const isFileSizeAlert = ref(false)
 
-const albumnIdea = ref()
-watch(albumnIdea, (_newValue) => {
-  uploadAlbumData.value.picdescription = albumnIdea.value
+watch(albumIdea, (_newValue) => {
+  uploadAlbumData.value.picdescription = albumIdea.value
 })
 
-const url = ref()
 const handleOnPreview = (event) => {
   const file = event.target.files[0]
   if (file.size > 1024 * 1024 * 4) {
     isFileSizeAlert.value = true
     return
   }
-  url.value = URL.createObjectURL(event.target.files[0])
+  albumUrl.value = URL.createObjectURL(event.target.files[0])
 
   uploadAlbumData.value.image = event.target.files[0]
 }
