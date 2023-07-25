@@ -192,20 +192,20 @@ watch(tattooSize, (newValue, _oldValue) => {
 //   { deep: true },
 //   { immediate: true }
 // )
-watch(
-  () => closeUpload.value, // Wrap closeUpload in a function to track its value changes
-  (nv, ov) => {
-    console.log('closeUpload nV', nv)
-    console.log('closeUpload oV', ov)
-    console.log('closeUpload new value', closeUpload.value)
-    if (nv === true) {
-      tattooName.value = ''
-      selectBodyParts.value = ''
-      tattooSize.value = ''
-      hour.value = ''
-    }
-  },
-  { deep: true, immediate: true } // Options object should be a single argument
-)
+// watch(
+//   () => closeUpload.value, // Wrap closeUpload in a function to track its value changes
+//   (nv, ov) => {
+//     console.log('closeUpload nV', nv)
+//     console.log('closeUpload oV', ov)
+//     console.log('closeUpload new value', closeUpload.value)
+//     if (nv === true) {
+//       tattooName.value = ''
+//       selectBodyParts.value = ''
+//       tattooSize.value = ''
+//       hour.value = ''
+//     }
+//   },
+//   { deep: true, immediate: true } // Options object should be a single argument
+// )
 </script>
 <style scoped></style>
