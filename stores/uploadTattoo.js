@@ -17,8 +17,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const APIBASE = runtimeConfig.public.APIBASE
 
   const authToken = useCookie('token')
-  const authCookie = useCookie('data')
-  const artistID = authCookie.value.Id // 對應刺青師ID
 
   const allImg = ref()
   const allImgNum = ref()

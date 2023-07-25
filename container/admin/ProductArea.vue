@@ -86,8 +86,8 @@
               <th>狀態</th>
               <th>作業時間</th>
               <th>上架日期</th>
-              <th>訂金</th>
               <th>總金額</th>
+              <th>訂金</th>
               <th></th>
             </tr>
           </thead>
@@ -115,9 +115,8 @@
               </td>
               <td>{{ item.Hour }} 小時</td>
               <td>{{ formattedOutput(new Date(item.InitTime)) }}</td>
-              <td>$ {{ item.Deposit }}</td>
               <td>$ {{ item.Total }}</td>
-              <td>{{ item.IsSoldout }}</td>
+              <td>$ {{ item.Deposit }}</td>
               <td class="cursor-pointer text-center">
                 <!-- 刪除鈕 -->
                 <button
