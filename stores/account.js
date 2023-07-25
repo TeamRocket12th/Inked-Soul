@@ -13,6 +13,7 @@ export const useAccountStore = defineStore('account', () => {
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
   const guid = ref('')
+  const isPending = ref(false)
 
   // 通用 (user|artist)
   const photo = ref('')
@@ -81,6 +82,7 @@ export const useAccountStore = defineStore('account', () => {
 
   // 一般流程登入
   const loginFn = async () => {
+    isPending.value = true
     const { data, error } = await useFetch(`${APIBASE}/api/login${identity.value}`, {
       method: 'POST',
       body: {
@@ -109,6 +111,7 @@ export const useAccountStore = defineStore('account', () => {
     } else if (error.value) {
       authToken.value = null
     }
+    isPending.value = false
   }
 
   // 登入
@@ -321,6 +324,7 @@ export const useAccountStore = defineStore('account', () => {
     artistInfoData,
     inputArtistInfoData,
     showTxt,
+    isPending,
     getUserInfo,
     editArtistInfo,
     getArtistInfo,
