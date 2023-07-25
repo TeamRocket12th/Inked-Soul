@@ -10,7 +10,12 @@
       class="z-1 designCard absolute top-0 hidden h-full w-full flex-col-reverse gap-3 p-5 group-hover:flex"
     >
       <div class="flex items-center justify-between">
-        <p class="font-noto-tc font-bold text-white">{{ props.data.ImgName }}</p>
+        <p v-if="props.data.Name" class="font-noto-tc font-bold text-white">
+          {{ props.data.Name }}
+        </p>
+        <p v-if="props.data.ImgName" class="font-noto-tc font-bold text-white">
+          {{ props.data.ImgName }}
+        </p>
         <p class="font-roboto-nl font-bold text-white">$ {{ props.data.Total }}</p>
       </div>
       <div class="flex items-center" :class="{ hidden: isArtistPage }">
@@ -20,7 +25,9 @@
           alt=""
           class="mr-2 h-[40px] w-[40px] rounded-lg bg-white object-cover object-center"
         />
-        <p class="font-roboto-nl font-bold text-white">{{ props.data.ArtistNickname }}</p>
+        <p class="font-roboto-nl font-bold text-white">
+          {{ props.data.Nickname }}
+        </p>
       </div>
     </div>
   </div>
@@ -41,4 +48,6 @@ const props = defineProps({
     require: true
   }
 })
+
+console.log('prop data', props.data)
 </script>
