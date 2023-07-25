@@ -49,7 +49,7 @@
         v-if="designInfo"
         :design-data="designInfo"
         class="sticky h-fit duration-500 ease-in-out"
-        :style="{ top: scrollY > 89 && scrollY < 500 ? '90px' : '10px' }"
+        :style="{ top: scrollY > 89 && scrollY < 1200 ? '90px' : '10px' }"
       >
         <!-- :class="{ 'top-[90px]': scrollY > 90 && scrollY < 400 }" -->
         <template #price>
