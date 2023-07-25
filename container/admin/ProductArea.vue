@@ -2,7 +2,7 @@
   <div>
     <div class="mb-10 flex flex-row items-center justify-between">
       <!-- radio btn -->
-      <div class="flex flex-row gap-10">
+      <div class="mr-2 flex flex-row gap-4 md:gap-10">
         <label for="all" class="flex cursor-pointer flex-row items-center gap-2">
           <input
             id="all"
@@ -42,7 +42,7 @@
       </div>
       <!-- upload btn -->
       <button
-        class="btn-neutral btn rounded-lg bg-black px-6 py-3 text-white"
+        class="btn-neutral btn rounded-lg bg-black px-3 py-3 text-white md:px-6"
         onclick="upload_product.showModal()"
       >
         上架認領圖
@@ -86,8 +86,8 @@
               <th>狀態</th>
               <th>作業時間</th>
               <th>上架日期</th>
-              <th>訂金</th>
               <th>總金額</th>
+              <th>訂金</th>
               <th></th>
             </tr>
           </thead>
@@ -115,36 +115,20 @@
               </td>
               <td>{{ item.Hour }} 小時</td>
               <td>{{ formattedOutput(new Date(item.InitTime)) }}</td>
-              <td>$ {{ item.Deposit }}</td>
               <td>$ {{ item.Total }}</td>
-              <!-- 編輯鈕 -->
+              <td>$ {{ item.Deposit }}</td>
               <td class="cursor-pointer text-center">
-                <!-- <details class="dropdown-right dropdown">
-                  <summary class="btn border-none bg-white">
-                    <Icon name="ic:baseline-more-vert" size="24" />
-                  </summary>
-                  <ul
-                    class="dropdown-content menu flex w-[180px] flex-row gap-5 rounded-lg bg-base-100 p-5 shadow"
-                  >
-                    <li>
-                      <a class="flex h-14 w-14 items-center justify-center rounded-full">
-                        <Icon name="ic:baseline-edit" size="24" />
-                      </a>
-                    </li>
-                <li> -->
+                <!-- 刪除鈕 -->
                 <button
                   :disabled="item.IsSoldout === '已售出'"
                   :class="{
                     ' text-custom hover:bg-white hover:text-custom': item.IsSoldout === '已售出'
                   }"
                   class="mx-auto flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in hover:bg-black hover:text-white"
-                  @click="deleteDesign(item.Id)"
+                  @click="showDeleteModal(item.Id)"
                 >
                   <Icon name="ic:baseline-delete" size="24" />
                 </button>
-                <!-- </li>
-                </ul>
-                </details > -->
               </td>
             </tr>
           </tbody>
@@ -154,6 +138,22 @@
     <div v-if="allImgNum">
       <PaginationBtn :num="allImgNum" state="back" />
     </div>
+    <!-- 刪除燈箱 -->
+    <dialog id="deleteModal" ref="deleteModal" class="modal">
+      <form method="dialog" class="modal-box flex flex-col items-center p-9">
+        <button class="btn-ghost btn-sm btn-circle btn absolute right-2 top-2">
+          <Icon name="ic:baseline-clear" />
+        </button>
+        <h3 class="mb-5 text-lg font-bold">確認下架認領圖</h3>
+        <p class="mb-10">提醒您，認領圖一經刪除後將無法復原。</p>
+        <button
+          class="btn bg-black px-6 py-3 text-white hover:bg-primary hover:text-black"
+          @click="deleteDesign(deleteId)"
+        >
+          下架認領圖
+        </button>
+      </form>
+    </dialog>
   </div>
 </template>
 <script setup>
@@ -219,11 +219,21 @@ watch(closeUpload, (_newValue) => {
   }
 })
 
+// 刪除認領圖燈箱
+const deleteModal = ref(null)
+const deleteId = ref()
+let delModal
+const showDeleteModal = (id) => {
+  deleteId.value = id
+  delModal.showModal()
+}
+
 onMounted(() => {
   artistGetTattooData('', 1)
   sucModal = successModal.value
   faModal = failedModal.value
   uploadDesign = uploadImage.value
+  delModal = deleteModal.value
 })
 </script>
 <style scoped></style>

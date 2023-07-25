@@ -17,8 +17,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const APIBASE = runtimeConfig.public.APIBASE
 
   const authToken = useCookie('token')
-  const authCookie = useCookie('data')
-  const artistID = authCookie.value.Id // 對應刺青師ID
 
   const allImg = ref()
   const allImgNum = ref()
@@ -134,8 +132,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     picdescription: ''
   })
 
-  // 組成formData
-  const selectAlbum = () => {
+  const uploadAlbum = (artistID) => {
+    // 組成formData
     // formData宣告為區域變數，每一次上傳都會有一個新的formData
     const albumnKey = {}
     const albumData = new FormData()
@@ -144,9 +142,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       albumnKey[key] = uploadAlbumData.value[key]
       albumData.append(key, uploadAlbumData.value[key])
     }
-  }
-  const uploadAlbum = (artistID) => {
-    selectAlbum()
+
     // 發API
     nextTick(async () => {
       const data = await $fetch(`${APIBASE}/api/uploadalbum`, {
