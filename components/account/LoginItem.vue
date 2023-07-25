@@ -44,7 +44,7 @@
   <button
     v-show="route.path.includes('login')"
     type="button"
-    class="btn-neutral btn bg-black text-white"
+    class="defaultBtn py-3 text-[20px]"
     @click="loginSubmit"
   >
     登入

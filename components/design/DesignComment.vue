@@ -1,18 +1,14 @@
 <template>
   <div class="mb-[90px] w-full">
     <p class="mb-6 font-bold">留言區</p>
-    <div class="mb-5 flex w-full flex-row items-center justify-between gap-5">
+    <div class="mb-5 flex w-full items-center gap-5">
       <input
         v-model="comment"
         type="text"
         placeholder="發表留言"
         class="w-full border-b border-black bg-transparent px-6 py-3 outline-none placeholder:text-custom"
       />
-      <button
-        type="button"
-        class="btn-neutral btn rounded-lg bg-black px-4 py-2 text-white"
-        @click="postComment"
-      >
+      <button type="button" class="defaultBtn w-[64px] whitespace-nowrap" @click="postComment">
         留言
       </button>
     </div>

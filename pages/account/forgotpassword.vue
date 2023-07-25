@@ -8,11 +8,7 @@
         <VErrorMessage name="電子信箱" class="whitespace-nowrap" />
       </label>
     </VForm>
-    <button
-      type="button"
-      class="btn-neutral btn bg-black text-white"
-      @click="resetPasswordSendEmail"
-    >
+    <button type="button" class="defaultBtn py-3 text-[20px]" @click="resetPasswordSendEmail">
       重設密碼
     </button>
     <div v-if="showTxt === true">
