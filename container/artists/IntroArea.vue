@@ -34,24 +34,24 @@
       <p>資歷｜{{ artistInfo.exp }}年</p>
       <p>工作室｜{{ artistInfo.studio }}</p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-phone" class="h-6 w-6" /> {{ artistInfo.tel }}
+        <Icon name="ic:outline-phone" size="24" class="text-secondary" /> {{ artistInfo.tel }}
       </p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-home" class="h-6 w-6" /> {{ artistInfo.add }}
+        <Icon name="ic:outline-home" size="24" class="text-secondary" /> {{ artistInfo.add }}
       </p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-access-time" class="h-6 w-6" />{{ artistInfo.time }}
+        <Icon name="ic:outline-access-time" size="24" class="text-secondary" />{{ artistInfo.time }}
       </p>
     </div>
 
     <div class="flex w-full flex-col gap-3">
       <p class="bg-primary px-5 py-3">作品風格</p>
       <p class="mb-2">{{ artistInfo.intro }}</p>
-      <ul class="flex flex-col items-start gap-2" v-if="artistInfo.style !== null">
+      <ul v-if="artistInfo.style !== null" class="flex flex-col items-start gap-2">
         <li
           v-for="(style, key) in styleArr"
           :key="key"
-          class="rounded-full border border-[#D0D0D0] px-3 py-1"
+          class="rounded-full border-[0.5px] border-[#D0D0D0] px-3 py-1"
         >
           {{ style }}
         </li>
