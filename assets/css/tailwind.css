@@ -38,6 +38,9 @@
 }
 
 @layer components {
+  .btnDefault {
+    @apply w-full cursor-pointer rounded-lg bg-black px-4 py-2 font-noto-tc text-base text-white;
+  }
   .formInput {
     @apply min-h-12 w-full rounded-lg border border-[#D0D0D0] px-[14px] py-[12px] outline-none;
   }

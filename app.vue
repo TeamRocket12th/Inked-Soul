@@ -24,4 +24,34 @@ setLocale('zh_TW')
 .vc-disabled {
   text-decoration: line-through;
 }
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-enter-to,
+.v-leave-from {
+  opacity: 1;
+}
+
+.backend-enter-active,
+.backend-leave-active {
+  transition: opacity 0.3s;
+}
+
+.backend-enter-from,
+.backend-leave-to {
+  opacity: 0;
+}
+
+.backend-enter-to,
+.backend-leave-from {
+  opacity: 1;
+}
 </style>

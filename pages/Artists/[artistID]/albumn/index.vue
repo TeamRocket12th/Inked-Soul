@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="allAlbum" class="grid grid-cols-3">
+    <div v-if="allAlbum" class="grid grid-cols-3 gap-8">
       <NuxtLink
         v-for="item in allAlbum"
         :key="item.id"
         :to="`/artists/${artistID}/albumn/${item.Id}`"
       >
-        <AlbumnCard :image="item.Url" />
+        <AlbumnCard :is-top="item.IsTop" :image="item.Url" />
       </NuxtLink>
     </div>
     <div v-if="allAlbumNum">
