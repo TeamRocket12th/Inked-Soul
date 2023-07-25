@@ -8,10 +8,10 @@
 import PhotoItem from '~/components/admin/PhotoItem.vue'
 import NavbarItem from '~/components/admin/NavbarItem.vue'
 
-definePageMeta({
-  pageTransition: {
-    name: 'backend'
-  }
-})
+// definePageMeta({
+//   pageTransition: {
+//     name: 'backend'
+//   }
+// })
 </script>
 <style scoped></style>
