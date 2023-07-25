@@ -1,6 +1,6 @@
 <template>
   <div class="boreder-black overflow-hidden rounded border-2">
-    <img :src="`${props.image}`" alt="" />
+    <img :src="`${props.image}`" alt="" class="object-cover object-center" />
   </div>
 </template>
 <script setup>
