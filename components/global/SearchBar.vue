@@ -267,10 +267,10 @@ const searchDesign = () => {
     navigateTo('/designs')
   } else if (route.path === '/designs') {
     allDesignData.value = []
-    getDesigns(1)
+    // getDesigns()
   } else if (route.path === '/artists') {
     allArtistsData.value = []
-    getArtists(1)
+    // getArtists()
   }
 }
 

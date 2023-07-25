@@ -53,7 +53,7 @@ const { allDesignData, isPending, isNoResult, isSearch } = storeToRefs(store)
 const { getDesigns } = store
 
 // 參考用
-const page = ref(0)
+const page = ref(1)
 const root = ref(null)
 
 const initIntersectionObserver = () => {
@@ -75,9 +75,15 @@ const initIntersectionObserver = () => {
   }
 }
 
-watch(page, (nextPage) => {
-  getDesigns(nextPage)
-})
+watch(
+  page,
+  (nextPage) => {
+    getDesigns(nextPage)
+  },
+  {
+    immediate: true
+  }
+)
 
 const { meta } = useMeta()
 useHead({
@@ -86,6 +92,7 @@ useHead({
 })
 
 onMounted(() => {
+  allDesignData.value = []
   initIntersectionObserver()
 })
 </script>
