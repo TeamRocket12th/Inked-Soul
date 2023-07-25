@@ -113,7 +113,10 @@ const newNumArr = computed(() => {
 
 // 發API
 const cookie = useCookie('data')
-const role = cookie.value.Role.toLowerCase()
+let role
+if (cookie) {
+  role = cookie.value.Role.toLowerCase()
+}
 const route = useRoute()
 const path = route.path
 const artistID = route.params.artistID

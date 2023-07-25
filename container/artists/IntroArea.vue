@@ -141,13 +141,18 @@ const checkFollow = (artistID) => {
   })
 }
 // 刺青師不能追蹤自己
-const token = useCookie('data')
-const role = token.value.Role
-const artistID = token.value.Id
 const show = ref(true)
+const token = useCookie('data')
+const role = ref()
+let artistID
+
 const prevent = () => {
-  if (role === 'artist' && artistID === id) {
-    show.value = false
+  if (token.value) {
+    role.value = token.value.Role
+    artistID = token.value.Id
+    if (role.value === 'artist' && artistID.toString() === id) {
+      show.value = false
+    }
   }
 }
 

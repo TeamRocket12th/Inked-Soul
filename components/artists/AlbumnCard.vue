@@ -1,4 +1,5 @@
 <template>
+
   <div class="relative overflow-hidden rounded-lg bg-white">
     <div
       v-if="props.isTop"
@@ -7,6 +8,7 @@
       <Icon name="ic:outline-push-pin" size="24" />
     </div>
     <img :src="`${props.image}`" alt="" class="h-[200px] w-full object-cover object-center" />
+
   </div>
 </template>
 <script setup>

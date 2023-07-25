@@ -15,7 +15,7 @@
         <p v-if="props.data.Nickname">{{ props.data.Nickname }}</p>
         <div v-if="typeof props.data.Style === 'string'" class="flex flex-col items-center gap-3">
           <span
-            v-for="(item, index) in styleArr"
+            v-for="(item, index) in styleArr.value"
             :key="index"
             class="rounded-full border px-3 py-1 text-xs"
             >{{ item }}</span
@@ -23,9 +23,6 @@
         </div>
       </div>
     </div>
-    <!-- <p>{{ props.category }}</p> -->
-    <!-- <p>{{ props.studioname }}</p> -->
-    <!-- <button class="rounded bg-slate-200 p-2" @click="follow">追蹤</button> -->
   </div>
 </template>
 
@@ -36,13 +33,18 @@ const props = defineProps({
     required: true
   }
 })
+if (props.data) {
+  console.log('props.data', props.data)
+}
 
 const styleArr = ref()
 styleArr.value = computed(() => {
   if (typeof props.data.Style === 'string') {
-    styleArr.value = props.data.Style.split(',')
+    // styleArr.value = props.data.Style.split(',')
+    // console.log('styleArr', styleArr.value)
+    // return (styleArr.value = props.data.Style.split(','))
 
-    return (styleArr.value = props.data.Style.split(','))
+    return props.data.Style.split(',')
   }
 })
 </script>
