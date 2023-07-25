@@ -8,6 +8,7 @@
     <IntroItem />
     <ArtistArea />
     <FeatureItem />
+    <GoTop />
   </div>
 </template>
 

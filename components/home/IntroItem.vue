@@ -101,11 +101,9 @@
             <img :src="item.image" alt="" class="h-full w-full object-cover" />
             <div class="imgOverlay hidden group-hover:block"></div>
           </div>
-          <div
-            class="absolute bottom-0 left-0 right-0 mx-auto hidden py-5 transition group-hover:block"
-          >
+          <div class="absolute bottom-0 left-0 right-0 mx-auto py-5 transition">
             <div class="flex flex-col items-center gap-3">
-              <h2 class="font-bold">{{ item.chinese }}</h2>
+              <h2 class="font-serif-tc font-bold">{{ item.chinese }}</h2>
               <h3 class="font-heading-typo text-base font-normal">{{ item.english }}</h3>
             </div>
           </div>
