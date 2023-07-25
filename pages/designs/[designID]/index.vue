@@ -25,7 +25,7 @@
             :items="allDesignData"
             :ssr-columns="2"
             :column-width="300"
-            :gap="16"
+            :gap="32"
           >
             <template #default="{ item }">
               <div class="rounded-xl">
@@ -49,7 +49,7 @@
         v-if="designInfo"
         :design-data="designInfo"
         class="sticky h-fit duration-500 ease-in-out"
-        :style="{ top: scrollY > 89 && scrollY < 1200 ? '90px' : '10px' }"
+        :style="{ top: scrollY > 89 && scrollY < 1200 ? '90px' : '50px' }"
       >
         <!-- :class="{ 'top-[90px]': scrollY > 90 && scrollY < 400 }" -->
         <template #price>
@@ -61,7 +61,7 @@
             <NuxtLink
               :to="!designInfo.IsSoldout ? `/designs/${designId}/order` : `/designs/${designId}`"
             >
-              <button class="btnDefault mb-3 py-5 text-[20px]" :disabled="designInfo.IsSoldout">
+              <button class="defaultBtn mb-3 py-5 text-[20px]" :disabled="designInfo.IsSoldout">
                 <span class=""> 認領圖 </span>
               </button>
             </NuxtLink>

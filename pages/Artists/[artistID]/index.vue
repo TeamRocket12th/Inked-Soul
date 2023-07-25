@@ -5,7 +5,7 @@
       :items="allDesignData"
       :ssr-columns="3"
       :column-width="200"
-      :gap="16"
+      :gap="32"
     >
       <template #default="{ item }">
         <div class="rounded-xl">

@@ -18,9 +18,7 @@
       <VErrorMessage name="確認密碼" class="whitespace-nowrap text-[#DC3545]" />
     </div>
   </label>
-  <button type="button" @click="signupSubmit" class="btn-neutral btn bg-black text-white">
-    註冊
-  </button>
+  <button type="button" @click="signupSubmit" class="defaultBtn py-3 text-[20px]">註冊</button>
   <NuxtLink to="/account/login">登入</NuxtLink>
 </template>
 <script setup>
