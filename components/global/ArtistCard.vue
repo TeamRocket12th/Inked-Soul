@@ -33,17 +33,10 @@ const props = defineProps({
     required: true
   }
 })
-if (props.data) {
-  console.log('props.data', props.data)
-}
 
 const styleArr = ref()
 styleArr.value = computed(() => {
   if (typeof props.data.Style === 'string') {
-    // styleArr.value = props.data.Style.split(',')
-    // console.log('styleArr', styleArr.value)
-    // return (styleArr.value = props.data.Style.split(','))
-
     return props.data.Style.split(',')
   }
 })
