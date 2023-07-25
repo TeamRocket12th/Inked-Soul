@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex h-[64px] w-[800px] items-start">
+  <div class="relative flex h-[64px] w-[824px] items-start">
     <!-- 選擇縣市 -->
     <div
       class="dropdown relative h-full"
@@ -7,7 +7,7 @@
     >
       <label
         tabindex="0"
-        class="height-auto mb-5 flex h-full items-center gap-2 rounded-e-none rounded-s-lg border border-secondary bg-white p-3"
+        class="height-auto mb-5 flex h-full items-center gap-2 rounded-e-none rounded-s-lg border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-secondary/70"
       >
         <Icon name="ic:outline-room" class="h-6 w-6" />
         <p v-if="cityArr.length === 0" class="text-[#D0D0D0]">選擇縣市</p>
@@ -16,7 +16,7 @@
         </div>
       </label>
       <div
-        class="dropdown-content menu rounded-box absolute left-0 z-[1] w-[800px] bg-base-100 p-2 shadow"
+        class="dropdown-content menu rounded-box absolute left-0 z-[1] w-[824px] bg-base-100 p-2 shadow"
         @click.capture="clear('city')"
       >
         <ul class="mb-2 grid grid-cols-4 border-b-2 border-primary pb-2">
@@ -33,8 +33,8 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'bg-black text-white focus:bg-black'
-                      : 'bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-white focus:bg-black'
+                      : 'rounded-none bg-white text-black focus:bg-white'
                   "
                   @click.prevent="cityToggle(city)"
                 >
@@ -101,7 +101,7 @@
     <div v-if="route.path !== '/artists'" class="dropdown h-full w-[40%]">
       <label
         tabindex="0"
-        class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-3"
+        class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-secondary/70"
       >
         <Icon name="ic:outline-tune" class="h-6 w-6" />
         <p v-if="searchSelect.length === 0" class="text-[#D0D0D0]">風格及元素</p>
@@ -113,19 +113,14 @@
       </label>
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -right-[50%] z-[1] flex w-[800px] flex-wrap bg-base-100 p-5 shadow"
+        class="dropdown-content menu rounded-box absolute -right-[55%] z-[1] flex w-[824px] flex-wrap bg-base-100 p-5 shadow"
       >
         <!-- 所有風格 -->
         <li>
-          <ul class="ml-0 flex flex-wrap border-b-2 border-[#D0D0D0] pb-4 pl-0 before:w-0">
+          <ul class="ml-0 flex flex-wrap border-b-[0.5px] border-primary pb-4 pl-0 before:w-0">
             <li>
               <button
-                class="px-3 py-1"
-                :class="
-                  styleArr.length === 0
-                    ? 'styleBtn bg-black text-white focus:bg-black'
-                    : 'styleBtn bg-white text-black focus:bg-white'
-                "
+                :class="styleArr.length === 0 ? 'chosenStyleBtn' : 'styleBtn'"
                 @click="clear('style')"
               >
                 所有風格
@@ -133,12 +128,7 @@
             </li>
             <li v-for="(style, index) in styles" :key="index">
               <button
-                class="px-3 py-1"
-                :class="
-                  styleArr.includes(style)
-                    ? 'styleBtn bg-black text-white focus:bg-black'
-                    : 'styleBtn bg-white text-black focus:bg-white'
-                "
+                :class="styleArr.includes(style) ? 'chosenStyleBtn' : 'styleBtn'"
                 @click.prevent="styleToggle(style)"
               >
                 {{ style }}
@@ -151,12 +141,7 @@
           <ul class="ml-0 flex flex-wrap pl-0 pt-4 before:w-0">
             <li>
               <button
-                class="px-3 py-1"
-                :class="
-                  elementArr.length === 0
-                    ? 'styleBtn bg-black text-white focus:bg-black'
-                    : 'styleBtn bg-white text-black focus:bg-white'
-                "
+                :class="elementArr.length === 0 ? 'chosenStyleBtn' : 'styleBtn'"
                 @click="clear('element')"
               >
                 所有元素
@@ -164,12 +149,7 @@
             </li>
             <li v-for="(element, index) in elements" :key="index">
               <button
-                class="px-3 py-1"
-                :class="
-                  elementArr.includes(element)
-                    ? 'styleBtn bg-black text-white focus:bg-black'
-                    : 'styleBtn bg-white text-black focus:bg-white'
-                "
+                :class="elementArr.includes(element) ? 'chosenStyleBtn' : 'styleBtn'"
                 @click.prevent="elementToggle(element)"
               >
                 {{ element }}
@@ -179,11 +159,7 @@
         </li>
       </ul>
     </div>
-    <button
-      type="button"
-      class="btn-neutral btn h-full w-[20%] rounded-none rounded-r-lg border-0 bg-black p-3 text-base text-white"
-      @click="searchDesign()"
-    >
+    <button type="button" class="searchBtn h-full w-[180px]" @click="searchDesign()">
       <slot></slot>
     </button>
   </div>

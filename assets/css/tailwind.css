@@ -8,7 +8,7 @@
 
 @layer base {
   h2 {
-    @apply font-serif text-[32px] font-bold leading-8;
+    @apply font-serif text-[32px] font-bold leading-[120%];
   }
   h4 {
     @apply text-[20px] font-bold leading-6;
@@ -45,7 +45,13 @@
     @apply w-full border-b p-4  outline-none;
   }
   .styleBtn {
-    @apply m-2 block inline-block whitespace-nowrap rounded-full border border-black p-2;
+    @apply m-2 block inline-block whitespace-nowrap rounded-full border-[1px] border-primary bg-white px-3 py-1 text-black hover:border-secondary hover:bg-white active:border-custom;
+  }
+  .chosenStyleBtn {
+    @apply m-2 block inline-block whitespace-nowrap rounded-full  bg-black px-3 py-1 text-white  hover:bg-black hover:text-custom focus:bg-black active:text-secondary;
+  }
+  .searchBtn {
+    @apply rounded-none rounded-r-lg border-0 bg-black px-6 py-4  text-[20px] font-bold leading-[120%] text-white hover:text-secondary;
   }
   .designCard {
     background: linear-gradient(
