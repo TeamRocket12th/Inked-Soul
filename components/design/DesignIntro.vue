@@ -16,15 +16,15 @@
         </div>
         <p>工作室&nbsp; | &nbsp;{{ props.designData.StudioName }}</p>
         <div class="flex flex-row items-center gap-2">
-          <Icon name="ic:outline-phone" size="24" />
+          <Icon name="ic:outline-phone" size="24" class="text-secondary" />
           <p>{{ props.designData.ArtistTel }}</p>
         </div>
         <div class="flex flex-row items-center gap-2">
-          <Icon name="ic:outline-home" size="24" />
+          <Icon name="ic:outline-home" size="24" class="text-secondary" />
           <p>{{ props.designData.City }}</p>
         </div>
         <div class="flex flex-row items-center gap-2">
-          <Icon name="ic:round-access-time" size="24" />
+          <Icon name="ic:round-access-time" size="24" class="text-secondary" />
           <p>
             {{ props.designData.StartTime || '00:00' }}
             <span>-</span>

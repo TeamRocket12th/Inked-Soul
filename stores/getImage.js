@@ -12,6 +12,7 @@ export const useGetImageStore = defineStore('getImage', () => {
   const artistName = ref()
 
   const isPending = ref(false)
+  const isNoResult = ref(false)
 
   const userGetTattooData = (ID, page) => {
     nextTick(async () => {
@@ -92,6 +93,7 @@ export const useGetImageStore = defineStore('getImage', () => {
     commentData,
     artistName,
     isPending,
+    isNoResult,
     userGetTattooData,
     userGetAlbum,
     userGetSingleAlbum,
