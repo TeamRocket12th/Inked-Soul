@@ -37,7 +37,7 @@
         <li
           v-for="(style, key) in props.designData.Style"
           :key="key"
-          class="rounded-full border px-3 py-1"
+          class="rounded-full border-[0.5px] border-custom px-3 py-1 text-sm"
         >
           {{ style }}
         </li>

@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div class="flex items-center justify-center gap-10">
-      <img src="/logo.png" alt="logo" class="w-[30px]" />
+  <div class="absolute bottom-0 left-0 right-0 top-0 z-10 h-full w-full bg-black bg-opacity-30">
+    <div class="flex h-full items-center justify-center gap-10">
+      <img src="/logo.png" alt="logo" class="spin w-[30px]" />
       <div class="text-primary-dark">
         <div class="flex">
-          <p class="text-4xl-plus font-bold">Loading</p>
+          <p class="font-bold">LOADGING</p>
           <div class="flex">
             <span class="loading1 text-4xl-plus font-bold">.</span>
             <span class="loading2 text-4xl-plus font-bold">.</span>
@@ -17,6 +17,9 @@
 </template>
 <script setup></script>
 <style scoped>
+.spin {
+  animation: spin 1.5s linear infinite;
+}
 .loading1 {
   animation: loading1 2s linear infinite;
 }
@@ -28,6 +31,15 @@
   animation: loading1 2s linear infinite;
   animation-delay: 1s;
 }
+@keyframes spin {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 @keyframes loading1 {
   0% {
     opacity: 1;

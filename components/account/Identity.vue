@@ -1,19 +1,25 @@
 <template>
   <div class="flex flex-col gap-[60px]">
     <slot name="title"></slot>
-    <div class="grid grid-cols-2">
+    <div class="grid grid-cols-2 text-sm">
       <button
         type="button"
-        :class="{ 'border-black': identity === 'user' }"
-        class="border-b-2 px-[25px] py-[3px] duration-200"
+        :class="{
+          'border-black  text-black': identity === 'user',
+          'text-secondary': identity !== 'user'
+        }"
+        class="border-b-2 px-[25px] py-[3px] pb-[12px] duration-200"
         @click="isActive('user')"
       >
         一般身份
       </button>
       <button
         type="button"
-        :class="{ 'border-black': identity === 'artist' }"
-        class="border-b-2 px-[25px] py-[3px] duration-200"
+        :class="{
+          'border-black text-black': identity === 'artist',
+          'text-secondary': identity !== 'artist'
+        }"
+        class="border-b-2 px-[25px] py-[3px] pb-[12px] duration-200"
         @click="isActive('artist')"
       >
         刺青師
