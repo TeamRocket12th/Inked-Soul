@@ -8,7 +8,7 @@
     </div>
     <button
       type="button"
-      class="btn-neutral btn rounded-lg bg-black px-6 py-3 text-white"
+      class="btn-basic items-center px-6 py-3 text-xl font-bold"
       @click="toPage"
     >
       更多刺青師

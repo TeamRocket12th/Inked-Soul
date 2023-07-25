@@ -75,4 +75,8 @@
   .goBack {
     @apply mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary  active:border-black;
   }
+
+  .btn-basic {
+    @apply rounded-lg bg-black text-white hover:text-primary active:text-secondary;
+  }
 }

@@ -7,7 +7,7 @@
     >
       <label
         tabindex="0"
-        class="height-auto mb-5 flex h-full items-center gap-2 rounded-e-none rounded-s-lg border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-secondary/70"
+        class="height-auto mb-5 flex h-full items-center gap-2 rounded-e-none rounded-s-lg border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50"
       >
         <Icon name="ic:outline-room" class="h-6 w-6" />
         <p v-if="cityArr.length === 0" class="text-[#D0D0D0]">選擇縣市</p>
@@ -50,8 +50,8 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'bg-black text-white focus:bg-black'
-                      : 'bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-white focus:bg-black'
+                      : 'rounded-none bg-white text-black focus:bg-white'
                   "
                   @click="cityToggle(city)"
                 >
@@ -67,8 +67,8 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'bg-black text-white focus:bg-black'
-                      : 'bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-white focus:bg-black'
+                      : 'rounded-none bg-white text-black focus:bg-white'
                   "
                   @click="cityToggle(city)"
                 >
@@ -84,8 +84,8 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'bg-black text-white focus:bg-black'
-                      : 'bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-white focus:bg-black'
+                      : 'rounded-none bg-white text-black focus:bg-white'
                   "
                   @click="cityToggle(city)"
                 >
@@ -101,7 +101,7 @@
     <div v-if="route.path !== '/artists'" class="dropdown h-full w-[40%]">
       <label
         tabindex="0"
-        class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-secondary/70"
+        class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50"
       >
         <Icon name="ic:outline-tune" class="h-6 w-6" />
         <p v-if="searchSelect.length === 0" class="text-[#D0D0D0]">風格及元素</p>
