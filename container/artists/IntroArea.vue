@@ -2,7 +2,10 @@
   <div class="flex flex-col items-center gap-10 rounded-lg bg-white p-5">
     <div class="flex w-full flex-col gap-3">
       <h2>{{ artistInfo.name }}</h2>
-      <img :src="artistInfo.img" class="rounded-lg object-cover shadow" />
+      <img
+        :src="artistInfo.img"
+        class="aspect-square rounded-lg object-cover object-center shadow"
+      />
       <div class="flex flex-row items-center justify-between">
         <!-- 追蹤 -->
         <div v-if="show === true" class="flex flex-row items-center">
@@ -14,17 +17,13 @@
           {{ artistInfo.followers }}
         </div>
         <!-- 分享 -->
-        <div>
-          <div class="dropdown-end dropdown">
-            <label
-              tabindex="0"
-              class="btn-outline btn border-none bg-white hover:bg-white hover:text-black"
-              ><Icon name="ic:outline-share" size="24"
-            /></label>
-            <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
-              <ShareModal :current-page="`/artists`" />
-            </ul>
-          </div>
+        <div class="dropdown-end dropdown">
+          <label tabindex="0" class="border-none bg-white hover:bg-white hover:text-black"
+            ><Icon name="ic:outline-share" size="24"
+          /></label>
+          <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
+            <ShareModal :current-page="`/artists`" />
+          </ul>
         </div>
       </div>
     </div>
