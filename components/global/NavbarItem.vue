@@ -8,24 +8,24 @@
     ]"
   >
     <NuxtLink to="/">
-      <div class="flex items-center justify-center gap-3">
-        <img :src="logoImage" alt="" class="h-6 w-6" />
-        <h2 class="font-heading-typo">Inked Soul</h2>
+      <div class="flex items-center justify-center gap-5">
+        <img :src="logoImage" alt="" class="h-10 w-10" />
+        <h2 class="font-heading-typo leading-[120%]">Inked Soul</h2>
       </div>
     </NuxtLink>
-    <ul class="flex flex-row items-center gap-4">
+    <ul class="flex flex-row items-center">
       <li>
-        <NuxtLink to="/designs">認領圖</NuxtLink>
+        <NuxtLink to="/designs" class="px-4 py-2">認領圖</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/artists">刺青師</NuxtLink>
+        <NuxtLink to="/artists" class="px-4 py-2">刺青師</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/tips">知識點</NuxtLink>
+        <NuxtLink to="/tips" class="mr-6 px-4 py-2">知識點</NuxtLink>
       </li>
-      <li>
-        <NuxtLink v-if="!authToken" to="/account/login">
-          <Icon name="mdi:account" size="24"
+      <li class="flex items-center">
+        <NuxtLink v-if="!authToken" to="/account/login" class="flex items-center">
+          <Icon name="mdi:account" size="24" class="self-auto"
         /></NuxtLink>
         <div v-if="authToken" class="dropdown-end dropdown">
           <label tabindex="0" class="avatar cursor-pointer align-middle">
