@@ -11,10 +11,10 @@
           <VField
             v-if="artistInfoData.StudioName"
             id="studio"
-            v-model="artistInfoData.StudioName"
+            v-model="inputArtistInfoData.StudioName"
             :rules="isUnder20"
             name="店名"
-            class="formInput text-[#D0D0D0]"
+            class="formInput placeholder:text-[#D0D0D0]"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
             disabled
           />
@@ -25,9 +25,9 @@
             v-model="inputArtistInfoData.StudioName"
             :rules="isUnder20"
             name="店名"
-            class="formInput text-[#D0D0D0]"
+            class="formInput placeholder:text-[#D0D0D0]"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
-            :placeholder="artistInfoData.StudioName"
+            placeholder="StudioName"
           />
           <Icon
             v-if="props.errors.店名"
@@ -152,7 +152,8 @@ const { isTel, isUnder20 } = useValidate()
 
 const props = defineProps({
   errors: {
-    require: true
+    type: null,
+    required: true
   }
 })
 
