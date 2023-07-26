@@ -48,6 +48,4 @@ const props = defineProps({
     require: true
   }
 })
-
-console.log('prop data', props.data)
 </script>
