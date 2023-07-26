@@ -41,10 +41,7 @@
         </label>
       </div>
       <!-- upload btn -->
-      <button
-        class="btn-neutral btn rounded-lg bg-black px-3 py-3 text-white md:px-6"
-        onclick="upload_product.showModal()"
-      >
+      <button class="defaultBtn w-fit px-6 py-3 md:px-6" onclick="upload_product.showModal()">
         上架認領圖
       </button>
       <!-- UploadTattooArea -->

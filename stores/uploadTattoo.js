@@ -9,8 +9,8 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     pictotal: '',
     picdeposit: '',
     picbalance: '',
-    picstyle: '',
-    picelement: ''
+    picstyle: [],
+    picelement: []
   })
 
   const runtimeConfig = useRuntimeConfig()
@@ -37,6 +37,11 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       formData.delete(key)
       uploadTattooData.value[key] = ''
     }
+    uploadTattooData.picname = null
+    uploadTattooData.pichour = null
+    uploadTattooData.picidea = null
+    uploadTattooData.picstyle = []
+    uploadTattooData.picelement = []
   }
 
   // 限制上傳次數
@@ -47,10 +52,10 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       return false
     }
   }
-  // 上傳認領圖
   const response = ref()
   const showImage = ref(false)
   const closeUpload = ref(false)
+  // 上傳認領圖
   const uploadTattoo = async () => {
     selectImage()
     postImageLimit()

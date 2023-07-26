@@ -8,9 +8,7 @@
           class="rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
         />
       </button>
-      <!-- @click="toPreviousPage" -->
       <h4 class="text-center">上架認領圖</h4>
-      <div></div>
     </div>
 
     <VForm v-slot="{ errors, meta }" class="flex flex-col gap-5">
@@ -29,11 +27,11 @@
         </div>
         <button
           type="button"
-          class="btn-neutral btn w-full bg-black text-white"
+          class="defaultBtn py-3 text-[20px]"
           :disabled="!meta.valid"
           @click.prevent="uploadTattoo()"
         >
-          確認上傳
+          確認上架
         </button>
       </div>
     </VForm>

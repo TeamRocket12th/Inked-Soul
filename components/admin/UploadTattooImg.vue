@@ -33,7 +33,7 @@ import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
 
 const store = useUploadTattooStore()
-const { uploadTattooData } = storeToRefs(store)
+const { uploadTattooData, closeUpload } = storeToRefs(store)
 
 const isFileSizeAlert = ref(false)
 
@@ -47,5 +47,12 @@ const handleOnPreview = (event) => {
   url.value = URL.createObjectURL(event.target.files[0])
   uploadTattooData.value.Image = event.target.files[0]
 }
+
+// watch(closeUpload, (newValue) => {
+//   if (newValue) {
+//     url.value = ''
+//   }
+//   console.log(newValue)
+// })
 </script>
 <style scoped></style>

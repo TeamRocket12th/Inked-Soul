@@ -7,7 +7,7 @@
     <div class="relative">
       <VField
         id="designIdea"
-        v-model="designIdea"
+        v-model="uploadTattooData.picidea"
         as="textarea"
         name="設計理念"
         rules="max:30"
@@ -35,12 +35,6 @@ const props = defineProps({
     type: null,
     required: true
   }
-})
-
-const designIdea = ref()
-
-watch(designIdea, (_newValue) => {
-  uploadTattooData.value.picidea = designIdea.value
 })
 </script>
 <style scoped></style>
