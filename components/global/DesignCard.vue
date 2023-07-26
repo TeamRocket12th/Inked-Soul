@@ -1,5 +1,5 @@
 <template>
-  <div class="boreder-black group relative overflow-hidden rounded-lg border-2">
+  <div class="boreder-black group relative overflow-hidden rounded-lg border-[1px]">
     <img
       v-if="props.data"
       :src="props.data.Url"
