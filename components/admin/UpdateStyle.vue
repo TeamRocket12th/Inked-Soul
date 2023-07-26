@@ -24,7 +24,7 @@ import { useUploadTattooStore } from '~/stores/uploadTattoo'
 import { useAccountStore } from '~/stores/account'
 
 const editStore = useAccountStore()
-const { artistInfoData, inputArtistInfoData } = storeToRefs(editStore)
+const { artistInfoData } = storeToRefs(editStore)
 
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
@@ -58,9 +58,12 @@ const styleToggle = (addStyle) => {
 
   // 上傳刺青風格
   uploadTattooData.value.picstyle = personalStyle.value.join()
-
-  // 編輯個人風格
-  inputArtistInfoData.value.Style = personalStyle.value.join()
 }
+
+onMounted(() => {
+  uploadTattooData.value.picstyle = artistInfoData.value.Style
+    ? artistInfoData.value.Style.split(',')
+    : []
+})
 </script>
 <style scoped></style>

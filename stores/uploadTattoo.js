@@ -51,25 +51,23 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const response = ref()
   const showImage = ref(false)
   const closeUpload = ref(false)
-  const uploadTattoo = () => {
+  const uploadTattoo = async () => {
     selectImage()
     postImageLimit()
     try {
-      nextTick(async () => {
-        const { data } = await useFetch(`${APIBASE}/api/uploadimage`, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${authToken.value}`
-          },
-          body: formData
-        })
-        console.log('成功上傳認領圖', data)
-        response.value = data.value.Status
-        showImage.value = true
-        closeUpload.value = true
-        artistGetTattooData('', 1)
-        clearFormData()
+      const res = await $fetch(`${APIBASE}/api/uploadimage`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${authToken.value}`
+        },
+        body: formData
       })
+      console.log('成功上傳認領圖', res)
+      response.value = res.Status
+      showImage.value = true
+      closeUpload.value = true
+      artistGetTattooData('', 1)
+      clearFormData()
     } catch (error) {
       clearFormData()
       console.log('上傳錯誤', error)
