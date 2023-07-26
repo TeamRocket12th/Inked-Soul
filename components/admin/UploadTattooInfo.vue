@@ -31,6 +31,9 @@
           class="btn-outline btn my-1 mb-1 h-auto w-full justify-between border-[#D0D0D0] py-2 hover:border-[#D0D0D0] hover:bg-white hover:text-black"
         >
           <div>
+            <span v-if="selectBodyParts.length === 0" class="text-base font-normal text-custom">
+              {{ '請選擇' }}</span
+            >
             <span v-for="(part, key) in selectBodyParts" :key="key" class="mr-2">
               {{ part }}
             </span>
@@ -127,7 +130,7 @@ const bodyParts = [
 ]
 
 const tattooName = ref()
-const selectBodyParts = ref([bodyParts[0]])
+const selectBodyParts = ref([])
 const tattooSize = ref('')
 const hour = ref()
 const sizeErrorMessage = ref('')

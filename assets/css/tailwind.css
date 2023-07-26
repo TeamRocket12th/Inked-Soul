@@ -39,7 +39,7 @@
 
 @layer components {
   .formInput {
-    @apply min-h-12 w-full rounded-lg border border-[#D0D0D0] px-[14px] py-[12px] outline-none;
+    @apply min-h-12 w-full rounded-lg border border-custom px-[14px] py-[12px] outline-none placeholder:text-custom;
   }
   .accountInput {
     @apply w-full border-b p-4  outline-none;

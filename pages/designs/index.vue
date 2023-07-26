@@ -28,7 +28,7 @@
     </masonry-wall>
     <div ref="root" class="absolute bottom-[200px] py-20"></div>
     <!-- 無搜尋結果 -->
-    <div v-if="isNoResult" class="mt-10 text-center">
+    <div v-if="isNoResult && isSearch" class="mt-10 text-center">
       <Icon name="ic:round-find-replace" size="64" />
       <p>
         很抱歉，查無符合此搜尋條件的任何結果。<br />
@@ -54,7 +54,6 @@ const initIntersectionObserver = () => {
     entries.forEach((entry) => {
       if (isSearch.value) {
         page.value = 1
-        isSearch.value = false
         return
       }
       if (entry.intersectionRatio > 0 && !isNoResult.value) {
@@ -71,7 +70,10 @@ const initIntersectionObserver = () => {
 watch(
   page,
   (nextPage) => {
-    getDesigns(nextPage)
+    if (!isSearch.value) {
+      getDesigns(nextPage)
+    }
+    isSearch.value = false
   },
   {
     immediate: true

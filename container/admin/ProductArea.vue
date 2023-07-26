@@ -79,7 +79,7 @@
         <table class="w-full">
           <thead class="h-12 bg-primary">
             <tr>
-              <th>置頂</th>
+              <!-- <th>置頂</th> -->
               <th>認領圖</th>
               <th>名稱</th>
               <th>尺寸</th>
@@ -98,7 +98,7 @@
           </tbody>
           <tbody v-for="(item, key) in allImg" :key="key">
             <tr class="h-[108px] border-b border-[#D0D0D0]">
-              <td><input type="checkbox" /></td>
+              <!-- <td><input type="checkbox" /></td> -->
               <td class="flex h-[108px] items-center justify-center">
                 <img
                   :src="item.Url"

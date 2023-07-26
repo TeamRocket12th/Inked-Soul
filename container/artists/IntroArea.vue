@@ -2,7 +2,10 @@
   <div class="flex flex-col items-center gap-10 rounded-lg bg-white p-5">
     <div class="flex w-full flex-col gap-3">
       <h2>{{ artistInfo.name }}</h2>
-      <img :src="artistInfo.img" class="rounded-lg object-cover shadow" />
+      <img
+        :src="artistInfo.img"
+        class="aspect-square rounded-lg object-cover object-center shadow"
+      />
       <div class="flex flex-row items-center justify-between">
         <!-- 追蹤 -->
         <div v-if="show === true" class="flex flex-row items-center">
@@ -14,17 +17,13 @@
           {{ artistInfo.followers }}
         </div>
         <!-- 分享 -->
-        <div>
-          <div class="dropdown-end dropdown">
-            <label
-              tabindex="0"
-              class="btn-outline btn border-none bg-white hover:bg-white hover:text-black"
-              ><Icon name="ic:outline-share" size="24"
-            /></label>
-            <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
-              <ShareModal :current-page="`/artists`" />
-            </ul>
-          </div>
+        <div class="dropdown-end dropdown">
+          <label tabindex="0" class="border-none bg-white hover:bg-white hover:text-black"
+            ><Icon name="ic:outline-share" size="24"
+          /></label>
+          <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
+            <ShareModal :current-page="`/artists`" />
+          </ul>
         </div>
       </div>
     </div>
@@ -34,24 +33,24 @@
       <p>資歷｜{{ artistInfo.exp }}年</p>
       <p>工作室｜{{ artistInfo.studio }}</p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-phone" class="h-6 w-6" /> {{ artistInfo.tel }}
+        <Icon name="ic:outline-phone" size="24" class="text-secondary" /> {{ artistInfo.tel }}
       </p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-home" class="h-6 w-6" /> {{ artistInfo.add }}
+        <Icon name="ic:outline-home" size="24" class="text-secondary" /> {{ artistInfo.add }}
       </p>
       <p class="item-center flex flex-row gap-2">
-        <Icon name="ic:outline-access-time" class="h-6 w-6" />{{ artistInfo.time }}
+        <Icon name="ic:outline-access-time" size="24" class="text-secondary" />{{ artistInfo.time }}
       </p>
     </div>
 
     <div class="flex w-full flex-col gap-3">
       <p class="bg-primary px-5 py-3">作品風格</p>
       <p class="mb-2">{{ artistInfo.intro }}</p>
-      <ul class="flex flex-col items-start gap-2" v-if="artistInfo.style !== null">
+      <ul v-if="artistInfo.style !== null" class="flex flex-col items-start gap-2">
         <li
           v-for="(style, key) in styleArr"
           :key="key"
-          class="rounded-full border border-[#D0D0D0] px-3 py-1"
+          class="rounded-full border-[0.5px] border-[#D0D0D0] px-3 py-1"
         >
           {{ style }}
         </li>

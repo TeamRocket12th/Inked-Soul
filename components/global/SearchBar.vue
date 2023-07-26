@@ -266,6 +266,8 @@ const route = useRoute()
 const searchDesign = () => {
   showResult.value = true
   isSearch.value = true
+  allDesignData.value = []
+
   if (route.path === '/') {
     navigateTo('/designs')
   } else if (route.path === '/designs') {

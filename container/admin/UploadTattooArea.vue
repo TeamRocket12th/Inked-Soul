@@ -31,7 +31,7 @@
           type="button"
           class="btn-neutral btn w-full bg-black text-white"
           :disabled="!meta.valid"
-          @click="uploadTattoo()"
+          @click.prevent="uploadTattoo()"
         >
           確認上傳
         </button>
