@@ -7,7 +7,6 @@
         <span v-for="(item, index) in cityArr" :key="index" class="font-bold"
           >{{ item }}<span>&nbsp;</span></span
         ><span>&nbsp;</span>
-        <span>縣市</span>
       </div>
       <div v-if="path === '/designs'" class="flex items-center">
         <span v-if="styleArr.length === 0" class="font-bold">全部</span>
