@@ -37,6 +37,11 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       formData.delete(key)
       uploadTattooData.value[key] = ''
     }
+    uploadTattooData.picname = null
+    uploadTattooData.pichour = null
+    uploadTattooData.picidea = null
+    uploadTattooData.picstyle = []
+    uploadTattooData.picelement = []
   }
 
   // 限制上傳次數
@@ -68,8 +73,6 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       closeUpload.value = true
       artistGetTattooData('', 1)
       clearFormData()
-      uploadTattooData.picstyle = []
-      uploadTattooData.picelement = []
     } catch (error) {
       clearFormData()
       console.log('上傳錯誤', error)
