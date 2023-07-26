@@ -263,14 +263,14 @@ const route = useRoute()
 const searchDesign = () => {
   showResult.value = true
   isSearch.value = true
+  allDesignData.value = []
+
   if (route.path === '/') {
     navigateTo('/designs')
   } else if (route.path === '/designs') {
-    allDesignData.value = []
-    // getDesigns()
+    getDesigns('1')
   } else if (route.path === '/artists') {
-    allArtistsData.value = []
-    // getArtists()
+    getArtists('1')
   }
 }
 
