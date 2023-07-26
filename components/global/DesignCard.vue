@@ -1,10 +1,9 @@
 <template>
-  <div class="boreder-black group relative overflow-hidden rounded-lg border-2">
+  <div class="boreder-black group relative overflow-hidden rounded-lg border-[1px]">
     <img
       :src="props.data.Url"
       class="h-fit min-h-[200px] w-full bg-white object-contain object-center"
     />
-    <!-- :style="{ height: `${height}px` }" -->
     <!-- 遮罩 -->
     <div
       class="z-1 designCard absolute top-0 hidden h-full w-full flex-col-reverse gap-3 p-5 group-hover:flex"
