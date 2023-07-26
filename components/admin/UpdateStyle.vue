@@ -8,7 +8,7 @@
         <button
           ref="styleBtn"
           type="button"
-          :class="{ 'bg-black text-white': personalStyle.includes(style) }"
+          :class="{ 'bg-black text-white': uploadTattooData.picstyle.includes(style) }"
           class="whitespace-nowrap rounded-full border px-3 py-1"
           @click="styleToggle(style)"
         >
@@ -44,20 +44,20 @@ const styles = [
   'Traditional Japanese 日式傳統',
   '其他'
 ]
-const personalStyle = ref(artistInfoData.value.Style ? artistInfoData.value.Style.split(',') : [])
+// const personalStyle = ref(artistInfoData.value.Style ? artistInfoData.value.Style.split(',') : [])
 
 const styleToggle = (addStyle) => {
-  const index = personalStyle.value.indexOf(addStyle)
-  if (index === -1 && personalStyle.value.length < 2) {
-    personalStyle.value.push(addStyle)
+  const index = uploadTattooData.value.picstyle.indexOf(addStyle)
+  if (index === -1 && uploadTattooData.value.picstyle.length < 2) {
+    uploadTattooData.value.picstyle.push(addStyle)
   } else if (index !== -1) {
-    personalStyle.value.splice(index, 1)
-  } else if (personalStyle.value.length === 2) {
-    personalStyle.value.splice(0, 1, addStyle)
+    uploadTattooData.value.picstyle.splice(index, 1)
+  } else if (uploadTattooData.value.picstyle.length === 2) {
+    uploadTattooData.value.picstyle.splice(0, 1, addStyle)
   }
 
   // 上傳刺青風格
-  uploadTattooData.value.picstyle = personalStyle.value.join()
+  uploadTattooData.value.picstyle.join()
 }
 
 onMounted(() => {

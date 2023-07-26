@@ -6,7 +6,7 @@
         <button
           ref="styleBtn"
           type="button"
-          :class="{ 'bg-black text-white': tattooElement.includes(style) }"
+          :class="{ 'bg-black text-white': uploadTattooData.picelement.includes(style) }"
           class="whitespace-nowrap rounded-full border px-3 py-1"
           @click="styleToggle(style)"
         >
@@ -39,19 +39,19 @@ const elements = [
 ]
 
 // 要傳給 API 的值（需要轉換格式）
-const tattooElement = ref([])
+// const tattooElement = ref([])
 
 const styleToggle = (addStyle) => {
-  const index = tattooElement.value.indexOf(addStyle)
-  if (index === -1 && tattooElement.value.length < 2) {
-    tattooElement.value.push(addStyle)
+  const index = uploadTattooData.value.picelement.indexOf(addStyle)
+  if (index === -1 && uploadTattooData.value.picelement.length < 2) {
+    uploadTattooData.value.picelement.push(addStyle)
   } else if (index !== -1) {
-    tattooElement.value.splice(index, 1)
-  } else if (tattooElement.value.length === 2) {
-    tattooElement.value.splice(0, 1, addStyle)
+    uploadTattooData.value.picelement.splice(index, 1)
+  } else if (uploadTattooData.value.picelement.length === 2) {
+    uploadTattooData.value.picelement.splice(0, 1, addStyle)
   }
-  const elementStr = tattooElement.value.join()
-  uploadTattooData.value.picelement = elementStr
+  uploadTattooData.value.picelement.join()
+  // uploadTattooData.value.picelement = elementStr
 }
 </script>
 <style scoped></style>
