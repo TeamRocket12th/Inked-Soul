@@ -45,7 +45,7 @@ const isArtistPage = computed(() => {
 const props = defineProps({
   data: {
     type: Object,
-    require: true
+    required: true
   }
 })
 
