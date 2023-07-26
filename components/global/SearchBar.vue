@@ -17,7 +17,7 @@
       </label>
       <div
         class="dropdown-content menu rounded-box absolute left-0 z-[1] w-[824px] bg-base-100 p-2 shadow"
-        @click.self="clear('city')"
+        @click.capture.self="clear('city')"
       >
         <ul class="mb-2 grid grid-cols-4 border-b-2 border-primary pb-2">
           <li class="text-center text-base font-bold">北部</li>
@@ -215,18 +215,12 @@ const searchSelect = ref([])
 const cityToggle = (input) => {
   const cityIndex = cityArr.value.indexOf(input)
   if (cityArr.value.length === 0) {
-    console.log('1')
     cityArr.value.push(input)
-    console.log('1', cityArr.value)
   } else if (cityArr.value.length !== 0 && cityIndex === -1) {
-    console.log('2')
     cityArr.value.push(input)
     cityArr.value.shift()
-    console.log('2', cityArr.value)
   } else if (cityArr.value.length !== 0 && cityIndex !== -1) {
-    console.log('3')
     cityArr.value = []
-    console.log('3', cityArr.value)
   }
 }
 // 選擇風格
@@ -276,10 +270,10 @@ const searchDesign = () => {
     navigateTo('/designs')
   } else if (route.path === '/designs') {
     allDesignData.value = []
-    // getDesigns()
+    getDesigns(1)
   } else if (route.path === '/artists') {
     allArtistsData.value = []
-    // getArtists()
+    getArtists(1)
   }
 }
 

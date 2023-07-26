@@ -1,7 +1,7 @@
 <template>
   <!-- 所有認領圖 -->
   <div class="container relative mx-auto flex flex-col items-center">
-    <SearchBar class="mb-14">搜尋認領圖</SearchBar>
+    <SearchBar class="mb-5">搜尋認領圖</SearchBar>
     <search-result />
 
     <div v-if="isPending" class="grid w-full grid-cols-4 gap-8">
