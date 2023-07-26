@@ -1,8 +1,8 @@
 <template>
   <NuxtLayout name="album">
-    <div>
-      <p>單一作品集內頁</p>
-      {{ singleAlbum }}
+    <div class="flex flex-col gap-3">
+      <img :src="singleAlbum.Url" alt="" class="aspect-square w-full rounded-lg object-cover" />
+      <p class="font-noto-tc text-base text-secondary">{{ singleAlbum.Description }}</p>
     </div>
   </NuxtLayout>
 </template>
@@ -11,9 +11,6 @@
 import { storeToRefs } from 'pinia'
 import { useGetImageStore } from '~/stores/getImage'
 
-definePageMeta({
-  layout: 'custom'
-})
 const store = useGetImageStore()
 const { userGetSingleAlbum } = store
 const { singleAlbum } = storeToRefs(store)
