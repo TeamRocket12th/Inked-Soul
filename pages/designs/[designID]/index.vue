@@ -54,7 +54,7 @@
             <NuxtLink
               :to="!designInfo.IsSoldout ? `/designs/${designId}/order` : `/designs/${designId}`"
             >
-              <button class="defaultBtn mb-3 py-5 text-[20px]" :disabled="designInfo.IsSoldout">
+              <button class="btn-basic btn-large mb-3" :disabled="designInfo.IsSoldout">
                 <span class=""> 認領圖 </span>
               </button>
             </NuxtLink>
