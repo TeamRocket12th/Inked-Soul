@@ -1,11 +1,10 @@
 <template>
-  <div class="relative">
-    <div class="fixed top-0 z-50 w-full">
-      <NavbarItem></NavbarItem>
-    </div>
+  <div>
+    <NavbarItem class="fixed top-0 z-50 w-full"></NavbarItem>
     <div
-      class="relative pb-20"
-      :class="[{ 'pt-[160px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
+      class="relative min-h-screen pb-20"
+      :class="[{ 'pt-[120px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"
+      @click.capture="handleClickOutside('click default')"
     >
       <span
         v-show="isLoading"
@@ -13,11 +12,14 @@
       ></span>
       <slot></slot>
     </div>
-    <FooterItem></FooterItem>
+    <FooterItem class=""></FooterItem>
   </div>
 </template>
 
 <script setup>
+import { useOrderStore } from '~/stores/order'
+const store = useOrderStore()
+const { handleClickOutside } = store
 const route = useRoute()
 
 const nuxtApp = useNuxtApp()

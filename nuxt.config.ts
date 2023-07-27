@@ -2,7 +2,26 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Inked Soul'
+      title: 'Inked Soul',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+      charset: 'utf-8',
+      link: [{ rel: 'icon', type: 'image/png', href: '/logo-white.png' }],
+      meta: [
+        { name: 'description', content: '找尋最適合您的刺青' },
+        { name: 'keywords', content: 'designs,tattoo' },
+        {
+          property: 'og:title',
+          content: 'Inked Soul 刺青媒合平台'
+        },
+        {
+          property: 'og:image',
+          content: '/logo.png'
+        },
+        {
+          property: 'og:description',
+          content: '找到最適合你的刺青'
+        }
+      ]
     }
   },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@pinia/nuxt', 'dayjs-nuxt'],

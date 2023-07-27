@@ -1,22 +1,24 @@
 <template>
   <div>
     <h2 class="border-b-2 border-primary pb-4">已追蹤刺青師名單</h2>
+
     <div
       v-for="(item, index) in followingData"
       :key="index"
-      class="flex justify-between border-b-2 border-primary py-5"
+      to="item.ArtistId"
+      class="flex justify-between border-b-2 border-primary py-5 hover:cursor-pointer"
+      @click.self="toArtistPage(item.ArtistId)"
     >
       <div class="flex">
         <!-- 大頭照 -->
         <div
-          class="`artist-profile mr-2 h-16 w-16 rounded bg-contain bg-center bg-no-repeat"
+          class="artist-profile mr-2 h-16 w-16 rounded-xl bg-cover bg-center bg-no-repeat"
           :style="`background-image: url(${item.ArtistPhoto})`"
         ></div>
         <!-- 名稱+風格 -->
-        <div>
+        <div v-if="typeof item.ArtistStyle === 'string'">
           <h3>{{ item.ArtistName }}</h3>
           <div class="flex">
-            <!-- {{ item.ArtistStyle.split(',') }} -->
             <div
               v-for="(style, key) in item.ArtistStyle.split(',')"
               :key="key"
@@ -29,10 +31,17 @@
       </div>
       <div class="">
         <!-- 追蹤按鈕 -->
-        <Icon name="ic:baseline-bookmark" size="36" @click="unFollow()" />
+        <Icon
+          name="ic:baseline-bookmark"
+          size="36"
+          @click.prevent="unFollow(item.ArtistId)"
+          class="cursor-pointer"
+        />
       </div>
     </div>
-    <!-- <PaginationBtn/> -->
+    <div v-if="allNum">
+      <PaginationBtn :num="allNum" state="back" />
+    </div>
   </div>
 </template>
 
@@ -43,6 +52,11 @@ const store = useFollowsStore()
 const { getFollows, unFollow } = store
 const { followingData, allNum } = storeToRefs(store)
 
+// 跳轉前往刺青師個人頁
+const router = useRouter()
+const toArtistPage = (id) => {
+  router.push(`/artists/${id}`)
+}
 onMounted(() => {
   getFollows(1)
 })

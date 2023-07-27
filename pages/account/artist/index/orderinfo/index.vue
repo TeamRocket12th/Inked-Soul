@@ -8,14 +8,19 @@
             <tr>
               <th>認領圖</th>
               <th>名稱</th>
+              <th>預約時間</th>
+              <th>訂單狀態</th>
               <th>訂購人</th>
               <th>訂單編號</th>
               <th>交易日期</th>
-              <th>預約時間</th>
               <th>價格</th>
-              <th>訂單狀態</th>
             </tr>
           </thead>
+          <tbody v-if="!AllOrderRecord">
+            <tr class="h-[108px] border-b border-[#D0D0D0] text-center">
+              <td colspan="10">您尚無任何訂單</td>
+            </tr>
+          </tbody>
           <tbody>
             <OrderBar
               v-for="item in AllOrderRecord"
@@ -30,11 +35,14 @@
       </div>
     </div>
     <!-- 分頁 -->
-    <PageBtn
+    <!-- <PageBtn
       :current-page="emitNewPage"
       :total-page="totalPage"
       @update-current-page="getEmitPage"
-    />
+    /> -->
+    <div v-if="allOrderNum">
+      <PaginationBtn :num="allOrderNum" state="back" />
+    </div>
   </div>
 </template>
 <script setup>
@@ -43,10 +51,12 @@ import { useOrderStore } from '~/stores/order'
 import OrderBar from '~/components/order/OrderBar.vue'
 const store = useOrderStore()
 const { getAllOrder } = store
-const { AllOrderRecord, totalPage } = storeToRefs(store)
+const { AllOrderRecord, totalPage, allOrderNum } = storeToRefs(store)
 
 onMounted(() => {
-  getAllOrder('artist', emitNewPage)
+  nextTick(() => {
+    getAllOrder('artist', emitNewPage.value)
+  })
 })
 
 const emitNewPage = ref(1)

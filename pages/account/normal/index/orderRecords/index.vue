@@ -6,14 +6,19 @@
           <tr>
             <th>認領圖</th>
             <th>名稱</th>
+            <th>預約時段</th>
+            <th>訂單狀態</th>
             <th>刺青師</th>
             <th>訂單編號</th>
             <th>交易日期</th>
-            <th>預約時段</th>
             <th>訂金</th>
-            <th>訂單狀態</th>
           </tr>
         </thead>
+        <tbody v-if="!AllOrderRecord">
+          <tr class="h-[108px] border-b border-[#D0D0D0] text-center">
+            <td colspan="10">您尚無任何訂單</td>
+          </tr>
+        </tbody>
         <tbody>
           <OrderBar
             v-for="item in AllOrderRecord"
@@ -26,7 +31,7 @@
       </table>
     </div>
     <!-- 分頁 -->
-    <PaginationBtn />
+    <PaginationBtn :num="allOrderNum" state="back" />
   </div>
 </template>
 
@@ -34,16 +39,20 @@
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 import OrderBar from '~/components/order/OrderBar'
+
 const store = useOrderStore()
 const { getAllOrder } = store
-const { AllOrderRecord } = storeToRefs(store)
-watch(AllOrderRecord, (nV) => {
-  AllOrderRecord.value = nV
+const { AllOrderRecord, allOrderNum } = storeToRefs(store)
+
+watch(AllOrderRecord, (newValue) => {
+  AllOrderRecord.value = newValue
   return AllOrderRecord
 })
 
 onMounted(() => {
-  getAllOrder('user', 1)
+  nextTick(() => {
+    getAllOrder('user', 1)
+  })
 })
 
 const jump = (input) => {

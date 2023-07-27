@@ -13,6 +13,7 @@ export const useAccountStore = defineStore('account', () => {
   const password = ref('A1234567')
   const confirmPassword = ref('A1234567')
   const guid = ref('')
+  const isPending = ref(false)
 
   // 通用 (user|artist)
   const photo = ref('')
@@ -81,6 +82,7 @@ export const useAccountStore = defineStore('account', () => {
 
   // 一般流程登入
   const loginFn = async () => {
+    isPending.value = true
     const { data, error } = await useFetch(`${APIBASE}/api/login${identity.value}`, {
       method: 'POST',
       body: {
@@ -91,7 +93,6 @@ export const useAccountStore = defineStore('account', () => {
     })
     if (data.value) {
       const res = data.value
-      console.log('login res', res)
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
@@ -108,9 +109,9 @@ export const useAccountStore = defineStore('account', () => {
         router.push(`/account/${newIdentity}/editinfo`) // 登入成功跳轉到首頁
       }
     } else if (error.value) {
-      console.log(error.value)
       authToken.value = null
     }
+    isPending.value = false
   }
 
   // 登入
@@ -175,7 +176,7 @@ export const useAccountStore = defineStore('account', () => {
     userInfoData.Tel = tel.value
 
     try {
-      const { data, error } = await useFetch(`${APIBASE}/api/edituserinfo`, {
+      const { data } = await useFetch(`${APIBASE}/api/edituserinfo`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
@@ -193,12 +194,11 @@ export const useAccountStore = defineStore('account', () => {
   // 取得刺青師個人資料
   const getArtistInfo = async () => {
     try {
-      const { data, error } = await useFetch(`${APIBASE}/api/artistinfo`, {
+      const { data } = await useFetch(`${APIBASE}/api/artistinfo`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
-        },
-        method: 'GET'
+        }
       })
       Object.assign(artistInfoData, data.value.Data)
       Object.keys(inputArtistInfoData).forEach((key) => {
@@ -221,7 +221,7 @@ export const useAccountStore = defineStore('account', () => {
     Object.assign(artistInfoData, inputArtistInfoData)
 
     try {
-      const { data, error } = await useFetch(`${APIBASE}/api/editartistinfo`, {
+      await $fetch(`${APIBASE}/api/editartistinfo`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
@@ -229,10 +229,7 @@ export const useAccountStore = defineStore('account', () => {
         method: 'POST',
         body: artistInfoData
       })
-      if (data.value) {
-        await getArtistInfo()
-      }
-      console.log('edit', data.value)
+      await getArtistInfo()
     } catch (error) {
       console.log(error)
     }
@@ -307,7 +304,7 @@ export const useAccountStore = defineStore('account', () => {
         authCookie.value.Nickname = defaultNickname
       }
     } else {
-      return
+      return ''
     }
   }
 
@@ -324,6 +321,7 @@ export const useAccountStore = defineStore('account', () => {
     artistInfoData,
     inputArtistInfoData,
     showTxt,
+    isPending,
     getUserInfo,
     editArtistInfo,
     getArtistInfo,

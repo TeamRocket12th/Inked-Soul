@@ -13,7 +13,7 @@
       <div
         tabindex="0"
         class="dropdown-content absolute top-5 z-[1] w-full rounded-lg bg-base-100 p-2"
-        @click.self="handleClickOutside()"
+        @click="stretchToggle()"
       >
         <!-- 星星 -->
         <div class="mb-4 flex items-center">
@@ -57,7 +57,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
@@ -69,15 +68,16 @@ const APIBASE = runtimeConfig.public.APIBASE
 const authToken = useCookie('token')
 
 const store = useOrderStore()
-const { handleClickOutside, stretchToggle } = store
-const { isComment, stretchContainer } = storeToRefs(store)
+const { stretchToggle } = store
+const { isComment } = storeToRefs(store)
 
 const imageId = route.params.orderID
 const comment = ref('')
-const rate = ref(0)
+const rate = ref(5)
 
 const updateRating = (num) => {
   rate.value = num
+  console.log(rate.value)
 }
 
 const postComments = async () => {

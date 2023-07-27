@@ -34,9 +34,10 @@ module.exports = {
         '3xl': '1920px'
       },
       colors: {
-        primary: '#F0F0F0',
-        secondary: '#6C6C6C',
-        btn: '#D9D9D9'
+        primary: '#F0F0F0', // 超淺灰
+        secondary: '#6C6C6C', // 深灰
+        custom: '#D0D0D0', // 淺灰
+        btn: '#D9D9D9' //
       }
     }
   },

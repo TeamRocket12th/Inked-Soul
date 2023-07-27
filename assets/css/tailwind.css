@@ -8,7 +8,7 @@
 
 @layer base {
   h2 {
-    @apply font-serif text-[32px] font-bold leading-8;
+    @apply font-serif text-[32px] font-bold leading-[120%];
   }
   h4 {
     @apply text-[20px] font-bold leading-6;
@@ -27,7 +27,9 @@
     @apply text-center;
   }
   ::-webkit-scrollbar {
-    height: 2px;
+    height: 1px;
+    width: 5px;
+    background-color: rgba(240, 240, 240, 0.5);
   }
   ::-webkit-scrollbar-thumb {
     background: #d9d9d9;
@@ -37,13 +39,22 @@
 
 @layer components {
   .formInput {
-    @apply min-h-12 w-full rounded-lg border border-[#D0D0D0] px-[14px] py-[12px] outline-none;
+    @apply min-h-12 w-full rounded-lg border border-custom px-[14px] py-[12px] outline-none placeholder:text-custom;
   }
   .accountInput {
     @apply w-full border-b p-4  outline-none;
   }
+  .defaultBtn {
+    @apply block w-full cursor-pointer rounded-lg bg-black px-4 py-2 font-noto-tc text-base text-white duration-200 hover:text-[#F0F0F0F0];
+  }
   .styleBtn {
-    @apply m-2 block inline-block whitespace-nowrap rounded-full border border-black p-2;
+    @apply m-2 block  whitespace-nowrap rounded-full border-[1px] border-primary bg-white px-3 py-1 text-black hover:border-secondary hover:bg-white active:border-custom;
+  }
+  .chosenStyleBtn {
+    @apply m-2 block  whitespace-nowrap rounded-full  bg-black px-3 py-1 text-white  hover:bg-black hover:text-custom focus:bg-black active:text-secondary;
+  }
+  .searchBtn {
+    @apply rounded-none rounded-r-lg border-0 bg-black px-6 py-4  text-[20px] font-bold leading-[120%] text-white hover:text-secondary;
   }
   .designCard {
     background: linear-gradient(
@@ -63,5 +74,9 @@
 
   .goBack {
     @apply mb-5 rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary  active:border-black;
+  }
+
+  .btn-basic {
+    @apply rounded-lg bg-black text-white hover:text-primary active:text-secondary;
   }
 }

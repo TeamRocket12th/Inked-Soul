@@ -6,12 +6,12 @@
           <tr>
             <th>認領圖</th>
             <th>名稱</th>
+            <th>預約時段</th>
+            <th>訂單狀態</th>
             <th>{{ props.role }}</th>
             <th>訂單編號</th>
             <th>交易日期</th>
-            <th>預約時段</th>
             <th>訂金</th>
-            <th>訂單狀態</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +28,12 @@
                 <p>{{ props.order.Size }}</p>
               </div>
             </td>
+            <td>{{ bookedDate }} {{ bookedTimeFrame }}</td>
+            <td>
+              <span class="rounded-full bg-black px-3 py-1 text-white">
+                {{ orderStatus }}
+              </span>
+            </td>
             <td>
               <!-- 購買人 -->
               <p v-if="props.role === '訂購人'">{{ props.order.BuPurchaser }}</p>
@@ -43,9 +49,7 @@
               <!-- 交易日期 -->
               {{ payDate }}
             </td>
-            <td>{{ bookedDate }} {{ bookedTimeFrame }}</td>
             <td>$ {{ props.order.Deposit }}</td>
-            <td>{{ orderStatus }}</td>
           </tr>
         </tbody>
       </table>
@@ -63,6 +67,8 @@ const props = defineProps({
     default: '訂購人'
   }
 })
+
+const authCookie = useCookie('data')
 
 const { transformDate, transformOrderStatus } = useFormatted()
 
@@ -84,13 +90,9 @@ const bookedTimeFrame = computed(() => {
 const orderStatus = computed(() => {
   if (props.order) {
     const status = props.order.OrderStatus
-    return transformOrderStatus(status)
+    const role = authCookie.value.Role
+
+    return transformOrderStatus(status, role)
   }
 })
-
-const starAmount = props.order.star
-const starArr = []
-for (let i = 0; i < starAmount; i++) {
-  starArr.push('ic:baseline-star')
-}
 </script>

@@ -16,7 +16,7 @@
               :rules="isUnder20"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.名稱 }"
-              :placeholder="userInfoData.Nickname"
+              placeholder="請輸入您的名稱"
             />
             <Icon
               v-if="errors.名稱"
@@ -39,7 +39,7 @@
               name="手機"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.手機 }"
-              :placeholder="userInfoData.Tel"
+              placeholder="0912345678"
             />
             <Icon
               v-if="errors.手機"
@@ -55,8 +55,8 @@
           </div>
           <div class="relative">
             <VField
-              v-model="email"
               id="email"
+              v-model="email"
               rules="email"
               name="電子信箱"
               class="formInput text-gray-200"

@@ -5,24 +5,48 @@
       <h2 class="mb-10">找尋刺青靈感</h2>
       <div class="grid grid-cols-2 gap-[32px]">
         <!-- first row -->
-        <div class="flex flex-row gap-[32px]">
-          <img src="/home-inspire1.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
-          <img src="/home-inspire2.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
+        <div class="flex max-h-[304px] flex-row gap-[32px]">
+          <img
+            src="/home/5.jpg"
+            alt=""
+            class="w-full overflow-hidden rounded-lg border border-custom object-cover"
+          />
+          <img
+            src="/home/6.jpg"
+            alt=""
+            class="w-full overflow-hidden rounded-lg border border-custom object-cover"
+          />
         </div>
-        <img src="/home-inspire3.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
+        <img
+          src="/home/4.jpg"
+          alt=""
+          class="max-h-[304px] w-full overflow-hidden rounded-lg border border-custom object-cover"
+        />
         <!-- second row -->
-        <img src="/home-inspire4.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
-        <div class="flex flex-row gap-[32px]">
-          <img src="/home-inspire5.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
-          <img src="/home-inspire6.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
+        <img
+          src="/home/3.jpg"
+          alt=""
+          class="max-h-[304px] w-full overflow-hidden rounded-lg border border-custom object-cover"
+        />
+        <div class="flex max-h-[304px] flex-row gap-[32px]">
+          <img
+            src="/home/7.jpg"
+            alt=""
+            class="w-full overflow-hidden rounded-lg border border-custom object-contain"
+          />
+          <img
+            src="/home/8.jpg"
+            alt=""
+            class="w-full overflow-hidden rounded-lg border border-custom object-contain"
+          />
         </div>
       </div>
     </div>
 
     <!-- 待改為 grid  -->
-    <div class="flex flex-col items-center">
-      <div class="flex flex-row gap-[32px]">
-        <div class="flex h-[416px] w-[416px] flex-col items-center justify-center gap-10">
+    <div class="flex flex-col items-center gap-8">
+      <div class="grid grid-cols-2 gap-8">
+        <div class="col-span-1 flex max-h-[416px] flex-col items-center justify-center gap-10">
           <p class="text-center">
             這裡是藝術的殿堂 <br />
             為您找尋獨一無二的紋身藝術
@@ -31,10 +55,19 @@
             >探索認領圖</NuxtLink
           >
         </div>
-        <img src="/home-inspire7.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
+        <img
+          src="/home/1.jpg"
+          alt=""
+          class="col-span-1 max-h-[416px] overflow-hidden rounded-lg object-cover"
+        />
       </div>
-      <div class="flex flex-row-reverse gap-[32px]">
-        <div class="flex h-[416px] w-[416px] flex-col items-center justify-center gap-10">
+      <div class="grid grid-cols-2 gap-8">
+        <img
+          src="/home/2.jpg"
+          alt=""
+          class="col-span-1 max-h-[416px] overflow-hidden rounded-lg object-cover"
+        />
+        <div class="col-span-1 flex max-h-[416px] flex-col items-center justify-center gap-10">
           <p class="text-center">
             每一位刺青師都是綻放靈感的魔術師<br />
             與您共同編織刺青的靈魂故事
@@ -43,7 +76,6 @@
             >探索刺青師</NuxtLink
           >
         </div>
-        <img src="/home-inspire8.svg" alt="" class="overflow-hidden rounded-lg object-contain" />
       </div>
     </div>
   </div>
@@ -62,13 +94,16 @@
         <li
           v-for="(item, key) in style"
           :key="key"
-          class="relative flex cursor-pointer flex-col items-center text-white"
+          class="group relative flex max-h-[350px] cursor-pointer flex-col items-center text-white"
           @click="toDesignPage(item.link)"
         >
-          <img :src="item.image" alt="" />
-          <div class="absolute bottom-0 left-0 right-0 mx-auto py-5">
+          <div class="imgContainer h-full w-full">
+            <img :src="item.image" alt="" class="h-full w-full object-cover" />
+            <div class="imgOverlay hidden group-hover:block"></div>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 mx-auto py-5 transition">
             <div class="flex flex-col items-center gap-3">
-              <h2 class="font-bold">{{ item.chinese }}</h2>
+              <h2 class="font-serif-tc font-bold">{{ item.chinese }}</h2>
               <h3 class="font-heading-typo text-base font-normal">{{ item.english }}</h3>
             </div>
           </div>
@@ -89,49 +124,49 @@ const style = [
   {
     chinese: '黑灰派',
     english: 'Black and Grey',
-    image: '/home-element1.png',
+    image: '/home/style1.jpg',
     link: 'Black and Grey 黑灰派'
   },
   {
     chinese: '日式傳統',
     english: 'Traditional Japanese',
-    image: '/home-element2.png',
+    image: '/home/style2.jpg',
     link: 'Traditional Japanese 日式傳統'
   },
   {
     chinese: '新傳統',
     english: 'New Traditional',
-    image: '/home-element3.png',
+    image: '/home/style3.jpg',
     link: 'New Traditional 新傳統'
   },
   {
     chinese: '老派風',
     english: 'Old School',
-    image: '/home-element4.png',
+    image: '/home/style4.jpg',
     link: 'Old School 老派風'
   },
   {
     chinese: '幾何',
     english: 'Geometric',
-    image: '/home-element5.png',
+    image: '/home/style5.jpg',
     link: 'Geometric 幾何'
   },
   {
     chinese: '寫實主義',
     english: 'Realism',
-    image: '/home-element6.png',
+    image: '/home/style6.jpg',
     link: 'Realism 寫實主義'
   },
   {
     chinese: '單針',
     english: 'Fine Line',
-    image: '/home-element7.png',
+    image: '/home/style7.jpg',
     link: 'Fine Line 單針'
   },
   {
     chinese: '極黑風格',
     english: 'Blackwork',
-    image: '/home-element8.png',
+    image: '/home/style8.jpg',
     link: 'Blackwork 極黑風格'
   }
 ]
@@ -142,3 +177,21 @@ const toDesignPage = (style) => {
   navigateTo('/designs')
 }
 </script>
+<style scoped>
+.imgContainer {
+  position: relative;
+}
+.imgOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 67.71%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+</style>

@@ -26,7 +26,7 @@
                 ><Icon name="ic:outline-share" size="24"
               /></label>
               <ul tabindex="0" class="dropdown-content z-[1] w-52 rounded-lg bg-base-100">
-                <ShareModal />
+                <ShareModal :current-page="`/designs/${props.id}`" />
               </ul>
             </div>
           </div>
@@ -37,7 +37,7 @@
         <li
           v-for="(style, key) in props.designData.Style"
           :key="key"
-          class="rounded-full border px-3 py-1"
+          class="rounded-full border-[0.5px] border-custom px-3 py-1 text-sm"
         >
           {{ style }}
         </li>

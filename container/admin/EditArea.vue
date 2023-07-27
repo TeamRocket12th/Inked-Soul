@@ -14,9 +14,9 @@
       </div>
       <button
         type="button"
-        @click.prevent="editArtistInfo"
         :disabled="!meta.valid"
         class="btn-neutral btn mb-20 w-full bg-black text-white"
+        @click.prevent="editArtistInfo"
       >
         更新個人資料
       </button>

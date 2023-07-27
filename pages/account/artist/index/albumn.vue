@@ -10,69 +10,40 @@
       </button>
       <dialog id="upload_album" class="modal">
         <form method="dialog" class="modal-box">
-          <div class="mb-8 grid grid-cols-3 items-center justify-center">
-            <button class="h-12 w-12 cursor-pointer">
-              <Icon
-                name="ic:outline-keyboard-arrow-left"
-                size="48"
-                class="rounded-full border border-[#D0D0D0] text-secondary duration-200 hover:border-secondary"
-              />
-            </button>
-            <!-- @click="toPreviousPage" -->
-            <h4 class="text-center">上架作品集</h4>
-            <div></div>
-          </div>
-          <label
-            for="file"
-            :class="{ 'border-[#DC3545]': isFileSizeAlert }"
-            class="border-1 relative overflow-hidden rounded-lg border-black"
-          >
-            <div class="mb-4 flex h-full flex-col items-center justify-center gap-[20px]">
-              <Icon name="ic:baseline-add-circle-outline" class="h-[100px] w-[100px]" />
-              <p>上傳您的原創作品集</p>
-              <p>最大文件大小：4mb</p>
-            </div>
-            <img
-              :src="url"
-              alt=""
-              class="absolute top-0 h-full w-full object-contain"
-              :class="url ? 'bg-black' : ''"
-            />
-            <input
-              id="file"
-              type="file"
-              accept=".jpg, .png, .svg "
-              class="hidden"
-              @change.stop="handleOnPreview"
-            />
-          </label>
-          <label for="idea" class="mb-2 block">設計理念</label>
-          <textarea
-            id="idea"
-            class="textarea mb-4 block w-full"
-            placeholder="請填入創作想法、作品解說，30字內。"
-            v-model="albumnIdea"
-          ></textarea>
-          <button class="w-full rounded bg-black p-3 text-white" @click="uploadAlbum()">
-            確認上架
-          </button>
-        </form>
-        <form method="dialog" class="modal-backdrop">
-          <button>close</button>
+          <UploadAlbumArea />
         </form>
       </dialog>
     </div>
-    <!-- 上傳成功 -->
+    <!-- 上傳成功燈箱 -->
+    <dialog ref="successAlbumModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <Icon name="ic:baseline-check" size="60" class="mb-4" />
+        <p class="mb-10 font-bold">已成功上架您的作品集</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+      </div>
+    </dialog>
+    <!-- 上傳失敗燈箱 -->
+    <dialog ref="failedAlbumModal" class="rounded-xl p-8">
+      <div class="flex flex-col items-center">
+        <p class="mb-10 font-bold">上架失敗，請重新上架</p>
+        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+      </div>
+    </dialog>
     <!-- 表格 -->
     <table class="w-full">
       <thead>
-        <tr class="flex justify-between rounded-t-lg border-b-2 border-secondary bg-primary p-2">
+        <tr class="flex justify-between rounded-t-lg border-b border-custom bg-primary p-2">
           <td class="w-[10%]">置頂</td>
           <td class="w-[30%]">作品集</td>
           <td class="w-[30%]">上架日期</td>
-          <td class="w-[30%]"></td>
+          <td class="w-[10%]"></td>
         </tr>
       </thead>
+      <tbody v-if="!allAlbum">
+        <tr class="h-[108px] border-b border-[#D0D0D0] text-center">
+          <td colspan="10">您尚無任何訂單</td>
+        </tr>
+      </tbody>
       <tbody class="w-full overflow-hidden rounded-xl">
         <tr
           v-for="(item, index) in allAlbum"
@@ -80,7 +51,16 @@
           class="flex items-center justify-between border-b-2 border-primary p-2"
         >
           <td class="w-[10%]">
-            <input type="checkbox" />
+            <Icon
+              v-if="item.IsTop === false"
+              name="ic:baseline-check-box-outline-blank"
+              @click="editAlbum(item.Id, artistID, item.Description, true)"
+            />
+            <Icon
+              v-if="item.IsTop === true"
+              name="ic:outline-push-pin"
+              @click="editAlbum(item.Id, artistID, item.Description, false)"
+            />
           </td>
           <td class="flex w-[30%] justify-center">
             <div
@@ -89,45 +69,88 @@
             ></div>
           </td>
           <td class="w-[30%]">{{ formattedOutput(new Date(item.InitTime)) }}</td>
-          <td class="flex w-[30%] flex-row-reverse"><Icon name="ic:round-more-vert" /></td>
+          <td class="flex w-[10%] flex-row-reverse">
+            <!-- <div class="dropdown">
+              <label tabindex="0" class="btn m-1"><Icon name="ic:round-more-vert" /></label>
+              <ul
+                tabindex="0"
+                class="dropdown-right dropdown-content menu rounded-box z-[1] flex w-20 bg-base-100 p-2 shadow"
+              >
+                <li>
+                  <div class="h-15 w-15 flex justify-center rounded-full">
+                    <Icon name="ic:baseline-edit" />
+                  </div>
+                </li>
+                <li>
+                  <div class="h-15 w-15 flex justify-center rounded-full">
+                    <Icon name="ic:baseline-delete-outline" />
+                  </div>
+                </li>
+              </ul>
+            </div> -->
+            <button
+              :disabled="item.IsSoldout === '已售出'"
+              :class="{
+                ' text-custom hover:bg-white hover:text-custom': item.IsSoldout === '已售出'
+              }"
+              class="mx-auto flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in hover:bg-black hover:text-white"
+              @click="deleteDesign(item.Id)"
+            >
+              <Icon name="ic:baseline-delete" size="24" />
+            </button>
+          </td>
+          <!-- <Icon name="ic:round-more-vert" /> -->
         </tr>
       </tbody>
     </table>
+    <div v-if="allAlbumNum">
+      <PaginationBtn :num="allAlbumNum" state="front" />
+    </div>
   </div>
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUploadTattooStore } from '~/stores/uploadTattoo'
+import UploadAlbumArea from '~/container/admin/UploadAlbumArea'
+
 const store = useUploadTattooStore()
-const { getAlbumn, uploadAlbum } = store
-const { allAlbum, uploadAlbumData } = storeToRefs(store)
+const { getAlbumn, editAlbum } = store
+const { allAlbum, res, showAlbum, allAlbumNum } = storeToRefs(store)
 
 const { formattedOutput } = useFormatted()
 
 const token = useCookie('data')
 const artistID = token.value.Id
 
-const isFileSizeAlert = ref(false)
+// 上傳結果燈箱
+const successAlbumModal = ref(null)
+const failedAlbumModal = ref(null)
+let sucAlbumModal
+let faAlbumModal
+const showAlbumModal = () => {
+  if (res.value === 200) {
+    sucAlbumModal.showModal()
+    showAlbum.value = false
+  } else {
+    faAlbumModal.showModal()
+    showAlbum.value = false
+  }
+}
+const closeModal = () => {
+  sucAlbumModal.close()
+  faAlbumModal.close()
+}
 
-const albumnIdea = ref()
-const initTime = ref()
-watch(albumnIdea, (nV) => {
-  uploadAlbumData.value.picdescription = albumnIdea.value
+watch(showAlbum, (_newValue, _oldValue) => {
+  if (showAlbum.value === true) {
+    showAlbumModal()
+  }
 })
 
-const url = ref()
-const handleOnPreview = (event) => {
-  const file = event.target.files[0]
-  if (file.size > 1024 * 1024 * 4) {
-    isFileSizeAlert.value = true
-    return
-  }
-  url.value = URL.createObjectURL(event.target.files[0])
-
-  uploadAlbumData.value.image = event.target.files[0]
-}
 onMounted(() => {
   getAlbumn(artistID, 1)
+  sucAlbumModal = successAlbumModal.value
+  faAlbumModal = failedAlbumModal.value
 })
 </script>
 <style></style>

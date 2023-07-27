@@ -13,6 +13,14 @@
         <p>{{ props.order.size }}</p>
       </div>
     </td>
+    <!-- 預約時間 -->
+    <td>{{ bookedDate }} {{ bookedTimeFrame }}</td>
+    <!-- 訂單狀態 -->
+    <td>
+      <span class="rounded-full bg-black px-3 py-1 text-white">
+        {{ orderStatus }}
+      </span>
+    </td>
     <td>
       <!-- 購買人 -->
       {{ props.order.BuPurchaser }}
@@ -27,12 +35,9 @@
       <!-- 交易日期 -->
       {{ payDate }}
     </td>
-    <!-- 預約時間 -->
-    <td>{{ bookedDate }} {{ bookedTimeFrame }}</td>
+
     <!-- 價格(訂金) -->
     <td>$ {{ props.order.Deposit }}</td>
-    <!-- 訂單狀態 -->
-    <td>{{ orderStatus }}</td>
   </tr>
 </template>
 <script setup>
@@ -42,6 +47,9 @@ const props = defineProps({
     required: true
   }
 })
+
+const authCookie = useCookie('data')
+
 const { formattedOutput, transformOrderStatus } = useFormatted()
 const payDate = ref()
 const bookedDate = ref()
@@ -50,7 +58,9 @@ const newBookedDate = ref()
 const orderStatus = computed(() => {
   if (props.order) {
     const status = props.order.OrderStatus
-    return transformOrderStatus(status)
+    const role = authCookie.value.Role
+
+    return transformOrderStatus(status, role)
   }
 })
 const bookedTimeFrame = computed(() => {

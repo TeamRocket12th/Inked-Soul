@@ -3,8 +3,9 @@
     <NuxtLink to="/account/normal/orderRecords">
       <Icon name="ic:outline-keyboard-arrow-left" size="48" class="goBack" />
     </NuxtLink>
+
     <div class="relative flex h-auto flex-col items-center">
-      <OrderArea>
+      <OrderArea class="mb-5">
         <template #orderContext>
           <Icon :name="titleInfo.icon" size="40" />
           <h4>
@@ -59,7 +60,7 @@ const titleInfo = reactive({
 })
 
 const getOrderInfo = async () => {
-  const { data: orderResponse, error } = await useFetch(`${APIBASE}/api/orderinfo/${imageId}`, {
+  const { data: orderResponse } = await useFetch(`${APIBASE}/api/orderinfo/${imageId}`, {
     headers: {
       'Content-type': 'application/json',
       Authorization: `Bearer ${authToken.value}`
@@ -97,6 +98,10 @@ const orderContext = {
     content: ''
   }
 }
+
+setInterval(() => {
+  getOrderInfo()
+}, 10000)
 
 onMounted(() => {
   nextTick(() => {
