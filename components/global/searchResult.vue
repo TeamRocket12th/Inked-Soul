@@ -1,13 +1,14 @@
 <template>
   <div v-if="showResult" class="mb-8 flex w-full justify-between">
     <div class="flex items-center gap-2">
-      認領圖的
+      <slot></slot>
+      的
       <div class="text-left">
         <span v-if="cityArr.length === 0" class="font-bold">全部</span>
         <span v-for="(item, index) in cityArr" :key="index" class="font-bold"
           >{{ item }}<span>&nbsp;</span></span
         ><span>&nbsp;</span>
-        <span>縣市</span>
+        <span v-if="cityArr.length === 0" class="font-bold">縣市</span>
       </div>
       <div v-if="path === '/designs'" class="flex items-center">
         <span v-if="styleArr.length === 0" class="font-bold">全部</span>

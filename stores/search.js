@@ -86,12 +86,11 @@ export const useSearchStore = defineStore('search', () => {
         })
         showResult.value = true
         // console.log('成功取得所有刺青師', data)
-        if (data.value.Data !== null) {
+        if (data.value.response) {
           allArtistsData.value = data.value.Data
           allNum.value = data.value.response.TotalNum
         } else {
           allNum.value = 0
-          alert('認領圖中無相對刺青師在此縣市')
         }
       })
     } catch (error) {

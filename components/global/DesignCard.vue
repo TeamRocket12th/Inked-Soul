@@ -1,20 +1,21 @@
 <template>
-  <div class="boreder-black group relative overflow-hidden rounded-lg border-2">
+  <div class="boreder-black group relative overflow-hidden rounded-lg border-[1px]">
     <img
+      v-if="props.data"
       :src="props.data.Url"
       class="h-fit min-h-[200px] w-full bg-white object-contain object-center"
     />
-    <!-- :style="{ height: `${height}px` }" -->
     <!-- 遮罩 -->
     <div
+      v-if="props.data"
       class="z-1 designCard absolute top-0 hidden h-full w-full flex-col-reverse gap-3 p-5 group-hover:flex"
     >
       <div class="flex items-center justify-between">
-        <p v-if="props.data.Name" class="font-noto-tc font-bold text-white">
-          {{ props.data.Name }}
-        </p>
         <p v-if="props.data.ImgName" class="font-noto-tc font-bold text-white">
           {{ props.data.ImgName }}
+        </p>
+        <p v-if="props.data.Name" class="font-noto-tc font-bold text-white">
+          {{ props.data.Name }}
         </p>
         <p class="font-roboto-nl font-bold text-white">$ {{ props.data.Total }}</p>
       </div>
@@ -48,6 +49,4 @@ const props = defineProps({
     required: true
   }
 })
-
-console.log('prop data', props.data)
 </script>

@@ -3,7 +3,7 @@
     class="flex min-h-[80px] items-center justify-between px-[60px] py-4 text-black shadow-md duration-200 ease-in-out"
     :class="[
       { 'text-white shadow-none': scrollY < 250 && route.path === '/' },
-      { 'bg-[#FFF] text-black': route.path !== '/' },
+      { 'bg-[#FFF] text-secondary': route.path !== '/' },
       { 'bg-[#FFF]': scrollY > 250 }
     ]"
   >
@@ -13,15 +13,31 @@
         <h2 class="font-heading-typo leading-[120%]">Inked Soul</h2>
       </div>
     </NuxtLink>
-    <ul class="flex flex-row items-center">
-      <li>
-        <NuxtLink to="/designs" class="px-4 py-2">認領圖</NuxtLink>
+
+    <ul class="flex items-center">
+      <li class="h-auto w-auto">
+        <NuxtLink
+          to="/designs"
+          class="px-4 py-2"
+          :class="route.path === '/designs' ? 'text-black' : ''"
+          >認領圖</NuxtLink
+        >
       </li>
       <li>
-        <NuxtLink to="/artists" class="px-4 py-2">刺青師</NuxtLink>
+        <NuxtLink
+          to="/artists"
+          class="px-4 py-2"
+          :class="route.path === '/artists' ? 'text-black' : ''"
+          >刺青師</NuxtLink
+        >
       </li>
       <li>
-        <NuxtLink to="/tips" class="mr-6 px-4 py-2">知識點</NuxtLink>
+        <NuxtLink
+          to="/tips"
+          class="mr-6 px-4 py-2"
+          :class="route.path === '/tips' ? 'text-black' : ''"
+          >知識點</NuxtLink
+        >
       </li>
       <li class="flex items-center">
         <NuxtLink v-if="!authToken" to="/account/login" class="flex items-center">
@@ -206,4 +222,7 @@ watchEffect(() => {
     }
   }
 })
+
+// navbar字體顏色轉換
+const pagePath = computed(() => route.path)
 </script>

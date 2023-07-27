@@ -1,8 +1,8 @@
 <template>
   <!-- 所有認領圖 -->
   <div class="container relative mx-auto flex flex-col items-center">
-    <SearchBar class="mb-14">搜尋認領圖</SearchBar>
-    <search-result />
+    <SearchBar class="mb-5">搜尋認領圖</SearchBar>
+    <SearchResult>認領圖</SearchResult>
 
     <div v-if="isPending" class="grid w-full grid-cols-4 gap-8">
       <LoadingCard class="col-span-1" />
