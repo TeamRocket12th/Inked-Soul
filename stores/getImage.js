@@ -16,7 +16,7 @@ export const useGetImageStore = defineStore('getImage', () => {
 
   const userGetTattooData = (ID, page) => {
     nextTick(async () => {
-      isPending.value = true // 不知道要放在裡面還是外面，放在外面不行
+      isPending.value = true
       const { data } = await useFetch(`${APIBASE}/api/usergetallimg`, {
         method: 'POST',
         query: {

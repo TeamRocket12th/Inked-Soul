@@ -3,22 +3,21 @@
     <h2 class="mb-8">刺青知識點</h2>
     <ul class="grid grid-cols-3 gap-8">
       <li v-for="(item, key) in tipsData" :key="key">
-        <NuxtLink :to="`/tips/${item.Id}`">
-          <Suspense>
-            <template #default>
-              <TipsCard
-                :time="1000"
-                :image="item.Image"
-                :title="item.Title"
-                :date="item.Date"
-                :content="item.Content"
-              />
-            </template>
-            <template #fallback>
-              <LoadingCard />
-            </template>
-          </Suspense>
-        </NuxtLink>
+        <Suspense>
+          <template #default>
+            <TipsCard
+              :card-id="item.Id"
+              :time="1000"
+              :image="item.Image"
+              :title="item.Title"
+              :date="item.Date"
+              :content="item.Content"
+            />
+          </template>
+          <template #fallback>
+            <LoadingCard />
+          </template>
+        </Suspense>
       </li>
     </ul>
   </div>
