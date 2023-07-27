@@ -25,6 +25,9 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const formKey = {}
   // 打包成form data
   const formData = new FormData()
+
+  const isPending = ref(false)
+
   const selectImage = () => {
     for (const key in uploadTattooData.value) {
       formKey[key] = uploadTattooData.value[key]
@@ -37,9 +40,9 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       formData.delete(key)
       uploadTattooData.value[key] = ''
     }
-    uploadTattooData.picname = null
-    uploadTattooData.pichour = null
-    uploadTattooData.picidea = null
+    uploadTattooData.picname = ''
+    uploadTattooData.pichour = ''
+    uploadTattooData.picidea = ''
     uploadTattooData.picstyle = []
     uploadTattooData.picelement = []
   }
@@ -59,6 +62,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
   const uploadTattoo = async () => {
     selectImage()
     postImageLimit()
+    isPending.value = true
     try {
       const res = await $fetch(`${APIBASE}/api/uploadimage`, {
         method: 'POST',
@@ -77,6 +81,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
       clearFormData()
       console.log('上傳錯誤', error)
     }
+    isPending.value = false
   }
 
   // 刺青師後台取得認領圖
@@ -199,6 +204,7 @@ export const useUploadTattooStore = defineStore('UploadTattoo', () => {
     showImage,
     showAlbum,
     radio,
+    isPending,
     uploadTattoo,
     artistGetTattooData,
     getAlbumn,

@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute bottom-0 left-0 right-0 top-0 z-10 h-full w-full bg-black bg-opacity-30">
+  <div class="absolute bottom-0 left-0 right-0 top-0 z-50 h-screen w-full bg-black bg-opacity-30">
     <div class="flex h-full items-center justify-center gap-10">
       <img src="/logo.png" alt="logo" class="spin w-[30px]" />
       <div class="text-primary-dark">

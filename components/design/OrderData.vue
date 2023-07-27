@@ -131,9 +131,6 @@
         </div>
       </div>
     </VForm>
-
-    <!-- ❌ -->
-    <!-- <button @click="postOrder">test</button> -->
   </div>
 </template>
 <script setup>

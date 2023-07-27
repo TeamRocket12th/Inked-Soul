@@ -21,7 +21,7 @@
         </div>
         <div class="flex flex-row items-center gap-2">
           <Icon name="ic:outline-home" size="24" class="text-secondary" />
-          <p>{{ props.designData.City }}</p>
+          <p>{{ props.designData.Address }}</p>
         </div>
         <div class="flex flex-row items-center gap-2">
           <Icon name="ic:round-access-time" size="24" class="text-secondary" />
