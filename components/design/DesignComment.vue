@@ -6,11 +6,9 @@
         v-model="comment"
         type="text"
         placeholder="發表留言"
-        class="w-full border-b border-black bg-transparent px-6 py-3 outline-none placeholder:text-custom"
+        class="w-[89%] border-b border-black bg-transparent px-6 py-3 outline-none placeholder:text-custom"
       />
-      <button type="button" class="defaultBtn w-[64px] whitespace-nowrap" @click="postComment">
-        留言
-      </button>
+      <button type="button" class="btn-basic btn-small" @click="postComment">留言</button>
     </div>
     <ul class="mb-5 flex flex-col gap-7">
       <transition-group>
