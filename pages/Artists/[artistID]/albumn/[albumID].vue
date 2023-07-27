@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="album">
-    <div class="flex flex-col gap-3">
+    <div v-if="singleAlbum" class="flex flex-col gap-3">
       <img :src="singleAlbum.Url" alt="" class="aspect-square w-full rounded-lg object-cover" />
       <p class="font-noto-tc text-base text-secondary">{{ singleAlbum.Description }}</p>
     </div>
@@ -19,8 +19,8 @@ const route = useRoute()
 const artistID = route.params.artistID
 const albumID = route.params.albumID
 
-onMounted(() => {
-  userGetSingleAlbum(albumID, artistID)
+onMounted(async () => {
+  await userGetSingleAlbum(albumID, artistID)
 })
 </script>
 

@@ -107,21 +107,30 @@
             >
               <li>
                 <a
-                  :class="{ 'pointer-events-none line-through': disabledTime.includes('0') }"
+                  :class="{
+                    'pointer-events-none line-through':
+                      disabledTime.includes('0') || !availableTimeFrame.includes('時段一')
+                  }"
                   @click="selectTime(0)"
                   >上午（開店時間～12:00）</a
                 >
               </li>
               <li>
                 <a
-                  :class="{ 'pointer-events-none line-through': disabledTime.includes('1') }"
+                  :class="{
+                    'pointer-events-none line-through':
+                      disabledTime.includes('1') || !availableTimeFrame.includes('時段二')
+                  }"
                   @click="selectTime(1)"
                   >下午（12:00～18:00）</a
                 >
               </li>
               <li>
                 <a
-                  :class="{ 'pointer-events-none line-through': disabledTime.includes('2') }"
+                  :class="{
+                    'pointer-events-none line-through':
+                      disabledTime.includes('2') || !availableTimeFrame.includes('時段三')
+                  }"
                   @click="selectTime(2)"
                   >晚上（18:00～閉店時間）</a
                 >
@@ -163,6 +172,7 @@ const { data: artistInfo } = await useFetch(`${APIBASE}/api/artistbooking`, {
 
 const closeDays = ref(artistInfo.value.response.ClosedDays)
 const dayOff = ref(artistInfo.value.response.DayOff)
+const availableTimeFrame = ref(artistInfo.value.response.TimeFrame)
 const bookedDate = artistInfo.value.Data.map((item) => {
   const formattedBookedDate = item.BookedDate.replace(/\//g, '-')
   const formattedBookedTimeFrame = []
