@@ -24,6 +24,10 @@ setLocale('zh_TW')
 .vc-disabled {
   text-decoration: line-through;
 }
+vc-light.vc-attr,
+.vc-light .vc-attr {
+  --vc-highlight-solid-bg: black;
+}
 
 .v-enter-active,
 .v-leave-active {
