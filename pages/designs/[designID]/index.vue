@@ -90,7 +90,7 @@ const authToken = useCookie('token')
 
 const route = useRoute()
 
-const page = ref(0)
+const page = ref(1)
 const root = ref(null)
 const scrollY = ref('0')
 
@@ -122,9 +122,15 @@ const initIntersectionObserver = () => {
   }
 }
 
-watch(page, (nextPage) => {
-  userGetTattooData(artistId, nextPage)
-})
+watch(
+  page,
+  (nextPage) => {
+    userGetTattooData(artistId, nextPage)
+  },
+  {
+    immediate: true
+  }
+)
 
 const handleScroll = () => {
   scrollY.value = window.scrollY
