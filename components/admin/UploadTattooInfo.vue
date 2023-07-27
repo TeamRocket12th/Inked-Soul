@@ -9,7 +9,7 @@
       <div class="relative">
         <VField
           id="tattooName"
-          v-model="tattooName"
+          v-model="uploadTattooData.picname"
           name="作品名稱"
           rules="required"
           class="formInput"
@@ -85,7 +85,7 @@
       <div class="relative">
         <VField
           id="hour"
-          v-model="hour"
+          v-model="uploadTattooData.pichour"
           name="預計作業時間"
           rules="required"
           class="formInput"
@@ -129,18 +129,18 @@ const bodyParts = [
   '腿部'
 ]
 
-const tattooName = ref()
+// const tattooName = ref()
 const selectBodyParts = ref([])
 const tattooSize = ref('')
-const hour = ref()
+// const hour = ref()
 const sizeErrorMessage = ref('')
 
-watch(tattooName, (_newValue, _oldValue) => {
-  uploadTattooData.value.picname = tattooName.value
-})
-watch(hour, (_newValue, _oldValue) => {
-  uploadTattooData.value.pichour = hour.value
-})
+// watch(tattooName, (_newValue, _oldValue) => {
+//   uploadTattooData.value.picname = tattooName.value
+// })
+// watch(hour, (_newValue, _oldValue) => {
+//   uploadTattooData.value.pichour = hour.value
+// })
 
 const SelectRecommendPositions = (part) => {
   const index = selectBodyParts.value.indexOf(part)

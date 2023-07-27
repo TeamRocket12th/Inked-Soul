@@ -90,22 +90,17 @@ const props = defineProps({
 const store = useUploadTattooStore()
 const { uploadTattooData } = storeToRefs(store)
 
-const designIdea = ref()
 const totalPrice = ref()
 const deposit = ref()
 const balance = ref()
 
 watch(totalPrice, (newTotalPrice) => {
-  deposit.value = Math.floor(newTotalPrice * 0.3)
-  // const numericDeposit = Number(deposit.value.replace(/,/g, ''))
-  balance.value = Math.floor(newTotalPrice - deposit.value)
-  uploadTattooData.value.pictotal = totalPrice.value
-  uploadTattooData.value.picdeposit = deposit.value
-  uploadTattooData.value.picbalance = balance.value
-})
-
-watch(designIdea, (_newValue) => {
-  uploadTattooData.value.picidea = designIdea.value
+  deposit.value = Math.floor(newTotalPrice * 0.3).toLocaleString()
+  const numericDeposit = Number(deposit.value.replace(/,/g, ''))
+  balance.value = Math.floor(newTotalPrice - numericDeposit).toLocaleString()
+  uploadTattooData.value.pictotal = totalPrice.value.toLocaleString()
+  uploadTattooData.value.picdeposit = deposit.value.toString()
+  uploadTattooData.value.picbalance = balance.value.toString()
 })
 </script>
 <style scoped></style>
