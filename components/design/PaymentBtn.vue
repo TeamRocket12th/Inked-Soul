@@ -16,7 +16,7 @@
           </NuxtLink>
         </div>
         <div v-if="authToken">
-          <h3 class="text-lg font-bold">確認無誤，撥款刺青師 ${{ props.deposit }}元</h3>
+          <h3 class="text-lg font-bold">確認無誤，撥款刺青師 ${{ deposit }}元</h3>
           <p class="py-4">
             提醒您，請再次確認完整訂單。 <br />
             訂單成立後，平台將會協助把訂金撥款給賣家。
@@ -70,6 +70,8 @@ const authToken = useCookie('token')
 
 const store = useOrderStore()
 const { inputPaymentInfo, paymentInfo } = storeToRefs(store)
+
+const deposit = ref(props.deposit.toLocaleString())
 
 // 發送用戶下單資料
 const form = ref(null)

@@ -10,17 +10,17 @@
         <div class="relative">
           <VField
             id="realName"
+            v-model="inputArtistInfoData.Realname"
             :rules="isUnder20"
             name="真實姓名"
             class="formInput"
-            v-model="inputArtistInfoData.Realname"
             :class="{ 'border-[#DC3545]': props.errors.真實姓名 }"
             :placeholder="artistInfoData.Realname"
           />
           <Icon
+            v-if="props.errors.真實姓名"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.真實姓名"
           />
         </div>
       </div>
@@ -32,17 +32,17 @@
         <div class="relative">
           <VField
             id="nickName"
+            v-model="inputArtistInfoData.Nickname"
             :rules="isUnder20"
             name="名稱"
             class="formInput"
-            v-model="inputArtistInfoData.Nickname"
             :class="{ 'border-[#DC3545]': props.errors.名稱 }"
             :placeholder="artistInfoData.Nickname"
           />
           <Icon
+            v-if="props.errors.名稱"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.名稱"
           />
         </div>
       </div>
@@ -54,18 +54,17 @@
         <div class="relative">
           <VField
             id="phone"
+            v-model="inputArtistInfoData.Phone"
             :rules="isPhone"
             name="手機"
             class="formInput"
             placeholder="0912345678"
-            v-model="inputArtistInfoData.Phone"
             :class="{ 'border-[#DC3545]': props.errors.手機 }"
-            :placeholder="artistInfoData.Phone"
           />
           <Icon
+            v-if="props.errors.手機"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.手機"
           />
         </div>
       </div>
@@ -77,16 +76,16 @@
         <div class="relative">
           <VField
             id="email"
+            v-model="artistInfoData.Account"
             rules="email"
             name="電子信箱"
             class="formInput text-[#D0D0D0]"
-            v-model="artistInfoData.Account"
             disabled
           />
           <Icon
+            v-if="props.errors.電子信箱"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.電子信箱"
           />
         </div>
       </div>
@@ -98,17 +97,17 @@
         <div class="relative">
           <VField
             id="experience"
+            v-model="inputArtistInfoData.Experience"
             rules="integer: true"
             name="資歷"
             class="formInput"
-            v-model="inputArtistInfoData.Experience"
             :class="{ 'border-[#DC3545]': props.errors.資歷 }"
             :placeholder="artistInfoData.Experience || 1"
           />
           <Icon
+            v-if="props.errors.資歷"
             name="ic:baseline-error-outline"
             class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-            v-if="props.errors.資歷"
           />
         </div>
       </div>
@@ -126,7 +125,8 @@ const { isUnder20, isPhone } = useValidate()
 
 const props = defineProps({
   errors: {
-    require: true
+    type: null,
+    required: true
   }
 })
 </script>

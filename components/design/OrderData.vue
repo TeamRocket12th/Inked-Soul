@@ -131,9 +131,6 @@
         </div>
       </div>
     </VForm>
-
-    <!-- ❌ -->
-    <!-- <button @click="postOrder">test</button> -->
   </div>
 </template>
 <script setup>
@@ -142,7 +139,6 @@ import { useOrderStore } from '~/stores/order'
 
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
-// const authToken = useCookie('token')
 
 const store = useOrderStore()
 const { inputPaymentInfo, paymentInfo } = storeToRefs(store)
@@ -164,38 +160,6 @@ const { data: artistInfo } = await useFetch(`${APIBASE}/api/artistbooking`, {
   method: 'POST',
   body: props.artistId
 })
-
-// 發送用戶下單資料 (測試版本)
-// const paymentData = reactive({})
-// const postOrder = async () => {
-//   inputPaymentInfo.value.ImagesId = designData.value.ID
-//   // ⭕️ 正確的，測試先關掉
-//   const tempBookedTimeFrame = paymentInfo.value.BookedTimeFrame
-//   Object.assign(paymentInfo.value, inputPaymentInfo.value)
-//   paymentInfo.value.BookedTimeFrame = tempBookedTimeFrame
-
-//   if (!authToken.value) {
-//     return ''
-//   } else {
-//     const { data: orderResponse } = await useFetch(`${APIBASE}/api/artistbookingpay`, {
-//       headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` },
-//       method: 'POST',
-//       body: {
-//         itemDesc: '測試',
-//         itemDescid: paymentInfo.value.ImagesId,
-//         amt: 5000,
-//         Name: paymentInfo.value.Realname,
-//         Phone: paymentInfo.value.Phone,
-//         Email: paymentInfo.value.Realname,
-//         BookedDate: paymentInfo.value.BookedDate,
-//         BookedTimeFrame: paymentInfo.value.BookedTimeFrame
-//       }
-//     })
-//     if (!orderResponse.value) {
-//       console.log(orderResponse.value)
-//     }
-//   }
-// }
 
 const closeDays = ref(artistInfo.value.response.ClosedDays)
 const dayOff = ref(artistInfo.value.response.DayOff)

@@ -18,7 +18,7 @@
             tabindex="0"
             class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
           >
-            <li v-for="(day, key) in weeks" :key="key" @click="SelectCloseDays(day)" class="m-1">
+            <li v-for="(day, key) in weeks" :key="key" class="m-1" @click="SelectCloseDays(day)">
               <a :class="{ 'bg-gray-100': ArtistCloseDay.includes(day) }">{{ day.week }}</a>
             </li>
           </ul>
@@ -58,8 +58,8 @@
             <li
               v-for="(hour, key) in time"
               :key="key"
-              @click="SelectTime('open', hour)"
               class="m-1"
+              @click="SelectTime('open', hour)"
             >
               <a :class="{ 'bg-gray-100': ArtistOpenTime.includes(hour) }">{{ hour }}</a>
             </li>
@@ -82,8 +82,8 @@
             <li
               v-for="(hour, key) in time"
               :key="key"
-              @click="SelectTime('close', hour)"
               class="m-1"
+              @click="SelectTime('close', hour)"
             >
               <a :class="{ 'bg-gray-100': ArtistCloseTime.includes(hour) }">{{ hour }}</a>
             </li>
@@ -95,13 +95,13 @@
       <span>可供預約時段</span>
       <ul class="flex flex-wrap gap-2">
         <li
-          v-for="(time, key) in timeFrame"
+          v-for="(part, key) in timeFrame"
           :key="key"
-          @click="SelectTimeFrame(time)"
+          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(part.id) }"
           class="rounded-full border px-3 py-1 text-center"
-          :class="{ 'bg-black text-white': ArtistAvailableTimeFrame.includes(time) }"
+          @click="SelectTimeFrame(part.id)"
         >
-          <a>{{ time }}</a>
+          <a>{{ part.time }}</a>
         </li>
       </ul>
     </div>
@@ -146,7 +146,14 @@ const time = [
   '23:00',
   '24:00'
 ]
-const timeFrame = ['上午（開店時間～12:00）', '下午（12:00~18:00)', '晚上（18:00~閉店時間）']
+const timeFrame = [
+  { id: '時段一', time: '上午（開店時間～12:00）' },
+  {
+    id: '時段二',
+    time: '下午（12:00~18:00)'
+  },
+  { id: '時段三', time: '晚上（18:00~閉店時間）' }
+]
 
 const store = useAccountStore()
 const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
@@ -158,7 +165,7 @@ const ArtistOpenTime = ref(
   artistInfoData.value.StartTime ? artistInfoData.value.StartTime : '請選擇'
 )
 const ArtistCloseTime = ref(artistInfoData.value.EndTime ? artistInfoData.value.EndTime : '請選擇')
-const ArtistAvailableTimeFrame = ref(artistInfoData.value.TimeFrame || [])
+const ArtistAvailableTimeFrame = ref([])
 const ArtistDayoff = ref('')
 
 const date = new Date()
@@ -233,15 +240,7 @@ const SelectTimeFrame = (part) => {
     }
   }
 
-  const timeFrameMapping = {
-    0: '時段一',
-    1: '時段二',
-    2: '時段三'
-  }
-
-  inputArtistInfoData.value.TimeFrame = ArtistAvailableTimeFrame.value
-    .map((item) => timeFrameMapping[item])
-    .join()
+  inputArtistInfoData.value.TimeFrame = ArtistAvailableTimeFrame.value.join()
 }
 </script>
 <style></style>

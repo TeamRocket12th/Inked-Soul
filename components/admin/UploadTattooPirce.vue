@@ -95,10 +95,9 @@ const deposit = ref()
 const balance = ref()
 
 watch(totalPrice, (newTotalPrice) => {
-  deposit.value = Math.floor(newTotalPrice * 0.3).toLocaleString()
-  const numericDeposit = Number(deposit.value.replace(/,/g, ''))
-  balance.value = Math.floor(newTotalPrice - numericDeposit).toLocaleString()
-  uploadTattooData.value.pictotal = totalPrice.value.toLocaleString()
+  deposit.value = Math.floor(newTotalPrice * 0.3)
+  balance.value = Math.floor(newTotalPrice - deposit.value)
+  uploadTattooData.value.pictotal = totalPrice.value.toString()
   uploadTattooData.value.picdeposit = deposit.value.toString()
   uploadTattooData.value.picbalance = balance.value.toString()
 })

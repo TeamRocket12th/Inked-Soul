@@ -29,7 +29,7 @@
           type="button"
           class="defaultBtn py-3 text-[20px]"
           :disabled="!meta.valid"
-          @click.prevent="uploadTattoo()"
+          @click="uploadTattoo()"
         >
           確認上架
         </button>

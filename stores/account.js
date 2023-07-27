@@ -221,7 +221,7 @@ export const useAccountStore = defineStore('account', () => {
     Object.assign(artistInfoData, inputArtistInfoData)
 
     try {
-      const { data } = await useFetch(`${APIBASE}/api/editartistinfo`, {
+      await $fetch(`${APIBASE}/api/editartistinfo`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
@@ -229,10 +229,7 @@ export const useAccountStore = defineStore('account', () => {
         method: 'POST',
         body: artistInfoData
       })
-      if (data.value) {
-        await getArtistInfo()
-      }
-      console.log('edit', data.value)
+      await getArtistInfo()
     } catch (error) {
       console.log(error)
     }
