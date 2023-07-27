@@ -1,7 +1,5 @@
 <template>
-  <NuxtLayout name="term">
-    <template #navbar></template>
-  </NuxtLayout>
+  <NuxtLayout name="term"> </NuxtLayout>
 </template>
 <script setup></script>
 <style scoped></style>

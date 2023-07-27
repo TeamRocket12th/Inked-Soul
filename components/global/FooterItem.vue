@@ -12,7 +12,7 @@
           <NuxtLink to="/tips">知識點</NuxtLink>
         </li>
       </ul>
-      <Icon name="ic:outline-email" />
+      <Icon name="ic:outline-email" size="24" />
     </div>
     <hr />
 
@@ -25,7 +25,7 @@
           </div>
         </NuxtLink>
       </div>
-      <NuxtLink>使用者條款</NuxtLink>
+      <NuxtLink to="/term/userterm">使用者條款</NuxtLink>
     </div>
   </footer>
 </template>
