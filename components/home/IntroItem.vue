@@ -5,39 +5,39 @@
       <h2 class="mb-10">找尋刺青靈感</h2>
       <div class="grid grid-cols-2 gap-[32px]">
         <!-- first row -->
-        <div class="flex max-h-[304px] flex-row gap-[32px]">
+        <div class="col-span-2 flex max-h-[304px] flex-row gap-[32px] md:col-span-1">
           <img
             src="/home/5.jpg"
             alt=""
-            class="w-full overflow-hidden rounded-lg border border-custom object-cover"
+            class="aspect-square w-full overflow-hidden rounded-lg border border-custom object-cover"
           />
           <img
             src="/home/6.jpg"
             alt=""
-            class="w-full overflow-hidden rounded-lg border border-custom object-cover"
+            class="aspect-square w-full overflow-hidden rounded-lg border border-custom object-cover"
           />
         </div>
         <img
           src="/home/4.jpg"
           alt=""
-          class="max-h-[304px] w-full overflow-hidden rounded-lg border border-custom object-cover"
+          class="hidden max-h-[304px] w-full overflow-hidden rounded-lg border border-custom object-cover md:block"
         />
         <!-- second row -->
         <img
           src="/home/3.jpg"
           alt=""
-          class="max-h-[304px] w-full overflow-hidden rounded-lg border border-custom object-cover"
+          class="hidden max-h-[304px] w-full overflow-hidden rounded-lg border border-custom object-cover md:block"
         />
-        <div class="flex max-h-[304px] flex-row gap-[32px]">
+        <div class="col-span-2 flex max-h-[304px] flex-row gap-[32px] md:col-span-1">
           <img
             src="/home/7.jpg"
             alt=""
-            class="w-full overflow-hidden rounded-lg border border-custom object-contain"
+            class="aspect-square w-full overflow-hidden rounded-lg border border-custom object-contain"
           />
           <img
             src="/home/8.jpg"
             alt=""
-            class="w-full overflow-hidden rounded-lg border border-custom object-contain"
+            class="aspect-square w-full overflow-hidden rounded-lg border border-custom object-contain"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@
     <div class="flex flex-col items-center gap-8">
       <div class="grid grid-cols-2 gap-8">
         <div class="col-span-1 flex max-h-[416px] flex-col items-center justify-center gap-10">
-          <p class="text-center">
+          <p class="hidden text-center md:block">
             這裡是藝術的殿堂 <br />
             為您找尋獨一無二的紋身藝術
           </p>
@@ -68,7 +68,7 @@
           class="col-span-1 max-h-[416px] overflow-hidden rounded-lg object-cover"
         />
         <div class="col-span-1 flex max-h-[416px] flex-col items-center justify-center gap-10">
-          <p class="text-center">
+          <p class="hidden text-center md:block">
             每一位刺青師都是綻放靈感的魔術師<br />
             與您共同編織刺青的靈魂故事
           </p>
@@ -90,14 +90,14 @@
       <div
         class="via-opacity-20 absolute bottom-0 right-0 top-0 z-10 bg-gradient-to-l from-white to-transparent 2xl:w-20"
       ></div>
-      <ul class="grid grid-cols-4 gap-1">
+      <ul class="gap-1 md:grid md:grid-cols-4">
         <li
           v-for="(item, key) in style"
           :key="key"
           class="group relative flex max-h-[350px] cursor-pointer flex-col items-center text-white"
           @click="toDesignPage(item.link)"
         >
-          <div class="imgContainer h-full w-full">
+          <div class="imgContainer h-full w-full overflow-hidden">
             <img :src="item.image" alt="" class="h-full w-full object-cover" />
             <div class="imgOverlay hidden group-hover:block"></div>
           </div>

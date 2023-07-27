@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group relative flex h-[416px] w-full items-center justify-center overflow-hidden rounded-lg bg-white"
+    class="group relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-lg bg-white md:h-[416px]"
   >
     <img
       v-if="props.data.Photo"
@@ -16,7 +16,7 @@
     >
       <div class="flex flex-col items-center gap-3 hover:flex">
         <p v-if="props.data.Nickname" class="font-xl font-bold">{{ props.data.Nickname }}</p>
-        <div v-if="typeof props.data.Style === 'string'" class="flex items-center gap-3">
+        <div v-if="typeof props.data.Style === 'string'" class="hidden items-center gap-3 md:flex">
           <span
             v-for="(item, index) in styleArr.value"
             :key="index"
