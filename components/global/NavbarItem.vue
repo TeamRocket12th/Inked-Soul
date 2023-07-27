@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex min-h-[80px] items-center justify-between px-[60px] py-4 text-black shadow-md duration-200 ease-in-out"
+    class="fixed top-0 z-50 flex w-full flex-wrap items-center justify-between px-3 py-4 text-black shadow-md duration-200 ease-in-out md:min-h-[80px] md:flex-row md:px-[60px]"
     :class="[
       { 'text-white shadow-none': scrollY < 250 && route.path === '/' },
       { 'bg-[#FFF] text-secondary': route.path !== '/' },
@@ -14,7 +14,71 @@
       </div>
     </NuxtLink>
 
-    <ul class="flex items-center">
+    <!-- 手機版 -->
+    <div class="cursor-pointer md:hidden" @click="toggleMenu()">
+      <Icon name="ic:baseline-menu" size="24" />
+    </div>
+    <div
+      class="flex h-screen w-full flex-col py-5 text-[20px] leading-6"
+      :class="{ hidden: showMenu }"
+      @click="toggleMenu()"
+    >
+      <div class="flex flex-col gap-3 border-b px-8 py-5">
+        <NuxtLink
+          to="/account/login"
+          class="defaultBtn w-fit border border-custom bg-transparent text-secondary hover:text-secondary"
+          >登入</NuxtLink
+        >
+        <NuxtLink to="/account/signup" class="defaultBtn w-fit">註冊</NuxtLink>
+      </div>
+      <ul class="border-b py-5">
+        <li>
+          <NuxtLink
+            to="/designs"
+            class="block cursor-pointer px-8 py-4"
+            :class="route.path === '/designs' ? 'text-black' : ''"
+            >認領圖</NuxtLink
+          >
+        </li>
+        <li>
+          <NuxtLink
+            to="/artists"
+            class="block cursor-pointer px-8 py-4"
+            :class="route.path === '/artists' ? 'text-black' : ''"
+            >刺青師</NuxtLink
+          >
+        </li>
+        <li>
+          <NuxtLink
+            to="/tips"
+            class="block cursor-pointer px-8 py-4 md:mr-6"
+            :class="route.path === '/tips' ? 'text-black' : ''"
+            >知識點</NuxtLink
+          >
+        </li>
+      </ul>
+      <ul class="py-5">
+        <li>
+          <NuxtLink
+            to="/term/appealflow"
+            class="block cursor-pointer px-8 py-4 md:mr-6"
+            :class="route.path === '/tips' ? 'text-black' : ''"
+            >客服信箱</NuxtLink
+          >
+        </li>
+        <li>
+          <NuxtLink
+            to="/tips"
+            class="block cursor-pointer px-8 py-4 md:mr-6"
+            :class="route.path === '/tips' ? 'text-black' : ''"
+            >知識點</NuxtLink
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- 電腦版 -->
+    <ul class="hidden items-center md:flex">
       <li class="h-auto w-auto">
         <NuxtLink
           to="/designs"
@@ -225,4 +289,10 @@ watchEffect(() => {
 
 // navbar字體顏色轉換
 const pagePath = computed(() => route.path)
+
+// RWD
+const showMenu = ref(true)
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value
+}
 </script>

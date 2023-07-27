@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavbarItem class="fixed top-0 z-50 w-full"></NavbarItem>
+    <NavbarItem></NavbarItem>
     <div
       class="relative min-h-screen pb-20"
       :class="[{ 'pt-[120px]': route.path !== '/' }, { 'bg-primary': route.path !== '/' }]"

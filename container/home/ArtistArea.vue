@@ -1,7 +1,7 @@
 <template>
   <div class="container flex flex-col items-center gap-8">
     <h2 class="mb-10 text-center">本月精選刺青師</h2>
-    <div v-if="artistsData" class="grid grid-cols-3 gap-[32px]">
+    <div v-if="artistsData" class="grid grid-cols-2 gap-[32px] md:grid-cols-3">
       <NuxtLink v-for="item in artistsData" :key="item.Id" :to="`/artists/${item.Id}`">
         <ArtistCard :data="item"></ArtistCard>
       </NuxtLink>
