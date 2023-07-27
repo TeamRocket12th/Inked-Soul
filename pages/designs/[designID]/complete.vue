@@ -9,12 +9,10 @@
     <div class="">
       <NuxtLink
         :to="authToken ? `account/normal/${orderID}` : '/account/login'"
-        class="btn mr-4 border-[1px] border-primary bg-white"
+        class="btn mr-4 border-[1px] border-primary bg-white hover:border-secondary active:border-black"
         >看訂單交易紀錄</NuxtLink
       >
-      <NuxtLink to="/designs" class="btn bg-black text-white hover:text-black"
-        >探索更多認領圖</NuxtLink
-      >
+      <NuxtLink to="/designs" class="btn-basic btn-small">探索更多認領圖</NuxtLink>
     </div>
   </div>
 </template>

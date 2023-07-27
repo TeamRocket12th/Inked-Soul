@@ -1,8 +1,6 @@
 <template>
   <div>
-    <button class="btn-neutral btn w-full bg-black text-white" onclick="my_modal_3.showModal()">
-      確認付款
-    </button>
+    <button class="btn-basic btn-large" onclick="my_modal_3.showModal()">確認付款</button>
     <dialog id="my_modal_3" class="modal">
       <form method="dialog" class="modal-box text-center">
         <button class="btn-ghost btn-sm btn-circle btn absolute right-2 top-2">
@@ -12,7 +10,7 @@
           <h3 class="text-lg font-bold">尚未登入</h3>
           <p class="py-4">請先登入，才能夠下訂哦！</p>
           <NuxtLink to="/account/login">
-            <button class="btn-neutral btn px-5 text-white">前往登入</button>
+            <button class="btn-basic btn-small">前往登入</button>
           </NuxtLink>
         </div>
         <div v-if="authToken">
@@ -21,9 +19,7 @@
             提醒您，請再次確認完整訂單。 <br />
             訂單成立後，平台將會協助把訂金撥款給賣家。
           </p>
-          <button class="btn-neutral btn bg-black px-5 text-white" @click="postOrder">
-            確認付款
-          </button>
+          <button class="btn-basic btn-small" @click="postOrder">確認付款</button>
         </div>
       </form>
     </dialog>
