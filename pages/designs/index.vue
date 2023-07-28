@@ -54,7 +54,6 @@ const initIntersectionObserver = () => {
     entries.forEach((entry) => {
       if (isSearch.value) {
         page.value = 1
-        return
       }
       if (entry.intersectionRatio > 0 && !isNoResult.value) {
         page.value += 1
