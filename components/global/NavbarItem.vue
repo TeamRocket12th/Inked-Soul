@@ -19,7 +19,7 @@
       <Icon name="ic:baseline-menu" size="24" />
     </div>
     <div
-      class="flex h-screen w-full flex-col py-5 text-[20px] leading-6"
+      class="flex h-screen w-full flex-col bg-white py-5 text-[20px] leading-6 text-black"
       :class="{ hidden: showMenu }"
       @click="toggleMenu()"
     >
