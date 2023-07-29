@@ -32,28 +32,28 @@
                   <td class="px-20">
                     <transition>
                       <div
-                        v-if="dateDetail[0]"
+                        v-if="dateDetail['上午']"
                         class="flex h-[108px] items-center justify-center gap-3"
                       >
                         <img
-                          :src="dateDetail[0].ImgUrl"
+                          :src="dateDetail['上午'].ImgUrl"
                           class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
                         />
                         <div class="flex flex-col items-start justify-center">
-                          <p>{{ dateDetail[0].ImgName }}</p>
-                          <p>{{ dateDetail[0].ImgSize }}</p>
+                          <p>{{ dateDetail['上午'].ImgName }}</p>
+                          <p>{{ dateDetail['上午'].ImgSize }}</p>
                         </div>
                       </div>
                     </transition>
                   </td>
                   <td>
-                    <div v-if="dateDetail[0]" class="flex items-center justify-center gap-2">
+                    <div v-if="dateDetail['上午']" class="flex items-center justify-center gap-2">
                       <img
-                        :src="dateDetail[0].BuPurchaserPhoto"
+                        :src="dateDetail['上午'].BuPurchaserPhoto"
                         alt=""
                         class="h-6 w-6 rounded-full bg-white object-cover object-center"
                       />
-                      <p>{{ dateDetail[0].BuPurchaser }}</p>
+                      <p>{{ dateDetail['上午'].BuPurchaser }}</p>
                     </div>
                   </td>
                 </tr>
@@ -64,27 +64,27 @@
                   <td>
                     <transition>
                       <div
-                        v-if="dateDetail[1]"
+                        v-if="dateDetail['下午']"
                         class="flex h-[108px] items-center justify-center gap-3"
                       >
                         <img
-                          :src="dateDetail[1].ImgUrl"
+                          :src="dateDetail['下午'].ImgUrl"
                           class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
                         />
                         <div class="flex flex-col items-start justify-center">
-                          <p>{{ dateDetail[1].ImgName }}</p>
-                          <p>{{ dateDetail[1].ImgSize }}</p>
+                          <p>{{ dateDetail['下午'].ImgName }}</p>
+                          <p>{{ dateDetail['下午'].ImgSize }}</p>
                         </div>
                       </div>
                     </transition>
                   </td>
                   <td>
-                    <div v-if="dateDetail[1]" class="flex items-center justify-center gap-2">
+                    <div v-if="dateDetail['下午']" class="flex items-center justify-center gap-2">
                       <img
-                        :src="dateDetail[1].BuPurchaserPhoto"
+                        :src="dateDetail['下午'].BuPurchaserPhoto"
                         class="h-6 w-6 rounded-full bg-white object-cover object-center"
                       />
-                      <p>{{ dateDetail[1].BuPurchaser }}</p>
+                      <p>{{ dateDetail['下午'].BuPurchaser }}</p>
                     </div>
                   </td>
                 </tr>
@@ -95,27 +95,27 @@
                   <td>
                     <transition>
                       <div
-                        v-if="dateDetail[2]"
+                        v-if="dateDetail['晚上']"
                         class="flex h-[108px] items-center justify-center gap-3"
                       >
                         <img
-                          :src="dateDetail[2].ImgUrl"
+                          :src="dateDetail['晚上'].ImgUrl"
                           class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
                         />
                         <div class="flex flex-col items-start justify-center">
-                          <p>{{ dateDetail[2].ImgName }}</p>
-                          <p>{{ dateDetail[2].ImgSize }}</p>
+                          <p>{{ dateDetail['晚上'].ImgName }}</p>
+                          <p>{{ dateDetail['晚上'].ImgSize }}</p>
                         </div>
                       </div>
                     </transition>
                   </td>
                   <td>
-                    <div v-if="dateDetail[2]" class="flex items-center justify-center gap-2">
+                    <div v-if="dateDetail['晚上']" class="flex items-center justify-center gap-2">
                       <img
-                        :src="dateDetail[2].BuPurchaserPhoto"
+                        :src="dateDetail['晚上'].BuPurchaserPhoto"
                         class="h-6 w-6 rounded-full bg-white object-fill object-center"
                       />
-                      <p>{{ dateDetail[2].BuPurchaser }}</p>
+                      <p>{{ dateDetail['晚上'].BuPurchaser }}</p>
                     </div>
                   </td>
                 </tr>
@@ -143,7 +143,7 @@ const selectDate = ref('')
 const closeDate = ref('')
 const dayOff = ref('')
 const scheduleData = ref('')
-const dateDetail = ref('')
+const dateDetail = ref({})
 
 const disabledDates = computed(() => [
   {
@@ -187,7 +187,7 @@ watch(
   async () => {
     selectDate.value = formattedOutput(date.value)
 
-    const { data: dateResponse } = await useFetch(`${APIBASE}/api/orderday`, {
+    const res = await $fetch(`${APIBASE}/api/orderday`, {
       headers: {
         'Content-type': 'application/json',
         Authorization: `Bearer ${authToken.value}`
@@ -197,8 +197,20 @@ watch(
         BookedDate: selectDate.value
       }
     })
-    if (dateResponse.value && dateResponse.value !== '此日期無訂單') {
-      dateDetail.value = dateResponse.value.DataList
+
+    const orderData = res.DataList
+    if (orderData && orderData !== '此日期無訂單') {
+      orderData.forEach((item) => {
+        if (item.BookedTimeFrame.startsWith('上午')) {
+          dateDetail.value['上午'] = item
+        }
+        if (item.BookedTimeFrame.startsWith('下午')) {
+          dateDetail.value['下午'] = item
+        }
+        if (item.BookedTimeFrame.startsWith('晚上')) {
+          dateDetail.value['晚上'] = item
+        }
+      })
     } else {
       dateDetail.value = { Data: [] }
     }
@@ -221,7 +233,7 @@ th {
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.6s;
+  transition: opacity 0.3s;
 }
 
 .v-enter-from,
