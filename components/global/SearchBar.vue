@@ -10,8 +10,9 @@
         v-if="route.path === '/artists'"
         class="h-[0px] min-w-[128px] md:w-[320px] lg:w-[644px]"
       ></div>
-      <div
-        class="indicator mb-5 flex h-full w-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
+      <label
+        tabindex="0"
+        class="z-1 indicator mb-5 flex h-full w-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
       >
         <!-- 數字標示 -->
         <span
@@ -20,7 +21,7 @@
           >{{ cityArr.length }}</span
         >
         <!-- 欄位 -->
-        <label tabindex="0" class="flex cursor-pointer items-center">
+        <div tabindex="0" class="flex cursor-pointer items-center">
           <Icon name="ic:outline-room" size="24" class="mr-1 lg:mr-2" />
           <p
             v-if="cityArr.length === 0"
@@ -31,8 +32,8 @@
           <div v-if="cityArr.length !== 0 && width >= 768" class="flex text-black">
             <p v-for="(item, index) in cityArr" :key="index">{{ item }}<span>&nbsp;</span></p>
           </div>
-        </label>
-      </div>
+        </div>
+      </label>
       <!-- 地區選項 -->
       <!-- <div class="h-[100px] w-[824px] bg-black">測試寬度</div> -->
       <!-- <div class="h-[100px] w-[500px] bg-black">測試寬度</div> -->
@@ -195,7 +196,8 @@
     <!-- 選擇風格、元素 -->
     <div v-if="route.path !== '/artists'" class="dropdown h-full md:w-[170px] lg:w-[322px]">
       <div class="h-[0px] md:w-[170px] lg:w-[322px]"></div>
-      <div
+      <label
+        tabindex="0"
         class="indicator mb-5 flex h-full w-full items-center border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
       >
         <!-- 數字標示 -->
@@ -205,7 +207,7 @@
           >{{ searchSelect.length }}</span
         >
         <!-- 欄位 -->
-        <label tabindex="0" class="flex cursor-pointer items-center">
+        <div tabindex="0" class="flex cursor-pointer items-center">
           <div class="mr-1 lg:mr-2">
             <Icon name="ic:outline-tune" size="24" />
           </div>
@@ -220,8 +222,8 @@
               >{{ item }}<span>&nbsp;</span></span
             >
           </div>
-        </label>
-      </div>
+        </div>
+      </label>
       <!-- 風格元素選項 -->
       <ul
         tabindex="0"
