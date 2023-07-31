@@ -98,6 +98,7 @@ const postOrder = async () => {
     if (!orderResponse.value) {
       // console.log(orderResponse.value)
     } else {
+      // console.log('orderRes', orderResponse)
       paymentData.value = orderResponse.value.PaymentData
       await nextTick()
       form.value.submit() // 發送藍新回傳的資料
