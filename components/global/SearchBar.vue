@@ -225,7 +225,7 @@
       <!-- 風格元素選項 -->
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -right-[240%] z-[1] flex flex-wrap bg-base-100 p-5 shadow md:-right-[108%] lg:-right-[57%]"
+        class="dropdown-content menu rounded-box absolute -left-[77px] z-[1] flex flex-wrap bg-base-100 p-5 shadow md:-left-[150px] lg:-left-[322px]"
         :class="`w-[${searchBarWidth}px]`"
       >
         <!-- 所有風格 -->
