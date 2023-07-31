@@ -5,7 +5,10 @@
       class="dropdown relative h-full"
       :class="route.path === '/artists' ? `w-[${optionBoxWidth2}px]` : `w-[${optionBoxWidth}px] `"
     >
-      <!-- <div class="h-[100px] w-[322px] bg-black">測試寬度</div> -->
+      <div
+        v-if="route.path === '/artists'"
+        class="h-[0px] min-w-[128px] md:w-[320px] lg:w-[644px]"
+      ></div>
       <div
         class="indicator mb-5 flex h-full w-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
       >
@@ -33,12 +36,16 @@
       <!-- <div class="h-[100px] w-[824px] bg-black">測試寬度</div> -->
       <!-- <div class="h-[100px] w-[500px] bg-black">測試寬度</div> -->
       <!-- <div class="h-[0px] w-[344px] bg-black">測試寬度</div> -->
+
       <div
         class="dropdown-content menu rounded-box absolute left-0 z-[1] bg-base-100 p-2 shadow"
         :class="`w-[${searchBarWidth}px]`"
         @click.capture.self="clear('city')"
       >
-        <!-- <div class="h-[0px] w-[334px] bg-black"></div> -->
+        <div
+          v-if="route.path === '/artists'"
+          class="h-[0px] min-w-[308px] md:w-[500px] lg:w-[824px]"
+        ></div>
         <ul v-if="width >= 768" class="mb-2 grid grid-cols-4 border-b-2 border-primary pb-2">
           <li class="text-center text-base font-bold">北部</li>
           <li class="text-center text-base font-bold">中部</li>
@@ -193,6 +200,7 @@
       class="dropdown h-full"
       :class="`w-[${optionBoxWidth}px]`"
     >
+      <div class="h-[0px] md:w-[170px] lg:w-[644px]"></div>
       <div
         class="indicator mb-5 flex h-full w-full items-center border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
       >
@@ -221,7 +229,7 @@
       <!-- 地區選項 -->
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -right-[230%] z-[1] flex flex-wrap bg-base-100 p-5 shadow md:-right-[115%] lg:-right-[55%]"
+        class="dropdown-content menu rounded-box absolute -right-[230%] z-[1] flex flex-wrap bg-base-100 p-5 shadow md:-right-[108%] lg:-right-[57%]"
         :class="`w-[${searchBarWidth}px]`"
       >
         <!-- 所有風格 -->
