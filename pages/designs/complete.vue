@@ -17,8 +17,6 @@
   </div>
 </template>
 <script setup>
-import OrderArea from '~/container/order/OrderArea'
-import OrderDetail from '~/components/user/OrderDetail'
 import { storeToRefs } from 'pinia'
 import { useOrderStore } from '~/stores/order'
 import { useAccountStore } from '~/stores/account'
