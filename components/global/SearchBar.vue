@@ -1,31 +1,51 @@
 <template>
-  <div class="relative flex h-[64px] w-[824px] items-start">
+  <div ref="searchBar" class="relative flex h-[64px] min-w-[308px] md:w-[500px] lg:w-[824px]">
     <!-- 選擇縣市 -->
     <div
       class="dropdown relative h-full"
-      :class="route.path === '/artists' ? 'w-[80%]' : ' w-[40%]'"
+      :class="route.path === '/artists' ? `w-[${optionBoxWidth2}px]` : `w-[${optionBoxWidth}px] `"
     >
-      <label
-        tabindex="0"
-        class="height-auto mb-5 flex h-full items-center gap-2 rounded-e-none rounded-s-lg border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50"
-      >
-        <Icon name="ic:outline-room" class="h-6 w-6" />
-        <p v-if="cityArr.length === 0" class="text-[#D0D0D0]">選擇縣市</p>
-        <div v-if="cityArr.length !== 0" class="flex text-black">
-          <p v-for="(item, index) in cityArr" :key="index">{{ item }}<span>&nbsp;</span></p>
-        </div>
-      </label>
+      <!-- <div class="h-[100px] w-[322px] bg-black">測試寬度</div> -->
       <div
-        class="dropdown-content menu rounded-box absolute left-0 z-[1] w-[824px] bg-base-100 p-2 shadow"
+        class="indicator mb-5 flex h-full w-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
+      >
+        <!-- 數字標示 -->
+        <span
+          v-if="isMobile && cityArr.length !== 0"
+          class="badge badge-secondary indicator-start indicator-item h-6 w-6 rounded-full border-none bg-black text-white"
+          >{{ cityArr.length }}</span
+        >
+        <!-- 欄位 -->
+        <label tabindex="0" class="flex items-center">
+          <Icon name="ic:outline-room" class="mr-1 h-6 w-6 lg:mr-2" />
+          <p
+            v-if="cityArr.length === 0"
+            class="hidden text-ellipsis text-xs text-[#D0D0D0] md:block md:text-sm lg:text-base"
+          >
+            選擇縣市
+          </p>
+          <div v-if="cityArr.length !== 0 && width >= 768" class="flex text-black">
+            <p v-for="(item, index) in cityArr" :key="index">{{ item }}<span>&nbsp;</span></p>
+          </div>
+        </label>
+      </div>
+      <!-- 地區選項 -->
+      <!-- <div class="h-[100px] w-[824px] bg-black">測試寬度</div> -->
+      <!-- <div class="h-[100px] w-[500px] bg-black">測試寬度</div> -->
+      <!-- <div class="h-[0px] w-[344px] bg-black">測試寬度</div> -->
+      <div
+        class="dropdown-content menu rounded-box absolute left-0 z-[1] bg-base-100 p-2 shadow"
+        :class="`w-[${searchBarWidth}px]`"
         @click.capture.self="clear('city')"
       >
-        <ul class="mb-2 grid grid-cols-4 border-b-2 border-primary pb-2">
+        <!-- <div class="h-[0px] w-[334px] bg-black"></div> -->
+        <ul v-if="width >= 768" class="mb-2 grid grid-cols-4 border-b-2 border-primary pb-2">
           <li class="text-center text-base font-bold">北部</li>
           <li class="text-center text-base font-bold">中部</li>
           <li class="text-center text-base font-bold">南部</li>
           <li class="text-center text-base font-bold">東部</li>
         </ul>
-        <ul tabindex="0" class="grid grid-cols-4">
+        <ul v-if="width >= 768" tabindex="0" class="grid grid-cols-4">
           <!-- 北部 -->
           <li class="mb-4">
             <ul class="ml-0 flex flex-col items-center gap-1 pl-0 before:w-0">
@@ -33,8 +53,8 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'rounded-none bg-black text-white focus:bg-black'
-                      : 'rounded-none bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
                   "
                   @click.prevent="cityToggle(city)"
                 >
@@ -50,8 +70,8 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'rounded-none bg-black text-white focus:bg-black'
-                      : 'rounded-none bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
                   "
                   @click="cityToggle(city)"
                 >
@@ -67,8 +87,8 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'rounded-none bg-black text-white focus:bg-black'
-                      : 'rounded-none bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
                   "
                   @click="cityToggle(city)"
                 >
@@ -84,8 +104,78 @@
                 <button
                   :class="
                     cityArr.includes(city)
-                      ? 'rounded-none bg-black text-white focus:bg-black'
-                      : 'rounded-none bg-white text-black focus:bg-white'
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
+                  "
+                  @click="cityToggle(city)"
+                >
+                  {{ city }}
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul v-if="width < 768">
+          <li>
+            <p class="text-center text-base font-bold">北部</p>
+            <ul class="flex flex-wrap">
+              <li v-for="(city, key) in taiwanCities.northern" :key="key">
+                <button
+                  :class="
+                    cityArr.includes(city)
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
+                  "
+                  @click.prevent="cityToggle(city)"
+                >
+                  {{ city }}
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p class="text-center text-base font-bold">中部</p>
+            <ul class="flex flex-wrap">
+              <li v-for="(city, key) in taiwanCities.central" :key="key">
+                <button
+                  :class="
+                    cityArr.includes(city)
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
+                  "
+                  @click="cityToggle(city)"
+                >
+                  {{ city }}
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p class="text-center text-base font-bold">南部</p>
+            <ul class="flex flex-wrap">
+              <li v-for="(city, key) in taiwanCities.southern" :key="key">
+                <button
+                  :class="
+                    cityArr.includes(city)
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
+                  "
+                  @click="cityToggle(city)"
+                >
+                  {{ city }}
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p class="text-center text-base font-bold">東部</p>
+            <ul class="flex flex-wrap">
+              <li v-for="(city, key) in taiwanCities.eastern" :key="key">
+                <button
+                  :class="
+                    cityArr.includes(city)
+                      ? 'rounded-none bg-black text-xs text-white focus:bg-black md:text-sm'
+                      : 'rounded-none bg-white text-xs text-black focus:bg-white md:text-sm'
                   "
                   @click="cityToggle(city)"
                 >
@@ -98,22 +188,41 @@
       </div>
     </div>
     <!-- 選擇風格、元素 -->
-    <div v-if="route.path !== '/artists'" class="dropdown h-full w-[40%]">
-      <label
-        tabindex="0"
-        class="mb-5 flex h-full items-center gap-2 border border-secondary bg-white p-5 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50"
+    <div
+      v-if="route.path !== '/artists'"
+      class="dropdown h-full"
+      :class="`w-[${optionBoxWidth}px]`"
+    >
+      <div
+        class="indicator mb-5 flex h-full w-full items-center border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
       >
-        <Icon name="ic:outline-tune" class="h-6 w-6" />
-        <p v-if="searchSelect.length === 0" class="text-[#D0D0D0]">風格及元素</p>
-        <div v-if="searchSelect.length !== 0" class="line-clamp-1 w-full">
-          <span v-for="(item, index) in searchSelect" :key="index" class="text-black"
-            >{{ item }}<span>&nbsp;</span></span
+        <!-- 數字標示 -->
+        <span
+          v-if="isMobile && searchSelect.length !== 0"
+          class="badge badge-secondary indicator-start indicator-item h-6 w-6 rounded-full border-none bg-black text-white"
+          >{{ searchSelect.length }}</span
+        >
+        <!-- 欄位 -->
+        <label tabindex="0" class="flex items-center">
+          <Icon name="ic:outline-tune" class="mr-1 h-6 w-6 lg:mr-2" />
+          <p
+            v-if="searchSelect.length === 0"
+            class="hidden text-ellipsis text-xs text-[#D0D0D0] sm:text-xs md:block md:text-sm lg:text-base"
           >
-        </div>
-      </label>
+            風格及元素
+          </p>
+          <div v-if="searchSelect.length !== 0" class="line-clamp-1 hidden md:block md:w-full">
+            <span v-for="(item, index) in searchSelect" :key="index" class="text-black"
+              >{{ item }}<span>&nbsp;</span></span
+            >
+          </div>
+        </label>
+      </div>
+      <!-- 地區選項 -->
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -right-[55%] z-[1] flex w-[824px] flex-wrap bg-base-100 p-5 shadow"
+        class="dropdown-content menu rounded-box absolute -right-[230%] z-[1] flex flex-wrap bg-base-100 p-5 shadow md:-right-[115%] lg:-right-[55%]"
+        :class="`w-[${searchBarWidth}px]`"
       >
         <!-- 所有風格 -->
         <li>
@@ -159,12 +268,13 @@
         </li>
       </ul>
     </div>
-    <button type="button" class="searchBtn h-full w-[180px]" @click="searchDesign()">
+    <button type="button" class="searchBtn h-full !w-[180px]" @click="searchDesign()">
       <slot></slot>
     </button>
   </div>
 </template>
 <script setup>
+import { useWindowSize } from 'vue-window-size'
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
@@ -279,8 +389,44 @@ const searchDesign = () => {
   }
 }
 
-// onMounted(() => {
-//   window.addEventListener('click', clickOutside)
-// })
+// 監聽視窗寬度
+const isMobile = ref(false)
+const { width } = useWindowSize()
+watch(width, (_newValue) => {
+  if (_newValue <= 768) {
+    isMobile.value = true
+  } else {
+    isMobile.value = false
+  }
+})
+onMounted(() => {
+  if (width.value <= 768) {
+    isMobile.value = true
+  }
+})
+
+// 監聽搜尋欄寬度
+const searchBar = ref(null)
+const searchBarWidth = ref(0)
+const optionBoxWidth = ref(0)
+const optionBoxWidth2 = ref(0)
+let searchbar
+function handleResize() {
+  searchBarWidth.value = searchbar.offsetWidth
+  optionBoxWidth.value = (searchBarWidth.value - 180) / 2
+  optionBoxWidth2.value = searchBarWidth.value - 180
+}
+watch(searchBarWidth, () => {
+  handleResize()
+})
+onMounted(() => {
+  searchbar = searchBar.value
+  handleResize()
+  window.addEventListener('resize', handleResize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 <style scoped></style>
