@@ -128,6 +128,10 @@ export const useAccountStore = defineStore('account', () => {
     }
   }
 
+  const logout = () => {
+    authToken.value = null
+    authCookie.value = null
+  }
   // 註冊
   const signupSubmit = async () => {
     const { data, error } = await useFetch(`${APIBASE}/api/signup${identity.value}`, {
@@ -327,6 +331,7 @@ export const useAccountStore = defineStore('account', () => {
     getArtistInfo,
     loginSubmit,
     signupSubmit,
+    logout,
     editInfo,
     resetPasswordSendEmail,
     resetPassword,
