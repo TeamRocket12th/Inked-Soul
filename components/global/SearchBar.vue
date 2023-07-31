@@ -3,8 +3,9 @@
     <!-- 選擇縣市 -->
     <div
       class="dropdown relative h-full"
-      :class="route.path === '/artists' ? `w-[${optionBoxWidth2}px]` : `w-[${optionBoxWidth}px] `"
+      :class="route.path === '/artists' ? `md:w-[320px] lg:w-[644px]` : `md:w-[150px] lg:w-[322px]`"
     >
+      <div v-if="route.path !== '/artists'" class="h-[0px] md:w-[10px] lg:w-[322px]"></div>
       <div
         v-if="route.path === '/artists'"
         class="h-[0px] min-w-[128px] md:w-[320px] lg:w-[644px]"
@@ -38,14 +39,10 @@
       <!-- <div class="h-[0px] w-[344px] bg-black">測試寬度</div> -->
 
       <div
-        class="dropdown-content menu rounded-box absolute left-0 z-[1] bg-base-100 p-2 shadow"
-        :class="`w-[${searchBarWidth}px]`"
+        class="dropdown-content menu rounded-box absolute left-0 z-[1] min-w-[308px] bg-base-100 p-2 shadow md:w-[500px] lg:w-[824px]"
         @click.capture.self="clear('city')"
       >
-        <div
-          v-if="route.path === '/artists'"
-          class="h-[0px] min-w-[308px] md:w-[500px] lg:w-[824px]"
-        ></div>
+        <div class="h-[0px] min-w-[308px] md:w-[500px] lg:w-[824px]"></div>
         <ul v-if="width >= 768" class="mb-2 grid grid-cols-4 border-b-2 border-primary pb-2">
           <li class="text-center text-base font-bold">北部</li>
           <li class="text-center text-base font-bold">中部</li>
@@ -195,12 +192,8 @@
       </div>
     </div>
     <!-- 選擇風格、元素 -->
-    <div
-      v-if="route.path !== '/artists'"
-      class="dropdown h-full"
-      :class="`w-[${optionBoxWidth}px]`"
-    >
-      <div class="h-[0px] md:w-[170px] lg:w-[644px]"></div>
+    <div v-if="route.path !== '/artists'" class="dropdown h-full md:w-[170px] lg:w-[322px]">
+      <div class="h-[0px] md:w-[170px] lg:w-[322px]"></div>
       <div
         class="indicator mb-5 flex h-full w-full items-center border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
       >
@@ -423,6 +416,7 @@ function handleResize() {
   searchBarWidth.value = searchbar.offsetWidth
   optionBoxWidth.value = (searchBarWidth.value - 180) / 2
   optionBoxWidth2.value = searchBarWidth.value - 180
+  console.log('searchBarWidth', searchBarWidth.value)
 }
 watch(searchBarWidth, () => {
   handleResize()
