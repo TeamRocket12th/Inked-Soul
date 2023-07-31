@@ -12,8 +12,9 @@
       ></div>
       <label
         tabindex="0"
-        class="z-1 indicator mb-5 flex h-full w-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
+        class="z-1 indicator mb-5 flex h-full w-full items-center rounded-e-none rounded-s-lg border border-secondary bg-white p-4 lg:p-5"
       >
+        <!-- 外框 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 -->
         <!-- 數字標示 -->
         <span
           v-if="isMobile && cityArr.length !== 0"
@@ -34,13 +35,9 @@
           </div>
         </div>
       </label>
-      <!-- 地區選項 -->
-      <!-- <div class="h-[100px] w-[824px] bg-black">測試寬度</div> -->
-      <!-- <div class="h-[100px] w-[500px] bg-black">測試寬度</div> -->
-      <!-- <div class="h-[0px] w-[344px] bg-black">測試寬度</div> -->
 
       <div
-        class="dropdown-content menu rounded-box absolute left-0 z-[1] min-w-[308px] bg-base-100 p-2 shadow md:w-[500px] lg:w-[824px]"
+        class="dropdown-content menu rounded-box absolute left-0 z-[1] bg-base-100 p-2 shadow md:w-[500px] lg:w-[824px]"
         @click.capture.self="clear('city')"
       >
         <div class="h-[0px] min-w-[308px] md:w-[500px] lg:w-[824px]"></div>
@@ -198,8 +195,9 @@
       <div class="h-[0px] md:w-[170px] lg:w-[322px]"></div>
       <label
         tabindex="0"
-        class="indicator mb-5 flex h-full w-full items-center border border-secondary bg-white p-4 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50 lg:p-5"
+        class="indicator mb-5 flex h-full w-full items-center border border-secondary bg-white p-4 lg:p-5"
       >
+        <!-- 外框 focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-black/50  -->
         <!-- 數字標示 -->
         <span
           v-if="isMobile && searchSelect.length !== 0"
@@ -227,8 +225,7 @@
       <!-- 風格元素選項 -->
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -left-[77px] z-[1] flex flex-wrap bg-base-100 p-5 shadow md:-left-[150px] lg:-left-[322px]"
-        :class="`w-[${searchBarWidth}px]`"
+        class="dropdown-content menu rounded-box absolute -left-[77px] z-[1] flex min-w-[308px] flex-wrap bg-base-100 p-5 shadow md:-left-[150px] md:w-[500px] lg:-left-[322px] lg:w-[824px]"
       >
         <!-- 所有風格 -->
         <li>
