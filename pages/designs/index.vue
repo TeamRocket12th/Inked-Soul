@@ -88,5 +88,6 @@ useHead({
 onMounted(() => {
   allDesignData.value = []
   initIntersectionObserver()
+  getDesigns(1)
 })
 </script>

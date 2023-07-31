@@ -119,6 +119,7 @@
             </ul>
           </li>
         </ul>
+        <!-- 手機板地區選項 -->
         <ul v-if="width < 768">
           <li>
             <p class="text-center text-base font-bold">北部</p>
@@ -279,8 +280,16 @@ import { useWindowSize } from 'vue-window-size'
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '~/stores/search'
 const store = useSearchStore()
-const { allDesignData, allArtistsData, cityArr, styleArr, elementArr, showResult, isSearch } =
-  storeToRefs(store)
+const {
+  allDesignData,
+  allArtistsData,
+  cityArr,
+  styleArr,
+  elementArr,
+  showResult,
+  isSearch,
+  searchSelect
+} = storeToRefs(store)
 const { getDesigns, getArtists } = store
 
 const taiwanCities = {
@@ -318,9 +327,6 @@ const elements = [
   '靈魂',
   '其他'
 ]
-
-// render 選擇的風格與元素
-const searchSelect = ref([])
 
 // 選擇城市
 const cityToggle = (input) => {
@@ -378,7 +384,6 @@ const searchDesign = () => {
   showResult.value = true
   isSearch.value = true
   allDesignData.value = []
-
   if (route.path === '/') {
     navigateTo('/designs')
   } else if (route.path === '/designs') {
