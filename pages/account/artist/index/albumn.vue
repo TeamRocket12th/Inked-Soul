@@ -41,7 +41,7 @@
       </thead>
       <tbody v-if="!allAlbum">
         <tr class="h-[108px] border-b border-[#D0D0D0] text-center">
-          <td colspan="10">您尚無任何訂單</td>
+          <td colspan="10">目前尚未上傳作品集</td>
         </tr>
       </tbody>
       <tbody class="w-full overflow-hidden rounded-xl">

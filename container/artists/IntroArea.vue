@@ -8,7 +8,7 @@
       />
       <div class="flex flex-row items-center justify-between">
         <!-- 追蹤 -->
-        <div v-if="show === true" class="flex flex-row items-center">
+        <div v-if="isSelf === true" class="flex flex-row items-center">
           <Icon
             :name="followStatus === false ? 'ic:baseline-bookmark-border' : 'ic:baseline-bookmark'"
             class="h-6 w-6 hover:cursor-pointer"
@@ -17,13 +17,15 @@
           {{ artistInfo.followers }}
         </div>
         <!-- 分享 -->
-        <div class="dropdown-end dropdown">
-          <label tabindex="0" class="border-none bg-white hover:bg-white hover:text-black"
-            ><Icon name="ic:outline-share" size="24"
-          /></label>
-          <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
-            <ShareModal :current-page="`/artists`" />
-          </ul>
+        <div class="flex w-full justify-end">
+          <div class="dropdown-end dropdown">
+            <label tabindex="0" class="border-none bg-white hover:bg-white hover:text-black"
+              ><Icon name="ic:outline-share" size="24"
+            /></label>
+            <ul tabindex="0" class="dropdown-content z-[1] w-52 bg-base-100">
+              <ShareModal :current-page="`/artists`" />
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -140,7 +142,7 @@ const checkFollow = (artistID) => {
   })
 }
 // 刺青師不能追蹤自己
-const show = ref(true)
+const isSelf = ref(true)
 const token = useCookie('data')
 const role = ref()
 let artistID
@@ -150,7 +152,7 @@ const prevent = () => {
     role.value = token.value.Role
     artistID = token.value.Id
     if (role.value === 'artist' && artistID.toString() === id) {
-      show.value = false
+      isSelf.value = false
     }
   }
 }

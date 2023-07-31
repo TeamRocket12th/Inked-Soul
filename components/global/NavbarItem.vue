@@ -240,7 +240,7 @@ const authCookie = useCookie('data')
 
 const store = useAccountStore()
 const { userInfoData, photo, artistInfoData } = storeToRefs(store)
-const { getUserInfo, getArtistInfo } = store
+const { getUserInfo, getArtistInfo, logout } = store
 
 const { Role, Email } = authCookie.value ? authCookie.value : ''
 
@@ -272,11 +272,6 @@ const logoImage = computed(() => {
   }
 })
 
-const logout = () => {
-  authToken.value = undefined || null
-  authCookie.value = undefined || null
-}
-
 watchEffect(() => {
   if (authCookie.value) {
     if (authCookie.value.Role.toLowerCase() === 'artist') {
@@ -286,9 +281,6 @@ watchEffect(() => {
     }
   }
 })
-
-// navbar字體顏色轉換
-const pagePath = computed(() => route.path)
 
 // RWD
 const showMenu = ref(true)
