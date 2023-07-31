@@ -20,8 +20,8 @@
           >{{ cityArr.length }}</span
         >
         <!-- 欄位 -->
-        <label tabindex="0" class="flex items-center">
-          <Icon name="ic:outline-room" class="mr-1 h-6 w-6 lg:mr-2" />
+        <label tabindex="0" class="flex cursor-pointer items-center">
+          <Icon name="ic:outline-room" size="24" class="mr-1 lg:mr-2" />
           <p
             v-if="cityArr.length === 0"
             class="hidden text-ellipsis text-xs text-[#D0D0D0] md:block md:text-sm lg:text-base"
@@ -205,15 +205,17 @@
           >{{ searchSelect.length }}</span
         >
         <!-- 欄位 -->
-        <label tabindex="0" class="flex items-center">
-          <Icon name="ic:outline-tune" class="mr-1 h-6 w-6 lg:mr-2" />
+        <label tabindex="0" class="flex cursor-pointer items-center">
+          <div class="mr-1 lg:mr-2">
+            <Icon name="ic:outline-tune" size="24" />
+          </div>
           <p
             v-if="searchSelect.length === 0"
             class="hidden text-ellipsis text-xs text-[#D0D0D0] sm:text-xs md:block md:text-sm lg:text-base"
           >
             風格及元素
           </p>
-          <div v-if="searchSelect.length !== 0" class="line-clamp-1 hidden md:block md:w-full">
+          <div v-if="searchSelect.length !== 0" class="hidden md:line-clamp-1">
             <span v-for="(item, index) in searchSelect" :key="index" class="text-black"
               >{{ item }}<span>&nbsp;</span></span
             >
