@@ -21,7 +21,7 @@
           >{{ cityArr.length }}</span
         >
         <!-- 欄位 -->
-        <label tabindex="0" class="flex cursor-pointer items-center">
+        <div tabindex="0" class="flex cursor-pointer items-center">
           <Icon name="ic:outline-room" size="24" class="mr-1 lg:mr-2" />
           <p
             v-if="cityArr.length === 0"
@@ -207,7 +207,7 @@
           >{{ searchSelect.length }}</span
         >
         <!-- 欄位 -->
-        <label tabindex="0" class="flex cursor-pointer items-center">
+        <div tabindex="0" class="flex cursor-pointer items-center">
           <div class="mr-1 lg:mr-2">
             <Icon name="ic:outline-tune" size="24" />
           </div>
