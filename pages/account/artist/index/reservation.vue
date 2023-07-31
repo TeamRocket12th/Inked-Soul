@@ -185,6 +185,7 @@ const getSchedule = async () => {
 watch(
   date,
   async () => {
+    dateDetail.value = {}
     selectDate.value = formattedOutput(date.value)
 
     const res = await $fetch(`${APIBASE}/api/orderday`, {

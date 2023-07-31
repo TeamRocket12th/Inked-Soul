@@ -6,8 +6,9 @@
     <img
       :src="`${props.data.BuPurchaserPhoto}`"
       alt=""
-      class="h-6 w-6 rounded-full object-cover object-center"
+      class="h-6 w-6 rounded-full bg-white object-cover object-center"
     />
+
     <div class="flex w-full flex-col gap-3">
       <div class="flex flex-col">
         <div class="flex flex-row items-center gap-10">
@@ -25,7 +26,7 @@
         <img
           :src="`${props.data.ImgUrl}`"
           alt=""
-          class="h-[100px] w-[100px] rounded-lg border border-primary object-cover object-center"
+          class="h-[100px] w-[100px] rounded-lg border border-primary bg-white object-cover object-center"
         />
         <div class="flex flex-col items-start justify-center">
           <p>{{ props.data.ImgName }}</p>
@@ -38,6 +39,7 @@
 <script setup>
 const props = defineProps({
   data: {
+    type: null,
     required: true
   }
 })
