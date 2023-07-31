@@ -6,6 +6,7 @@ export const useSearchStore = defineStore('search', () => {
   const cityArr = ref([])
   const styleArr = ref([])
   const elementArr = ref([])
+  const searchSelect = ref([])
   const filterArr = ref([])
   const cityStr = ref()
   const styleStr = ref()
@@ -107,6 +108,7 @@ export const useSearchStore = defineStore('search', () => {
     cityArr,
     styleArr,
     elementArr,
+    searchSelect,
     cityStr,
     styleStr,
     elementStr,
