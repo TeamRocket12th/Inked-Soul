@@ -1,6 +1,6 @@
 <template>
   <button
-    class="fixed bottom-[10rem] right-[10rem] z-10 h-11 w-11 rounded-full border-[1px] border-secondary bg-primary"
+    class="fixed bottom-[3rem] right-[1rem] z-10 h-11 w-11 rounded-full border-[1px] border-secondary bg-primary"
     @click="goToTop()"
   >
     Top
