@@ -16,7 +16,7 @@
     >
       <div class="flex flex-col items-center gap-3 hover:flex">
         <p v-if="props.data.Nickname" class="font-xl font-bold">{{ props.data.Nickname }}</p>
-        <div v-if="typeof props.data.Style === 'string'" class="hidden items-center gap-3 md:flex">
+        <div v-if="typeof props.data.Style === 'string'" class="flex flex-col items-center gap-1">
           <span
             v-for="(item, index) in styleArr.value"
             :key="index"

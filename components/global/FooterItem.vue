@@ -19,7 +19,7 @@
       <div class="logo">
         <NuxtLink to="/" class="text-4xl">
           <div class="flex items-center justify-center gap-3">
-            <img src="/logo-white.png" alt="" class="h-6" />
+            <img src="/logo-white.png" alt="" class="h-8 w-auto" />
             <h2 class="font-heading-typo">Inked Soul</h2>
           </div>
         </NuxtLink>
