@@ -2,9 +2,9 @@
   <nav
     class="fixed top-0 z-50 flex w-full flex-wrap items-center justify-between px-3 py-4 text-black shadow-md duration-200 ease-in-out md:min-h-[80px] md:flex-row md:px-[60px]"
     :class="[
-      { 'text-white shadow-none': scrollY < 250 && route.path === '/' },
-      { 'bg-[#FFF] text-secondary': route.path !== '/' },
-      { 'bg-[#FFF]': scrollY > 250 }
+      { '!text-white shadow-none': scrollY < 250 && route.path === '/' },
+      { 'bg-[#FFF] ': route.path !== '/' },
+      { 'bg-[#FFF] text-black': scrollY > 250 }
     ]"
   >
     <NuxtLink to="/">
@@ -83,7 +83,7 @@
         <NuxtLink
           to="/designs"
           class="px-4 py-2"
-          :class="route.path === '/designs' ? 'text-black' : ''"
+          :class="route.path === '/designs' ? 'text-black' : 'text-secondary'"
           >認領圖</NuxtLink
         >
       </li>
@@ -91,7 +91,7 @@
         <NuxtLink
           to="/artists"
           class="px-4 py-2"
-          :class="route.path === '/artists' ? 'text-black' : ''"
+          :class="route.path === '/artists' ? 'text-black' : 'text-secondary'"
           >刺青師</NuxtLink
         >
       </li>
@@ -99,7 +99,7 @@
         <NuxtLink
           to="/tips"
           class="mr-6 px-4 py-2"
-          :class="route.path === '/tips' ? 'text-black' : ''"
+          :class="route.path === '/tips' ? 'text-black' : 'text-secondary'"
           >知識點</NuxtLink
         >
       </li>

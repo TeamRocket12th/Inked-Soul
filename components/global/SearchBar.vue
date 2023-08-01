@@ -422,7 +422,6 @@ function handleResize() {
   searchBarWidth.value = searchbar.offsetWidth
   optionBoxWidth.value = (searchBarWidth.value - 180) / 2
   optionBoxWidth2.value = searchBarWidth.value - 180
-  console.log('searchBarWidth', searchBarWidth.value)
 }
 watch(searchBarWidth, () => {
   handleResize()
@@ -433,8 +432,8 @@ onMounted(() => {
   window.addEventListener('resize', handleResize)
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
-})
+// onBeforeUnmount(() => {
+//   window.removeEventListener('resize', handleResize)
+// })
 </script>
 <style scoped></style>

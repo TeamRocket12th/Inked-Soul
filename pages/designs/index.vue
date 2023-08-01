@@ -85,9 +85,12 @@ useHead({
   meta: [{ name: 'description', content: meta.design.description }]
 })
 
-onMounted(() => {
+const returnEmpty = () => {
   allDesignData.value = []
+}
+
+onMounted(() => {
+  returnEmpty()
   initIntersectionObserver()
-  getDesigns(1)
 })
 </script>

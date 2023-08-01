@@ -72,6 +72,7 @@ export const useSearchStore = defineStore('search', () => {
   // 取得刺青師
   const getArtists = (num) => {
     arrToString()
+
     try {
       nextTick(async () => {
         const { data } = await useFetch(`${APIBASE}/api/searchartist`, {
