@@ -375,7 +375,6 @@ const clear = (input) => {
     searchSelect.value = searchSelect.value.filter((item) => !elementArr.value.includes(item))
     elementArr.value = []
   } else if (input === 'city') {
-    console.log('clear city')
     cityArr.value = []
   }
 }
@@ -423,7 +422,6 @@ function handleResize() {
   searchBarWidth.value = searchbar.offsetWidth
   optionBoxWidth.value = (searchBarWidth.value - 180) / 2
   optionBoxWidth2.value = searchBarWidth.value - 180
-  console.log('searchBarWidth', searchBarWidth.value)
 }
 watch(searchBarWidth, () => {
   handleResize()
