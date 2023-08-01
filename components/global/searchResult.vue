@@ -28,10 +28,6 @@
       </div>
       <div>，共{{ allNum ? allNum : 0 }}個結果</div>
     </div>
-
-    <div class="cursor-pointer rounded-lg border bg-white p-1">
-      <Icon name="ic:round-sync-alt" size="24" class="origin-center rotate-90" />
-    </div>
   </div>
 </template>
 
