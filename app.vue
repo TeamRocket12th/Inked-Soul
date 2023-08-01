@@ -28,6 +28,14 @@ vc-light.vc-attr,
 .vc-light .vc-attr {
   --vc-highlight-solid-bg: black;
 }
+.vc-container:focus,
+.vc-container *:focus {
+  background-color: black;
+  color: white;
+}
+.vc-pane-layout {
+  gap: 20px;
+}
 
 .v-enter-active,
 .v-leave-active {

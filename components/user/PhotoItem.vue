@@ -19,11 +19,11 @@
               <Icon name="ic:outline-photo-camera" size="20" class="text-white" />
             </label>
             <input
+              id="photo"
               type="file"
               accept=".jpg, .png, .svg, .gif"
-              @change="handleOnPreview"
               class="hidden"
-              id="photo"
+              @change="handleOnPreview"
             />
           </div>
         </div>
@@ -32,18 +32,18 @@
 
       <button
         v-show="previewUrl"
-        @click="postImg"
         class="m-2 flex items-center gap-2 rounded-lg border border-black px-3 py-1"
+        @click="postImg"
       >
         <Icon name="ic:baseline-upgrade" size="24" />
-        <p>上傳認領圖</p>
+        <p>上傳大頭照</p>
       </button>
     </div>
   </div>
 </template>
 <script setup>
-import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
 
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
