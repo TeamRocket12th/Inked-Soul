@@ -24,7 +24,7 @@
           :src="props.data.Photo"
           loading="lazy"
           alt=""
-          class="mr-2 h-[40px] w-[40px] rounded-lg bg-white object-cover object-center"
+          class="mr-2 h-6 w-6 rounded-lg bg-white object-cover object-center"
         />
         <p class="font-roboto-nl font-bold text-white">
           {{ props.data.Nickname }}
