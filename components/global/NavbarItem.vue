@@ -9,7 +9,7 @@
   >
     <NuxtLink to="/">
       <div class="flex items-center justify-center gap-5">
-        <img :src="logoImage" alt="" class="h-10 w-10" />
+        <img :src="logoImage" alt="" class="h-10" />
         <h2 class="font-heading-typo leading-[120%]">Inked Soul</h2>
       </div>
     </NuxtLink>

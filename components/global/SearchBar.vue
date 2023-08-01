@@ -37,7 +37,7 @@
       </label>
 
       <div
-        class="dropdown-content menu rounded-box absolute left-0 z-[1] bg-base-100 p-2 shadow md:w-[500px] lg:w-[824px]"
+        class="dropdown-content menu absolute left-0 z-[1] rounded-lg bg-base-100 p-2 shadow md:w-[500px] lg:w-[824px]"
         @click.capture.self="clear('city')"
       >
         <div class="h-[0px] min-w-[308px] md:w-[500px] lg:w-[824px]"></div>
@@ -225,7 +225,7 @@
       <!-- 風格元素選項 -->
       <ul
         tabindex="0"
-        class="dropdown-content menu rounded-box absolute -left-[77px] z-[1] flex min-w-[308px] flex-wrap bg-base-100 p-5 shadow md:-left-[150px] md:w-[500px] lg:-left-[322px] lg:w-[824px]"
+        class="dropdown-content menu absolute -left-[77px] z-[1] flex min-w-[308px] flex-wrap rounded-lg bg-base-100 p-5 shadow md:-left-[150px] md:w-[500px] lg:-left-[322px] lg:w-[824px]"
       >
         <!-- 所有風格 -->
         <li>
@@ -431,8 +431,8 @@ onMounted(() => {
   window.addEventListener('resize', handleResize)
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
-})
+// onBeforeUnmount(() => {
+//   window.removeEventListener('resize', handleResize)
+// })
 </script>
 <style scoped></style>

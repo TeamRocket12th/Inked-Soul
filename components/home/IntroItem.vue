@@ -51,9 +51,7 @@
             這裡是藝術的殿堂 <br />
             為您找尋獨一無二的紋身藝術
           </p>
-          <NuxtLink class="rounded-lg bg-black px-6 py-3 text-white" to="/designs"
-            >探索認領圖</NuxtLink
-          >
+          <NuxtLink class="btn-basic btn-normal" to="/designs">探索認領圖</NuxtLink>
         </div>
         <img
           src="/home/1.jpg"
@@ -72,9 +70,7 @@
             每一位刺青師都是綻放靈感的魔術師<br />
             與您共同編織刺青的靈魂故事
           </p>
-          <NuxtLink class="rounded-lg bg-black px-6 py-3 text-white" to="/artists"
-            >探索刺青師</NuxtLink
-          >
+          <NuxtLink class="btn-basic btn-normal" to="/artists">探索刺青師</NuxtLink>
         </div>
       </div>
     </div>

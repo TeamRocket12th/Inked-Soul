@@ -47,11 +47,11 @@
 
   /* searchBar 未被選擇按鈕樣式 */
   .styleBtn {
-    @apply m-2 block  whitespace-nowrap rounded-full border-[1px] border-primary bg-white px-3 py-1 text-black hover:border-secondary hover:bg-white active:border-custom;
+    @apply m-2 block  whitespace-nowrap rounded-full border-[1px] border-primary bg-white px-3 py-1 text-black visited:bg-white  hover:bg-btn;
   }
   /* searchBar 被選擇按鈕樣式 */
   .chosenStyleBtn {
-    @apply m-2 block  whitespace-nowrap rounded-full  bg-black px-3 py-1 text-white  hover:bg-black hover:text-custom focus:bg-black active:text-secondary;
+    @apply m-2 block  whitespace-nowrap rounded-full  bg-black px-3 py-1 text-white hover:bg-black hover:text-custom focus:bg-black active:text-secondary;
   }
   /* searchBar 搜尋按鈕 */
   .searchBtn {
