@@ -119,9 +119,10 @@
                 <button
                   :disabled="item.IsSoldout === '已售出'"
                   :class="{
-                    ' text-custom hover:bg-white hover:text-custom': item.IsSoldout === '已售出'
+                    ' text-custom hover:bg-white hover:text-custom': item.IsSoldout === '已售出',
+                    ' hover:text-white': item.IsSoldout !== '已售出'
                   }"
-                  class="mx-auto flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in hover:bg-black hover:text-white"
+                  class="mx-auto flex h-14 w-14 items-center justify-center rounded-full duration-200 ease-in hover:bg-black"
                   @click="showDeleteModal(item.Id)"
                 >
                   <Icon name="ic:baseline-delete" size="24" />

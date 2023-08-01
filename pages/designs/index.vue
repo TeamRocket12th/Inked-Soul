@@ -52,10 +52,7 @@ const root = ref(null)
 const initIntersectionObserver = () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (isSearch.value) {
-        page.value = 1
-      }
-      if (entry.intersectionRatio > 0 && !isNoResult.value) {
+      if (entry.intersectionRatio > 0 && !isNoResult.value && !isSearch.value) {
         page.value += 1
       }
     })
@@ -71,6 +68,9 @@ watch(
   (nextPage) => {
     if (!isSearch.value) {
       getDesigns(nextPage)
+    } else if (isSearch.value) {
+      page.value = 1
+      getDesigns(1)
     }
     isSearch.value = false
   },
@@ -88,6 +88,5 @@ useHead({
 onMounted(() => {
   allDesignData.value = []
   initIntersectionObserver()
-  getDesigns(1)
 })
 </script>
