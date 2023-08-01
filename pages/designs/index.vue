@@ -55,6 +55,7 @@ const initIntersectionObserver = () => {
       if (entry.intersectionRatio > 0 && !isNoResult.value && !isSearch.value) {
         page.value += 1
       }
+      isSearch.value = false
     })
   })
   // 如果沒有pending才會執行
@@ -72,7 +73,6 @@ watch(
       page.value = 1
       getDesigns(1)
     }
-    isSearch.value = false
   },
   {
     immediate: true

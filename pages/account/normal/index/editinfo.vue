@@ -39,7 +39,7 @@
               name="手機"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.手機 }"
-              placeholder="0912345678"
+              placeholder="請輸入您的手機號碼"
             />
             <Icon
               v-if="errors.手機"
@@ -96,7 +96,7 @@
               type="password"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.新密碼 }"
-              disabled
+              autocomplete="new-passwrod"
             />
             <Icon
               v-if="errors.新密碼"
@@ -119,7 +119,7 @@
               type="password"
               class="formInput"
               :class="{ 'border-[#DC3545]': errors.密碼 }"
-              disabled
+              autocomplete="new-passwrod"
             />
             <Icon
               v-if="errors.密碼"
@@ -128,10 +128,15 @@
             />
           </div>
         </div>
+        <button
+          type="button"
+          class="btn w-full bg-black text-white"
+          :disabled="!meta.valid"
+          @click="editInfo"
+        >
+          更改密碼
+        </button>
       </VForm>
-      <button type="button" class="btn w-full bg-black text-white" @click="editInfo">
-        更改密碼
-      </button>
     </div>
   </div>
 </template>
@@ -151,10 +156,15 @@ const { data } = await useFetch(`${APIBASE}/api/userinfo`, {
   headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
 })
 
-setTimeout(() => {
+computed(() => {
   userInfoData.value.Nickname = data.value.Data.Nickname
   userInfoData.value.Tel = data.value.Data.Tel
-  // console.log('userInfoData', userInfoData)
-}, 100)
+})
+
+// setTimeout(() => {
+//   userInfoData.value.Nickname = data.value.Data.Nickname
+//   userInfoData.value.Tel = data.value.Data.Tel
+//   // console.log('userInfoData', userInfoData)
+// }, 100)
 </script>
 <style scoped></style>

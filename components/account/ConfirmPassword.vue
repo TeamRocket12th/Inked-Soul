@@ -8,11 +8,13 @@
       rules="required|min:8|confirmed:@密碼"
       class="accountInput"
       :class="{ 'border-[#DC3545]': errors.確認密碼 }"
+      placeholder="Confirm Password"
+      autocomplete
     />
     <Icon
+      v-if="errors.確認密碼"
       name="ic:baseline-error-outline"
       class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
-      v-if="errors.確認密碼"
     />
     <div class="h-[14px]">
       <VErrorMessage name="確認密碼" class="whitespace-nowrap text-[#DC3545]" />
@@ -31,6 +33,7 @@ const { signupSubmit } = store
 
 defineProps({
   errors: {
+    type: null,
     required: true
   }
 })
