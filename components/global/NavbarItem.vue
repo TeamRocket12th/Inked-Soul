@@ -2,14 +2,14 @@
   <nav
     class="fixed top-0 z-50 flex w-full flex-wrap items-center justify-between px-3 py-4 text-black shadow-md duration-200 ease-in-out md:min-h-[80px] md:flex-row md:px-[60px]"
     :class="[
-      { '!text-white shadow-none': scrollY < 250 && route.path === '/' },
+      { 'text-white shadow-none': scrollY < 250 && route.path === '/' },
       { 'bg-[#FFF] ': route.path !== '/' },
       { 'bg-[#FFF] text-black': scrollY > 250 }
     ]"
   >
     <NuxtLink to="/">
       <div class="flex items-center justify-center gap-5">
-        <img :src="logoImage" alt="" class="h-10 w-10" />
+        <img :src="logoImage" alt="" class="h-10" />
         <h2 class="font-heading-typo leading-[120%]">Inked Soul</h2>
       </div>
     </NuxtLink>
@@ -83,7 +83,7 @@
         <NuxtLink
           to="/designs"
           class="px-4 py-2"
-          :class="route.path === '/designs' ? 'text-black' : 'text-secondary'"
+          :class="route.path === '/designs' ? 'text-black' : ''"
           >認領圖</NuxtLink
         >
       </li>
@@ -91,7 +91,7 @@
         <NuxtLink
           to="/artists"
           class="px-4 py-2"
-          :class="route.path === '/artists' ? 'text-black' : 'text-secondary'"
+          :class="route.path === '/artists' ? 'text-black' : ''"
           >刺青師</NuxtLink
         >
       </li>
@@ -99,7 +99,7 @@
         <NuxtLink
           to="/tips"
           class="mr-6 px-4 py-2"
-          :class="route.path === '/tips' ? 'text-black' : 'text-secondary'"
+          :class="route.path === '/tips' ? 'text-black' : ''"
           >知識點</NuxtLink
         >
       </li>
