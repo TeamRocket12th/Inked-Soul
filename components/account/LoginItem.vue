@@ -1,5 +1,5 @@
 <template>
-  <VForm v-slot="{ errors, meta }" class="flex flex-col gap-[26px]">
+  <VForm v-slot="{ errors }" class="flex flex-col gap-[26px]">
     <label class="relative flex flex-col items-start gap-1">
       <span class="mb-1">電子信箱</span>
       <VField
@@ -29,6 +29,7 @@
         class="accountInput"
         placeholder="Password"
         :class="{ 'border-[#DC3545]': errors.密碼 }"
+        autocomplete
       />
       <Icon
         v-if="errors.密碼"

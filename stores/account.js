@@ -8,10 +8,10 @@ export const useAccountStore = defineStore('account', () => {
 
   const showTxt = ref(false)
   const identity = ref('user')
-  const email = ref('benson@gmail.com')
+  const email = ref('')
 
-  const password = ref('A1234567')
-  const confirmPassword = ref('A1234567')
+  const password = ref('')
+  const confirmPassword = ref('')
   const guid = ref('')
   const isPending = ref(false)
 
@@ -96,6 +96,8 @@ export const useAccountStore = defineStore('account', () => {
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
+        email.value = null
+        password.value = null
 
         Id.value = res.Data.Id
         // photo.value = res.Data.Photo
@@ -131,6 +133,8 @@ export const useAccountStore = defineStore('account', () => {
   const logout = () => {
     authToken.value = null
     authCookie.value = null
+    email.value = null
+    password.value = null
   }
   // 註冊
   const signupSubmit = async () => {
