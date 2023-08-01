@@ -41,7 +41,7 @@
         @click.capture.self="clear('city')"
       >
         <div class="h-[0px] min-w-[308px] md:w-[500px] lg:w-[824px]"></div>
-        <ul v-if="width >= 768" class="mb-2 grid grid-cols-4 border-b-2 border-primary pb-2">
+        <ul v-if="width >= 768" class="mb-2 grid w-full grid-cols-4 border-b-2 border-primary pb-2">
           <li class="text-center text-base font-bold">北部</li>
           <li class="text-center text-base font-bold">中部</li>
           <li class="text-center text-base font-bold">南部</li>
