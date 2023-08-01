@@ -57,8 +57,7 @@ export const useFollowsStore = defineStore('follows', () => {
           page: num
         }
       })
-      if (data.value) {
-        console.log('用戶後台取得已追蹤列表', data)
+      if (data.value?.Data) {
         followingData.value = data.value.Data
         allNum.value = data.value.response.TotalNum
       }

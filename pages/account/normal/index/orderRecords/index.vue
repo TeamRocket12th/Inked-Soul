@@ -31,7 +31,7 @@
       </table>
     </div>
     <!-- 分頁 -->
-    <PaginationBtn :num="allOrderNum" state="back" />
+    <PaginationBtn :num="totalPage" state="back" />
   </div>
 </template>
 
@@ -42,7 +42,7 @@ import OrderBar from '~/components/order/OrderBar'
 
 const store = useOrderStore()
 const { getAllOrder } = store
-const { AllOrderRecord, allOrderNum } = storeToRefs(store)
+const { AllOrderRecord, allOrderNum, totalPage } = storeToRefs(store)
 
 watch(AllOrderRecord, (newValue) => {
   AllOrderRecord.value = newValue

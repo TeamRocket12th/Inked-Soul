@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="border-b-2 border-primary pb-4">已追蹤刺青師名單</h2>
+    <p v-show="!followingData">尚未追蹤刺青師</p>
 
     <div
       v-for="(item, index) in followingData"
@@ -16,26 +16,26 @@
           :style="`background-image: url(${item.ArtistPhoto})`"
         ></div>
         <!-- 名稱+風格 -->
-        <div v-if="typeof item.ArtistStyle === 'string'">
+        <div v-if="typeof item.ArtistStyle === 'string'" class="flex flex-col justify-between">
           <h3>{{ item.ArtistName }}</h3>
-          <div class="flex">
-            <div
+          <ul class="flex gap-2">
+            <li
               v-for="(style, key) in item.ArtistStyle.split(',')"
               :key="key"
-              class="rounded-full border-[1px] border-primary px-4 py-1"
+              class="rounded-full border-[1px] border-primary px-4 py-1 text-sm"
             >
               {{ style }}
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="">
         <!-- 追蹤按鈕 -->
         <Icon
           name="ic:baseline-bookmark"
-          size="36"
-          @click.prevent="unFollow(item.ArtistId)"
+          size="24"
           class="cursor-pointer"
+          @click.prevent="unFollow(item.ArtistId)"
         />
       </div>
     </div>
