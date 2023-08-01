@@ -15,7 +15,7 @@
       </NuxtLink>
     </div>
 
-    <div class="col-span-7 flex h-fit flex-col items-center justify-center pt-[10%] text-center">
+    <div class="col-span-7 flex h-fit flex-col items-center justify-center pt-[5%] text-center">
       <div class="flex w-[50%] flex-col gap-10 rounded-lg border border-black p-10">
         <slot>
           <div>登入｜註冊｜忘記密碼｜重設密碼</div>
