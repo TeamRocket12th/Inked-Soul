@@ -96,7 +96,6 @@ export const useAccountStore = defineStore('account', () => {
       if (res.Status === 200) {
         authToken.value = res.Token
         authCookie.value = res.Data
-        email.value = null
         password.value = null
 
         Id.value = res.Data.Id

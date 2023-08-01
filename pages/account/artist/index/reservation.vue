@@ -7,7 +7,7 @@
       :attributes="haveOrder"
       :disabled-dates="disabledDates"
       color="gray"
-      class="col-span-7 px-8 py-5"
+      class="col-span-7 px-10 py-5"
       :columns="2"
       expanded
     />
@@ -235,5 +235,9 @@ th {
 .v-enter-to,
 .v-leave-from {
   opacity: 1;
+}
+
+.vc-pane-layout {
+  gap: 40px;
 }
 </style>
