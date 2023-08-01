@@ -38,6 +38,7 @@
               :rules="isPhone"
               name="手機"
               class="formInput"
+              maxlength="10"
               :class="{ 'border-[#DC3545]': errors.手機 }"
               placeholder="請輸入您的手機號碼"
             />
@@ -73,7 +74,7 @@
           type="button"
           class="btn w-full bg-black text-white hover:text-black"
           :disabled="!meta.valid"
-          @click="editInfo"
+          @click.prevent="editInfo"
         >
           更新個人資料
         </button>
@@ -152,19 +153,25 @@ const { editInfo } = store
 
 const { isUnder20, isPhone, isPassword } = useValidate()
 
-const { data } = await useFetch(`${APIBASE}/api/userinfo`, {
-  headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
-})
+const getUserInfo = async () => {
+  try {
+    const res = await $fetch(`${APIBASE}/api/userinfo`, {
+      headers: { 'Content-type': 'application/json', Authorization: `Bearer ${authToken.value}` }
+    })
+    if (res.Status === 200) {
+      userInfoData.value.Nickname = res.Data.Nickname
+      userInfoData.value.Tel = res.Data.Tel
 
-computed(() => {
-  userInfoData.value.Nickname = data.value.Data.Nickname
-  userInfoData.value.Tel = data.value.Data.Tel
-})
+      // 賦值到畫面
+      name.value = res.Data.Nickname
+      tel.value = res.Data.Tel
+      email.value = res.Data.Account
+    }
+  } catch (_error) {}
+}
 
-// setTimeout(() => {
-//   userInfoData.value.Nickname = data.value.Data.Nickname
-//   userInfoData.value.Tel = data.value.Data.Tel
-//   // console.log('userInfoData', userInfoData)
-// }, 100)
+onMounted(async () => {
+  await getUserInfo()
+})
 </script>
 <style scoped></style>

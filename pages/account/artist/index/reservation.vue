@@ -24,7 +24,7 @@
             </thead>
             <transition>
               <tbody v-if="dateDetail">
-                <tr class="h-[108px] odd:bg-primary">
+                <tr class="h-[108px]" :class="{ 'bg-primary': dateDetail['上午'] }">
                   <td>
                     <p>上午</p>
                   </td>
@@ -53,7 +53,10 @@
                     </div>
                   </td>
                 </tr>
-                <tr class="h-[108px] border-y border-[#D0D0D0] odd:bg-primary">
+                <tr
+                  class="h-[108px] border-y border-[#D0D0D0]"
+                  :class="{ 'bg-primary': dateDetail['下午'] }"
+                >
                   <td class="">
                     <p>下午</p>
                   </td>
@@ -81,7 +84,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr class="h-[108px] odd:bg-primary">
+                <tr class="h-[108px]" :class="{ 'bg-primary': dateDetail['晚上'] }">
                   <td class="">
                     <p>晚上</p>
                   </td>

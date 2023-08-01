@@ -183,7 +183,7 @@ export const useAccountStore = defineStore('account', () => {
     userInfoData.Tel = tel.value
 
     try {
-      const { data } = await useFetch(`${APIBASE}/api/edituserinfo`, {
+      await $fetch(`${APIBASE}/api/edituserinfo`, {
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${authToken.value}`
@@ -192,7 +192,6 @@ export const useAccountStore = defineStore('account', () => {
         body: userInfoData
       })
       getUserInfo()
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -245,7 +244,7 @@ export const useAccountStore = defineStore('account', () => {
   // 發送重設密碼信件
   const resetPasswordSendEmail = async () => {
     showTxt.value = true
-    const { data, error } = await useFetch(`${APIBASE}/api/${identity.value}email`, {
+    await $fetch(`${APIBASE}/api/${identity.value}email`, {
       method: 'POST',
       body: {
         Account: email
