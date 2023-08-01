@@ -1,8 +1,11 @@
 <template>
-  <div class="grid grid-cols-12">
+  <div class="relative flex grid grid-cols-12">
     <LoadingItem v-if="isPending" />
-    <div class="relative sticky left-0 right-0 top-0 col-span-5 h-screen overflow-hidden">
-      <img src="/account-left.jpg" alt="" class="object-cover" />
+    <div
+      class="sticky left-0 top-0 col-span-5 h-screen overflow-hidden bg-cover bg-center"
+      style="background-image: url('/account-left.jpg')"
+    >
+      <!-- <img src="/account-left.jpg" alt="" class="w-full" /> -->
       <NuxtLink to="/" class="absolute inset-y-1/2 left-0 right-0 text-center">
         <!-- -translate-y-[50%] -->
         <div class="left-40 flex items-center justify-center">
@@ -12,7 +15,7 @@
       </NuxtLink>
     </div>
 
-    <div class="col-span-7 flex h-fit flex-col items-center justify-center text-center">
+    <div class="col-span-7 flex h-fit flex-col items-center justify-center pt-[10%] text-center">
       <div class="flex w-[50%] flex-col gap-10 rounded-lg border border-black p-10">
         <slot>
           <div>登入｜註冊｜忘記密碼｜重設密碼</div>
