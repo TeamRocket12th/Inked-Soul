@@ -12,7 +12,6 @@
           <NuxtLink to="/tips">知識點</NuxtLink>
         </li>
       </ul>
-      <Icon name="ic:outline-email" size="24" />
     </div>
     <hr />
 
