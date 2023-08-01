@@ -2,9 +2,9 @@
   <nav
     class="fixed top-0 z-50 flex w-full flex-wrap items-center justify-between px-3 py-4 text-black shadow-md duration-200 ease-in-out md:min-h-[80px] md:flex-row md:px-[60px]"
     :class="[
-      { '!text-white shadow-none': scrollY < 250 && route.path === '/' },
+      { 'text-white shadow-none': scrollY < 250 && route.path === '/' },
       { 'bg-[#FFF] ': route.path !== '/' },
-      { 'bg-[#FFF] text-black': scrollY > 250 }
+      { 'bg-[#FFF]': scrollY > 250 }
     ]"
   >
     <NuxtLink to="/">
@@ -78,7 +78,7 @@
     </div>
 
     <!-- 電腦版 -->
-    <ul class="hidden items-center md:flex">
+    <ul class="hidden items-center md:flex" :class="{ 'text-secondary': route.path !== '/' }">
       <li class="h-auto w-auto">
         <NuxtLink
           to="/designs"

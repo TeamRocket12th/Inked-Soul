@@ -33,7 +33,7 @@
                 class="formInput rounded-md px-3 py-2 text-sm font-semibold text-black"
                 @click.prevent="togglePopover"
               >
-                {{ formatDate }}
+                {{ ArtistDayoff }}
               </button>
             </template>
           </VDatePicker>
@@ -157,7 +157,7 @@ const timeFrame = [
 
 const store = useAccountStore()
 const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
-const { formatDate, formattedOutput } = useFormatted()
+const { formattedOutput } = useFormatted()
 
 // 要get API 的值（需要轉換格式）
 const ArtistCloseDay = ref([])
@@ -168,7 +168,7 @@ const ArtistCloseTime = ref(artistInfoData.value.EndTime ? artistInfoData.value.
 const ArtistAvailableTimeFrame = ref([])
 const ArtistDayoff = ref('')
 
-const date = new Date()
+const today = new Date()
 const selectDayoff = ref('')
 const selectedDayoff = ref([
   {
@@ -180,13 +180,16 @@ const selectedDayoff = ref([
   }
 ])
 
-onMounted(() => {
-  ArtistDayoff.value = formattedOutput(date)
-})
-watch(selectDayoff, (newValue) => {
-  ArtistDayoff.value = formattedOutput(newValue)
-  inputArtistInfoData.value.DayOff = ArtistDayoff.value
-})
+watch(
+  selectDayoff,
+  (newValue) => {
+    ArtistDayoff.value = formattedOutput(newValue || today)
+    inputArtistInfoData.value.DayOff = ArtistDayoff.value
+  },
+  {
+    immediate: true
+  }
+)
 
 const AlertSelect = ref(false)
 

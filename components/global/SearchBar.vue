@@ -374,7 +374,6 @@ const clear = (input) => {
     searchSelect.value = searchSelect.value.filter((item) => !elementArr.value.includes(item))
     elementArr.value = []
   } else if (input === 'city') {
-    console.log('clear city')
     cityArr.value = []
   }
 }

@@ -1,40 +1,36 @@
 <template>
-  <div class="grid grid-cols-7 items-end gap-10">
-    <!-- <div class="col-span-3"> -->
+  <div class="grid grid-cols-7 items-end gap-5">
+    <!-- <p class="mb-10 text-xl font-bold">{{ selectDate }} 的預約</p> -->
+
     <VDatePicker
       v-model="date"
       :attributes="haveOrder"
       :disabled-dates="disabledDates"
-      title-position="left"
       color="gray"
-      class="col-span-3 py-8"
+      class="col-span-7 px-8 py-5"
+      :columns="2"
       expanded
     />
-    <!-- </div> -->
-    <div class="col-span-4">
-      <p class="mb-10 text-xl font-bold">{{ selectDate }} 的預約</p>
-      <div class="overflow-x-auto">
+    <div class="col-span-7">
+      <div>
         <div>
-          <table>
+          <table class="w-full">
             <thead class="h-[60px] w-full">
               <tr>
-                <th>時段</th>
+                <th class="w-[80px]">時段</th>
                 <th>認領圖</th>
-                <th>訂購人</th>
+                <th class="w-[80px]">訂購人</th>
               </tr>
             </thead>
             <transition>
               <tbody v-if="dateDetail">
                 <tr class="h-[108px] odd:bg-primary">
-                  <td class="">
+                  <td>
                     <p>上午</p>
                   </td>
-                  <td class="px-20">
+                  <td class="">
                     <transition>
-                      <div
-                        v-if="dateDetail['上午']"
-                        class="flex h-[108px] items-center justify-center gap-3"
-                      >
+                      <div v-if="dateDetail['上午']" class="flex items-center justify-center gap-3">
                         <img
                           :src="dateDetail['上午'].ImgUrl"
                           class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
@@ -63,10 +59,7 @@
                   </td>
                   <td>
                     <transition>
-                      <div
-                        v-if="dateDetail['下午']"
-                        class="flex h-[108px] items-center justify-center gap-3"
-                      >
+                      <div v-if="dateDetail['下午']" class="flex items-center justify-center gap-3">
                         <img
                           :src="dateDetail['下午'].ImgUrl"
                           class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
@@ -94,10 +87,7 @@
                   </td>
                   <td>
                     <transition>
-                      <div
-                        v-if="dateDetail['晚上']"
-                        class="flex h-[108px] items-center justify-center gap-3"
-                      >
+                      <div v-if="dateDetail['晚上']" class="flex items-center justify-center gap-3">
                         <img
                           :src="dateDetail['晚上'].ImgUrl"
                           class="h-[100px] w-[100px] rounded-lg border bg-white object-cover object-center"
@@ -185,6 +175,7 @@ const getSchedule = async () => {
 watch(
   date,
   async () => {
+    dateDetail.value = {}
     selectDate.value = formattedOutput(date.value)
 
     const res = await $fetch(`${APIBASE}/api/orderday`, {

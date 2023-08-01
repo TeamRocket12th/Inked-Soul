@@ -80,8 +80,8 @@ export const useOrderStore = defineStore('order', () => {
       })
 
       AllOrderRecord.value = res.Data
-      totalPage.value = Math.floor(res.Data.TotalNum / 10) + 1
-      allOrderNum.value = res.Data.TotalNum
+      totalPage.value = Math.floor(res.TotalNum / 10) + 1
+      allOrderNum.value = res.TotalNum
     } catch (error) {
       console.log('取得所有訂單失敗', error)
     }

@@ -23,7 +23,7 @@ export const useFollowsStore = defineStore('follows', () => {
         }
       })
       console.log('follow', data.value)
-      alert('已追蹤此刺青師')
+      // alert('已追蹤此刺青師')
     })
   }
   // 取消追蹤
@@ -40,7 +40,7 @@ export const useFollowsStore = defineStore('follows', () => {
         }
       })
       console.log('unfollow', data.value)
-      alert('已取消追蹤此刺青師')
+      // alert('已取消追蹤此刺青師')
       getFollows(1)
     })
   }
@@ -57,8 +57,7 @@ export const useFollowsStore = defineStore('follows', () => {
           page: num
         }
       })
-      if (data.value) {
-        console.log('用戶後台取得已追蹤列表', data)
+      if (data.value?.Data) {
         followingData.value = data.value.Data
         allNum.value = data.value.response.TotalNum
       }

@@ -1,14 +1,16 @@
 <template>
-  <div class="flex flex-col gap-20">
-    <BannerItem>
-      <template #default>
-        <SearchBar>搜尋認領圖</SearchBar>
-      </template>
-    </BannerItem>
-    <IntroItem />
-    <ArtistArea />
-    <FeatureItem />
-    <GoTop />
+  <div>
+    <div class="flex flex-col gap-20">
+      <BannerItem>
+        <template #default>
+          <SearchBar>搜尋認領圖</SearchBar>
+        </template>
+      </BannerItem>
+      <IntroItem />
+      <ArtistArea />
+      <FeatureItem />
+      <GoTop />
+    </div>
   </div>
 </template>
 

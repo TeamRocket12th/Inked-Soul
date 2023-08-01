@@ -28,6 +28,7 @@
       name="Newebpay"
       method="post"
       action="https://ccore.newebpay.com/MPG/mpg_gateway"
+      @submit.prevent="handleSubmit"
     >
       <!-- 設定 hidden 可以隱藏不用給使用者看的資訊 -->
       <!-- 藍新金流商店代號 -->
@@ -69,6 +70,12 @@ const { inputPaymentInfo, paymentInfo } = storeToRefs(store)
 
 const deposit = ref(props.deposit.toLocaleString())
 
+const handleSubmit = () => {
+  if (paymentData.value && form.value) {
+    form.value.submit()
+  }
+}
+
 // 發送用戶下單資料
 const form = ref(null)
 const paymentData = ref({})
@@ -100,7 +107,7 @@ const postOrder = async () => {
     } else {
       paymentData.value = orderResponse.value.PaymentData
       await nextTick()
-      form.value.submit() // 發送藍新回傳的資料
+      handleSubmit() // 發送藍新回傳的資料
     }
   }
 }

@@ -2,17 +2,18 @@ export const useFormatted = () => {
   const formatDate = ref(new Date())
 
   // new Date() -> 'yyyy-mm-dd'
-  const formattedOutput = (date) => {
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const day = String(date.getDate()).padStart(2, '0')
+  const formattedOutput = (date: string) => {
+    const selectDate = new Date(date)
 
-    formatDate.value = `${year}-${month}-${day}`
+    const year = selectDate.getFullYear()
+    const month = String(selectDate.getMonth() + 1).padStart(2, '0')
+    const day = String(selectDate.getDate()).padStart(2, '0')
+
     return `${year}-${month}-${day}`
   }
 
   // 'yyyy/mm/dd' -> 'yyyy-mm-dd'
-  const transformDate = (date) => {
+  const transformDate = (date: string) => {
     const dateParts = date.slice(0, 10).split('/')
     const year = dateParts[0]
     const month = dateParts[1]
@@ -21,8 +22,8 @@ export const useFormatted = () => {
     return `${year}-${month}-${day}`
   }
 
-  const transformOrderStatus = (num, role) => {
-    const status = {
+  const transformOrderStatus = (num: number, role: string): string => {
+    const status: Record<number, string> = {
       0: '訂單取消',
       1: '訂單成立',
       2: '完成訂單',
@@ -36,8 +37,8 @@ export const useFormatted = () => {
     return status[num]
   }
 
-  const transformWeek = (week) => {
-    const closeDaysMapping = {
+  const transformWeek = (week: string[]) => {
+    const closeDaysMapping: Record<string, number> = {
       星期日: 1,
       星期一: 2,
       星期二: 3,
