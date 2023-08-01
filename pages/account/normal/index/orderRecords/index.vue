@@ -14,7 +14,7 @@
             <th>訂金</th>
           </tr>
         </thead>
-        <tbody v-if="!AllOrderRecord">
+        <tbody v-if="!allOrderNum">
           <tr class="h-[108px] border-b border-[#D0D0D0] text-center">
             <td colspan="10">您尚無任何訂單</td>
           </tr>

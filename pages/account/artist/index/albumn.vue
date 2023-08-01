@@ -54,11 +54,14 @@
             <Icon
               v-if="item.IsTop === false"
               name="ic:baseline-check-box-outline-blank"
+              class="cursor-pointer"
               @click="editAlbum(item.Id, artistID, item.Description, true)"
             />
             <Icon
               v-if="item.IsTop === true"
               name="ic:outline-push-pin"
+              size="20"
+              class="cursor-pointer"
               @click="editAlbum(item.Id, artistID, item.Description, false)"
             />
           </td>
