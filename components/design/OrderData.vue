@@ -174,6 +174,7 @@ const { data: artistInfo } = await useFetch(`${APIBASE}/api/artistbooking`, {
 const closeDays = ref(artistInfo.value.response.ClosedDays)
 const dayOff = ref(artistInfo.value.response.DayOff)
 const availableTimeFrame = ref(artistInfo.value.response.TimeFrame)
+
 const bookedDate = artistInfo.value.Data.map((item) => {
   const formattedBookedDate = item.BookedDate.replace(/\//g, '-')
   const formattedBookedTimeFrame = []
@@ -186,6 +187,19 @@ const bookedDate = artistInfo.value.Data.map((item) => {
   if (item.BookedTimeFrame.includes('晚上（18:00～閉店時間）')) {
     formattedBookedTimeFrame.push('2')
   }
+
+  // 待優化
+  availableTimeFrame.value.forEach((time) => {
+    if (time !== '時段一') {
+      formattedBookedTimeFrame.push('0')
+    }
+    if (time !== '時段二') {
+      formattedBookedTimeFrame.push('1')
+    }
+    if (time !== '時段三') {
+      formattedBookedTimeFrame.push('2')
+    }
+  })
   return [formattedBookedDate, formattedBookedTimeFrame]
 })
 

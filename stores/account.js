@@ -20,7 +20,7 @@ export const useAccountStore = defineStore('account', () => {
 
   const name = ref()
   const tel = ref()
-  const Id = ref(1)
+  const Id = ref()
   const userInfoData = reactive({
     Id: Id.value,
     Nickname: '',
