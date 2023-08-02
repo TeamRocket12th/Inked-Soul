@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <SearchResult>刺青師</SearchResult>
     <div class="grid w-full grid-cols-3 gap-8">
       <NuxtLink v-for="item in allArtistsData" :key="item.Id" :to="`/artists/${item.Id}`">

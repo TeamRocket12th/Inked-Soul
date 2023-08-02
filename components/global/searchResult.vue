@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showResult" class="mb-8 flex w-full justify-between">
+  <div v-if="showResult" class="mb-8 flex w-full">
     <div class="flex items-center gap-2">
       <slot></slot>
       的
