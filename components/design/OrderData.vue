@@ -35,6 +35,7 @@
             name="聯絡電話"
             :rules="isPhone"
             class="formInput"
+            maxlength="10"
             :class="{ 'border-[#DC3545]': errors.聯絡電話 }"
           />
           <Icon

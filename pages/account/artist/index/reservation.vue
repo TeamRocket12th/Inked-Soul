@@ -236,8 +236,4 @@ th {
 .v-leave-from {
   opacity: 1;
 }
-
-.vc-pane-layout {
-  gap: 40px;
-}
 </style>
