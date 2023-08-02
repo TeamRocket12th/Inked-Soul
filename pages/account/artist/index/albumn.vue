@@ -1,10 +1,8 @@
 <template>
   <div>
     <!-- 上傳 -->
-    <div class="mb-5 flex flex-row-reverse">
-      <button class="defaultBtn w-fit px-6 py-3 font-bold" onclick="upload_album.showModal()">
-        上架作品集
-      </button>
+    <div class="mb-4 flex flex-row-reverse">
+      <button class="btn-basic btn-normal" onclick="upload_album.showModal()">上架作品集</button>
       <dialog id="upload_album" class="modal">
         <form method="dialog" class="modal-box">
           <UploadAlbumArea />

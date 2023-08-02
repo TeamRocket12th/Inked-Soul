@@ -11,7 +11,7 @@
       @update-current-page="getEmitPage"
     /> -->
     <div v-if="commentNum">
-      <PaginationBtn :num="commentNum" state="back" />
+      <PaginationBtn :num="commentNum" state="front" />
     </div>
   </div>
 </template>

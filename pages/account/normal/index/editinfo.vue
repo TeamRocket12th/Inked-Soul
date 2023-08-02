@@ -14,7 +14,7 @@
               v-model="name"
               name="名稱"
               :rules="isUnder20"
-              class="formInput"
+              class="formInput text-base"
               :class="{ 'border-[#DC3545]': errors.名稱 }"
               placeholder="請輸入您的名稱"
             />
@@ -70,12 +70,7 @@
             />
           </div>
         </div>
-        <button
-          type="button"
-          class="btn w-full bg-black text-white hover:text-black"
-          :disabled="!meta.valid"
-          @click.prevent="editInfo"
-        >
+        <button type="button" class="btn-basic btn-wide" :disabled="!meta.valid" @click="editInfo">
           更新個人資料
         </button>
       </VForm>
@@ -129,12 +124,7 @@
             />
           </div>
         </div>
-        <button
-          type="button"
-          class="btn w-full bg-black text-white"
-          :disabled="!meta.valid"
-          @click="editInfo"
-        >
+        <button type="button" class="btn-basic btn-wide" :disabled="!meta.valid" @click="editInfo">
           更改密碼
         </button>
       </VForm>

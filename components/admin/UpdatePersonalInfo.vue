@@ -13,7 +13,7 @@
             v-model="inputArtistInfoData.Realname"
             :rules="isUnder20"
             name="真實姓名"
-            class="formInput"
+            class="formInput text-sm"
             :class="{ 'border-[#DC3545]': props.errors.真實姓名 }"
             :placeholder="artistInfoData.Realname"
           />
@@ -35,7 +35,7 @@
             v-model="inputArtistInfoData.Nickname"
             :rules="isUnder20"
             name="名稱"
-            class="formInput"
+            class="formInput text-sm"
             :class="{ 'border-[#DC3545]': props.errors.名稱 }"
             :placeholder="artistInfoData.Nickname"
           />
@@ -57,7 +57,7 @@
             v-model="inputArtistInfoData.Phone"
             :rules="isPhone"
             name="手機"
-            class="formInput"
+            class="formInput text-sm"
             placeholder="0912345678"
             :class="{ 'border-[#DC3545]': props.errors.手機 }"
           />
@@ -79,7 +79,7 @@
             v-model="artistInfoData.Account"
             rules="email"
             name="電子信箱"
-            class="formInput text-[#D0D0D0]"
+            class="formInput text-sm text-[#D0D0D0]"
             disabled
           />
           <Icon
@@ -100,7 +100,7 @@
             v-model="inputArtistInfoData.Experience"
             rules="integer: true"
             name="資歷"
-            class="formInput"
+            class="formInput text-sm"
             :class="{ 'border-[#DC3545]': props.errors.資歷 }"
             :placeholder="artistInfoData.Experience || 1"
           />

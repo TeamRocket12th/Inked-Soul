@@ -6,9 +6,11 @@
         class="col-start-8 flex cursor-pointer items-center justify-center whitespace-nowrap"
         @click.prevent="stretchToggle()"
       >
-        <span class="rounded-lg bg-black px-3 py-2 text-white focus:border-none focus:bg-[#D0D0D0]">
+        <button
+          class="rounded-lg bg-black px-3 py-2 text-white focus:border-none focus:bg-[#D0D0D0]"
+        >
           撰寫評價
-        </span>
+        </button>
       </label>
       <div
         tabindex="0"
@@ -96,7 +98,6 @@ const postComments = async () => {
   })
 
   isComment.value = true
-  console.log(data)
 }
 </script>
 

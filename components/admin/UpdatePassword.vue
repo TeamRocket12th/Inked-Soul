@@ -44,7 +44,7 @@
           />
         </div>
       </div>
-      <button :disabled="!meta.valid" class="btn-neutral btn bg-black text-white">更改密碼</button>
+      <button :disabled="!meta.valid" class="btn-basic btn-wide">更改密碼</button>
     </VForm>
   </div>
 </template>
