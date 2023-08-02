@@ -43,7 +43,7 @@
         @click="postImg"
       >
         <Icon name="ic:baseline-upgrade" size="24" />
-        <p>上傳認領圖</p>
+        <p>上傳大頭照</p>
       </button>
     </div>
   </div>

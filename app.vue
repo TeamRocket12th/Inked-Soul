@@ -27,6 +27,7 @@ setLocale('zh_TW')
 vc-light.vc-attr,
 .vc-light .vc-attr {
   --vc-highlight-solid-bg: black;
+  --vc-highlight-outline-border: black;
 }
 .vc-container:focus,
 .vc-container *:focus {
