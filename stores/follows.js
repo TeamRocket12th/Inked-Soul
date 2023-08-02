@@ -57,9 +57,11 @@ export const useFollowsStore = defineStore('follows', () => {
           page: num
         }
       })
-      if (data.value?.Data) {
+      if (data.value.Data) {
         followingData.value = data.value.Data
         allNum.value = data.value.response.TotalNum
+      } else {
+        followingData.value = []
       }
     })
   }
