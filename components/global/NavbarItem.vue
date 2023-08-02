@@ -226,25 +226,38 @@
               </div>
             </div>
             <li>
-              <NuxtLink to="/account/normal/editinfo" class="rounded-none px-8 py-4">
+              <NuxtLink
+                to="/account/normal/editinfo"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-account-circle" size="24" />
                 <p>編輯個人資料</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/normal/orderRecords" class="rounded-none px-8 py-4">
+              <NuxtLink
+                to="/account/normal/orderRecords"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-list-alt" size="24" />
                 <p>訂單資訊</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/normal/follows" class="rounded-none border-b px-8 py-4">
+              <NuxtLink
+                to="/account/normal/follows"
+                class="rounded-none border-b px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-bookmark-border" size="24" />
                 <p>追蹤刺青師</p></NuxtLink
               >
             </li>
             <li>
-              <NuxtLink to="/account/login" class="rounded-none px-8 py-4" @click="logout">
+              <NuxtLink
+                to="/account/login"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+                @click="logout"
+              >
                 <Icon name="ic:baseline-log-out" size="24" />
                 <p>登出</p></NuxtLink
               >
