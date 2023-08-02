@@ -124,7 +124,7 @@
             tabindex="0"
             class="dropdown-content menu menu-sm z-[1] mt-10 w-[326px] rounded-lg border border-[D0D0D0] bg-base-100 p-5 text-black shadow"
           >
-            <div class="mb-5 flex flex-row items-center gap-4">
+            <div class="hover: mb-5 flex flex-row items-center gap-4">
               <div class="avatar">
                 <div class="h-12 w-12 rounded-lg">
                   <img :src="Photo" alt="" />
@@ -136,49 +136,74 @@
               </div>
             </div>
             <li>
-              <NuxtLink to="/account/artist/editinfo" class="rounded-none px-8 py-4">
+              <NuxtLink
+                to="/account/artist/editinfo"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-account-circle" size="24" />
                 <p>編輯個人資料</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/membership" class="rounded-none border-b px-8 py-4">
+              <NuxtLink
+                to="/account/artist/membership"
+                class="rounded-none border-b px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-how-to-reg" size="24" />
                 <p>會員資格</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/productlist" class="rounded-none px-8 py-4">
+              <NuxtLink
+                to="/account/artist/productlist"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-collections-bookmark" size="24" />
                 <p>認領圖</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/albumn" class="rounded-none border-b px-8 py-4">
+              <NuxtLink
+                to="/account/artist/albumn"
+                class="rounded-none border-b px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:baseline-wallpaper" size="24" />
                 <p>作品集</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/reservation" class="rounded-none px-8 py-4">
+              <NuxtLink
+                to="/account/artist/reservation"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-event-available" size="24" />
                 <p>預約狀況</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/orderinfo" class="rounded-none px-8 py-4">
+              <NuxtLink
+                to="/account/artist/orderinfo"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:round-list-alt" size="24" />
                 <p>訂單資訊</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/artist/comments" class="rounded-none border-b px-8 py-4">
+              <NuxtLink
+                to="/account/artist/comments"
+                class="rounded-none border-b px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+              >
                 <Icon name="ic:outline-stars" size="24" />
                 <p>獲得評價</p>
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/account/login" class="rounded-none px-8 py-4" @click="logout">
+              <NuxtLink
+                to="/account/login"
+                class="rounded-none px-8 py-4 visited:bg-white hover:bg-primary active:bg-black active:text-white"
+                @click="logout"
+              >
                 <Icon name="ic:baseline-log-out" size="24" />
                 <p>登出</p>
               </NuxtLink>
