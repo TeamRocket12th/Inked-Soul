@@ -3,12 +3,17 @@
     <VForm v-slot="{ errors, meta }">
       <div class="mb-6 grid grid-cols-2 gap-[36px]">
         <div class="flex flex-col gap-5">
+          <!-- 個人資料 -->
           <UpdatePersonalInfo :errors="errors" />
+          <!-- 個人簡介 -->
           <UpdatePersonalBrief :errors="errors" />
+          <!-- 風格 -->
           <UpdateStyle />
         </div>
         <div class="flex flex-col gap-5">
+          <!-- 工作室資料 -->
           <UpdateStudioInfo :errors="errors" />
+          <!-- 工休日 -->
           <UpdateTime :errors="errors" />
         </div>
       </div>
