@@ -20,10 +20,10 @@
       <button
         type="button"
         :disabled="!meta.valid"
-        class="btn-neutral btn mb-20 w-full bg-black text-white"
+        class="btn-basic btn-wide mb-20"
         @click.prevent="editArtistInfo"
       >
-        更新個人資料
+        更新資訊
       </button>
     </VForm>
 

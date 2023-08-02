@@ -95,4 +95,8 @@
   .btn-large {
     @apply w-full py-5 text-[20px] font-bold;
   }
+  /* 自適應寬度按鈕 */
+  .btn-wide {
+    @apply w-full py-3 text-xl font-bold font-normal disabled:bg-custom disabled:text-white;
+  }
 }
