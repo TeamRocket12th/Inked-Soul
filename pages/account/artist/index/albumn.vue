@@ -2,12 +2,7 @@
   <div>
     <!-- 上傳 -->
     <div class="mb-4 flex flex-row-reverse">
-      <button
-        class="btn bg-black text-white hover:bg-secondary hover:text-black"
-        onclick="upload_album.showModal()"
-      >
-        上傳作品集
-      </button>
+      <button class="btn-basic btn-normal" onclick="upload_album.showModal()">上架作品集</button>
       <dialog id="upload_album" class="modal">
         <form method="dialog" class="modal-box">
           <UploadAlbumArea />

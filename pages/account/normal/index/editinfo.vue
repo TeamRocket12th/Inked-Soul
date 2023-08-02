@@ -14,7 +14,7 @@
               v-model="name"
               name="名稱"
               :rules="isUnder20"
-              class="formInput"
+              class="formInput text-base"
               :class="{ 'border-[#DC3545]': errors.名稱 }"
               placeholder="請輸入您的名稱"
             />
