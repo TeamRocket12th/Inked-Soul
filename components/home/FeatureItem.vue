@@ -12,7 +12,7 @@
         </div>
       </li>
       <li
-        class="flex h-[120px] w-[416px] justify-between justify-between border-b border-l border-[#D0D0D0] pb-5 pl-[15px]"
+        class="flex h-[120px] w-[416px] justify-between border-b border-l border-[#D0D0D0] pb-5 pl-[15px]"
       >
         <div class="flex w-full items-center justify-between">
           <Icon name="ic:twotone-pending-actions" class="h-10 w-10" />
@@ -34,7 +34,7 @@
       <li class="flex h-[120px] w-[416px] justify-between border-l border-[#D0D0D0] pl-[15px] pt-5">
         <div class="flex w-full items-center justify-between">
           <Icon name="ic:twotone-fact-check" class="h-10 w-10" />
-          <div class="flex h-[83px] flex-col items-end justify-between">
+          <div class="flex h-full flex-col items-end justify-between">
             <h4>評價機制</h4>
             <p class="text-secondary">安心預約經由平台認證的專業刺青師</p>
           </div>
