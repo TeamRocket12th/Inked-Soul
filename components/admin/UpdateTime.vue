@@ -6,7 +6,7 @@
         <div class="dropdown-end dropdown w-full">
           <label
             tabindex="0"
-            class="btn-outline btn my-1 mb-1 h-auto w-full border-[#D0D0D0] bg-white py-2"
+            class="btn-outline btn my-1 mb-1 h-auto w-full border-[#D0D0D0] bg-white py-2 font-normal hover:bg-black hover:text-white focus:bg-black focus:text-white"
           >
             <span>
               <!-- v-for="(day, key) in ArtistCloseDay" :key="key" -->
@@ -19,7 +19,7 @@
             class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
           >
             <li v-for="(day, key) in weeks" :key="key" class="m-1" @click="SelectCloseDays(day)">
-              <a :class="{ 'bg-gray-100': ArtistCloseDay.includes(day) }">{{ day.week }}</a>
+              <a :class="{ 'bg-black text-white': ArtistCloseDay.includes(day) }">{{ day.week }}</a>
             </li>
           </ul>
         </div>
@@ -30,7 +30,7 @@
           <VDatePicker v-model="selectDayoff" :attributes="selectedDayoff" color="gray">
             <template #default="{ togglePopover }">
               <button
-                class="formInput rounded-md px-3 py-2 text-sm font-semibold text-black"
+                class="formInput rounded-md px-3 py-2 text-sm font-normal text-black"
                 @click.prevent="togglePopover"
               >
                 {{ ArtistDayoff }}
@@ -47,7 +47,7 @@
         <div class="dropdown-hover dropdown w-full">
           <label
             tabindex="0"
-            class="btn-outline btn mb-1 w-full border-[#D0D0D0]"
+            class="btn-outline btn mb-1 w-full border-[#D0D0D0] font-normal hover:bg-black"
             :class="{ 'border-[#DC3545]': AlertSelect }"
             >{{ ArtistOpenTime }}</label
           >
@@ -61,7 +61,7 @@
               class="m-1"
               @click="SelectTime('open', hour)"
             >
-              <a :class="{ 'bg-gray-100': ArtistOpenTime.includes(hour) }">{{ hour }}</a>
+              <a :class="{ 'bg-black text-white': ArtistOpenTime.includes(hour) }">{{ hour }}</a>
             </li>
           </ul>
         </div>
@@ -71,7 +71,7 @@
         <div class="dropdown-hover dropdown w-full">
           <label
             tabindex="0"
-            class="btn-outline btn mb-1 w-full border-[#D0D0D0]"
+            class="btn-outline btn mb-1 w-full border-[#D0D0D0] font-normal hover:bg-black"
             :class="{ 'border-[#DC3545]': AlertSelect }"
             >{{ ArtistCloseTime }}</label
           >
@@ -85,7 +85,7 @@
               class="m-1"
               @click="SelectTime('close', hour)"
             >
-              <a :class="{ 'bg-gray-100': ArtistCloseTime.includes(hour) }">{{ hour }}</a>
+              <a :class="{ 'bg-black text-white': ArtistCloseTime.includes(hour) }">{{ hour }}</a>
             </li>
           </ul>
         </div>

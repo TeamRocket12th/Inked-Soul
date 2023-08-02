@@ -14,7 +14,7 @@
             v-model="inputArtistInfoData.StudioName"
             :rules="isUnder20"
             name="店名"
-            class="formInput placeholder:text-[#D0D0D0]"
+            class="formInput text-sm placeholder:text-[#D0D0D0]"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
             disabled
           />
@@ -25,7 +25,7 @@
             v-model="inputArtistInfoData.StudioName"
             :rules="isUnder20"
             name="店名"
-            class="formInput placeholder:text-[#D0D0D0]"
+            class="formInput text-sm placeholder:text-[#D0D0D0]"
             :class="{ 'border-[#DC3545]': props.errors.店名 }"
             placeholder="StudioName"
           />
@@ -47,7 +47,7 @@
             id="license"
             v-model="artistInfoData.License"
             name="營業登記號"
-            class="formInput text-[#D0D0D0]"
+            class="formInput text-sm text-[#D0D0D0]"
             :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
             :placeholder="artistInfoData.License"
             disabled
@@ -58,7 +58,7 @@
             id="license"
             v-model="inputArtistInfoData.License"
             name="營業登記號"
-            class="formInput"
+            class="formInput text-sm"
             :class="{ 'border-[#DC3545]': props.errors.營業登記號 }"
             :placeholder="artistInfoData.License"
           />
@@ -75,7 +75,7 @@
         <div class="dropdown-end dropdown relative w-full">
           <label
             tabindex="0"
-            class="btn-outline btn mb-1 w-full border-[#D0D0D0] hover:border-[#D0D0D0] hover:bg-white hover:text-black"
+            class="btn-outline btn mb-1 w-full border-[#D0D0D0] font-normal hover:border-[#D0D0D0] hover:bg-white hover:text-black"
             >{{ studioLoaction }}</label
           >
           <Icon
@@ -112,7 +112,7 @@
           id="address"
           v-model="inputArtistInfoData.Address"
           name="地址"
-          class="formInput"
+          class="formInput text-sm"
           :placeholder="artistInfoData.Address || '鄉鎮市區、里鄰、門牌號碼'"
         />
       </div>
@@ -127,7 +127,7 @@
             v-model="inputArtistInfoData.Tel"
             :rules="isTel"
             name="電話"
-            class="formInput"
+            class="formInput text-sm"
             :class="{ 'border-[#DC3545]': props.errors.電話 }"
             :placeholder="artistInfoData.Tel || '00 - 00000000'"
           />
