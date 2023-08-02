@@ -84,7 +84,7 @@
               >
                 <template #default="{ togglePopover }">
                   <button
-                    class="formInput rounded-md px-3 py-2 text-sm font-semibold text-black"
+                    class="formInput rounded-md px-3 py-2 text-sm font-normal text-black"
                     @click.prevent="togglePopover"
                   >
                     {{ inputPaymentInfo.BookedDate }}
