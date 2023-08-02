@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-10 flex flex-row items-center justify-between">
+    <div class="mb-5 flex flex-row items-center justify-between">
       <!-- radio btn -->
       <div class="mr-2 flex flex-row gap-4 md:gap-10">
         <label for="all" class="flex cursor-pointer flex-row items-center gap-2">
@@ -41,7 +41,7 @@
         </label>
       </div>
       <!-- upload btn -->
-      <button class="defaultBtn w-fit px-6 py-3 md:px-6" onclick="upload_product.showModal()">
+      <button class="defaultBtn w-fit px-6 py-3 font-bold" onclick="upload_product.showModal()">
         上架認領圖
       </button>
       <!-- UploadTattooArea -->

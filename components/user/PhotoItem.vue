@@ -77,14 +77,14 @@ const postImg = async () => {
   const formData = new FormData()
   formData.append('file', userImage.value)
   try {
-    const { data, error } = useFetch(`${APIBASE}/api/uploaduserprofile`, {
+    const res = $fetch(`${APIBASE}/api/uploaduserprofile`, {
       headers: {
         Authorization: `Bearer ${authToken.value}`
       },
       method: 'POST',
       body: formData
     })
-    if (data.value.Message) {
+    if (res.Message) {
       await getUserInfo()
     }
     previewUrl.value = false

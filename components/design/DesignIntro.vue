@@ -6,14 +6,16 @@
     <div v-if="props">
       <p class="mb-3 bg-primary px-5 py-3">預約資訊</p>
       <div class="flex flex-col gap-3">
-        <div class="flex flex-row items-center gap-2">
-          <div class="avatar">
-            <div class="w-10 rounded-lg">
-              <img :src="`${props.designData.ArtistPhoto}`" />
+        <NuxtLink :to="`/artists/${props.designData.ArtistID}`">
+          <div class="flex flex-row items-center gap-2 duration-200 hover:text-secondary">
+            <div class="avatar">
+              <div class="w-10 rounded-lg">
+                <img :src="`${props.designData.ArtistPhoto}`" />
+              </div>
             </div>
+            <p>{{ props.designData.ArtistName }}</p>
           </div>
-          <p>{{ props.designData.ArtistName }}</p>
-        </div>
+        </NuxtLink>
         <p>工作室&nbsp; | &nbsp;{{ props.designData.StudioName }}</p>
         <div class="flex flex-row items-center gap-2">
           <Icon name="ic:outline-phone" size="24" class="text-secondary" />

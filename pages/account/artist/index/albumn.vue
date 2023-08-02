@@ -1,12 +1,9 @@
 <template>
   <div>
     <!-- 上傳 -->
-    <div class="mb-4 flex flex-row-reverse">
-      <button
-        class="btn bg-black text-white hover:bg-secondary hover:text-black"
-        onclick="upload_album.showModal()"
-      >
-        上傳作品集
+    <div class="mb-5 flex flex-row-reverse">
+      <button class="defaultBtn w-fit px-6 py-3 font-bold" onclick="upload_album.showModal()">
+        上架作品集
       </button>
       <dialog id="upload_album" class="modal">
         <form method="dialog" class="modal-box">
@@ -19,14 +16,14 @@
       <div class="flex flex-col items-center">
         <Icon name="ic:baseline-check" size="60" class="mb-4" />
         <p class="mb-10 font-bold">已成功上架您的作品集</p>
-        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+        <button class="btn bg-black text-white" @click="closeModal()">上其他作品集</button>
       </div>
     </dialog>
     <!-- 上傳失敗燈箱 -->
     <dialog ref="failedAlbumModal" class="rounded-xl p-8">
       <div class="flex flex-col items-center">
         <p class="mb-10 font-bold">上架失敗，請重新上架</p>
-        <button class="btn bg-black text-white" @click="closeModal()">上傳其他作品集</button>
+        <button class="btn bg-black text-white" @click="closeModal()">上其他作品集</button>
       </div>
     </dialog>
     <!-- 表格 -->
