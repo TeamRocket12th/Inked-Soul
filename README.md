@@ -1,4 +1,7 @@
-# Inked Soul
+<div align="center">
+<img src="./public/logo-white.png"/>
+<h1><a>Inked Soul | 刺青師預約與媒合平台</a></h1>
+</div>
 
 ### Git Commit 規範
 
