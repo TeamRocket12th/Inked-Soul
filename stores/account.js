@@ -31,7 +31,7 @@ export const useAccountStore = defineStore('account', () => {
     Account: '',
     Password: '',
     License: '',
-    Address: ''
+    TimeFrame: ''
   })
   const artistInfoData = reactive({
     Id: '',
