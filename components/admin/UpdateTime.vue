@@ -10,7 +10,7 @@
           >
             <span>
               <!-- v-for="(day, key) in ArtistCloseDay" :key="key" -->
-              {{ inputArtistInfoData.ClosedDays || artistInfoData.ClosedDays }}
+              {{ artistInfoData.ClosedDays }}
               <!-- {{ day.week }} -->
             </span>
           </label>
@@ -19,7 +19,9 @@
             class="dropdown-content menu rounded-box z-10 w-full flex-nowrap overflow-scroll bg-base-100 p-2 shadow"
           >
             <li v-for="(day, key) in weeks" :key="key" class="m-1" @click="SelectCloseDays(day)">
-              <a :class="{ 'bg-black text-white': ArtistCloseDay.includes(day) }">{{ day.week }}</a>
+              <a :class="{ 'bg-black text-white': ArtistCloseDay.includes(day.week) }">{{
+                day.week
+              }}</a>
             </li>
           </ul>
         </div>
@@ -160,12 +162,19 @@ const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
 const { formattedOutput } = useFormatted()
 
 // 要get API 的值（需要轉換格式）
-const ArtistCloseDay = ref([])
+const ArtistCloseDay = ref(
+  []
+  // artistInfoData.value.ClosedDays ? artistInfoData.value.ClosedDays.split(',') : []
+)
+
 const ArtistOpenTime = ref(
   artistInfoData.value.StartTime ? artistInfoData.value.StartTime : '請選擇'
 )
 const ArtistCloseTime = ref(artistInfoData.value.EndTime ? artistInfoData.value.EndTime : '請選擇')
-const ArtistAvailableTimeFrame = ref([])
+const ArtistAvailableTimeFrame = ref(
+  []
+  // artistInfoData.value.TimeFrame ? artistInfoData.value.TimeFrame.split(',') : []
+)
 const ArtistDayoff = ref('')
 
 const today = new Date()
@@ -184,7 +193,7 @@ watch(
   selectDayoff,
   (newValue) => {
     ArtistDayoff.value = formattedOutput(newValue || today)
-    inputArtistInfoData.value.DayOff = ArtistDayoff.value
+    // inputArtistInfoData.value.DayOff = ArtistDayoff.value
   },
   {
     immediate: true
@@ -194,7 +203,7 @@ watch(
 const AlertSelect = ref(false)
 
 const SelectCloseDays = (day) => {
-  if (ArtistCloseDay.value.includes(day) === false) {
+  if (!ArtistCloseDay.value.includes(day)) {
     ArtistCloseDay.value.push(day)
     ArtistCloseDay.value.sort((a, b) => {
       const indexA = Object.values(a)[0]
@@ -202,14 +211,14 @@ const SelectCloseDays = (day) => {
       return indexA - indexB
     })
   } else {
-    const index = ArtistCloseDay.value.indexOf(day)
+    const index = ArtistCloseDay.value.indexOf(day.week)
     ArtistCloseDay.value.splice(index, 1)
     if (ArtistCloseDay.value.length === 0) {
       ArtistCloseDay.value.splice(index, 1, day)
     }
   }
 
-  inputArtistInfoData.value.ClosedDays = ArtistCloseDay.value
+  artistInfoData.value.ClosedDays = ArtistCloseDay.value
     .map((item) => {
       return item.week
     })
@@ -228,12 +237,12 @@ const SelectTime = (status, time) => {
     AlertSelect.value = false
   }
 
-  inputArtistInfoData.value.StartTime = ArtistOpenTime.value
-  inputArtistInfoData.value.EndTime = ArtistCloseTime.value
+  artistInfoData.value.StartTime = ArtistOpenTime.value
+  artistInfoData.value.EndTime = ArtistCloseTime.value
 }
 
 const SelectTimeFrame = (part) => {
-  if (ArtistAvailableTimeFrame.value.includes(part) === false) {
+  if (!ArtistAvailableTimeFrame.value.includes(part)) {
     ArtistAvailableTimeFrame.value.push(part)
   } else {
     const index = ArtistAvailableTimeFrame.value.indexOf(part)

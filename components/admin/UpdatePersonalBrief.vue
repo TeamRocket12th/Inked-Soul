@@ -8,11 +8,11 @@
       <div class="relative">
         <VField
           id="intro"
-          v-model="inputArtistInfoData.Intro"
+          v-model="artistInfoData.Intro"
           as="textarea"
           name="簡介"
           rules="max:30"
-          :placeholder="artistInfoData.Intro || '填寫您的個人簡介'"
+          placeholder="填寫您的個人簡介"
           class="textarea-bordered textarea min-h-[72px] w-full text-sm"
           style="outline: none"
           :class="{ 'border-[#DC3545]': props.errors.簡介 }"
@@ -31,7 +31,7 @@ import { storeToRefs } from 'pinia'
 import { useAccountStore } from '~/stores/account'
 
 const store = useAccountStore()
-const { artistInfoData, inputArtistInfoData } = storeToRefs(store)
+const { artistInfoData } = storeToRefs(store)
 
 const props = defineProps({
   errors: {

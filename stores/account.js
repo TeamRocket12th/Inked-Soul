@@ -22,7 +22,6 @@ export const useAccountStore = defineStore('account', () => {
   const tel = ref()
   const Id = ref()
   const userInfoData = reactive({
-    Id: Id.value,
     Nickname: '',
     Tel: ''
   })
@@ -31,27 +30,8 @@ export const useAccountStore = defineStore('account', () => {
     Id: '',
     Account: '',
     Password: '',
-    Realname: '',
-    Nickname: '',
-    StudioName: '',
     License: '',
-    Phone: '',
-    Tel: '',
-    Style: '',
-    StartTime: '',
-    EndTime: '',
-    City: '',
-    Address: '',
-    ClosedDays: '',
-    DayOff: '',
-    Experience: 0,
-    Intro: '',
-    IsVerified: 0,
-    MemberShip: 0,
-    Guid: '',
-    Follower: 0,
-    TimeFrame: '',
-    PasswordTime: ''
+    Address: ''
   })
   const artistInfoData = reactive({
     Id: '',
@@ -72,12 +52,7 @@ export const useAccountStore = defineStore('account', () => {
     DayOff: '',
     Experience: 0,
     Intro: '',
-    IsVerified: 0,
-    MemberShip: 0,
-    Guid: '',
-    Follower: 0,
-    TimeFrame: '',
-    PasswordTime: ''
+    TimeFrame: ''
   })
 
   // 一般流程登入
@@ -207,9 +182,9 @@ export const useAccountStore = defineStore('account', () => {
         }
       })
       Object.assign(artistInfoData, data.value.Data)
-      Object.keys(inputArtistInfoData).forEach((key) => {
-        inputArtistInfoData[key] = ''
-      })
+      // Object.keys(inputArtistInfoData).forEach((key) => {
+      //   inputArtistInfoData[key] = ''
+      // })
 
       photo.value = data.value.Data.Photo
 
