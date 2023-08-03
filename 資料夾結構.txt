@@ -1,0 +1,195 @@
+Inked-Soul
+    ├─.eslintrc.js
+    ├─.gitignore
+    ├─.npmrc
+    ├─.prettierrc.js
+    ├─1.txt
+    ├─app.vue
+    ├─nuxt.config.ts
+    ├─package-lock.json
+    ├─package.json
+    ├─README.md
+    ├─tailwind.config.js
+    ├─tsconfig.json
+    ├─assets
+    │  └─css
+    │    └─tailwind.css
+    ├─components
+    │  ├─account
+    │  │ ├─ConfirmPassword.vue
+    │  │ ├─Identity.vue
+    │  │ ├─LoginItem.vue
+    │  │ └─...
+    │  ├─admin
+    │  │ ├─NavbarItem.vue
+    │  │ ├─PhotoItem.vue
+    │  │ ├─PlansCard.vue
+    │  │ └─...
+    │  ├─artists
+    │  │ └─AlbumnCard.vue
+    │  ├─design
+    │  │ ├─DesignComment.vue
+    │  │ ├─DesignImage.vue
+    │  │ ├─DesignIntro.vue
+    │  │ └─...
+    │  ├─global
+    │  │ ├─ArtistCard.vue
+    │  │ ├─CommentItem.vue
+    │  │ ├─DesignCard.vue
+    │  │ └─...
+    │  ├─home
+    │  │ ├─BannerItem.vue
+    │  │ ├─FeatureItem.vue
+    │  │ └─IntroItem.vue
+    │  ├─order
+    │  │ ├─GetComments.vue
+    │  │ ├─OrderBar.vue
+    │  │ ├─OrderData.vue
+    │  │ └─...
+    │  ├─search
+    │  │ └─SearchArtists.vue
+    │  ├─tips
+    │  │ └─TipsCard.vue
+    │  └─user
+    │    ├─NavbarItem.vue
+    │    ├─OrderDetail.vue
+    │    └─PhotoItem.vue
+    ├─composables
+    │ ├─useFormatted.ts
+    │ ├─useMeta.js
+    │ └─useValidate.ts
+    ├─container
+    │  ├─admin
+    │  │ ├─EditArea.vue
+    │  │ ├─ProductArea.vue
+    │  │ ├─UploadAlbumArea.vue
+    │  │ └─...
+    │  ├─artists
+    │  │ └─IntroArea.vue
+    │  │
+    │  ├─home
+    │  │ ├─ArtistArea.vue
+    │  │ └─DesignArea.vue
+    │  │
+    │  ├─order
+    │  │ └─OrderArea.vue
+    │  │
+    │  └─searchAllArtists
+    │    └─ArtistsArea.vue
+    ├─layouts
+    │ ├─account.vue
+    │ ├─albumn.vue
+    │ ├─backend.vue
+    │ └─...
+    │
+    ├─middleware
+    │ └─auth.global.js
+    ├─pages
+    │  ├─index.vue
+    │  ├─account
+    │  │  ├─forgotpassword.vue
+    │  │  ├─login.vue
+    │  │  ├─resetpassword.vue
+    │  │  ├─signup.vue
+    │  │  ├─verify.vue
+    │  │  ├─artist
+    │  │  │  ├─index.vue
+    │  │  │  └─index
+    │  │  │      ├─albumn.vue
+    │  │  │      ├─comments.vue
+    │  │  │      ├─editinfo.vue
+    │  │  │      ├─productlist.vue
+    │  │  │      ├─reservation.vue
+    │  │  │      ├─membership
+    │  │  │      │ ├─index.vue
+    │  │  │      │ └─[option].vue
+    │  │  │      └─orderinfo
+    │  │  │        ├─index.vue
+    │  │  │        └─[orderID].vue
+    │  │  └─normal
+    │  │      ├─index.vue
+    │  │      └─index
+    │  │          ├─editinfo.vue
+    │  │          ├─follows.vue
+    │  │          └─orderRecords
+    │  │            ├─index.vue
+    │  │            └─[orderID].vue
+    │  ├─artists
+    │  │  ├─index.vue
+    │  │  ├─[artistID].vue
+    │  │  └─[artistID]
+    │  │      ├─comments.vue
+    │  │      ├─index.vue
+    │  │      └─albumn
+    │  │        ├─index.vue
+    │  │        └─[albumID].vue
+    │  ├─designs
+    │  │  ├─complete.vue
+    │  │  ├─index.vue
+    │  │  └─[designID]
+    │  │    ├─index.vue
+    │  │    └─order.vue
+    │  ├─term
+    │  │  ├─index.vue
+    │  │  └─index
+    │  │    ├─appealflow.vue
+    │  │    ├─privacyterms.vue
+    │  │    └─serterm.vue
+    │  └─Tips
+    │    ├─ndex.vue
+    │    └─[tipsID].vue
+    ├─plugins
+    │ ├─vCalendar.js
+    │ ├─veevaildate-components.ts
+    │ ├─veevaildate-rules.ts
+    │ └─...
+    ├─public
+    │  ├─account-left.jpg
+    │  ├─dotwork.png
+    │  ├─favicon.ico
+    │  ├─home-banner.svg
+    │  ├─logo-white.png
+    │  ├─logo.png
+    │  ├─share-facebook.svg
+    │  ├─share-line.svg
+    │  ├─home
+    │  │ ├─1.jpg
+    │  │ ├─2.jpg
+    │  │ ├─3.jpg
+    │  │ └─...
+    │  └─tips
+    │    ├─1.jpg
+    │    ├─2.jpg
+    │    ├─3.jpg
+    |    └─...
+    ├─server
+    │  │  tsconfig.json
+    │  │
+    │  └─api
+    │      ├─getArtists
+    │      │  ├─getAllArtists.js
+    │      │  ├─GetAllArtists.post.js
+    │      │  ├─[id].js
+    │      │  ├─getAlbumn
+    │      │  │ └─[id].js
+    │      │  ├─getComments
+    │      │  │ └─[id].js
+    │      │  └─getDesign
+    │      │    └─[id].js
+    │      ├─getDesign
+    │      │ ├─getAllDesign.js
+    │      │ ├─getAllDesign.post.js
+    │      │ └─[designID].js
+    │      │
+    │      ├─getOrder
+    │      │ ├─getAllOrder.js
+    │      │ └─[orderID].js
+    │      └─getUser
+    │        └─getUser.js
+    ├─stores
+    │ ├─account.js
+    │ ├─count.ts
+    │ ├─follows.js
+    │ └─...
+    └─types
+      └─index.ts
