@@ -10,8 +10,8 @@
   </div>
 </template>
 <script setup>
-import { useAccountStore } from '~/stores/account'
 import { storeToRefs } from 'pinia'
+import { useAccountStore } from '~/stores/account'
 
 const runtimeConfig = useRuntimeConfig()
 const APIBASE = runtimeConfig.public.APIBASE
