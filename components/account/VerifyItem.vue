@@ -8,7 +8,7 @@
       <div class="relative w-full">
         <VField
           id="realname"
-          v-model="temp"
+          v-model="verifyUserData.ArtistName"
           name="真實姓名"
           rules="required"
           class="w-full border-b border-black px-4 py-3 outline-none"
@@ -30,7 +30,7 @@
       <div class="relative w-full">
         <VField
           id="studio-name"
-          v-model="temp"
+          v-model="verifyUserData.StudioName"
           name="店名"
           rules="required"
           class="w-full border-b border-black px-4 py-3 outline-none"
@@ -52,7 +52,7 @@
       <div class="relative w-full">
         <VField
           id="license"
-          v-model="temp"
+          v-model="verifyUserData.License"
           name="營登"
           rules="required"
           class="w-full border-b border-black px-4 py-3 outline-none"
@@ -74,7 +74,7 @@
       <div class="relative w-full">
         <VField
           id="address"
-          v-model="temp"
+          v-model="verifyUserData.Address"
           name="地址"
           rules="required"
           class="w-full border-b border-black px-4 py-3 outline-none"
@@ -96,7 +96,7 @@
       <div class="relative w-full">
         <VField
           id="phone"
-          v-model="temp"
+          v-model="verifyUserData.Tel"
           name="電話"
           rules="required"
           class="w-full border-b border-black px-4 py-3 outline-none"
@@ -113,6 +113,10 @@
   </VForm>
 </template>
 <script setup>
-const temp = ref()
+import { storeToRefs } from 'pinia'
+import { useVerify } from '~/stores/verify'
+
+const store = useVerify()
+const { verifyUserData } = storeToRefs(store)
 </script>
 <style></style>

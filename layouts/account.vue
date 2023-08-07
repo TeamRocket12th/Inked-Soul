@@ -15,8 +15,8 @@
 
     <div class="col-span-7 flex h-full flex-col items-center justify-center text-center">
       <div
-        class="flex flex-col gap-10 rounded-lg p-10"
-        :class="{ 'w-[50%] border border-black': route.path !== '/account/verify' }"
+        class="flex flex-col gap-10 rounded-lg"
+        :class="{ 'w-[50%] border border-black p-10': route.path !== '/account/verify' }"
       >
         <slot>
           <div>登入｜註冊｜忘記密碼｜重設密碼</div>
