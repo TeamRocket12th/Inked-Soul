@@ -1,14 +1,18 @@
 <template>
-  <VForm v-slot="{ errors, meta }" class="flex flex-col gap-2">
-    <label class="flex flex-col items-start gap-1">
-      <span class="mb-1">真實姓名</span>
+  <VForm v-slot="{ errors }" class="flex flex-col gap-10">
+    <div class="flex flex-col items-start gap-2">
+      <div class="flex w-full items-center justify-between">
+        <label for="realname">真實姓名*</label>
+        <VErrorMessage name="真實姓名" class="whitespace-nowrap text-[#DC3545]" />
+      </div>
       <div class="relative w-full">
         <VField
-          v-model="temp"
+          id="realname"
+          v-model="verifyUserData.ArtistName"
           name="真實姓名"
           rules="required"
-          class="formInput"
-          placeholder="真實姓名"
+          class="w-full border-b border-black px-4 py-3 outline-none"
+          placeholder="刺青師真實姓名"
           :class="{ 'border-[#DC3545]': errors.真實姓名 }"
         />
         <Icon
@@ -17,21 +21,20 @@
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
         />
       </div>
-
-      <div class="h-[14px]">
-        <VErrorMessage name="真實姓名" class="whitespace-nowrap text-[#DC3545]" />
+    </div>
+    <div class="flex flex-col items-start gap-2">
+      <div class="flex w-full items-center justify-between">
+        <label for="studio-name">店名*</label>
+        <VErrorMessage name="店名" class="whitespace-nowrap text-[#DC3545]" />
       </div>
-    </label>
-    <label class="flex flex-col items-start gap-1">
-      <span class="mb-1">店名</span>
       <div class="relative w-full">
         <VField
-          v-model="temp"
+          id="studio-name"
+          v-model="verifyUserData.StudioName"
           name="店名"
-          type="password"
           rules="required"
-          class="formInput"
-          placeholder="店名"
+          class="w-full border-b border-black px-4 py-3 outline-none"
+          placeholder="完整工作室名稱"
           :class="{ 'border-[#DC3545]': errors.店名 }"
         />
         <Icon
@@ -40,42 +43,42 @@
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
         />
       </div>
-      <div class="h-[14px]">
-        <VErrorMessage name="店名" class="whitespace-nowrap text-[#DC3545]" />
+    </div>
+    <div class="flex flex-col items-start gap-2">
+      <div class="flex w-full items-center justify-between">
+        <label for="license">營利事業登記證號*</label>
+        <VErrorMessage name="營登" class="whitespace-nowrap text-[#DC3545]" />
       </div>
-    </label>
-    <label class="flex flex-col items-start gap-1">
-      <span class="mb-1">營業登記證號</span>
       <div class="relative w-full">
         <VField
-          v-model="temp"
-          name="營業登記證號"
-          type="password"
+          id="license"
+          v-model="verifyUserData.License"
+          name="營登"
           rules="required"
-          class="formInput"
-          placeholder="營業登記證號"
-          :class="{ 'border-[#DC3545]': errors.營業登記證號 }"
+          class="w-full border-b border-black px-4 py-3 outline-none"
+          placeholder="例：字第●●●●●●號"
+          :class="{ 'border-[#DC3545]': errors.營登 }"
         />
         <Icon
-          v-if="errors.營業登記證號"
+          v-if="errors.營登"
           name="ic:baseline-error-outline"
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
         />
       </div>
-      <div class="h-[14px]">
-        <VErrorMessage name="營業登記證號" class="whitespace-nowrap text-[#DC3545]" />
+    </div>
+    <div class="flex flex-col items-start gap-2">
+      <div class="flex w-full items-center justify-between">
+        <label for="address">地址*</label>
+        <VErrorMessage name="地址" class="whitespace-nowrap text-[#DC3545]" />
       </div>
-    </label>
-    <label class="flex flex-col items-start gap-1">
-      <span class="mb-1">地址</span>
       <div class="relative w-full">
         <VField
-          v-model="temp"
+          id="address"
+          v-model="verifyUserData.Address"
           name="地址"
-          type="password"
           rules="required"
-          class="formInput"
-          placeholder="地址"
+          class="w-full border-b border-black px-4 py-3 outline-none"
+          placeholder="工作室鄉鎮市區、里鄰、門牌號碼"
           :class="{ 'border-[#DC3545]': errors.地址 }"
         />
         <Icon
@@ -84,35 +87,36 @@
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
         />
       </div>
-      <div class="h-[14px]">
-        <VErrorMessage name="地址" class="whitespace-nowrap text-[#DC3545]" />
+    </div>
+    <div class="flex flex-col items-start gap-2">
+      <div class="flex w-full items-center justify-between">
+        <label for="phone">電話*</label>
+        <VErrorMessage name="電話" class="whitespace-nowrap text-[#DC3545]" />
       </div>
-    </label>
-    <label class="flex flex-col items-start gap-1">
-      <span class="mb-1">市話</span>
       <div class="relative w-full">
         <VField
-          v-model="temp"
-          name="市話"
-          type="password"
+          id="phone"
+          v-model="verifyUserData.Tel"
+          name="電話"
           rules="required"
-          class="formInput"
-          placeholder="市話"
-          :class="{ 'border-[#DC3545]': errors.市話 }"
+          class="w-full border-b border-black px-4 py-3 outline-none"
+          placeholder="工作室聯絡電話"
+          :class="{ 'border-[#DC3545]': errors.電話 }"
         />
         <Icon
-          v-if="errors.市話"
+          v-if="errors.電話"
           name="ic:baseline-error-outline"
           class="absolute right-3 top-[50%] h-6 w-6 -translate-y-[50%] text-[#DC3545]"
         />
       </div>
-      <div class="h-[14px]">
-        <VErrorMessage name="市話" class="whitespace-nowrap text-[#DC3545]" />
-      </div>
-    </label>
+    </div>
   </VForm>
 </template>
 <script setup>
-const temp = ref()
+import { storeToRefs } from 'pinia'
+import { useVerify } from '~/stores/verify'
+
+const store = useVerify()
+const { verifyUserData } = storeToRefs(store)
 </script>
 <style></style>
