@@ -1,9 +1,9 @@
 <div align="center">
-  <img src="./public/logo-white.png" style="width:300px"/>
+  <img src="./public/logo-white.png" style="width:40px; background:black; border-radius:16px; padding: 16px "/>
   <h1><a href="https://inked-soul.vercel.app/" style="color:white">Inked Soul | 刺青師預約與媒合平台</a></h1>
 </div>
-<div align="center" style="display:flex;justify-content: space-between">
-    <a href="https://file.notion.so/f/s/3b22b365-5319-4e21-bd88-92e39a9811f0/%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf?id=27818b1d-7675-4c3c-81b7-0b784664d5b1&table=block&spaceId=e71a0075-a30a-431a-9a61-9b7506cf3156&expirationTimestamp=1691193600000&signature=zsX4nezZFMlG-cvIYWq5iFGfh0gJEpI8cLLsBVWQDi8&downloadName=%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf">簡報介紹</a>
+<div align="center" style="display:flex;justify-content: space-between; margin-bottom: 16px">
+    <a href="https://file.notion.so/f/s/3b22b365-5319-4e21-bd88-92e39a9811f0/%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf?id=27818b1d-7675-4c3c-81b7-0b784664d5b1&table=block&spaceId=e71a0075-a30a-431a-9a61-9b7506cf3156&expirationTimestamp=1691625600000&signature=hYdd4Tn-umTlN_qK1xbmiYFO7UmZ0Lzwdx-Xes_4lRY&downloadName=%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf">簡報介紹</a>
     <a href="https://inked-soul.vercel.app/" >前台網站</a>
     <a href="https://github.com/TeamRocket12th/Inked-Soul.git">後台repo</a>
     <a href="https://www.notion.so/96066b6702a34a8ab86eeeaf6c499480?v=2a8b8062037a49a88990704fc81016d3">API list</a>
@@ -129,6 +129,8 @@ Inked Soul 提供一個專門服務刺青師與刺青愛好者的平台，透過
 | doc         | 無         | 文件相關                                   |
 | others      | N/A        | 其他                                       |
 
+---
+
 ## Git Branch 命名規則
 
 | 分支名稱       | 說明             |
@@ -140,28 +142,49 @@ Inked Soul 提供一個專門服務刺青師與刺青愛好者的平台，透過
 | hotfix/xxx     | 修復什麼東西     |
 | config/xxx     | 修改設定內容     |
 
+---
+
 ## 開發工具
 
 ### 設計
 
-- Figma
-- Adobe Illustrator
+<img alt='figma' src='https://img.shields.io/badge/figma-design?style=for-the-badge&logo=figma&logoColor=white&color=%23F24E1E
+'>
+<img alt='adobeillustrator' src='https://img.shields.io/badge/adobeillustrator-design?style=for-the-badge&logo=adobeillustrator&logoColor=white&color=%23FF9A00'>
 
 ### 前端
 
-- vue 3
-- nuxt 3
-- tailwindCss
-- pinia
-- mockoon
+<img alt='vue3' src='https://img.shields.io/badge/Vue3-vue?style=for-the-badge&logo=vuedotjs&logoColor=white&color=%234FC08D
+'>
+<img alt='nuxt' src='https://img.shields.io/badge/Nuxt-n?style=for-the-badge&logo=nuxtdotjs&logoColor=white&color=%2300DC82'>
+<img alt='pinia' src='https://img.shields.io/badge/Pinia-vue?style=for-the-badge&logoColor=white&color=yellow
+'>
+<img alt='tailwind' src='https://img.shields.io/badge/Tailwind-CSS?style=for-the-badge&logo=tailwindcss&logoColor=white&color=%2306B6D4'>
+<img alt='daisyui' src='https://img.shields.io/badge/daisyUI-css?style=for-the-badge&logo=daisyui&logoColor=white&color=%235A0EF8
+'>
+<img alt='mockoon' src='https://img.shields.io/badge/mockoon-api?style=for-the-badge&logoColor=white&color=gray
+'>
 
 ### 後端
 
-- C#
-- LINQ
-- Visual Studio
-- Swagger
-- MS SQL
-- Postman
-- MVC WEBAPI
-- Microsoft Azure
+<img alt='dotnet' src='https://img.shields.io/badge/dotnet-backend?style=for-the-badge&logo=dotnet&logoColor=white&color=%23512BD4
+'>
+<img alt='csharp' src='https://img.shields.io/badge/C%23-backend?style=for-the-badge&logo=csharp&logoColor=white&color=%23239120
+'>
+<img alt='mysql' src='https://img.shields.io/badge/Mysql-backend?style=for-the-badge&logo=mysql&logoColor=white&color=%234479A1
+'>
+<img alt='swagger' src='https://img.shields.io/badge/swagger-backend?style=for-the-badge&logo=swagger&logoColor=white&color=%2385EA2D
+'>
+<img alt='swagger' src='https://img.shields.io/badge/swagger-backend?style=for-the-badge&logo=swagger&logoColor=white&color=%2385EA2D
+'>
+<img alt='postman' src='https://img.shields.io/badge/postman-backend?style=for-the-badge&logo=postman&logoColor=white&color=%23FF6C37
+'>
+<img alt='microsoftazure' src='https://img.shields.io/badge/microsoftazure-backend?style=for-the-badge&logo=microsoftazure&logoColor=white&color=%230078D4
+'>
+
+### 協作工具
+
+<img alt='notion' src='https://img.shields.io/badge/notion-backend?style=for-the-badge&logo=notion&logoColor=white&color=%23000000
+'>
+<img alt='discord' src='https://img.shields.io/badge/discord-backend?style=for-the-badge&logo=discord&logoColor=white&color=%235865F2
+'>
