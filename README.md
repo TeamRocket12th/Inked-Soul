@@ -1,21 +1,18 @@
 <div align="center">
   <img src="./public/logo-white.png" style="width:40px; background:black; border-radius:16px; padding: 16px "/>
-  <h1><a href="https://inked-soul.vercel.app/" style="color:white">Inked Soul | 刺青師預約與媒合平台</a></h1>
-</div>
-<div align="center" style="display:flex;justify-content: space-between; margin-bottom: 16px">
-    <a href="https://file.notion.so/f/s/3b22b365-5319-4e21-bd88-92e39a9811f0/%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf?id=27818b1d-7675-4c3c-81b7-0b784664d5b1&table=block&spaceId=e71a0075-a30a-431a-9a61-9b7506cf3156&expirationTimestamp=1691625600000&signature=hYdd4Tn-umTlN_qK1xbmiYFO7UmZ0Lzwdx-Xes_4lRY&downloadName=%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf">簡報介紹</a>
-    <a href="https://inked-soul.vercel.app/" >前台網站</a>
-    <a href="https://github.com/TeamRocket12th/Inked-Soul.git">後台repo</a>
-    <a href="https://www.notion.so/96066b6702a34a8ab86eeeaf6c499480?v=2a8b8062037a49a88990704fc81016d3">API list</a>
-    <a href="https://inkedsoul.rocket-coding.com/swagger/index.html?url=/swagger/v1/swagger.json">Swagger</a>
+  <h1>Inked Soul | 刺青師預約與媒合平台</h1>
+  <p>Inked Soul 提供一個專門服務刺青師與刺青愛好者的平台，透過聚集大量的刺青師，</br>匯集大量品質優良的設計圖，使刺青愛好者可以更方便更快速的找到自己喜歡的設計圖</p>
 </div>
 <div>
 <img src="./public/home-banner.svg"/>
+<div align="center" style="display:flex;justify-content: space-between; margin-bottom: 16px">
+    <a href="https://file.notion.so/f/s/3b22b365-5319-4e21-bd88-92e39a9811f0/%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf?id=27818b1d-7675-4c3c-81b7-0b784664d5b1&table=block&spaceId=e71a0075-a30a-431a-9a61-9b7506cf3156&expirationTimestamp=1691625600000&signature=hYdd4Tn-umTlN_qK1xbmiYFO7UmZ0Lzwdx-Xes_4lRY&downloadName=%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf">簡報介紹</a>
+    <a href="https://inked-soul.vercel.app/" >前台網站</a>
+<!--     <a href="https://github.com/TeamRocket12th/Inked-Soul.git">後台repo</a> -->
+<!--     <a href="https://www.notion.so/96066b6702a34a8ab86eeeaf6c499480?v=2a8b8062037a49a88990704fc81016d3">API list</a> -->
+    <a href="https://inkedsoul.rocket-coding.com/swagger/index.html?url=/swagger/v1/swagger.json">Swagger</a>
 </div>
-
-## 網站介紹
-
-Inked Soul 提供一個專門服務刺青師與刺青愛好者的平台，透過聚集大量的刺青師，匯集大量品質優良的設計圖，使刺青愛好者可以更方便更快速的找到自己喜歡的設計圖
+</div>
 
 ## 功能介紹
 
