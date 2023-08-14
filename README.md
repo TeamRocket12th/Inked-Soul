@@ -147,42 +147,38 @@ Inked Soul 提供一個專門服務刺青師與刺青愛好者的平台，透過
 ## 開發工具
 
 ### 設計
-
-<img alt='figma' src='https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white
-'>
-<img alt='adobeillustrator' src='https://img.shields.io/badge/Adobe%20Illustrator-FF9A00?style=for-the-badge&logo=adobeillustrator&logoColor=white&color=%23FF9A00'>
+<p style="margin-bottom: 80px">
+  <img alt='figma' src='https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white'>
+  <img alt='adobeillustrator' src='https://img.shields.io/badge/Adobe%20Illustrator-FF9A00?style=for-the-badge&logo=adobeillustrator&logoColor=white&color=%23FF9A00'>
+</p>
 
 ### 前端
-
-<img alt='vue3' src='https://img.shields.io/badge/Vue%20js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-'>
-<img alt='nuxt' src='https://img.shields.io/badge/Nuxt-n?style=for-the-badge&logo=nuxtdotjs&logoColor=white&color=%2300DC82'>
-<img alt='pinia' src='https://img.shields.io/badge/Pinia-vue?style=for-the-badge&logoColor=white&color=yellow
-'>
-<img alt='tailwind' src='https://img.shields.io/badge/Tailwind-CSS?style=for-the-badge&logo=tailwindcss&logoColor=white&color=%2306B6D4'>
-<img alt='daisyui' src='https://img.shields.io/badge/daisyUI-css?style=for-the-badge&logo=daisyui&logoColor=white&color=%235A0EF8
-'>
-<img alt='mockoon' src='https://img.shields.io/badge/mockoon-api?style=for-the-badge&logoColor=white&color=gray
-'>
+<p style="margin-bottom: 80px">
+  <img alt='vue3' src='https://img.shields.io/badge/Vue%20js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D'>
+  <img alt='nuxt' src='https://img.shields.io/badge/Nuxt-n?style=for-the-badge&logo=nuxtdotjs&logoColor=white&color=%2300DC82'>
+  <img alt='pinia' src='https://img.shields.io/badge/Pinia-vue?style=for-the-badge&logoColor=white&color=yellow'>
+  <img alt='tailwind' src='https://img.shields.io/badge/Tailwind-CSS?style=for-the-badge&logo=tailwindcss&logoColor=white&color=%2306B6D4'>
+  <img alt='daisyui' src='https://img.shields.io/badge/daisyUI-css?style=for-the-badge&logo=daisyui&logoColor=white&color=%235A0EF8'>
+  <img alt='mockoon' src='https://img.shields.io/badge/mockoon-api?style=for-the-badge&logoColor=white&color=gray'>
+  <img alt="Vercel" src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
+  <img alt="GItHUB" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
+  <img alt="GIt" src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white" />
+  <img alt="ESLINT" src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white" />
+  <img alt="PRETTIER" src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" />
+</p>
 
 ### 後端
-
-<img alt='dotnet' src='https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white
-'>
-<img alt='csharp' src='https://img.shields.io/badge/C%23-backend?style=for-the-badge&logo=csharp&logoColor=white&color=%23239120
-'>
-<img alt='mysql' src='https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white
-'>
-<img alt='swagger' src='https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white
-'>
-<img alt='postman' src='	https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white
-'>
-<img alt='microsoftazure' src='https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white
-'>
+<p style="margin-bottom: 80px">
+  <img alt='dotnet' src='https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white'>
+  <img alt='csharp' src='https://img.shields.io/badge/C%23-backend?style=for-the-badge&logo=csharp&logoColor=white&color=%23239120'>
+  <img alt='mysql' src='https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white'>
+  <img alt='swagger' src='https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white'>
+  <img alt='postman' src='https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white'>
+  <img alt='microsoftazure' src='https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white'>
+</p>
 
 ### 協作工具
-
-<img alt='notion' src='https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white
-'>
-<img alt='discord' src='https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white
-'>
+<p style="margin-bottom: 80px">
+  <img alt='notion' src='https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white'>
+  <img alt='discord' src='https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white'>
+</p> 
