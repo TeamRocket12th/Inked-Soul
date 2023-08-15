@@ -4,7 +4,8 @@
   <p>Inked Soul 提供一個專門服務刺青師與刺青愛好者的平台，透過聚集大量的刺青師，</br>匯集大量品質優良的設計圖，使刺青愛好者可以更方便更快速的找到自己喜歡的設計圖</p>
 </div>
 <div>
-<img src="./public/home-banner.svg"/>
+<!-- <img src="./public/home-banner.svg"/> -->
+  <img src="https://media.discordapp.net/attachments/1108738003943309344/1140932924779266180/mockup02.jpg?width=1820&height=1060">
 <div align="center" style="display:flex;justify-content: space-between; margin-bottom: 16px">
     <a href="https://file.notion.so/f/s/3b22b365-5319-4e21-bd88-92e39a9811f0/%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf?id=27818b1d-7675-4c3c-81b7-0b784664d5b1&table=block&spaceId=e71a0075-a30a-431a-9a61-9b7506cf3156&expirationTimestamp=1691625600000&signature=hYdd4Tn-umTlN_qK1xbmiYFO7UmZ0Lzwdx-Xes_4lRY&downloadName=%E5%B0%88%E9%A1%8C%E7%B0%A1%E5%A0%B1.pdf">簡報介紹</a>
     <a href="https://inked-soul.vercel.app/" >前台網站</a>
