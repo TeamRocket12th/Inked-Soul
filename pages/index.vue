@@ -1,22 +1,28 @@
 <template>
-  <div class="mt-8 flex flex-col items-center">
-    <h1 class="text-3xl font-semibold text-indigo-400">Hello</h1>
-    <p class="mt-4 text-5xl font-bold text-gray-600">
-      專題開始了！<Icon name="ant-design:aliwangwang-outlined" color="black" />
-    </p>
-    <div class="mt-4 flex items-center gap-6">
-      <p>你的分數：{{ count }}</p>
-      <button class="btn" @click="increment">
-        <Icon name="ri:bard-fill" size="30" />
-      </button>
+  <div>
+    <div class="flex flex-col gap-20">
+      <BannerItem>
+        <template #default>
+          <SearchBar>搜尋認領圖</SearchBar>
+        </template>
+      </BannerItem>
+      <IntroItem />
+      <ArtistArea />
+      <FeatureItem />
+      <GoTop />
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useCounterStore } from '~/stores/count'
-const counterStore = useCounterStore()
-const { count } = storeToRefs(counterStore)
-const { increment } = counterStore
+<script setup>
+import BannerItem from '~/components/home/BannerItem.vue'
+import IntroItem from '~/components/home/IntroItem.vue'
+import ArtistArea from '~/container/home/ArtistArea.vue'
+import FeatureItem from '~/components/home/FeatureItem.vue'
+
+const { meta } = useMeta()
+useHead({
+  title: meta.index.title, // 會蓋掉nuxt.config的設定
+  meta: [{ name: 'description', content: meta.index.description }]
+})
 </script>
